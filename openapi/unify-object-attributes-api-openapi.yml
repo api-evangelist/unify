@@ -1,0 +1,1721 @@
+openapi: 3.1.0
+info:
+  title: Unify Analytics Events Object Attributes API
+  summary: Send website and product analytics data into the Unify platform.
+  version: '1'
+  termsOfService: https://www.unifygtm.com/legal/terms-and-conditions
+  contact:
+    name: Unify Support
+    url: https://www.unifygtm.com/support
+    email: support@unifygtm.com
+servers:
+- url: https://api.unifyintent.com/analytics/v1
+  variables: {}
+security:
+- BasicAuth: []
+tags:
+- name: Object Attributes
+paths:
+  /objects/{object_name}/attributes:
+    get:
+      operationId: list_object_attributes
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful list operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UObjects.UAttribute'
+                description: Response for a successful list operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attributes
+    post:
+      operationId: create_object_attribute
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response for a successful create operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UAttribute'
+                description: Response for a successful create operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                    - attribute_reference_object_not_found
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '409':
+          description: Response for any operation that results in a conflict error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - attribute_conflict
+                  message:
+                    type: string
+                description: Response for any operation that results in a conflict error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attributes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UObjects.UAttribute'
+  /objects/{object_name}/attributes/{attribute_name}:
+    get:
+      operationId: get_object_attribute
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful get operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UAttribute'
+                description: Response for a successful get operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attributes
+    patch:
+      operationId: update_object_attribute
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful update operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UAttribute'
+                description: Response for a successful update operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                    - invalid_request_for_value_type
+                    - one_to_one_references_not_supported
+                    - reference_cardinality_downgrade_not_supported
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '409':
+          description: Response for any operation that results in a conflict error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - related_attribute_conflict
+                  message:
+                    type: string
+                description: Response for any operation that results in a conflict error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attributes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UObjects.UAttributeUpdate'
+    delete:
+      operationId: delete_object_attribute
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful delete operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                description: Response for a successful delete operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attributes
+components:
+  schemas:
+    UObjects.UAttributeUpdate:
+      anyOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - $ref: '#/components/schemas/UObjects.UMultiSelectAttributeUpdate'
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - $ref: '#/components/schemas/UObjects.UReferenceAttributeUpdate'
+      - $ref: '#/components/schemas/UObjects.USelectAttributeUpdate'
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of an attribute on a Unify object.
+    UResponses.BadRequestError:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
+          type: string
+        attribute_api_name:
+          type: string
+      allOf:
+      - type: object
+        unevaluatedProperties: {}
+      description: Validation error detail returned for bad request responses.
+    UObjects.UMultiSelectAttributeUpdate:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOptionUpdateItem'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "multi-select" attribute on a Unify object.
+    UObjects.USelectAttribute:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOption'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - SELECT
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "select" attribute on a Unify object.
+    UObjects.USelectAttributeUpdate:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOptionUpdateItem'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "select" attribute on a Unify object.
+    UObjects.UReferenceCardinality:
+      type: string
+      enum:
+      - ONE
+      - MANY
+    UObjects.UMultiSelectAttribute:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOption'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - MULTI_SELECT
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "multi-select" attribute on a Unify object.
+    UObjects.UReferenceAttribute:
+      type: object
+      required:
+      - cardinality
+      - related_object
+      - related_attribute
+      properties:
+        cardinality:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UReferenceCardinality'
+          description: The cardinality of the reference attribute.
+        related_object:
+          type: string
+          description: The API name of the object that this attribute references.
+        related_attribute:
+          anyOf:
+          - $ref: '#/components/schemas/UObjects.URelatedReferenceAttribute'
+          - type: 'null'
+          description: 'The optional related attribute on the referenced object. When this exists,
+
+            the relationship between the two objects is bidirectional.'
+      allOf:
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - REFERENCE
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "reference" attribute on a Unify object.
+    UObjects.UReferenceAttributeUpdate:
+      type: object
+      required:
+      - cardinality
+      - related_object
+      - related_attribute
+      properties:
+        cardinality:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UReferenceCardinality'
+          description: The cardinality of the reference attribute.
+        related_object:
+          type: string
+          description: The API name of the object that this attribute references.
+        related_attribute:
+          anyOf:
+          - $ref: '#/components/schemas/UObjects.URelatedReferenceAttribute'
+          - type: 'null'
+          description: 'The optional related attribute on the referenced object. When this exists,
+
+            the relationship between the two objects is bidirectional.'
+      allOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "reference" attribute on a Unify object.
+    UObjects.UAttributeOption:
+      type: object
+      required:
+      - api_name
+      - display_name
+      properties:
+        api_name:
+          type: string
+          description: 'This is the unique identifier for the attribute option at the API level. It
+
+            is unique within the attribute and cannot be changed.'
+        display_name:
+          type: string
+          description: 'This is the user-facing attribute option name that will be shown within
+
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+    UObjects.UAttributeOptionUpdateItem:
+      type: object
+      required:
+      - display_name
+      properties:
+        display_name:
+          type: string
+          description: 'This is the user-facing attribute option name that will be shown within
+
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+    UObjects.URelatedReferenceAttribute:
+      type: object
+      required:
+      - api_name
+      - display_name
+      - cardinality
+      properties:
+        api_name:
+          type: string
+        display_name:
+          type: string
+        cardinality:
+          $ref: '#/components/schemas/UObjects.UReferenceCardinality'
+    UObjects.UAttribute:
+      anyOf:
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - ADDRESS
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - BOOLEAN
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - COUNTRY
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - CURRENCY
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - DATE
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - DATETIME
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - DECIMAL
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - EMAIL_ADDRESS
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - INTEGER
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - $ref: '#/components/schemas/UObjects.UMultiSelectAttribute'
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - PHONE_NUMBER
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - $ref: '#/components/schemas/UObjects.UReferenceAttribute'
+      - $ref: '#/components/schemas/UObjects.USelectAttribute'
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - TEXT
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - URL
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - UUID
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            anyOf:
+            - type: string
+            - type: 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of an attribute on a Unify object.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: Basic

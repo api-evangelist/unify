@@ -1,0 +1,665 @@
+openapi: 3.1.0
+info:
+  title: Unify Analytics Events Object Attribute Options API
+  summary: Send website and product analytics data into the Unify platform.
+  version: '1'
+  termsOfService: https://www.unifygtm.com/legal/terms-and-conditions
+  contact:
+    name: Unify Support
+    url: https://www.unifygtm.com/support
+    email: support@unifygtm.com
+servers:
+- url: https://api.unifyintent.com/analytics/v1
+  variables: {}
+security:
+- BasicAuth: []
+tags:
+- name: Object Attribute Options
+paths:
+  /objects/{object_name}/attributes/{attribute_name}/options:
+    get:
+      operationId: list_object_attribute_options
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful list operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UObjects.UAttributeOption'
+                description: Response for a successful list operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                    - attribute_options_not_supported
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attribute Options
+    post:
+      operationId: create_object_attribute_option
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response for a successful create operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UAttributeOption'
+                description: Response for a successful create operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                    - attribute_options_not_supported
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '409':
+          description: Response for any operation that results in a conflict error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - attribute_option_conflict
+                  message:
+                    type: string
+                description: Response for any operation that results in a conflict error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attribute Options
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UObjects.UAttributeOption'
+  /objects/{object_name}/attributes/{attribute_name}/options/{option_name}:
+    get:
+      operationId: get_object_attribute_option
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: option_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful get operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UAttributeOption'
+                description: Response for a successful get operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                    - attribute_option_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attribute Options
+    patch:
+      operationId: update_object_attribute_option
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: option_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful update operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UAttributeOption'
+                description: Response for a successful update operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                    - attribute_option_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '409':
+          description: Response for any operation that results in a conflict error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - attribute_option_conflict
+                  message:
+                    type: string
+                description: Response for any operation that results in a conflict error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attribute Options
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UObjects.UAttributeOptionUpdate'
+    delete:
+      operationId: delete_object_attribute_option
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attribute_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: option_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful delete operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                description: Response for a successful delete operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                    - attribute_not_found
+                    - attribute_option_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Object Attribute Options
+components:
+  schemas:
+    UObjects.UAttributeOption:
+      type: object
+      required:
+      - api_name
+      - display_name
+      properties:
+        api_name:
+          type: string
+          description: 'This is the unique identifier for the attribute option at the API level. It
+
+            is unique within the attribute and cannot be changed.'
+        display_name:
+          type: string
+          description: 'This is the user-facing attribute option name that will be shown within
+
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+    UResponses.BadRequestError:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
+          type: string
+        attribute_api_name:
+          type: string
+      allOf:
+      - type: object
+        unevaluatedProperties: {}
+      description: Validation error detail returned for bad request responses.
+    UObjects.UAttributeOptionUpdate:
+      type: object
+      required:
+      - display_name
+      properties:
+        display_name:
+          type: string
+          description: 'This is the user-facing attribute option name that will be shown within
+
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: Basic

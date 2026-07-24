@@ -1,0 +1,655 @@
+openapi: 3.1.0
+info:
+  title: Unify Analytics Events Objects API
+  summary: Send website and product analytics data into the Unify platform.
+  version: '1'
+  termsOfService: https://www.unifygtm.com/legal/terms-and-conditions
+  contact:
+    name: Unify Support
+    url: https://www.unifygtm.com/support
+    email: support@unifygtm.com
+servers:
+- url: https://api.unifyintent.com/analytics/v1
+  variables: {}
+security:
+- BasicAuth: []
+tags:
+- name: Objects
+paths:
+  /objects:
+    get:
+      operationId: list_objects
+      parameters: []
+      responses:
+        '200':
+          description: Response for a successful list operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UObjects.UObject'
+                description: Response for a successful list operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Objects
+    post:
+      operationId: create_object
+      parameters: []
+      responses:
+        '201':
+          description: Response for a successful create operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UObject'
+                description: Response for a successful create operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '409':
+          description: Response for any operation that results in a conflict error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_conflict
+                  message:
+                    type: string
+                description: Response for any operation that results in a conflict error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Objects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UObjects.UObject'
+  /objects/{object_name}:
+    get:
+      operationId: get_object
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful get operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UObject'
+                description: Response for a successful get operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Objects
+    patch:
+      operationId: update_object
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful update operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                  data:
+                    $ref: '#/components/schemas/UObjects.UObject'
+                description: Response for a successful update operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '403':
+          description: Response for any operation that results in a forbidden error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - forbidden
+                  message:
+                    type: string
+                description: Response for any operation that results in a forbidden error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '409':
+          description: Response for any operation that results in a conflict error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_conflict
+                  message:
+                    type: string
+                description: Response for any operation that results in a conflict error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Objects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UObjects.UObjectUpdate'
+    delete:
+      operationId: delete_object
+      parameters:
+      - name: object_name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response for a successful delete operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - success
+                description: Response for a successful delete operation.
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '403':
+          description: Response for any operation that results in a forbidden error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - forbidden
+                  message:
+                    type: string
+                description: Response for any operation that results in a forbidden error.
+        '404':
+          description: Response for any operation that results in a not found error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - object_not_found
+                  message:
+                    type: string
+                description: Response for any operation that results in a not found error.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Objects
+components:
+  schemas:
+    UObjects.UObjectUpdate:
+      type: object
+      required:
+      - display_name
+      - description
+      properties:
+        display_name:
+          type: string
+          description: 'This is the user-facing object name shown within Unify. It is not required
+
+            to be unique within Unify and can be changed at any time.'
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'This is a description of the object. It is not required but will be shown
+
+            in the UI to help understand the purpose of the object. Typically, this
+
+            should be a short sentence or two explaining the object.'
+    UObjects.UObjectProvider:
+      type: string
+      enum:
+      - UNIFY
+      - CUSTOMER
+      description: 'Represents who created and manages an object in Unify.
+
+
+        In most ways, all objects within the Unify platform behave the same way
+
+        regardless of whether they are defined by Unify or as custom objects by a
+
+        plugin or user. This includes the ability to define custom attributes and
+
+        access records via API.
+
+
+        However, there are some subtle distinctions that require differentiating
+
+        between these classifications of objects. This enumeration is used to
+
+        represent these distinctions.'
+    UResponses.BadRequestError:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
+          type: string
+        attribute_api_name:
+          type: string
+      allOf:
+      - type: object
+        unevaluatedProperties: {}
+      description: Validation error detail returned for bad request responses.
+    UObjects.UObject:
+      type: object
+      required:
+      - provider
+      - api_name
+      - display_name
+      - description
+      properties:
+        provider:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UObjectProvider'
+          description: 'The provider of an object represents who created and manages the object in
+
+            Unify. This is used to differentiate between standard objects provided by
+
+            Unify and custom objects created by a plugin or user.'
+          readOnly: true
+        api_name:
+          type: string
+          description: 'This is the unique identifier for the object at the API level. It is unique
+
+            within Unify and cannot be changed.'
+        display_name:
+          type: string
+          description: 'This is the user-facing object name shown within Unify. It is not required
+
+            to be unique within Unify and can be changed at any time.'
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 'This is a description of the object. It is not required but will be shown
+
+            in the UI to help understand the purpose of the object. Typically, this
+
+            should be a short sentence or two explaining the object.'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: Basic

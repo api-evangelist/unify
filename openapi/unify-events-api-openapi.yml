@@ -1,0 +1,1044 @@
+openapi: 3.1.0
+info:
+  title: Unify Analytics Events API
+  summary: Send website and product analytics data into the Unify platform.
+  version: '1'
+  termsOfService: https://www.unifygtm.com/legal/terms-and-conditions
+  contact:
+    name: Unify Support
+    url: https://www.unifygtm.com/support
+    email: support@unifygtm.com
+servers:
+- url: https://api.unifyintent.com/analytics/v1
+  variables: {}
+security:
+- BasicAuth: []
+tags:
+- name: Events
+paths:
+  /identify:
+    post:
+      operationId: send_identify_event
+      description: Send an "identify" event.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+        '401':
+          description: Access is unauthorized.
+      tags:
+      - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentifyEvent'
+  /page:
+    post:
+      operationId: send_page_event
+      description: Send a "page" event.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+        '401':
+          description: Access is unauthorized.
+      tags:
+      - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PageEvent'
+  /track:
+    post:
+      operationId: send_track_event
+      description: Send a "track" event.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+        '401':
+          description: Access is unauthorized.
+      tags:
+      - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackEvent'
+components:
+  schemas:
+    UValues.UInteger:
+      type: integer
+      description: Integer value.
+      title: UInteger
+    TrackEvent:
+      type: object
+      required:
+      - type
+      - visitorId
+      - timestamp
+      - context
+      - name
+      properties:
+        type:
+          type: string
+          enum:
+          - track
+          description: The type of analytics event being sent.
+        visitorId:
+          type: string
+          description: Unique identifier for the visitor that triggered this event.
+        sessionId:
+          type: string
+          description: Unique identifier for the session in which this event occurred.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event (in UTC).
+        sentAt:
+          type: string
+          format: date-time
+          description: 'Timestamp at which the request is sent (in UTC).
+
+
+            Typically, this value is nearly identical to `timestamp`. However in some
+
+            situations there is latency between when the event occurs and when it is
+
+            sent to Unify.'
+        context:
+          allOf:
+          - $ref: '#/components/schemas/EventContext'
+          description: Contextual information about the client behind the event.
+        name:
+          type: string
+          description: Name of the event that was tracked.
+        properties:
+          allOf:
+          - $ref: '#/components/schemas/TrackProperties'
+          description: Details about the event that was tracked.
+      description: A track event represents a custom action or activity performed by a visitor.
+    CreateOrUpdateUPersonAttributes:
+      type: object
+      required:
+      - email
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UAddress'
+          description: Physical address of the person.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Corporate phone number of the person.
+        do_not_call:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether calling this person is disallowed.
+        do_not_email:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether emailing this person is disallowed.
+        email:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UEmail'
+          description: Email address of the person.
+        email_opt_out:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether the person has opted out of email communications.
+        eu_resident:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether this person is a resident of the European Union.
+        first_name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: First name of the person.
+        last_name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Last name of the person.
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Source of the person record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: 'LinkedIn profile of the person.
+
+
+            This is the full URL of the LinkedIn profile of the person. The value
+
+            will always be standardized with an HTTPS prefix, "www" subdomain, and
+
+            trailing slash.'
+        mobile_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Mobile phone number of the person.
+        record_owner:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UReference'
+          description: The user that owns the person record.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Status of the person.
+        title:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Job title of the person.
+        work_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Work phone number of the person.
+      description: ''
+    IdentifyEvent:
+      type: object
+      required:
+      - type
+      - visitorId
+      - timestamp
+      - context
+      properties:
+        type:
+          type: string
+          enum:
+          - identify
+          description: The type of analytics event being sent.
+        visitorId:
+          type: string
+          description: Unique identifier for the visitor that triggered this event.
+        sessionId:
+          type: string
+          description: Unique identifier for the session in which this event occurred.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event (in UTC).
+        sentAt:
+          type: string
+          format: date-time
+          description: 'Timestamp at which the request is sent (in UTC).
+
+
+            Typically, this value is nearly identical to `timestamp`. However in some
+
+            situations there is latency between when the event occurs and when it is
+
+            sent to Unify.'
+        context:
+          allOf:
+          - $ref: '#/components/schemas/EventContext'
+          description: Contextual information about the client behind the event.
+        traits:
+          allOf:
+          - $ref: '#/components/schemas/Traits'
+          deprecated: true
+        company:
+          allOf:
+          - $ref: '#/components/schemas/CreateOrUpdateUCompanyAttributes'
+          description: Information about the company associated with the visitor.
+        person:
+          allOf:
+          - $ref: '#/components/schemas/CreateOrUpdateUPersonAttributes'
+          description: Information about the person associated with the visitor.
+      description: An identify event is used to send information about a visitor.
+    ipv4:
+      type: string
+      format: ipv4
+    UValues.UCountry:
+      type: object
+      required:
+      - code
+      - name
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountryCode'
+          description: Country code.
+        name:
+          type: string
+          description: Country name.
+      description: Composite object representing a country.
+      title: UCountry
+    UValues.UReference:
+      type: object
+      required:
+      - object
+      - id
+      properties:
+        object:
+          type: string
+          description: Object type.
+        id:
+          type: string
+          format: uuid
+          description: Object ID.
+      description: Composite object representing a reference to another object.
+      title: UReference
+    EventContext:
+      type: object
+      properties:
+        library:
+          type: object
+          properties:
+            name:
+              type: string
+            version:
+              type: string
+          description: Name and version of the library used to send the event.
+        ip:
+          anyOf:
+          - $ref: '#/components/schemas/ipv4'
+          - $ref: '#/components/schemas/ipv6'
+          description: IP address for the client that triggered the event.
+        locale:
+          type: string
+          description: Locale string for the client that triggered the event.
+        userAgent:
+          type: string
+          description: User agent string for the device.
+        userAgentData:
+          type: object
+          properties:
+            brands:
+              type: array
+              items:
+                type: object
+                properties:
+                  brand:
+                    type: string
+                  version:
+                    type: string
+            mobile:
+              type: boolean
+            platform:
+              type: string
+          description: User agent data for the device.
+        utm:
+          allOf:
+          - $ref: '#/components/schemas/CampaignParams'
+          description: Marketing campaign information.
+      description: Contextual client information attached to an analytics event.
+    PageEvent:
+      type: object
+      required:
+      - type
+      - visitorId
+      - timestamp
+      - context
+      properties:
+        type:
+          type: string
+          enum:
+          - page
+          description: The type of analytics event being sent.
+        visitorId:
+          type: string
+          description: Unique identifier for the visitor that triggered this event.
+        sessionId:
+          type: string
+          description: Unique identifier for the session in which this event occurred.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event (in UTC).
+        sentAt:
+          type: string
+          format: date-time
+          description: 'Timestamp at which the request is sent (in UTC).
+
+
+            Typically, this value is nearly identical to `timestamp`. However in some
+
+            situations there is latency between when the event occurs and when it is
+
+            sent to Unify.'
+        context:
+          allOf:
+          - $ref: '#/components/schemas/EventContext'
+          description: Contextual information about the client behind the event.
+        name:
+          type: string
+          description: Name of the page that was viewed.
+        properties:
+          allOf:
+          - $ref: '#/components/schemas/PageProperties'
+          description: Details about the page that was viewed.
+      description: A page view event represents a client visiting a page on a website.
+    UValues.UBoolean:
+      type: boolean
+      description: Boolean value.
+      title: UBoolean
+    UValues.UCountryCode:
+      type: string
+      enum:
+      - AD
+      - AE
+      - AF
+      - AG
+      - AI
+      - AL
+      - AM
+      - AO
+      - AQ
+      - AR
+      - AS
+      - AT
+      - AU
+      - AW
+      - AX
+      - AZ
+      - BA
+      - BB
+      - BD
+      - BE
+      - BF
+      - BG
+      - BH
+      - BI
+      - BJ
+      - BL
+      - BM
+      - BN
+      - BO
+      - BQ
+      - BR
+      - BS
+      - BT
+      - BV
+      - BW
+      - BY
+      - BZ
+      - CA
+      - CC
+      - CD
+      - CF
+      - CG
+      - CH
+      - CI
+      - CK
+      - CL
+      - CM
+      - CN
+      - CO
+      - CR
+      - CU
+      - CV
+      - CW
+      - CX
+      - CY
+      - CZ
+      - DE
+      - DJ
+      - DK
+      - DM
+      - DO
+      - DZ
+      - EC
+      - EE
+      - EG
+      - EH
+      - ER
+      - ES
+      - ET
+      - FI
+      - FJ
+      - FK
+      - FM
+      - FO
+      - FR
+      - GA
+      - GB
+      - GD
+      - GE
+      - GF
+      - GG
+      - GH
+      - GI
+      - GL
+      - GM
+      - GN
+      - GP
+      - GQ
+      - GR
+      - GS
+      - GT
+      - GU
+      - GW
+      - GY
+      - HK
+      - HM
+      - HN
+      - HR
+      - HT
+      - HU
+      - ID
+      - IE
+      - IL
+      - IM
+      - IN
+      - IO
+      - IQ
+      - IR
+      - IS
+      - IT
+      - JE
+      - JM
+      - JO
+      - JP
+      - KE
+      - KG
+      - KH
+      - KI
+      - KM
+      - KN
+      - KP
+      - KR
+      - KW
+      - KY
+      - KZ
+      - LA
+      - LB
+      - LC
+      - LI
+      - LK
+      - LR
+      - LS
+      - LT
+      - LU
+      - LV
+      - LY
+      - MA
+      - MC
+      - MD
+      - ME
+      - MF
+      - MG
+      - MH
+      - MK
+      - ML
+      - MM
+      - MN
+      - MO
+      - MP
+      - MQ
+      - MR
+      - MS
+      - MT
+      - MU
+      - MV
+      - MW
+      - MX
+      - MY
+      - MZ
+      - NA
+      - NC
+      - NE
+      - NF
+      - NG
+      - NI
+      - NL
+      - 'NO'
+      - NP
+      - NR
+      - NU
+      - NZ
+      - OM
+      - PA
+      - PE
+      - PF
+      - PG
+      - PH
+      - PK
+      - PL
+      - PM
+      - PN
+      - PR
+      - PS
+      - PT
+      - PW
+      - PY
+      - QA
+      - RE
+      - RO
+      - RS
+      - RU
+      - RW
+      - SA
+      - SB
+      - SC
+      - SD
+      - SE
+      - SG
+      - SH
+      - SI
+      - SJ
+      - SK
+      - SL
+      - SM
+      - SN
+      - SO
+      - SR
+      - SS
+      - ST
+      - SV
+      - SX
+      - SY
+      - SZ
+      - TC
+      - TD
+      - TF
+      - TG
+      - TH
+      - TJ
+      - TK
+      - TL
+      - TM
+      - TN
+      - TO
+      - TR
+      - TT
+      - TV
+      - TW
+      - TZ
+      - UA
+      - UG
+      - UM
+      - US
+      - UY
+      - UZ
+      - VA
+      - VC
+      - VE
+      - VG
+      - VI
+      - VN
+      - VU
+      - WF
+      - WS
+      - XK
+      - YE
+      - YT
+      - ZA
+      - ZM
+      - ZW
+      description: ISO 3166-1 alpha-2 country code.
+      title: UCountryCode
+    UValues.UDate:
+      type: string
+      description: String value representing a date.
+      title: UDate
+    CreateOrUpdateUCompanyAttributes:
+      type: object
+      required:
+      - domain
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UAddress'
+          description: Physical address of the company.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Corporate phone number of the company.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Description of the company.
+        do_not_contact:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether contacting this company is disallowed.
+        domain:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+          description: Website domain of the company.
+        employee_count:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UInteger'
+          description: Estimated employee count of the company.
+        founded:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDate'
+          description: Date when the company was founded.
+        industry:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Industry the company operates in.
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Source of the company record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: 'LinkedIn profile of the company.
+
+
+            This is the full URL of the LinkedIn profile of the company. The value will
+
+            always be standardized with an HTTPS prefix, "www" subdomain, and trailing
+
+            slash.'
+        name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Name of the company.
+        record_owner:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UReference'
+          description: The user that owns the company record.
+        revenue:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCurrency'
+          description: Estimated revenue of the company.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Status of the company.
+        time_zone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Time zone the company is located in.
+      description: ''
+    UValues.UEmail:
+      type: string
+      format: email
+      description: String value representing an email address.
+      title: UEmail
+    UValues.UText:
+      type: string
+      description: String value.
+      title: UText
+    Traits:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          description: Email address of the visitor.
+      description: Traits for the identify request payload.
+    CampaignParams:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Source of the campaign.
+        medium:
+          type: string
+          description: Medium of the campaign.
+        campaign:
+          type: string
+          description: Name of the campaign.
+        term:
+          type: string
+          description: Term of the campaign.
+        content:
+          type: string
+          description: Content of the campaign.
+      description: UTM parameters for tracking marketing campaigns.
+    ipv6:
+      type: string
+      format: ipv6
+    UValues.UAddress:
+      type: object
+      properties:
+        country:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountry'
+          description: Country code in ISO 3166-1 alpha-2 format.
+        administrativeArea:
+          type: string
+          description: State, province, region, or territory.
+        subAdministrativeArea:
+          type: string
+          description: County or other secondary governmental division of an administrative area.
+        locality:
+          type: string
+          description: City, town, or village.
+        dependentLocality:
+          type: string
+          description: Neighborhood, borough, district, or city sector.
+        postalCode:
+          type: string
+          description: Postal code or ZIP code.
+        thoroughfare:
+          type: string
+          description: Street name with elements such as street type or direction.
+        premise:
+          type: string
+          description: Street number or building name.
+        subPremise:
+          type: string
+          description: Apartment, suite, office number, or other secondary unit designator.
+      description: Composite object representing a physical address.
+      title: UAddress
+    UValues.UCurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - USS
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      description: ISO 4217 currency code.
+      title: UCurrencyCode
+    UValues.UUrl:
+      type: string
+      description: String value representing a web URL or internet domain.
+      title: UUrl
+    PageProperties:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path of the page (equivalent to `location.pathname`).
+        query:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Query string parameters (equivalent to `location.search`).
+        referrer:
+          type: string
+          description: Referrer page's full URL (equivalent to `document.referrer`).
+        title:
+          type: string
+          description: Page title (equivalent to `document.title`).
+        url:
+          type: string
+          description: URL of the page (equivalent to `location.href`).
+      description: Details about a page included in a page request.
+    UValues.UPhoneNumber:
+      type: string
+      description: String value representing a phone number.
+      title: UPhoneNumber
+    UValues.UCurrency:
+      type: object
+      required:
+      - code
+      - value
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCurrencyCode'
+          description: Currency code.
+        value:
+          type: number
+          format: decimal
+          description: Currency value.
+      description: Composite object representing a currency value.
+      title: UCurrency
+    TrackProperties:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path of the page (equivalent to `location.pathname`).
+        query:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Query string parameters (equivalent to `location.search`).
+        referrer:
+          type: string
+          description: Referrer page's full URL (equivalent to `document.referrer`).
+        title:
+          type: string
+          description: Page title (equivalent to `document.title`).
+        url:
+          type: string
+          description: URL of the page (equivalent to `location.href`).
+      unevaluatedProperties: {}
+      description: Details about an event included in a track request.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: Basic
