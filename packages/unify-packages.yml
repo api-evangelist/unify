@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.unifygtm.com/developers/introduction
+packages:
+  - language: python
+    registry: pypi
+    name: unifygtm-sdk
+    version: 0.1.3
+    url: https://pypi.org/project/unifygtm-sdk/
+    install: pip install unifygtm-sdk
+    repository: https://github.com/unifygtm/sdk-python
+    docs: https://docs.unifygtm.com/developers/sdks/python-library
+    official: true
+  - language: typescript
+    registry: npm
+    name: "@unifygtm/sdk"
+    version: 0.1.3
+    url: https://www.npmjs.com/package/@unifygtm/sdk
+    install: npm install @unifygtm/sdk
+    repository: https://github.com/unifygtm/sdk-typescript
+    docs: https://docs.unifygtm.com/developers/sdks/typescript-library
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@unifygtm/intent-client"
+    version: 1.9.5
+    url: https://www.npmjs.com/package/@unifygtm/intent-client
+    install: npm install @unifygtm/intent-client
+    repository: https://github.com/unifygtm/intent-js-client
+    docs: https://docs.unifygtm.com/developers/intent-client/js-client
+    description: Browser client for sending website and product intent events into Unify.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@unifygtm/intent-react"
+    version: 1.9.5
+    url: https://www.npmjs.com/package/@unifygtm/intent-react
+    install: npm install @unifygtm/intent-react
+    repository: https://github.com/unifygtm/intent-react
+    docs: https://docs.unifygtm.com/developers/intent-client/react
+    description: React bindings for the Unify Intent JS client.
+    official: true
+examples:
+  - name: bulk-api-connector-examples
+    url: https://github.com/unifygtm/bulk-api-connector-examples
+    description: Directory of example Connector implementations using the Unify Bulk API.
+    official: true

@@ -1,0 +1,153 @@
+generated: '2026-07-21'
+method: derived
+format: custom-envelope
+source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json, openapi/unify-analytics-openapi.json
+notes: Unify does not use RFC 9457 application/problem+json; errors are custom JSON objects
+  (e.g. UResponses.BadRequestError with code/path fields).
+problems:
+- status: 400
+  description: Response for any operation that results in a bad request error.
+  apis:
+  - data
+  - sequences
+  source_operations:
+  - openapi/unify-data-openapi.json#list_objects
+  - openapi/unify-data-openapi.json#create_object
+  - openapi/unify-data-openapi.json#get_object
+- status: 401
+  description: Access is unauthorized.
+  apis:
+  - analytics
+  source_operations:
+  - openapi/unify-analytics-openapi.json#send_identify_event
+  - openapi/unify-analytics-openapi.json#send_page_event
+  - openapi/unify-analytics-openapi.json#send_track_event
+- status: 401
+  description: Response for any operation that results in an unauthorized error.
+  apis:
+  - data
+  - sequences
+  source_operations:
+  - openapi/unify-data-openapi.json#list_objects
+  - openapi/unify-data-openapi.json#create_object
+  - openapi/unify-data-openapi.json#get_object
+- status: 403
+  description: Response for any operation that results in a forbidden error.
+  apis:
+  - data
+  source_operations:
+  - openapi/unify-data-openapi.json#update_object
+  - openapi/unify-data-openapi.json#delete_object
+- status: 404
+  description: Response for any operation that results in a not found error.
+  apis:
+  - data
+  source_operations:
+  - openapi/unify-data-openapi.json#get_object
+  - openapi/unify-data-openapi.json#update_object
+  - openapi/unify-data-openapi.json#delete_object
+- status: 404
+  description: Response returned when a Bulk API job cannot be found.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job
+  - openapi/unify-sequences-openapi.json#cancel_sequence_enrollment_step_query_job
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
+- status: 404
+  description: Response returned when a sequence cannot be found.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#retrieve_sequence
+  - openapi/unify-sequences-openapi.json#delete_sequence
+  - openapi/unify-sequences-openapi.json#pause_sequence
+- status: 404
+  description: Response returned when a sequence step cannot be found.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#list_sequence_steps
+  - openapi/unify-sequences-openapi.json#retrieve_sequence_step
+- status: 404
+  description: Response returned when an enrollment cannot be found.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#create_sequence_enrollment
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment
+  - openapi/unify-sequences-openapi.json#delete_sequence_enrollment
+- status: 409
+  description: Response for any operation that results in a conflict error.
+  apis:
+  - data
+  source_operations:
+  - openapi/unify-data-openapi.json#create_object
+  - openapi/unify-data-openapi.json#update_object
+  - openapi/unify-data-openapi.json#create_object_attribute
+- status: 409
+  description: Response returned when Bulk API job results are not ready yet.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_query_job_results
+- status: 409
+  description: Response returned when a Bulk API job is not cancelable.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#cancel_sequence_enrollment_step_query_job
+  - openapi/unify-sequences-openapi.json#cancel_sequence_enrollment_query_job
+- status: 409
+  description: Response returned when a sequence state change conflicts with a concurrent update.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#pause_sequence
+  - openapi/unify-sequences-openapi.json#resume_sequence
+- status: 409
+  description: Response returned when the person is already enrolled in an active sequence.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#create_sequence_enrollment
+- status: 410
+  description: Response returned when Bulk API job results have expired.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_query_job_results
+- status: 413
+  description: Response returned when a requested Bulk API results page is too large.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_query_job_results
+- status: 429
+  description: Response for any operation that exceeds a rate limit.
+  apis:
+  - sequences
+  source_operations:
+  - openapi/unify-sequences-openapi.json#create_sequence_enrollment_step_query_job
+  - openapi/unify-sequences-openapi.json#list_sequence_enrollment_step_query_jobs
+  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job
+- status: 500
+  description: Response for any operation that results in an internal server error.
+  apis:
+  - data
+  - sequences
+  source_operations:
+  - openapi/unify-data-openapi.json#list_objects
+  - openapi/unify-data-openapi.json#create_object
+  - openapi/unify-data-openapi.json#get_object
+- status: 503
+  description: Response for any operation that results in service unavailability.
+  apis:
+  - data
+  source_operations:
+  - openapi/unify-data-openapi.json#create_object_record
+  - openapi/unify-data-openapi.json#upsert_object_record
+  - openapi/unify-data-openapi.json#update_object_record

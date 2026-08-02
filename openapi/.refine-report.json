@@ -1,0 +1,28 @@
+{
+  "provider": "unify",
+  "sources": [
+    "unify-events-api-openapi.yml",
+    "unify-object-attribute-options-api-openapi.yml",
+    "unify-object-attributes-api-openapi.yml",
+    "unify-object-records-api-openapi.yml",
+    "unify-objects-api-openapi.yml",
+    "unify-sequence-enrollment-steps-api-openapi.yml",
+    "unify-sequence-enrollments-api-openapi.yml",
+    "unify-sequences-api-openapi.yml"
+  ],
+  "outputs": [
+    "unify-events-api-openapi.yml",
+    "unify-object-attribute-options-api-openapi.yml",
+    "unify-object-attributes-api-openapi.yml",
+    "unify-object-records-api-openapi.yml",
+    "unify-objects-api-openapi.yml",
+    "unify-sequence-enrollment-steps-api-openapi.yml",
+    "unify-sequence-enrollments-api-openapi.yml",
+    "unify-sequences-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

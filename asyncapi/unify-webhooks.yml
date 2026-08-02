@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.unifygtm.com/reference/plays/actions
+spec_type: Webhooks
+notes: Unify publishes no AsyncAPI document. Its outbound event surface is the
+  Plays "Webhook" action, captured here as the provider's documented webhook
+  surface.
+webhooks:
+  - name: play-webhook-action
+    direction: outbound
+    docs: https://docs.unifygtm.com/reference/plays/actions
+    description: The webhook action in Unify Plays sends an HTTP request to any
+      URL, pushing prospect and company data to tools that accept webhooks
+      (e.g. Zapier, n8n, dialers, marketing automation, internal tooling) when
+      a signal-triggered Play fires. Launched 2026-05-26 per the changelog
+      ("Webhooks in Plays").
+    payload: User-configured from Play context (prospect and company data);
+      configuration and test panes are provided in the Play builder.
+inbound:
+  - name: clay-webhook-import
+    direction: inbound
+    docs: https://docs.unifygtm.com/developers/guides/send-data/clay-webhook
+    description: Unify can receive records sent from a Clay sheet via webhook
+      into the Data platform.

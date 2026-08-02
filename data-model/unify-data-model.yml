@@ -1,0 +1,78 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json,
+  https://docs.unifygtm.com/developers/api/data/standard-objects
+docs: https://docs.unifygtm.com/developers/api/data/standard-objects
+entities:
+  - name: object
+    description: A data-platform object (table). Standard objects ship built in
+      (company, person, user); custom objects can be created via the Data API.
+  - name: attribute
+    description: A field on an object, with a type (text, url, email address,
+      reference, datetime, etc.) and optional uniqueness.
+  - name: attribute_option
+    description: An allowed option value for a select-style attribute.
+  - name: record
+    description: A row of an object, addressed by id or found/upserted via
+      unique attribute values.
+  - name: company
+    description: Standard object representing an organization; deduplicated by
+      normalized unique domain.
+  - name: person
+    description: Standard object representing an individual, unique by email.
+  - name: user
+    description: Standard object representing a Unify user (record owners).
+  - name: sequence
+    description: An outbound sequence with ordered steps (Sequences API).
+  - name: sequence_step
+    description: A step within a sequence.
+  - name: sequence_enrollment
+    description: A person's enrollment in a sequence, with pause/resume state.
+  - name: query_job
+    description: Asynchronous Bulk API job for exporting enrollment and
+      enrollment-step datasets.
+relationships:
+  - from: object
+    to: attribute
+    kind: has_many
+    via: object_name (path /objects/{object_name}/attributes)
+  - from: attribute
+    to: attribute_option
+    kind: has_many
+    via: attribute path /objects/{object_name}/attributes/{attribute_id}/options
+  - from: object
+    to: record
+    kind: has_many
+    via: path /objects/{object_name}/records
+  - from: person
+    to: company
+    kind: belongs_to
+    via: company (Reference attribute; settable by match on unique values such
+      as domain)
+  - from: company
+    to: user
+    kind: belongs_to
+    via: record_owner (Reference attribute)
+  - from: person
+    to: user
+    kind: belongs_to
+    via: record_owner (Reference attribute)
+  - from: sequence
+    to: sequence_step
+    kind: has_many
+    via: path /sequences/{sequence_id}/steps
+  - from: sequence
+    to: sequence_enrollment
+    kind: has_many
+    via: sequence_id filter on list_sequence_enrollments
+  - from: sequence_enrollment
+    to: person
+    kind: belongs_to
+    via: person_id
+  - from: query_job
+    to: sequence_enrollment
+    kind: has_many
+    via: enrollment query-job results pages
+unique_keys:
+  company: domain (normalized, deduplicating)
+  person: email

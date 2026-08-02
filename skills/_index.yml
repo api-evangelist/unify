@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/unifygtm/agent-plugins
+notes: Provider-published Agent Skills, saved verbatim from the official Unify
+  agent-plugins repository (unify/skills/*/SKILL.md), which ships plugins for
+  Claude Code, Codex, and Cursor alongside the hosted MCP server captured in
+  mcp/unify-mcp.yml. Descriptions below are the providers' own frontmatter.
+skills:
+  - file: unify-unify-skill.md
+    name: unify
+    description: Directory skill for working with Unify, the go-to-market platform
+      for finding and engaging buyers; maps every Unify skill.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/unify/SKILL.md
+  - file: unify-agent-runs-skill.md
+    name: agent-runs
+    description: Run Unify agent tasks with the core run_agent -> poll_agent ->
+      answer_question -> read_agent_results loop.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/agent-runs/SKILL.md
+  - file: unify-discovery-skill.md
+    name: discovery
+    description: Build lists of companies or people from criteria - ICP filters,
+      personas, lookalikes, hiring signals, technographics, funding stage.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/discovery/SKILL.md
+  - file: unify-enrichment-skill.md
+    name: enrichment
+    description: Find work emails, phone numbers, firmographics, funding,
+      technographics, job postings, and fresh employment data for known
+      companies or people.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/enrichment/SKILL.md
+  - file: unify-outreach-skill.md
+    name: outreach
+    description: Create email sequences, generate per-prospect copy previews,
+      approve and enroll prospects, and manage rep tasks.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/outreach/SKILL.md
+  - file: unify-crm-skill.md
+    name: crm
+    description: CRM and record management - read Salesforce/HubSpot, write CRM
+      records, upsert companies/people into Unify, export to Lists.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/crm/SKILL.md
+  - file: unify-data-tables-skill.md
+    name: data-tables
+    description: Page through the rows of result tables produced by Unify agent
+      runs with load_datatable.
+    source: https://github.com/unifygtm/agent-plugins/blob/main/unify/skills/data-tables/SKILL.md

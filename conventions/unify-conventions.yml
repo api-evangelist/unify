@@ -1,0 +1,51 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json,
+  openapi/unify-analytics-openapi.json, https://docs.unifygtm.com/developers/introduction
+authentication:
+  style: api-key header
+  header: x-api-key
+  notes: Generate an API key in the app under Settings -> Developers
+    (app.unifygtm.com/dashboard/settings/integrations/api-keys). The Bulk API
+    requires a user-backed API key. The Analytics API uses HTTP Basic
+    authentication instead (public write key), suitable for client-side event
+    collection. See authentication/unify-authentication.yml.
+idempotency:
+  supported: false
+  notes: No Idempotency-Key header or documented idempotency contract. The Data
+    API offers upsert and find-unique operations keyed on unique attribute
+    values, which give natural-key write semantics but are not a documented
+    idempotency-key mechanism.
+pagination:
+  data_api:
+    style: cursor
+    params: [cursor, limit]
+  sequences_api:
+    style: cursor and page
+    params: [cursor, limit, page, page_size]
+    notes: Bulk query-job results are fetched page by page (page, page_size up
+      to 10000 per the Bulk API guide).
+filtering:
+  sequences_api: [sequence_id, person_id, mailbox_id, status, type,
+    updated_after, updated_before]
+validation:
+  dry_run: validation_mode query parameter on Data API create, upsert, and
+    update record operations.
+error_envelope:
+  shape: Custom JSON error objects (e.g. UResponses.BadRequestError with code
+    and path fields); success responses wrap payloads in a status/data
+    envelope. Not RFC 9457 problem+json. See errors/unify-problem-types.yml.
+rate_limits:
+  signaling: 429 responses documented on Sequences API operations ("Response
+    for any operation that exceeds a rate limit"); no published numeric limits
+    found.
+versioning:
+  scheme: uri-path (/v1). See lifecycle/unify-lifecycle.yml.
+async_jobs:
+  pattern: The Bulk API uses asynchronous query jobs (create job -> poll status
+    -> page results -> optional cancel) for large Sequence enrollment and
+    enrollment-step exports.
+cross_links:
+  errors: errors/unify-problem-types.yml
+  lifecycle: lifecycle/unify-lifecycle.yml
+  authentication: authentication/unify-authentication.yml

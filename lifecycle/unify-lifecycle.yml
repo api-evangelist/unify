@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.unifygtm.com/developers/introduction, https://www.unifygtm.com/changelog
+versioning:
+  scheme: uri-path
+  current: v1
+  evidence: All published API base URLs carry /v1 (api.unifygtm.com/data/v1,
+    api.unifygtm.com/sequences/v1, api.unifyintent.com/analytics/v1).
+changelog: https://www.unifygtm.com/changelog
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation policy or RFC 8594 Sunset header support was
+    found in the docs as of the probe date.
+sla:
+  url: null
+  notes: No public SLA page found.
+status_page: null
+status_page_notes: No public status page found (status.unifygtm.com does not
+  resolve); recorded as absent.
+deprecated_operations: []

@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: searched
+hosts:
+  - host: https://www.unifygtm.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://docs.unifygtm.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://app.unifygtm.com
+    note: Returns HTTP 200 with the SPA index.html for every /.well-known/ path
+      (catch-all route) - no real well-known documents are served, so these are
+      recorded as absent.
+    documents: []
+notes: No /.well-known/ discovery surface was found on any Unify host as of the
+  probe date. Recorded as valid absence; no WellKnown or SecurityTxt pointer is
+  wired in apis.yml.

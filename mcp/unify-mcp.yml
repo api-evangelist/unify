@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/unifygtm/agent-plugins
+status: published
+server:
+  name: unify
+  transport: http
+  url: https://mcp.unifygtm.com/mcp
+  auth: oauth2 (public client, browser login; client configuration published in
+    the official agent-plugins repository)
+distribution:
+  - kind: agent-plugin
+    repository: https://github.com/unifygtm/agent-plugins
+    description: Official Unify GTM agent plugins for Claude Code, Codex, and Cursor.
+      Each plugin bundles the hosted MCP server (unify/mcp.json) plus seven packaged
+      agent skills (see skills/_index.yml in this repo).
+    license: MIT
+notes: >-
+  The plugin description published by Unify: "Run Unify's GTM agent from Claude
+  Code - build company and people lists, enrich emails and phone numbers, and
+  launch sequences and tasks." Tool inventory is served by the remote MCP server
+  at runtime and requires an authenticated Unify workspace, so tools[] is not
+  enumerated here.

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/unify-analytics-openapi.json, openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: Basic
+  sources:
+  - openapi/unify-analytics-openapi.json
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/unify-data-openapi.json
+  - openapi/unify-sequences-openapi.json
+docs: https://docs.unifygtm.com/developers/introduction
+notes: API keys are generated in the Unify app under Settings -> Developers (app.unifygtm.com/dashboard/settings/integrations/api-keys)
+  and sent in the x-api-key header on the Data and Sequences APIs. The Bulk API requires a user-backed
+  API key. The Analytics API authenticates with HTTP Basic using a public write key suitable
+  for client-side event collection.

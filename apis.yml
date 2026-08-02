@@ -1,27 +1,246 @@
 aid: unify
 name: Unify
-description: Unify is a company surfaced as a portfolio company of battery-ventures, emergence-capital
-  and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the
-  enrichment pipeline.
+description: Unify is a B2B outbound and go-to-market platform that combines 25+ intent
+  signals with AI agents and automated multi-channel sequences to help companies identify,
+  qualify, and engage buyers automatically. Founded in 2023 and backed by the OpenAI
+  Startup Fund, Thrive Capital, Battery Ventures, and Emergence Capital, Unify exposes
+  developer APIs for analytics event collection, object data management, and sequence
+  automation, plus official Python and TypeScript SDKs, a hosted MCP server, and
+  published agent skills.
 url: https://raw.githubusercontent.com/api-evangelist/unify/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://raw.githubusercontent.com/unifygtm/agent-plugins/main/unify/assets/unify-logo-light.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
 - emergence-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
-- Company
-apis: []
+- Sales
+- Marketing
+- Go-To-Market
+- Outbound
+- Intent Data
+- AI Agents
+- B2B
+- Data Enrichment
+- Sequences
+- Analytics
+apis:
+- aid: unify:unify-events-api
+  name: Unify Events API
+  description: The Events API from Unify — 3 operation(s) for events.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-object-attribute-options-api
+  name: Unify Object Attribute Options API
+  description: >-
+    The Object Attribute Options API from Unify — 2 operation(s) for object attribute options.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Object Attribute Options
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-object-attribute-options-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-object-attributes-api
+  name: Unify Object Attributes API
+  description: The Object Attributes API from Unify — 2 operation(s) for object attributes.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Object Attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-object-attributes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-object-records-api
+  name: Unify Object Records API
+  description: The Object Records API from Unify — 4 operation(s) for object records.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Object Records
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-object-records-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-objects-api
+  name: Unify Objects API
+  description: The Objects API from Unify — 2 operation(s) for objects.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-objects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-sequence-enrollment-steps-api
+  name: Unify Sequence Enrollment Steps API
+  description: >-
+    The Sequence Enrollment Steps API from Unify — 4 operation(s) for sequence enrollment steps.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Sequence Enrollment Steps
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-sequence-enrollments-api
+  name: Unify Sequence Enrollments API
+  description: The Sequence Enrollments API from Unify — 8 operation(s) for sequence enrollments.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Sequence Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-sequence-enrollments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+- aid: unify:unify-sequences-api
+  name: Unify Sequences API
+  description: The Sequences API from Unify — 18 operation(s) for sequences.
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Sequences
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-sequences-api-openapi.yml
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/unify-agentic-access.yml
+- type: TrustCenter
+  url: security/unify-trust-center.yml
+- type: DomainSecurity
+  url: security/unify-domain-security.yml
+- type: Authentication
+  url: authentication/unify-authentication.yml
 - type: Website
   url: https://www.unifygtm.com
+- type: DeveloperPortal
+  url: https://docs.unifygtm.com/developers/introduction
+- type: Documentation
+  url: https://docs.unifygtm.com
+- type: APIReference
+  url: https://docs.unifygtm.com/developers/api/data/overview
+- type: GettingStarted
+  url: https://docs.unifygtm.com/getting-started/setup-guide
+- type: Blog
+  url: https://www.unifygtm.com/blog
+- type: GitHubOrganization
+  url: https://github.com/unifygtm
+- type: Pricing
+  url: https://www.unifygtm.com/pricing
+- type: SignUp
+  url: https://app.unifygtm.com/?screen_hint=signup
+- type: Login
+  url: https://auth.unifygtm.com/u/login/identifier
+- type: TermsOfService
+  url: https://www.unifygtm.com/legal/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://www.unifygtm.com/legal/privacy-policy
+- type: Compliance
+  url: https://trust.unifygtm.com/
+- type: ChangeLog
+  url: changelog/unify-changelog.yml
+- type: LLMsTxt
+  url: llms/unify-llms.txt
+- type: MCPServer
+  url: mcp/unify-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Packages
+  url: packages/unify-packages.yml
+- type: SDKs
+  url: packages/unify-packages.yml
+- type: Conformance
+  url: conformance/unify-conformance.yml
+- type: ErrorCatalog
+  url: errors/unify-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/unify-lifecycle.yml
+- type: Conventions
+  url: conventions/unify-conventions.yml
+- type: DataModel
+  url: data-model/unify-data-model.yml
+- type: Webhooks
+  url: asyncapi/unify-webhooks.yml
+- type: XTwitter
+  url: https://twitter.com/unifygtm
+- type: LinkedIn
+  url: https://www.linkedin.com/company/unifygtm/
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 30
+  pass: local-v1
