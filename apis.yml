@@ -1,12 +1,12 @@
 aid: unify
 name: Unify
-description: Unify is a B2B outbound and go-to-market platform that combines 25+ intent
-  signals with AI agents and automated multi-channel sequences to help companies identify,
-  qualify, and engage buyers automatically. Founded in 2023 and backed by the OpenAI
-  Startup Fund, Thrive Capital, Battery Ventures, and Emergence Capital, Unify exposes
-  developer APIs for analytics event collection, object data management, and sequence
-  automation, plus official Python and TypeScript SDKs, a hosted MCP server, and
-  published agent skills.
+description: Unify is a B2B outbound and go-to-market platform that pairs AI agents with reps to find
+  buyers already in market and reach them with the right message, combining 40+ data sources, 1.1B+ contacts
+  and 65M+ companies with intent signals, automated Plays and multi-channel sequences. Founded in 2023
+  and backed by $52M+ from the OpenAI Startup Fund, Thrive Capital, Battery Ventures and Emergence Capital,
+  Unify publishes four anonymous OpenAPI 3.0 documents covering 68 operations across Data, Sequences,
+  Tasks and Analytics, official Python and TypeScript SDKs, browser intent clients, a hosted OAuth-protected
+  MCP server exposing 71 tools, provider-published agent skills, and an A2A agent card.
 url: https://raw.githubusercontent.com/api-evangelist/unify/refs/heads/main/apis.yml
 accessModel:
   pricing: unknown
@@ -28,7 +28,7 @@ x-backed-by:
 - emergence-capital
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-13'
 tags:
 - Sales
 - Marketing
@@ -40,75 +40,64 @@ tags:
 - Data Enrichment
 - Sequences
 - Analytics
+- Tasks
+- Bulk API
+- MCP
+- Agent Skills
+- Webhooks
 apis:
 - aid: unify:unify-events-api
-  name: Unify Events API
-  description: The Events API from Unify — 3 operation(s) for events.
-  humanURL: https://docs.unifygtm.com/developers/api/data/overview
-  baseURL: https://api.unifygtm.com/data/v1
+  name: Unify Analytics Events API
+  description: Server-side event collection for the Unify Analytics API - identify, page and track events
+    posted from a website or product with a public write key over HTTP Basic. 3 operation(s).
+  humanURL: https://docs.unifygtm.com/developers/api/analytics/overview
+  baseURL: https://api.unifyintent.com/analytics/v1
   tags:
   - Events
   properties:
   - type: OpenAPI
     url: openapi/unify-events-api-openapi.yml
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/data/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: OpenAPI
+    url: https://api.unifyintent.com/analytics/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
     url: https://docs.unifygtm.com/developers/api/analytics/overview
-- aid: unify:unify-object-attribute-options-api
-  name: Unify Object Attribute Options API
-  description: >-
-    The Object Attribute Options API from Unify — 2 operation(s) for object attribute options.
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/analytics/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+  - type: Overlay
+    url: overlays/unify-analytics-overlay.yaml
+  - type: ToolCrosswalk
+    url: mcp/unify-tool-crosswalk.yml
+- aid: unify:unify-event-query-jobs-api
+  name: Unify Event Query Jobs API
+  description: 'Asynchronous Bulk API export of collected analytics events: create a query job, poll its
+    status, page the results, or cancel it. 5 operation(s).'
   humanURL: https://docs.unifygtm.com/developers/api/data/overview
   baseURL: https://api.unifygtm.com/data/v1
   tags:
-  - Object Attribute Options
+  - Event Query Jobs
   properties:
   - type: OpenAPI
-    url: openapi/unify-object-attribute-options-api-openapi.yml
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/data/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
-- aid: unify:unify-object-attributes-api
-  name: Unify Object Attributes API
-  description: The Object Attributes API from Unify — 2 operation(s) for object attributes.
-  humanURL: https://docs.unifygtm.com/developers/api/data/overview
-  baseURL: https://api.unifygtm.com/data/v1
-  tags:
-  - Object Attributes
-  properties:
+    url: openapi/unify-event-query-jobs-api-openapi.yml
   - type: OpenAPI
-    url: openapi/unify-object-attributes-api-openapi.yml
+    url: https://api.unifygtm.com/data/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
     url: https://docs.unifygtm.com/developers/api/data/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
-- aid: unify:unify-object-records-api
-  name: Unify Object Records API
-  description: The Object Records API from Unify — 4 operation(s) for object records.
-  humanURL: https://docs.unifygtm.com/developers/api/data/overview
-  baseURL: https://api.unifygtm.com/data/v1
-  tags:
-  - Object Records
-  properties:
-  - type: OpenAPI
-    url: openapi/unify-object-records-api-openapi.yml
-  - type: Documentation
+  - type: APIReference
     url: https://docs.unifygtm.com/developers/api/data/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
 - aid: unify:unify-objects-api
   name: Unify Objects API
-  description: The Objects API from Unify — 2 operation(s) for objects.
+  description: Create, read, update and delete the objects (tables) of the Unify data platform, covering
+    both the standard company/person/user objects and custom objects. 5 operation(s).
   humanURL: https://docs.unifygtm.com/developers/api/data/overview
   baseURL: https://api.unifygtm.com/data/v1
   tags:
@@ -116,61 +105,203 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/unify-objects-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/data/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
     url: https://docs.unifygtm.com/developers/api/data/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
-- aid: unify:unify-sequence-enrollment-steps-api
-  name: Unify Sequence Enrollment Steps API
-  description: >-
-    The Sequence Enrollment Steps API from Unify — 4 operation(s) for sequence enrollment steps.
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+  - type: Overlay
+    url: overlays/unify-data-overlay.yaml
+  - type: ToolCrosswalk
+    url: mcp/unify-tool-crosswalk.yml
+- aid: unify:unify-object-attributes-api
+  name: Unify Object Attributes API
+  description: Manage the attributes (fields) defined on a Unify object, including type, uniqueness and
+    lifecycle. 5 operation(s).
   humanURL: https://docs.unifygtm.com/developers/api/data/overview
   baseURL: https://api.unifygtm.com/data/v1
   tags:
-  - Sequence Enrollment Steps
+  - Object Attributes
   properties:
   - type: OpenAPI
-    url: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+    url: openapi/unify-object-attributes-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/data/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
     url: https://docs.unifygtm.com/developers/api/data/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
-- aid: unify:unify-sequence-enrollments-api
-  name: Unify Sequence Enrollments API
-  description: The Sequence Enrollments API from Unify — 8 operation(s) for sequence enrollments.
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+- aid: unify:unify-object-attribute-options-api
+  name: Unify Object Attribute Options API
+  description: Manage the allowed option values on select-style Unify object attributes. 5 operation(s).
   humanURL: https://docs.unifygtm.com/developers/api/data/overview
   baseURL: https://api.unifygtm.com/data/v1
   tags:
-  - Sequence Enrollments
+  - Object Attribute Options
   properties:
   - type: OpenAPI
-    url: openapi/unify-sequence-enrollments-api-openapi.yml
+    url: openapi/unify-object-attribute-options-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/data/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
     url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+- aid: unify:unify-object-records-api
+  name: Unify Object Records API
+  description: Create, read, update, delete, upsert and find-unique the records of any Unify object, with
+    a validation_mode dry-run for writes. 6 operation(s).
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Object Records
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-object-records-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/data/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/sequences/overview
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+- aid: unify:unify-object-record-query-jobs-api
+  name: Unify Object Record Query Jobs API
+  description: 'Asynchronous Bulk API export of object records: create a query job with structured filters,
+    poll it, page the results, or cancel it. 5 operation(s).'
+  humanURL: https://docs.unifygtm.com/developers/api/data/overview
+  baseURL: https://api.unifygtm.com/data/v1
+  tags:
+  - Object Record Query Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-object-record-query-jobs-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/data/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
 - aid: unify:unify-sequences-api
   name: Unify Sequences API
-  description: The Sequences API from Unify — 18 operation(s) for sequences.
-  humanURL: https://docs.unifygtm.com/developers/api/data/overview
-  baseURL: https://api.unifygtm.com/data/v1
+  description: List, retrieve, pause, resume and delete Unify outbound sequences and read their ordered
+    steps. 7 operation(s).
+  humanURL: https://docs.unifygtm.com/developers/api/sequences/overview
+  baseURL: https://api.unifygtm.com/sequences/v1
   tags:
   - Sequences
   properties:
   - type: OpenAPI
     url: openapi/unify-sequences-api-openapi.yml
-  - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/data/overview
+  - type: OpenAPI
+    url: https://api.unifygtm.com/sequences/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
     url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+  - type: Overlay
+    url: overlays/unify-sequences-overlay.yaml
+  - type: ToolCrosswalk
+    url: mcp/unify-tool-crosswalk.yml
+- aid: unify:unify-sequence-enrollments-api
+  name: Unify Sequence Enrollments API
+  description: Enroll people in sequences and pause, resume, cancel, list and bulk-export those enrollments.
+    11 operation(s).
+  humanURL: https://docs.unifygtm.com/developers/api/sequences/overview
+  baseURL: https://api.unifygtm.com/sequences/v1
+  tags:
+  - Sequence Enrollments
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-sequence-enrollments-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/sequences/v1/openapi.json
+    name: Provider-hosted live specification
   - type: Documentation
-    url: https://docs.unifygtm.com/developers/api/analytics/overview
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+- aid: unify:unify-sequence-enrollment-steps-api
+  name: Unify Sequence Enrollment Steps API
+  description: Asynchronous Bulk API export of executed sequence enrollment steps. 5 operation(s).
+  humanURL: https://docs.unifygtm.com/developers/api/sequences/overview
+  baseURL: https://api.unifygtm.com/sequences/v1
+  tags:
+  - Sequence Enrollment Steps
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/sequences/v1/openapi.json
+    name: Provider-hosted live specification
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/sequences/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+- aid: unify:unify-tasks-api
+  name: Unify Tasks API
+  description: Create, read, update, complete, delete, list and bulk-export the outreach tasks - emails,
+    calls, LinkedIn touches and manual action items - assigned to Unify users against a person. 11 operation(s).
+  humanURL: https://docs.unifygtm.com/developers/api/tasks/overview
+  baseURL: https://api.unifygtm.com/tasks/v1
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/unify-tasks-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.unifygtm.com/tasks/v1/openapi.json
+    name: Provider-hosted live specification
+  - type: Documentation
+    url: https://docs.unifygtm.com/developers/api/tasks/overview
+  - type: APIReference
+    url: https://docs.unifygtm.com/developers/api/tasks/overview
+  - type: RateLimits
+    url: rate-limits/unify-rate-limits.yml
+  - type: Authentication
+    url: authentication/unify-authentication.yml
+  - type: Overlay
+    url: overlays/unify-tasks-overlay.yaml
+  - type: ToolCrosswalk
+    url: mcp/unify-tool-crosswalk.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -241,8 +372,32 @@ common:
   url: https://twitter.com/unifygtm
 - type: LinkedIn
   url: https://www.linkedin.com/company/unifygtm/
+- type: AgentCard
+  url: a2a/unify-a2a.yml
+- type: WellKnown
+  url: well-known/unify-well-known.yml
+- type: OAuthScopes
+  url: scopes/unify-scopes.yml
+- type: ToolCrosswalk
+  url: mcp/unify-tool-crosswalk.yml
+- type: Plans
+  url: plans/unify-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/unify-rate-limits.yml
+- type: Components
+  url: components/unify-components.yml
+- type: Overlay
+  url: overlays/unify-data-overlay.yaml
+- type: Overlay
+  url: overlays/unify-sequences-overlay.yaml
+- type: Overlay
+  url: overlays/unify-tasks-overlay.yaml
+- type: Support
+  url: mailto:support@unifygtm.com
+- type: ChangeLog
+  url: https://www.unifygtm.com/changelog
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-13'
   status: enriched
-  artifacts_added: 30
+  artifacts_added: 13
   pass: local-v1
