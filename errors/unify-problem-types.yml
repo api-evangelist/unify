@@ -1,153 +1,172 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: derived
-format: custom-envelope
-source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json, openapi/unify-analytics-openapi.json
-notes: Unify does not use RFC 9457 application/problem+json; errors are custom JSON objects
-  (e.g. UResponses.BadRequestError with code/path fields).
+source: >-
+  openapi/_original/unify-data-openapi.json,
+  openapi/_original/unify-sequences-openapi.json,
+  openapi/_original/unify-tasks-openapi.json,
+  openapi/_original/unify-analytics-openapi.json
+  (all four harvested live from the API hosts on 2026-08-13)
+format: custom
+format_note: >-
+  NOT RFC 9457. Every error response is media type application/json (344 error
+  response bodies across the four documents; no application/problem+json anywhere)
+  and every one shares the same two-field envelope: a machine-readable `status`
+  string enum and a human `message`. Richer failures extend that envelope with
+  extra top-level fields via allOf rather than RFC 9457 extension members. The
+  envelope is consistent and discriminated, which is most of what an agent needs -
+  what it lacks is `type`/`title`/`instance` and a documented registry of the
+  `status` values.
+envelope:
+  media_type: application/json
+  required: [status, message]
+  fields:
+    - name: status
+      type: string
+      role: machine-readable discriminator, declared as a single-value enum per error schema
+    - name: message
+      type: string
+      role: human-readable detail
+  extension_mechanism: allOf onto the base envelope, adding operation-specific top-level fields
+status_values:
+  values:
+    - value: not_found
+      http: 404
+    - value: conflict
+      http: 409
+    - value: state_conflict
+      http: 409
+    - value: job_not_cancelable
+      http: 409
+    - value: results_expired
+      http: 410
+    - value: results_page_too_large
+      http: 413
+  note: >-
+    These are the status enums that appear in named schemas. The generic 400/401/
+    403/429/500/503 responses declare a description but no schema, so their status
+    values are not published anywhere machine-readable.
 problems:
-- status: 400
-  description: Response for any operation that results in a bad request error.
-  apis:
-  - data
-  - sequences
-  source_operations:
-  - openapi/unify-data-openapi.json#list_objects
-  - openapi/unify-data-openapi.json#create_object
-  - openapi/unify-data-openapi.json#get_object
-- status: 401
-  description: Access is unauthorized.
-  apis:
-  - analytics
-  source_operations:
-  - openapi/unify-analytics-openapi.json#send_identify_event
-  - openapi/unify-analytics-openapi.json#send_page_event
-  - openapi/unify-analytics-openapi.json#send_track_event
-- status: 401
-  description: Response for any operation that results in an unauthorized error.
-  apis:
-  - data
-  - sequences
-  source_operations:
-  - openapi/unify-data-openapi.json#list_objects
-  - openapi/unify-data-openapi.json#create_object
-  - openapi/unify-data-openapi.json#get_object
-- status: 403
-  description: Response for any operation that results in a forbidden error.
-  apis:
-  - data
-  source_operations:
-  - openapi/unify-data-openapi.json#update_object
-  - openapi/unify-data-openapi.json#delete_object
-- status: 404
-  description: Response for any operation that results in a not found error.
-  apis:
-  - data
-  source_operations:
-  - openapi/unify-data-openapi.json#get_object
-  - openapi/unify-data-openapi.json#update_object
-  - openapi/unify-data-openapi.json#delete_object
-- status: 404
-  description: Response returned when a Bulk API job cannot be found.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job
-  - openapi/unify-sequences-openapi.json#cancel_sequence_enrollment_step_query_job
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
-- status: 404
-  description: Response returned when a sequence cannot be found.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#retrieve_sequence
-  - openapi/unify-sequences-openapi.json#delete_sequence
-  - openapi/unify-sequences-openapi.json#pause_sequence
-- status: 404
-  description: Response returned when a sequence step cannot be found.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#list_sequence_steps
-  - openapi/unify-sequences-openapi.json#retrieve_sequence_step
-- status: 404
-  description: Response returned when an enrollment cannot be found.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#create_sequence_enrollment
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment
-  - openapi/unify-sequences-openapi.json#delete_sequence_enrollment
-- status: 409
-  description: Response for any operation that results in a conflict error.
-  apis:
-  - data
-  source_operations:
-  - openapi/unify-data-openapi.json#create_object
-  - openapi/unify-data-openapi.json#update_object
-  - openapi/unify-data-openapi.json#create_object_attribute
-- status: 409
-  description: Response returned when Bulk API job results are not ready yet.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_query_job_results
-- status: 409
-  description: Response returned when a Bulk API job is not cancelable.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#cancel_sequence_enrollment_step_query_job
-  - openapi/unify-sequences-openapi.json#cancel_sequence_enrollment_query_job
-- status: 409
-  description: Response returned when a sequence state change conflicts with a concurrent update.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#pause_sequence
-  - openapi/unify-sequences-openapi.json#resume_sequence
-- status: 409
-  description: Response returned when the person is already enrolled in an active sequence.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#create_sequence_enrollment
-- status: 410
-  description: Response returned when Bulk API job results have expired.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_query_job_results
-- status: 413
-  description: Response returned when a requested Bulk API results page is too large.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job_results
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_query_job_results
-- status: 429
-  description: Response for any operation that exceeds a rate limit.
-  apis:
-  - sequences
-  source_operations:
-  - openapi/unify-sequences-openapi.json#create_sequence_enrollment_step_query_job
-  - openapi/unify-sequences-openapi.json#list_sequence_enrollment_step_query_jobs
-  - openapi/unify-sequences-openapi.json#get_sequence_enrollment_step_query_job
-- status: 500
-  description: Response for any operation that results in an internal server error.
-  apis:
-  - data
-  - sequences
-  source_operations:
-  - openapi/unify-data-openapi.json#list_objects
-  - openapi/unify-data-openapi.json#create_object
-  - openapi/unify-data-openapi.json#get_object
-- status: 503
-  description: Response for any operation that results in service unavailability.
-  apis:
-  - data
-  source_operations:
-  - openapi/unify-data-openapi.json#create_object_record
-  - openapi/unify-data-openapi.json#upsert_object_record
-  - openapi/unify-data-openapi.json#update_object_record
+  - status: 400
+    title: Bad request
+    description: Response for any operation that results in a bad request error.
+    operations: 65
+    schema: null
+    schema_note: No response schema is declared - only a description string.
+  - status: 401
+    title: Unauthorized
+    description: >-
+      Response for any operation that results in an unauthorized error (65 ops).
+      The Analytics API words it "Access is unauthorized." (3 ops).
+    operations: 68
+    schema: null
+    remediation: >-
+      Data/Sequences/Tasks: supply a valid x-api-key header (Settings ->
+      Developers). Analytics: supply HTTP Basic credentials with the workspace
+      public write key.
+  - status: 403
+    title: Forbidden
+    description: Response for any operation that results in a forbidden error.
+    operations: 15
+    schema: null
+    note: Concentrated on Tasks (all 11 operations) and on object/attribute mutation.
+  - status: 404
+    title: Not found
+    description: Response for any operation that results in a not found error.
+    operations: 51
+    status_value: not_found
+    schemas:
+      - name: GetBulkApiJobNotFoundResponse
+        used_by: 15
+        detail: Bulk API job cannot be found.
+      - name: EnrollmentNotFoundResponse
+        used_by: 5
+        detail: Enrollment cannot be found.
+      - name: SequenceNotFoundResponse
+        used_by: 4
+        detail: Sequence cannot be found.
+      - name: SequenceStepNotFoundResponse
+        used_by: 2
+      - name: CreateBulkApiObjectRecordsJobObjectNotFoundResponse
+        used_by: 1
+  - status: 409
+    title: Conflict
+    operations: 25
+    schemas:
+      - name: CancelBulkApiJobNotCancelableResponse
+        used_by: 5
+        status_value: job_not_cancelable
+        detail: The Bulk API job is past the point where it can be cancelled.
+      - name: SequenceStateConflictResponse
+        used_by: 2
+        status_value: state_conflict
+        extra_fields: [current_is_paused]
+        detail: >-
+          Returned by pause_sequence / resume_sequence when the sequence is already
+          in the requested state. Carries current_is_paused so a caller can
+          reconcile without a re-read.
+      - name: CreateEnrollmentConflictResponse
+        used_by: 1
+        status_value: conflict
+        extra_fields: [active_sequence_id, active_enrollment_id]
+        detail: >-
+          Returned by create_sequence_enrollment when the person is already
+          actively enrolled. Carries the conflicting sequence and enrollment ids -
+          the most useful error body in the whole surface, because it hands the
+          caller the identifiers needed to resolve the conflict.
+      - name: bulk job results not ready
+        used_by: 5
+        detail: Bulk API job results are not ready yet.
+  - status: 410
+    title: Gone - results expired
+    operations: 5
+    status_value: results_expired
+    schema: GetBulkApiJobResultsExpiredResponse
+    detail: Bulk API job results have expired and must be regenerated with a new job.
+    remediation: Create a new query job; do not retry the same job_id.
+  - status: 413
+    title: Payload too large
+    operations: 5
+    status_value: results_page_too_large
+    schema: GetBulkApiJobResultsPayloadTooLargeResponse
+    detail: The requested Bulk API results page is too large.
+    remediation: Request a smaller page_size.
+  - status: 429
+    title: Too many requests
+    description: Response for any operation that exceeds a rate limit.
+    operations: 44
+    schema: null
+    remediation: >-
+      Honour the Retry-After header before retrying. See
+      rate-limits/unify-rate-limits.yml for the published limits.
+  - status: 500
+    title: Internal server error
+    description: Response for any operation that results in an internal server error.
+    operations: 65
+    schema: null
+  - status: 503
+    title: Service unavailable
+    description: Response for any operation that results in service unavailability.
+    operations: 4
+    schema: null
+    note: Declared only on the four Object Records write operations (create/update/upsert/delete).
+gaps:
+  - id: no-error-code-registry
+    detail: >-
+      Unify publishes no error-code reference page. The `status` enum values are
+      only discoverable by reading the named schemas in the OpenAPI, and the six
+      generic classes (400/401/403/429/500/503) declare no schema at all, so their
+      status values are not published in any form.
+  - id: analytics-declares-no-429
+    detail: >-
+      The Analytics API declares 200/202/401 only. It has a documented
+      100,000-per-5-minute rate limit but no 429 response in its contract, so a
+      generated client will not model throttling on the ingest path.
+  - id: not-rfc9457
+    detail: >-
+      No application/problem+json, no type URI, no problem-type registry. The
+      envelope is consistent, so the cost is interoperability rather than
+      ambiguity.
+cross_links:
+  conventions: conventions/unify-conventions.yml
+  rate_limits: rate-limits/unify-rate-limits.yml
+  authentication: authentication/unify-authentication.yml

@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Data Object Records API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Object Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "create_object_record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/records",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "validation_mode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a record of an object. `data` must include every required\nattribute, and a value that duplicates an existing record's unique\nattribute value is rejected with a conflict — use upsert instead when\nthe record may already exist."
+        },
+        {
+          "info": {
+            "name": "find_unique_object_record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/records/find-unique",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Find a single record by attribute values. `match` must include at least\none unique attribute so that at most one record can match; the response\ncontains the matching record, or `null` data when none exists."
+        },
+        {
+          "info": {
+            "name": "upsert_object_record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/records/upsert",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "validation_mode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a record depending on whether one already exists. The\n`match` values (which must include at least one unique attribute) find\nthe existing record, and the `create` / `update` / `*_if_empty` property\ngroups control which attribute values apply in each case. This is the\nrecommended way to write records that may already exist."
+        },
+        {
+          "info": {
+            "name": "get_object_record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/records/:record_id",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "record_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single record by its ID."
+        },
+        {
+          "info": {
+            "name": "update_object_record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/records/:record_id",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "record_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "validation_mode",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a record by its ID. Only the attributes present in `data` are\nchanged; other attribute values are left untouched."
+        },
+        {
+          "info": {
+            "name": "delete_object_record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/records/:record_id",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "record_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a record by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

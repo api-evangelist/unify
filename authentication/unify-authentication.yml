@@ -1,27 +1,105 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: openapi/unify-analytics-openapi.json, openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json
+source: >-
+  openapi/_original/unify-analytics-openapi.json,
+  openapi/_original/unify-data-openapi.json,
+  openapi/_original/unify-sequences-openapi.json,
+  openapi/_original/unify-tasks-openapi.json
+  (harvested live 2026-08-13),
+  https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp,
+  https://auth.unifygtm.com/.well-known/oauth-authorization-server
+docs: https://docs.unifygtm.com/developers/introduction
 summary:
   types:
-  - apiKey
-  - http
+    - apiKey
+    - http
+    - oauth2
   api_key_in:
-  - header
+    - header
+  oauth2_flows:
+    - authorizationCode
+    - deviceCode
+    - clientCredentials
+    - refreshToken
+    - tokenExchange
+  oauth2_surface: MCP only (not declared in any OpenAPI)
 schemes:
-- name: BasicAuth
-  type: http
-  scheme: Basic
-  sources:
-  - openapi/unify-analytics-openapi.json
-- name: ApiKeyAuth
-  type: apiKey
-  in: header
-  parameter: x-api-key
-  sources:
-  - openapi/unify-data-openapi.json
-  - openapi/unify-sequences-openapi.json
-docs: https://docs.unifygtm.com/developers/introduction
-notes: API keys are generated in the Unify app under Settings -> Developers (app.unifygtm.com/dashboard/settings/integrations/api-keys)
-  and sent in the x-api-key header on the Data and Sequences APIs. The Bulk API requires a user-backed
-  API key. The Analytics API authenticates with HTTP Basic using a public write key suitable
-  for client-side event collection.
+  - name: ApiKeyAuth
+    type: apiKey
+    in: header
+    parameter: x-api-key
+    applies_to: [Data API, Sequences API, Tasks API]
+    operations: 65
+    sources:
+      - openapi/_original/unify-data-openapi.json
+      - openapi/_original/unify-sequences-openapi.json
+      - openapi/_original/unify-tasks-openapi.json
+    provisioning: >-
+      Generated in the Unify app under Settings -> Developers
+      (app.unifygtm.com/dashboard/settings/integrations/api-keys).
+    scoped: false
+    scope_note: >-
+      A key carries the full authority of the Unify user it belongs to. No
+      read-only key, no per-resource key, no expiry policy is published. The Bulk
+      API specifically requires a user-backed API key.
+  - name: BasicAuth
+    type: http
+    scheme: Basic
+    applies_to: [Analytics API]
+    operations: 3
+    sources:
+      - openapi/_original/unify-analytics-openapi.json
+    detail: >-
+      HTTP Basic with a public write key, intended for client-side collection from
+      a browser or product. Write-only ingest, which is why a publishable
+      credential is acceptable here.
+  - name: MCP OAuth
+    type: oauth2
+    declared_in_openapi: false
+    surface: https://mcp.unifygtm.com/mcp
+    discovery:
+      protected_resource: https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp
+      authorization_server: https://auth.unifygtm.com/
+      spec: [RFC 9728, RFC 8414, OpenID Connect Discovery 1.0]
+    issuer: https://auth.unifygtm.com/
+    platform: Auth0 on a Unify custom domain
+    bearer_methods: [header]
+    pkce: [S256, plain]
+    dynamic_client_registration: true
+    scopes: identity only (openid, profile, email, offline_access, ...) - no product scopes
+    alternative: >-
+      An x-api-key header may be sent to the MCP endpoint instead of an OAuth
+      bearer token, for clients that cannot run the browser login.
+    cross_link: scopes/unify-scopes.yml
+    evidence:
+      probe: POST tools/list to https://mcp.unifygtm.com/mcp
+      http_status: 401
+      www_authenticate: >-
+        Bearer resource_metadata="https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp",
+        error="invalid_request", error_description="No authentication token provided."
+      checked: '2026-08-13'
+posture:
+  transport: HTTPS only across all hosts (see security/unify-domain-security.yml).
+  mtls: false
+  signed_requests: false
+  key_rotation_policy_published: false
+  sso: >-
+    SSO is offered for the Unify application as a Business-plan add-on; it governs
+    app login, not API authentication.
+gaps:
+  - id: no-least-privilege
+    detail: >-
+      Neither authentication path can express less than full user authority. There
+      are no API-key scopes and no product OAuth scopes, so delegating a
+      narrow capability to an agent is not possible - a key or token that can read
+      a record can also delete a sequence.
+  - id: no-key-lifecycle
+    detail: >-
+      No documented key expiry, rotation guidance, or last-used visibility.
+notes: >-
+  Three of the four APIs authenticate with a single x-api-key header; the fourth
+  (Analytics) uses HTTP Basic with a publishable write key because it is a
+  browser-side ingest path. OAuth exists only on the MCP surface, where the
+  authorization server is a full Auth0 tenant on Unify's own domain with RFC 9728
+  protected-resource discovery - a notably more modern posture than the REST APIs
+  it fronts.

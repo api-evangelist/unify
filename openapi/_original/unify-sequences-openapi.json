@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Unify Sequences API",
     "summary": "Interact with sequences and sequence enrollments within the Unify platform.",
@@ -23,9 +23,10 @@
     }
   ],
   "paths": {
-    "/enrollment-steps/query-jobs": {
+    "/sequences/v1/enrollment-steps/query-jobs": {
       "post": {
         "operationId": "create_sequence_enrollment_step_query_job",
+        "description": "Start an asynchronous query job that exports sequence enrollment steps —\nper-person executions of each sequence step, including sent email\nengagement and any reply. Omitting `filter` exports all enrollment\nsteps. Poll the job until it is `FINISHED`, then page through the\nresults.",
         "parameters": [],
         "responses": {
           "201": {
@@ -165,11 +166,13 @@
       },
       "get": {
         "operationId": "list_sequence_enrollment_step_query_jobs",
+        "description": "List sequence enrollment step query jobs, optionally filtered by status.",
         "parameters": [
           {
             "name": "cursor",
             "in": "query",
             "required": false,
+            "description": "Opaque cursor returned by the previous page.",
             "schema": {
               "type": "string"
             },
@@ -190,6 +193,7 @@
             "name": "status",
             "in": "query",
             "required": false,
+            "description": "Filter jobs by status.",
             "schema": {
               "$ref": "#/components/schemas/BulkApiJobStatus"
             },
@@ -323,9 +327,10 @@
         ]
       }
     },
-    "/enrollment-steps/query-jobs/{job_id}": {
+    "/sequences/v1/enrollment-steps/query-jobs/{job_id}": {
       "get": {
         "operationId": "get_sequence_enrollment_step_query_job",
+        "description": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation.",
         "parameters": [
           {
             "name": "job_id",
@@ -473,9 +478,10 @@
         ]
       }
     },
-    "/enrollment-steps/query-jobs/{job_id}/cancel": {
+    "/sequences/v1/enrollment-steps/query-jobs/{job_id}/cancel": {
       "post": {
         "operationId": "cancel_sequence_enrollment_step_query_job",
+        "description": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
         "parameters": [
           {
             "name": "job_id",
@@ -633,7 +639,7 @@
         ]
       }
     },
-    "/enrollment-steps/query-jobs/{job_id}/results": {
+    "/sequences/v1/enrollment-steps/query-jobs/{job_id}/results": {
       "get": {
         "operationId": "get_sequence_enrollment_step_query_job_results",
         "description": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.",
@@ -898,9 +904,10 @@
         ]
       }
     },
-    "/enrollments": {
+    "/sequences/v1/enrollments": {
       "post": {
         "operationId": "create_sequence_enrollment",
+        "description": "Enroll a person in a sequence. `mailbox_emails` lists candidate sending\nmailboxes, one of which is selected at enrollment time. If the person is\nalready actively enrolled in a sequence, the request fails with a `409`\nidentifying the active enrollment.",
         "parameters": [],
         "responses": {
           "201": {
@@ -1056,15 +1063,20 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "destructiveHint": false
         }
       },
       "get": {
         "operationId": "list_sequence_enrollments",
+        "description": "List sequence enrollments — each tracks one person's progress through a\nsequence along with reply, bounce, opt-out, and pause state. Pages at\nmost 100 enrollments per request; to export more than a few hundred\nenrollments, create an asynchronous query job instead.",
         "parameters": [
           {
             "name": "cursor",
             "in": "query",
             "required": false,
+            "description": "Opaque cursor returned by the previous page.",
             "schema": {
               "type": "string"
             },
@@ -1103,6 +1115,16 @@
             "name": "mailbox_id",
             "in": "query",
             "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/uuid"
+            },
+            "explode": false
+          },
+          {
+            "name": "enrolled_by_play_id",
+            "in": "query",
+            "required": false,
+            "description": "Filter to enrollments created by this play.",
             "schema": {
               "$ref": "#/components/schemas/uuid"
             },
@@ -1265,12 +1287,17 @@
         "tags": [
           "Sequences",
           "Sequence Enrollments"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/enrollments/query-jobs": {
+    "/sequences/v1/enrollments/query-jobs": {
       "post": {
         "operationId": "create_sequence_enrollment_query_job",
+        "description": "Start an asynchronous query job that exports sequence enrollments\nmatching the optional filter; omitting `filter` exports all enrollments.\nPoll the job until it is `FINISHED`, then page through the results.",
         "parameters": [],
         "responses": {
           "201": {
@@ -1410,11 +1437,13 @@
       },
       "get": {
         "operationId": "list_sequence_enrollment_query_jobs",
+        "description": "List sequence enrollment query jobs, optionally filtered by status.",
         "parameters": [
           {
             "name": "cursor",
             "in": "query",
             "required": false,
+            "description": "Opaque cursor returned by the previous page.",
             "schema": {
               "type": "string"
             },
@@ -1435,6 +1464,7 @@
             "name": "status",
             "in": "query",
             "required": false,
+            "description": "Filter jobs by status.",
             "schema": {
               "$ref": "#/components/schemas/BulkApiJobStatus"
             },
@@ -1568,9 +1598,10 @@
         ]
       }
     },
-    "/enrollments/query-jobs/{job_id}": {
+    "/sequences/v1/enrollments/query-jobs/{job_id}": {
       "get": {
         "operationId": "get_sequence_enrollment_query_job",
+        "description": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation.",
         "parameters": [
           {
             "name": "job_id",
@@ -1718,9 +1749,10 @@
         ]
       }
     },
-    "/enrollments/query-jobs/{job_id}/cancel": {
+    "/sequences/v1/enrollments/query-jobs/{job_id}/cancel": {
       "post": {
         "operationId": "cancel_sequence_enrollment_query_job",
+        "description": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
         "parameters": [
           {
             "name": "job_id",
@@ -1878,7 +1910,7 @@
         ]
       }
     },
-    "/enrollments/query-jobs/{job_id}/results": {
+    "/sequences/v1/enrollments/query-jobs/{job_id}/results": {
       "get": {
         "operationId": "get_sequence_enrollment_query_job_results",
         "description": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.",
@@ -2143,9 +2175,10 @@
         ]
       }
     },
-    "/enrollments/{id}": {
+    "/sequences/v1/enrollments/{id}": {
       "get": {
         "operationId": "get_sequence_enrollment",
+        "description": "Get a single enrollment by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -2290,10 +2323,15 @@
         "tags": [
           "Sequences",
           "Sequence Enrollments"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "delete": {
         "operationId": "delete_sequence_enrollment",
+        "description": "Cancel an enrollment, stopping any remaining steps for the person.",
         "parameters": [
           {
             "name": "id",
@@ -2438,12 +2476,17 @@
         "tags": [
           "Sequences",
           "Sequence Enrollments"
-        ]
+        ],
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/enrollments/{id}/pause": {
+    "/sequences/v1/enrollments/{id}/pause": {
       "post": {
         "operationId": "pause_sequence_enrollment",
+        "description": "Pause an enrollment, halting the person's progress through the sequence\nuntil it is resumed.",
         "parameters": [
           {
             "name": "id",
@@ -2588,12 +2631,18 @@
         "tags": [
           "Sequences",
           "Sequence Enrollments"
-        ]
+        ],
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/enrollments/{id}/resume": {
+    "/sequences/v1/enrollments/{id}/resume": {
       "post": {
         "operationId": "resume_sequence_enrollment",
+        "description": "Resume a paused enrollment so the person continues through the sequence.",
         "parameters": [
           {
             "name": "id",
@@ -2738,17 +2787,23 @@
         "tags": [
           "Sequences",
           "Sequence Enrollments"
-        ]
+        ],
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "idempotentHint": true
+        }
       }
     },
-    "/sequences": {
+    "/sequences/v1/sequences": {
       "get": {
         "operationId": "list_sequences",
+        "description": "List sequences — automated series of outreach steps (emails, tasks, and\ntiming conditions) that run against enrolled people.",
         "parameters": [
           {
             "name": "cursor",
             "in": "query",
             "required": false,
+            "description": "Opaque cursor returned by the previous page.",
             "schema": {
               "type": "string"
             },
@@ -2889,12 +2944,17 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/sequences/{id}": {
+    "/sequences/v1/sequences/{id}": {
       "get": {
         "operationId": "retrieve_sequence",
+        "description": "Get a single sequence by its ID, including its owner, send schedule, and\nruleset.",
         "parameters": [
           {
             "name": "id",
@@ -3038,10 +3098,15 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "delete": {
         "operationId": "delete_sequence",
+        "description": "Delete a sequence by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -3185,12 +3250,17 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/sequences/{id}/pause": {
+    "/sequences/v1/sequences/{id}/pause": {
       "post": {
         "operationId": "pause_sequence",
+        "description": "Pause a sequence, halting progress for all of its enrollments until it\nis resumed.",
         "parameters": [
           {
             "name": "id",
@@ -3344,12 +3414,18 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/sequences/{id}/resume": {
+    "/sequences/v1/sequences/{id}/resume": {
       "post": {
         "operationId": "resume_sequence",
+        "description": "Resume a paused sequence so its enrollments continue.",
         "parameters": [
           {
             "name": "id",
@@ -3503,12 +3579,17 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "idempotentHint": true
+        }
       }
     },
-    "/sequences/{id}/steps": {
+    "/sequences/v1/sequences/{id}/steps": {
       "get": {
         "operationId": "list_sequence_steps",
+        "description": "List a sequence's steps. Steps are automatic emails, manual emails, or\ntasks (calls, LinkedIn touches, action items); each step's dependencies\ndescribe when it runs relative to its parent step.",
         "parameters": [
           {
             "name": "id",
@@ -3522,6 +3603,7 @@
             "name": "cursor",
             "in": "query",
             "required": false,
+            "description": "Opaque cursor returned by the previous page.",
             "schema": {
               "type": "string"
             },
@@ -3684,12 +3766,17 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/sequences/{id}/steps/{step_id}": {
+    "/sequences/v1/sequences/{id}/steps/{step_id}": {
       "get": {
         "operationId": "retrieve_sequence_step",
+        "description": "Get a single step of a sequence by ID. The response shape is\ndiscriminated by the step's `type`.",
         "parameters": [
           {
             "name": "id",
@@ -3851,7 +3938,11 @@
         },
         "tags": [
           "Sequences"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       }
     }
   },
@@ -4352,6 +4443,57 @@
                 "description": "Filter matching values excluded from a set."
               }
             ]
+          },
+          "enrolled_by_play": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ],
+            "description": "Filter by the play that created the enrollment."
           }
         },
         "allOf": [
@@ -4616,6 +4758,7 @@
           "sequence",
           "person",
           "mailbox",
+          "enrolled_by_play",
           "reply_email_message",
           "status",
           "is_blocked",
@@ -4646,6 +4789,16 @@
           },
           "mailbox": {
             "$ref": "#/components/schemas/EnrollmentMailbox"
+          },
+          "enrolled_by_play": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EnrollmentPlay"
+              }
+            ],
+            "nullable": true,
+            "description": "The play that created the enrollment, if applicable."
           },
           "reply_email_message": {
             "type": "object",
@@ -4785,6 +4938,22 @@
           }
         },
         "description": "Person details embedded in enrollment responses."
+      },
+      "EnrollmentPlay": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Details of the play that created an enrollment."
       },
       "EnrollmentReplyEmailMessage": {
         "type": "object",
@@ -5151,6 +5320,22 @@
         },
         "description": "Response returned when pausing a sequence."
       },
+      "PlaySummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Play details embedded in sequence enrollment Bulk API results."
+      },
       "RelativeTimeUnit": {
         "type": "string",
         "enum": [
@@ -5425,6 +5610,7 @@
           "sequence",
           "mailbox",
           "person",
+          "enrolled_by_play",
           "reply_email_message"
         ],
         "properties": {
@@ -5475,6 +5661,16 @@
           },
           "person": {
             "$ref": "#/components/schemas/SequencePerson"
+          },
+          "enrolled_by_play": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlaySummary"
+              }
+            ],
+            "nullable": true,
+            "description": "The play that created the enrollment, if applicable."
           },
           "reply_email_message": {
             "type": "object",
@@ -6503,7 +6699,7 @@
   },
   "servers": [
     {
-      "url": "https://api.unifygtm.com/sequences/v1",
+      "url": "https://api.unifygtm.com",
       "variables": {}
     }
   ]

@@ -1,0 +1,2931 @@
+{
+  "item": [
+    {
+      "id": "c3bd3e5b-ae5d-48f0-9d21-34cb66476bcc",
+      "name": "Object Records",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fed70489-9ec4-4eab-a77f-c5d0e44e7fbf",
+          "name": "create object record",
+          "request": {
+            "name": "create object record",
+            "description": {
+              "content": "Create a record of an object. `data` must include every required\nattribute, and a value that duplicates an existing record's unique\nattribute value is rejected with a conflict — use upsert instead when\nthe record may already exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "records"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "validation_mode",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e4acfbff-cdbc-4a07-9f8b-cce2d4f16f9c",
+              "name": "Response for a successful create operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"object\": \"string\",\n    \"id\": \"string\",\n    \"created_at\": \"2016-09-08T05:12:59.782Z\",\n    \"updated_at\": \"1974-11-21T21:40:14.663Z\",\n    \"attributes\": {\n      \"key_0\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      },\n      \"key_1\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cf08fdc-36d2-49c8-a4b1-f6725fa60e10",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3d8c359-1508-47bc-be71-71f2cc804d1e",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5651ecb-925a-4d9b-a6ca-c50436dd3f98",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"object_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5133a073-3124-4776-b454-0292de22ac77",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9077909b-f026-4b21-b705-aa7f8fdd15d7",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59a2cd1d-f709-4fa4-a525-1e1ca8c5f7dd",
+              "name": "Response for any operation that results in service unavailability.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"service_unavailable\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d95cbc32-7151-46ba-8efb-3c33563eef72",
+          "name": "find unique object record",
+          "request": {
+            "name": "find unique object record",
+            "description": {
+              "content": "Find a single record by attribute values. `match` must include at least\none unique attribute so that at most one record can match; the response\ncontains the matching record, or `null` data when none exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "records",
+                "find-unique"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_3\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_4\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b279bbfe-5e10-4547-8701-2d9829347313",
+              "name": "Response for a successful get operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "find-unique"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"object\": \"string\",\n    \"id\": \"string\",\n    \"created_at\": \"1990-01-06T08:07:17.385Z\",\n    \"updated_at\": \"2018-05-29T04:49:44.328Z\",\n    \"attributes\": {\n      \"key_0\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      },\n      \"key_1\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a598f648-27ef-405e-ab9c-c74fe381d559",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "find-unique"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9a607d4-cac1-4738-ab4c-574518c98822",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "find-unique"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b24a5ab-166a-4ce8-a69a-3e447198b56c",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "find-unique"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"object_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "493a685f-3726-44e5-a99f-c0369a0b8be8",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "find-unique"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b6c3359-1721-4f85-a6c3-ca1f393406ff",
+          "name": "upsert object record",
+          "request": {
+            "name": "upsert object record",
+            "description": {
+              "content": "Create or update a record depending on whether one already exists. The\n`match` values (which must include at least one unique attribute) find\nthe existing record, and the `create` / `update` / `*_if_empty` property\ngroups control which attribute values apply in each case. This is the\nrecommended way to write records that may already exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "records",
+                "upsert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "validation_mode",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_3\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e37a99f-2647-4e59-b2f2-8c0c509656c0",
+              "name": "Response for a successful update operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"object\": \"string\",\n    \"id\": \"string\",\n    \"created_at\": \"1995-03-24T23:38:18.364Z\",\n    \"updated_at\": \"1957-08-12T05:21:49.653Z\",\n    \"attributes\": {\n      \"key_0\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      },\n      \"key_1\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39eeafde-bdea-4ea7-a732-9d9467767ea5",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_missing_required_field\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb2e553f-5236-4cb8-8288-e265be4c3c44",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416cd9e8-2fd7-4b07-9808-7cdb90c9c63a",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"object_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09db74c7-8b8d-4b5e-a524-d480c3ff0236",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32d397c5-a38d-4543-8eda-c819cdbc37c9",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42ee9e43-8567-4721-ad1d-968df9e6eafa",
+              "name": "Response for any operation that results in service unavailability.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    "upsert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"match\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  },\n  \"create_or_update_if_empty\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_2\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"service_unavailable\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3c1fbcf-b984-4ad0-a12e-dc980606a249",
+          "name": "get object record",
+          "request": {
+            "name": "get object record",
+            "description": {
+              "content": "Get a single record by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "records",
+                ":record_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "record_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25f0b631-6443-49c0-9dbe-0b1ef792f4dd",
+              "name": "Response for a successful get operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"object\": \"string\",\n    \"id\": \"string\",\n    \"created_at\": \"2011-08-13T15:29:11.603Z\",\n    \"updated_at\": \"2001-11-08T16:12:40.225Z\",\n    \"attributes\": {\n      \"key_0\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f9ab86b-01ac-4f9a-a952-f49924fbbd64",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c676e6d9-2257-402a-8f3d-6bc25cebc32a",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "747f4eb5-c66b-493b-9a9d-77dccf1f68ac",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbb338a6-eac8-4bac-bf59-e4290cb85478",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3437400-7a53-4d6a-817f-3f862f81119b",
+          "name": "update object record",
+          "request": {
+            "name": "update object record",
+            "description": {
+              "content": "Update a record by its ID. Only the attributes present in `data` are\nchanged; other attribute values are left untouched.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "records",
+                ":record_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "validation_mode",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "record_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1dd252e3-6bcf-44a1-b72d-9c4436a4b22e",
+              "name": "Response for a successful update operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"object\": \"string\",\n    \"id\": \"string\",\n    \"created_at\": \"1995-03-24T23:38:18.364Z\",\n    \"updated_at\": \"1957-08-12T05:21:49.653Z\",\n    \"attributes\": {\n      \"key_0\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      },\n      \"key_1\": {\n        \"country\": {\n          \"description\": \"Country code in ISO 3166-1 alpha-2 format.\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"administrative_area\": \"<string>\",\n        \"sub_administrative_area\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"dependent_locality\": \"<string>\",\n        \"postal_code\": \"<string>\",\n        \"thoroughfare\": \"<string>\",\n        \"premise\": \"<string>\",\n        \"sub_premise\": \"<string>\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ddccf16-effa-4200-90d9-18cf878531a2",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_missing_required_field\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96b90207-f198-4c14-9d14-32405b45b068",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f5d82db-5257-4d3d-a8dc-abc720937966",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ede88692-c811-42e2-b93d-dc5d77e77894",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4c82d6f-e925-41c6-8364-cbca1a77ba2f",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1531a987-0ff1-4c22-b292-c2bc6dd8d765",
+              "name": "Response for any operation that results in service unavailability.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "validation_mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"key_0\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"key_1\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"<string>\"\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"service_unavailable\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9db680d-c077-4982-b34b-5a933906c217",
+          "name": "delete object record",
+          "request": {
+            "name": "delete object record",
+            "description": {
+              "content": "Delete a record by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "records",
+                ":record_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "record_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd5ba87e-11e0-4e81-8855-dd9e19fbc352",
+              "name": "Response for a successful delete operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f1be3dc-f3bc-4726-bd1c-aba3a790a1a9",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19c5922d-ad19-4cda-8793-c31fbae9ca09",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aef5f893-4f87-4e2e-94bf-cb6351db7f6c",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"record_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "934ca04c-3b22-48b2-9689-723a9d0ebb88",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb9fb8a7-2b16-456f-8a3b-e891a6e91a97",
+              "name": "Response for any operation that results in service unavailability.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "records",
+                    ":record_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "record_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"service_unavailable\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unifygtm.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0338a0a-6f14-4cc3-8c7a-8380cbc0eebc",
+    "name": "Unify Data Object Records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Unify Support\n Email: support@unifygtm.com",
+      "type": "text/plain"
+    }
+  }
+}

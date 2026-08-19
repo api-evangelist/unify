@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Data Object Attribute Options API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Object Attribute Options",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_object_attribute_options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name/options",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              }
+            ]
+          },
+          "docs": "List the options defined for a `SELECT` or `MULTI_SELECT` attribute.\nOptions are the predefined values the attribute can hold; requests\nagainst other attribute types fail with\n`attribute_options_not_supported`."
+        },
+        {
+          "info": {
+            "name": "create_object_attribute_option",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name/options",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an option to a `SELECT` or `MULTI_SELECT` attribute."
+        },
+        {
+          "info": {
+            "name": "get_object_attribute_option",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name/options/:option_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              },
+              {
+                "name": "option_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute option."
+              }
+            ]
+          },
+          "docs": "Get a single option on a `SELECT` or `MULTI_SELECT` attribute by its API\nname."
+        },
+        {
+          "info": {
+            "name": "update_object_attribute_option",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name/options/:option_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              },
+              {
+                "name": "option_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute option."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an option's display name. The option's API name is fixed at\ncreation."
+        },
+        {
+          "info": {
+            "name": "delete_object_attribute_option",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name/options/:option_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              },
+              {
+                "name": "option_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute option."
+              }
+            ]
+          },
+          "docs": "Delete an option from a `SELECT` or `MULTI_SELECT` attribute."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

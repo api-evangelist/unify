@@ -1,56 +1,76 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 source: https://www.unifygtm.com/changelog
-scheme: dated entries (no version numbers); product changelog covers the
-  platform, including API and developer-surface launches
+scheme: dated entries (no version numbers); product changelog covers the platform, including API and developer-surface
+  launches
 entries:
-  - date: '2026-06-24'
-    title: Unify's Next Chapter
-    kind: announcement
-    highlights: Reintroducing Unify as "Claude for Outbound Sellers" - reps
-      build lists from 40+ data sources, enrich contacts from 1.1B+ contacts,
-      and craft 1:1 sequences from prompts.
-  - date: '2026-05-26'
-    title: Webhooks in Plays
-    kind: addition
-    highlights: Push prospect and company data to any tool via webhook actions
-      from a signal-triggered Play (n8n, Zapier, dialers, marketing automation).
-  - date: '2026-05-21'
-    title: Unify API
-    kind: addition
-    highlights: Connect your data warehouse, third-party tools, or internal
-      systems directly to Unify to power targeting, plays, and exclusions.
-  - date: '2026-05-05'
-    title: Phone number management
-    kind: addition
-    highlights: Add, enrich, and validate phone numbers directly in Unify.
-  - date: '2026-04-23'
-    title: Revamped Filter Builder
-    kind: addition
-    highlights: Filter on deeper, richer data for sharper Audiences, Lists, and
-      Plays.
-  - date: '2026-04-17'
-    title: Out-of-office reply management
-    kind: addition
-    highlights: Automatic OOO detection pauses sequences and resumes outreach
-      on the prospect's return date.
-  - date: '2026-04-02'
-    title: PostHog Integration for Product Signals
-    kind: addition
-    highlights: Native PostHog integration for real-time product-led outbound.
-  - date: '2026-03-31'
-    title: Notes
-    kind: addition
-    highlights: Built-in rich-text notes on Company and Person records.
-  - date: '2026-03-16'
-    title: Sequence rulesets
-    kind: addition
-    highlights: Reusable rulesets standardize exclusions, eligibility, and
-      behavior across sequences.
-  - date: '2026-03-10'
-    title: One-off Tasks
-    kind: addition
-    highlights: Manual emails, calls, LinkedIn touches, and follow-ups without
-      enrolling prospects into a sequence.
-notes: Entry dates and titles extracted from the public changelog page on the
-  generation date; breaking changes are not flagged on the page.
+- date: '2026-06-24'
+  title: Unify's Next Chapter
+  kind: announcement
+  highlights: Reintroducing Unify as "Claude for Outbound Sellers" - reps build lists from 40+ data sources,
+    enrich contacts from 1.1B+ contacts, and craft 1:1 sequences from prompts.
+- date: '2026-05-26'
+  title: Webhooks in Plays
+  kind: addition
+  highlights: Push prospect and company data to any tool via webhook actions from a signal-triggered Play
+    (n8n, Zapier, dialers, marketing automation).
+- date: '2026-05-21'
+  title: Unify API
+  kind: addition
+  highlights: Connect your data warehouse, third-party tools, or internal systems directly to Unify to
+    power targeting, plays, and exclusions.
+- date: '2026-05-05'
+  title: Phone number management
+  kind: addition
+  highlights: Add, enrich, and validate phone numbers directly in Unify.
+- date: '2026-04-23'
+  title: Revamped Filter Builder
+  kind: addition
+  highlights: Filter on deeper, richer data for sharper Audiences, Lists, and Plays.
+- date: '2026-04-17'
+  title: Out-of-office reply management
+  kind: addition
+  highlights: Automatic OOO detection pauses sequences and resumes outreach on the prospect's return date.
+- date: '2026-04-02'
+  title: PostHog Integration for Product Signals
+  kind: addition
+  highlights: Native PostHog integration for real-time product-led outbound.
+- date: '2026-03-31'
+  title: Notes
+  kind: addition
+  highlights: Built-in rich-text notes on Company and Person records.
+- date: '2026-03-16'
+  title: Sequence rulesets
+  kind: addition
+  highlights: Reusable rulesets standardize exclusions, eligibility, and behavior across sequences.
+- date: '2026-03-12'
+  title: Smarter table execution
+  kind: enhancement
+  highlights: Table multi-select (Shift/Cmd + Click) and right-click context menus for bulk action across
+    tasks, lists, enrollments and mailboxes.
+- date: '2026-03-10'
+  title: One-off Tasks
+  kind: addition
+  highlights: Manual emails, calls, LinkedIn touches, and follow-ups without enrolling prospects into
+    a sequence.
+- date: '2026-03-02'
+  title: HubSpot Owner Assignment
+  kind: addition
+  highlights: An Assign Owner node toggle syncs record owners back to HubSpot, with an option to overwrite
+    existing owners.
+- date: '2026-02-20'
+  title: Introducing Lists
+  kind: addition
+  highlights: Build and manage groups of accounts and people from scratch, CSV, filters or Plays; enroll
+    into sequences and audit activity from one place.
+notes: 'Entry dates and titles extracted from the public changelog page. Breaking changes are not flagged
+  on the page and no version numbers are used. Re-checked 2026-08-13: the newest entry is still 2026-06-24,
+  so the product changelog has not been updated in roughly seven weeks - even though a whole new Tasks
+  API and two new Bulk query-job families shipped in the API surface during that window (see lifecycle/unify-lifecycle.yml).
+  The changelog covers the product, not the API contract; there is no developer-facing API changelog.'
+checked: '2026-08-13'
+api_changelog:
+  published: false
+  detail: No developer/API changelog exists. API changes are announced, if at all, as product entries
+    on www.unifygtm.com/changelog - the 2026-05-21 "Unify API" entry is the only one. The Tasks API that
+    is live today has no changelog entry.

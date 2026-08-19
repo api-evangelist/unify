@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Unify Analytics API",
     "summary": "Send website and product analytics data into the Unify platform.",
@@ -208,7 +208,8 @@
           "address": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UAddress"
+                "$ref": "#/components/schemas/UValues.UAddress",
+                "nullable": true
               }
             ],
             "description": "Physical address of the company."
@@ -216,7 +217,8 @@
           "corporate_phone": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
               }
             ],
             "description": "Corporate phone number of the company."
@@ -224,7 +226,8 @@
           "description": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Description of the company."
@@ -232,7 +235,8 @@
           "do_not_contact": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UBoolean"
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
               }
             ],
             "description": "Whether contacting this company is disallowed."
@@ -248,7 +252,8 @@
           "employee_count": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UInteger"
+                "$ref": "#/components/schemas/UValues.UInteger",
+                "nullable": true
               }
             ],
             "description": "Estimated employee count of the company."
@@ -256,7 +261,8 @@
           "founded": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UDate"
+                "$ref": "#/components/schemas/UValues.UDate",
+                "nullable": true
               }
             ],
             "description": "Date when the company was founded."
@@ -264,7 +270,8 @@
           "industry": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Industry the company operates in."
@@ -272,7 +279,8 @@
           "lead_source": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Source of the company record."
@@ -280,7 +288,8 @@
           "linkedin_url": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UUrl",
+                "nullable": true
               }
             ],
             "description": "LinkedIn profile of the company.\n\nThis is the full URL of the LinkedIn profile of the company. The value will\nalways be standardized with an HTTPS prefix, \"www\" subdomain, and trailing\nslash."
@@ -288,23 +297,32 @@
           "name": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Name of the company."
           },
           "record_owner": {
-            "allOf": [
+            "anyOf": [
               {
-                "$ref": "#/components/schemas/UValues.UReference"
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
               }
             ],
+            "nullable": true,
             "description": "The user that owns the company record."
           },
           "revenue": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UCurrency"
+                "$ref": "#/components/schemas/UValues.UCurrency",
+                "nullable": true
               }
             ],
             "description": "Estimated revenue of the company."
@@ -312,7 +330,8 @@
           "status": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Status of the company."
@@ -320,7 +339,8 @@
           "time_zone": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Time zone the company is located in."
@@ -337,15 +357,32 @@
           "address": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UAddress"
+                "$ref": "#/components/schemas/UValues.UAddress",
+                "nullable": true
               }
             ],
             "description": "Physical address of the person."
           },
+          "company": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+              }
+            ],
+            "nullable": true,
+            "description": "Company associated with the person."
+          },
           "corporate_phone": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
               }
             ],
             "description": "Corporate phone number of the person."
@@ -353,7 +390,8 @@
           "do_not_call": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UBoolean"
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
               }
             ],
             "description": "Whether calling this person is disallowed."
@@ -361,7 +399,8 @@
           "do_not_email": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UBoolean"
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
               }
             ],
             "description": "Whether emailing this person is disallowed."
@@ -377,7 +416,8 @@
           "email_opt_out": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UBoolean"
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
               }
             ],
             "description": "Whether the person has opted out of email communications."
@@ -385,7 +425,8 @@
           "eu_resident": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UBoolean"
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
               }
             ],
             "description": "Whether this person is a resident of the European Union."
@@ -393,7 +434,8 @@
           "first_name": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "First name of the person."
@@ -401,7 +443,8 @@
           "last_name": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Last name of the person."
@@ -409,7 +452,8 @@
           "lead_source": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Source of the person record."
@@ -417,7 +461,8 @@
           "linkedin_url": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UUrl",
+                "nullable": true
               }
             ],
             "description": "LinkedIn profile of the person.\n\nThis is the full URL of the LinkedIn profile of the person. The value\nwill always be standardized with an HTTPS prefix, \"www\" subdomain, and\ntrailing slash."
@@ -425,23 +470,32 @@
           "mobile_phone": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
               }
             ],
             "description": "Mobile phone number of the person."
           },
           "record_owner": {
-            "allOf": [
+            "anyOf": [
               {
-                "$ref": "#/components/schemas/UValues.UReference"
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
               }
             ],
+            "nullable": true,
             "description": "The user that owns the person record."
           },
           "status": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Status of the person."
@@ -449,7 +503,8 @@
           "title": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UText"
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
               }
             ],
             "description": "Job title of the person."
@@ -457,7 +512,8 @@
           "work_phone": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/UValues.UPhoneNumber"
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
               }
             ],
             "description": "Work phone number of the person."
@@ -671,7 +727,7 @@
           },
           "query": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Query string parameters (equivalent to `location.search`)."
@@ -758,7 +814,7 @@
           },
           "query": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "type": "string"
             },
             "description": "Query string parameters (equivalent to `location.search`)."
@@ -776,7 +832,7 @@
             "description": "URL of the page (equivalent to `location.href`)."
           }
         },
-        "unevaluatedProperties": {},
+        "additionalProperties": {},
         "description": "Details about an event included in a track request."
       },
       "Traits": {
@@ -792,6 +848,43 @@
         },
         "description": "Traits for the identify request payload."
       },
+      "UResponses.BadRequestError": {
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "object_api_name": {
+            "type": "string"
+          },
+          "attribute_api_name": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        ],
+        "description": "Validation error detail returned for bad request responses."
+      },
       "UValues.UAddress": {
         "type": "object",
         "properties": {
@@ -803,11 +896,11 @@
             ],
             "description": "Country code in ISO 3166-1 alpha-2 format."
           },
-          "administrativeArea": {
+          "administrative_area": {
             "type": "string",
             "description": "State, province, region, or territory."
           },
-          "subAdministrativeArea": {
+          "sub_administrative_area": {
             "type": "string",
             "description": "County or other secondary governmental division of an administrative area."
           },
@@ -815,11 +908,11 @@
             "type": "string",
             "description": "City, town, or village."
           },
-          "dependentLocality": {
+          "dependent_locality": {
             "type": "string",
             "description": "Neighborhood, borough, district, or city sector."
           },
-          "postalCode": {
+          "postal_code": {
             "type": "string",
             "description": "Postal code or ZIP code."
           },
@@ -831,7 +924,7 @@
             "type": "string",
             "description": "Street number or building name."
           },
-          "subPremise": {
+          "sub_premise": {
             "type": "string",
             "description": "Apartment, suite, office number, or other secondary unit designator."
           }
@@ -1353,25 +1446,78 @@
         "description": "String value representing a phone number.",
         "title": "UPhoneNumber"
       },
-      "UValues.UReference": {
+      "UValues.UReferenceById": {
         "type": "object",
         "required": [
-          "object",
           "id"
         ],
         "properties": {
-          "object": {
-            "type": "string",
-            "description": "Object type."
-          },
           "id": {
-            "type": "string",
-            "format": "uuid",
-            "description": "Object ID."
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUuid"
+              }
+            ],
+            "description": "An object record ID."
           }
         },
-        "description": "Composite object representing a reference to another object.",
-        "title": "UReference"
+        "description": "Reference to another object record by ID.\n\nThis will find an existing record by its ID, and an error will be returned if\nthe record does not exist.",
+        "title": "UReferenceById"
+      },
+      "UValues.UReferenceByMatch": {
+        "type": "object",
+        "required": [
+          "match"
+        ],
+        "properties": {
+          "match": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to match against to find an existing record.\n\nAt least one unique attribute must be included to ensure that at most one\nrecord is matched. Additional unique or non-unique attributes may also be\nincluded to refine the matching criteria."
+          }
+        },
+        "description": "Reference to another object record by match criteria.\n\nThis will find an existing record using the provided match criteria, and\n`null` will be returned if no match is found.",
+        "title": "UReferenceByMatch"
+      },
+      "UValues.UReferenceByUpsert": {
+        "type": "object",
+        "required": [
+          "match"
+        ],
+        "properties": {
+          "match": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to match against to find an existing record.\n\nAt least one unique attribute must be included to ensure that at most one\nrecord is matched. Additional unique or non-unique attributes may also be\nincluded to refine the matching criteria."
+          },
+          "create": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to use when creating a new record if no match is found."
+          },
+          "update": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to use when updating an existing record if a match is found."
+          },
+          "update_if_empty": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to update when a matching record is found and the\nexisting attribute value on the record is `null`."
+          },
+          "create_or_update": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to apply during both creation and update operations."
+          },
+          "create_or_update_if_empty": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The attribute values to apply during both creation and update-if-empty\noperations."
+          }
+        },
+        "description": "Reference to another object record by performing a nested upsert.\n\nAt least one of `create`, `create_or_update` or `create_or_update_if_empty`\nmust be provided, and all required attributes on the object must be included\nin at least one of these properties.\n\n## Precedence\n\nWhen the same attribute is specified in multiple properties, the values will\nbe applied in a specific order of precedence. If a record is being created,\nthe following order is used:\n\n1. `create`\n2. `create_or_update`\n3. `create_or_update_if_empty`\n\nIf an existing record is being updated, the following order is used:\n\n1. `update`\n2. `create_or_update`\n3. `update_if_empty`\n4. `create_or_update_if_empty`",
+        "title": "UReferenceByUpsert"
       },
       "UValues.UText": {
         "type": "string",
@@ -1382,6 +1528,11 @@
         "type": "string",
         "description": "String value representing a web URL or internet domain.",
         "title": "UUrl"
+      },
+      "UValues.UUuid": {
+        "type": "string",
+        "description": "String UUIDv4 value.",
+        "title": "UUuid"
       },
       "ipv4": {
         "type": "string",

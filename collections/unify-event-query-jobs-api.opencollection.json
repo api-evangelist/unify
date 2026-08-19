@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Data Event Query Jobs API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Query Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_event_query_jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/events/query-jobs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by status."
+              }
+            ]
+          },
+          "docs": "List event query jobs, optionally filtered by status."
+        },
+        {
+          "info": {
+            "name": "create_event_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/events/query-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start an asynchronous query job that exports analytics events — website\nand product activity (`page`, `track`, `identify`) with any revealed\ncompany and person embedded in each row. Events are immutable, so filter\non `timestamp` for incremental exports; omitting `filter` exports all\nevents. Poll the job until it is `FINISHED`, then page through the\nresults."
+        },
+        {
+          "info": {
+            "name": "get_event_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/events/query-jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation."
+        },
+        {
+          "info": {
+            "name": "cancel_event_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/events/query-jobs/:job_id/cancel",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled."
+        },
+        {
+          "info": {
+            "name": "get_event_query_job_results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/events/query-jobs/:job_id/results",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`."
+              }
+            ]
+          },
+          "docs": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

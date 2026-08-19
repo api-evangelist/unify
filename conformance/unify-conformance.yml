@@ -1,42 +1,96 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json,
-  openapi/unify-analytics-openapi.json, https://trust.unifygtm.com/
+generated: '2026-08-13'
+method: searched
+source: openapi/_original/*.json (harvested live 2026-08-13), https://auth.unifygtm.com/.well-known/oauth-authorization-server,
+  https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp, https://docs.unifygtm.com/.well-known/agent-card.json,
+  https://trust.unifygtm.com/
 standards:
-  - id: oauth2
-    conforms: false
-    evidence: No oauth2 securitySchemes in any published OpenAPI; Data and
-      Sequences APIs use an x-api-key header, Analytics uses HTTP Basic.
-  - id: oidc
-    conforms: false
-    evidence: No openIdConnect security scheme; app login is via
-      auth.unifygtm.com (Auth0 universal login) but the public APIs are
-      API-key authenticated.
-  - id: api-key-auth
-    conforms: true
-    evidence: ApiKeyAuth (type apiKey, in header, name x-api-key) declared in
-      the Data and Sequences OpenAPI documents.
-  - id: cursor-pagination
-    conforms: true
-    evidence: cursor + limit query parameters on Data API list operations;
-      cursor, page and page_size parameters on Sequences API list and bulk
-      query-job result operations.
-  - id: rate-limiting-429
-    conforms: true
-    evidence: Sequences OpenAPI documents 429 "Response for any operation that
-      exceeds a rate limit".
-  - id: rfc9457-problem-details
-    conforms: false
-    evidence: Errors use a custom JSON envelope (e.g. UResponses.BadRequestError
-      with code/path fields), not application/problem+json.
-  - id: json-api
-    conforms: false
-    evidence: Responses use a custom status/data envelope, not JSON:API.
-  - id: soc2-type-2
-    conforms: true
-    evidence: SOC 2 Type II certification published on https://trust.unifygtm.com/
-      (method searched).
-  - id: dry-run-validation
-    conforms: true
-    evidence: validation_mode query parameter on Data API create/upsert/update
-      record operations.
+- id: oauth2
+  conforms: true
+  evidence: 'No oauth2 securityScheme in any OpenAPI, but the hosted MCP server at https://mcp.unifygtm.com/mcp
+    is a live OAuth 2.0 protected resource: it returns an RFC 6750 Bearer challenge and its authorization
+    server (https://auth.unifygtm.com/) publishes full RFC 8414 metadata with PKCE S256, dynamic client
+    registration and DPoP ES256. Conformance is on the MCP surface only; the REST APIs remain API-key
+    authenticated.'
+- id: oidc
+  conforms: true
+  evidence: https://auth.unifygtm.com/.well-known/openid-configuration returns a complete OpenID Connect
+    Discovery 1.0 document (issuer, authorization/token/userinfo endpoints, jwks_uri, claims_supported,
+    id_token signing algs). Applies to Unify application login and the MCP OAuth flow, not to the REST
+    APIs.
+- id: api-key-auth
+  conforms: true
+  evidence: ApiKeyAuth (type apiKey, in header, name x-api-key) declared in the Data and Sequences OpenAPI
+    documents.
+- id: cursor-pagination
+  conforms: true
+  evidence: cursor + limit query parameters with a next_cursor response field on Data, Sequences and Tasks
+    list operations; the Bulk API uses page + page_size (max 10000) for job results.
+- id: rate-limiting-429
+  conforms: true
+  evidence: '429 declared on 44 of 68 operations, described "Response for any operation that exceeds a
+    rate limit". Published limits: 100,000 requests / 5-minute window per API. The Analytics API is the
+    exception - it publishes a limit but declares no 429 response.'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom JSON envelope (e.g. UResponses.BadRequestError with code/path fields),
+    not application/problem+json.
+- id: json-api
+  conforms: false
+  evidence: Responses use a custom status/data envelope, not JSON:API.
+- id: soc2-type-2
+  conforms: true
+  evidence: SOC 2 Type II certification published on https://trust.unifygtm.com/ (method searched).
+- id: dry-run-validation
+  conforms: true
+  evidence: validation_mode query parameter on Data API create/upsert/update record operations.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: https://auth.unifygtm.com/.well-known/oauth-authorization-server returns 200 with a valid
+    RFC 8414 document. Saved at well-known/unify-oauth-authorization-server.json.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp returns 200 naming the resource,
+    its authorization server and header bearer methods. Saved at well-known/unify-oauth-protected-resource.json.
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: 'An unauthenticated POST to the MCP endpoint returns 401 with a WWW-Authenticate: Bearer challenge
+    carrying resource_metadata and error/error_description parameters.'
+- id: a2a-1.0.0
+  conforms: true
+  grade: conformant
+  evidence: 'https://docs.unifygtm.com/.well-known/agent-card.json returns a valid A2A agent card: capabilities
+    is an object, protocolVersion is present ("0.3"), skills is an array. One deviation - it uses supportedInterfaces
+    where A2A 1.0.0 names the field additionalInterfaces. Graded in a2a/unify-a2a.yml.'
+- id: mcp
+  conforms: true
+  evidence: 'Two live HTTP MCP servers: the OAuth-protected GTM server at https://mcp.unifygtm.com/mcp
+    (71 published tools) and an anonymous documentation server at https://docs.unifygtm.com/mcp whose
+    tools/list returned 200 with 3 tools. See mcp/unify-mcp.yml.'
+- id: agentskills-discovery-0.2.0
+  conforms: true
+  evidence: https://docs.unifygtm.com/.well-known/agent-skills/index.json declares $schema https://schemas.agentskills.io/discovery/0.2.0/schema.json
+    and lists one skill-md entry with a sha256 digest. Saved at well-known/unify-agent-skills-index.json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Unify host (www, docs, app, api.unifygtm.com,
+    api.unifyintent.com, mcp).
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404 on every host; the four OpenAPI documents are reachable
+    individually at <api-host>/<service>/v1/openapi.json but are not catalogued.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy is documented; no operation
+    in the 68 is marked deprecated.
+- id: retry-after
+  conforms: true
+  evidence: The Bulk API guide instructs callers to honour the Retry-After header on 429. It is the only
+    rate-limit response header Unify documents.
+- id: idempotency-key
+  conforms: false
+  evidence: No Idempotency-Key header or parameter in any of the 68 operations and no idempotency contract
+    in the docs. See conventions/unify-conventions.yml.
+- id: openapi-3.0
+  conforms: true
+  evidence: 'All four published documents declare openapi: 3.0.0 and parse cleanly; 68 operations, all
+    with unique operationIds and declared tags.'

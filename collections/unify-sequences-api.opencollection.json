@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Sequences API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sequences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_sequences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List sequences — automated series of outreach steps (emails, tasks, and\ntiming conditions) that run against enrolled people."
+        },
+        {
+          "info": {
+            "name": "retrieve_sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single sequence by its ID, including its owner, send schedule, and\nruleset."
+        },
+        {
+          "info": {
+            "name": "delete_sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a sequence by its ID."
+        },
+        {
+          "info": {
+            "name": "pause_sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences/:id/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Pause a sequence, halting progress for all of its enrollments until it\nis resumed."
+        },
+        {
+          "info": {
+            "name": "resume_sequence",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resume a paused sequence so its enrollments continue."
+        },
+        {
+          "info": {
+            "name": "list_sequence_steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences/:id/steps",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Repeat `type` to filter by multiple sequence step types."
+              }
+            ]
+          },
+          "docs": "List a sequence's steps. Steps are automatic emails, manual emails, or\ntasks (calls, LinkedIn touches, action items); each step's dependencies\ndescribe when it runs relative to its parent step."
+        },
+        {
+          "info": {
+            "name": "retrieve_sequence_step",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/sequences/:id/steps/:step_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "step_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single step of a sequence by ID. The response shape is\ndiscriminated by the step's `type`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

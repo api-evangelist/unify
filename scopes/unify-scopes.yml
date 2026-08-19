@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: probed
+source: https://auth.unifygtm.com/.well-known/oauth-authorization-server
+docs: https://docs.unifygtm.com/developers/mcp/getting-started
+checked: '2026-08-13'
+applies_to: MCP (OAuth user login) only
+note: >-
+  None of Unify's four OpenAPI documents declares an oauth2 securityScheme - the
+  REST APIs are x-api-key (Data/Sequences/Tasks) and HTTP Basic (Analytics), so
+  derive-oauth-scopes.py has nothing to read from the specs. OAuth exists on a
+  different surface: the hosted MCP server at https://mcp.unifygtm.com/mcp returns
+  an RFC 9728 protected-resource document naming https://auth.unifygtm.com/ as its
+  authorization server. The scopes below are read from that server's live RFC 8414
+  metadata, saved verbatim at
+  well-known/unify-oauth-authorization-server.json.
+  IMPORTANT: scopes_supported here is the standard OIDC identity set advertised by
+  the Auth0 tenant. Unify publishes NO product-permission scopes (nothing of the
+  form read:sequences / write:records). Authorization for MCP tool calls is
+  enforced by the identity of the logged-in user and their Unify tenant, not by
+  scope - "every tool call is scoped to the Unify user and tenant that
+  authenticated the connection. A tool can only read or act on data that user can
+  already see in Unify." Do not read this file as a permission model for the REST
+  APIs; there is none.
+authorization_server:
+  issuer: https://auth.unifygtm.com/
+  platform: Auth0 (custom domain on unifygtm.com)
+  authorization_endpoint: https://auth.unifygtm.com/authorize
+  token_endpoint: https://auth.unifygtm.com/oauth/token
+  device_authorization_endpoint: https://auth.unifygtm.com/oauth/device/code
+  registration_endpoint: https://auth.unifygtm.com/oidc/register
+  revocation_endpoint: https://auth.unifygtm.com/oauth/revoke
+  userinfo_endpoint: https://auth.unifygtm.com/userinfo
+  jwks_uri: https://auth.unifygtm.com/.well-known/jwks.json
+  dynamic_client_registration: true
+  pkce_methods: [S256, plain]
+  token_endpoint_auth_methods: [client_secret_basic, client_secret_post, private_key_jwt, none]
+  dpop_signing_alg_values_supported: [ES256]
+protected_resource:
+  resource: https://mcp.unifygtm.com/mcp
+  authorization_servers: [https://auth.unifygtm.com/]
+  bearer_methods_supported: [header]
+  spec: RFC 9728
+  file: well-known/unify-oauth-protected-resource.json
+flows:
+  - flow: authorizationCode
+    pkce: true
+    note: The path a Claude/Cursor/Codex MCP client uses when a person logs in to Unify.
+  - flow: deviceCode
+    grant: urn:ietf:params:oauth:grant-type:device_code
+  - flow: clientCredentials
+  - flow: refreshToken
+  - flow: tokenExchange
+    grant: urn:ietf:params:oauth:grant-type:token-exchange
+  - flow: implicit
+    note: Advertised by the tenant; not a path Unify documents for MCP.
+scopes:
+  - scope: openid
+    description: Standard OIDC scope requesting an ID token for the authenticated Unify user.
+    kind: identity
+  - scope: profile
+    description: Standard OIDC scope for the user's basic profile claims.
+    kind: identity
+  - scope: offline_access
+    description: Requests a refresh token so an MCP client can keep the connection alive without re-prompting.
+    kind: identity
+  - scope: email
+    description: The user's email address.
+    kind: identity
+  - scope: email_verified
+    kind: identity
+  - scope: name
+    kind: identity
+  - scope: given_name
+    kind: identity
+  - scope: family_name
+    kind: identity
+  - scope: nickname
+    kind: identity
+  - scope: picture
+    kind: identity
+  - scope: phone
+    kind: identity
+  - scope: address
+    kind: identity
+  - scope: created_at
+    kind: identity
+  - scope: identities
+    description: Linked identity-provider records for the user.
+    kind: identity
+alternative_auth:
+  - method: api-key
+    header: x-api-key
+    detail: >-
+      Unify documents an API-key alternative for MCP clients that cannot run the
+      OAuth flow. A key carries the full authority of the Unify user it belongs to
+      and is not scope-limited.
+    source: https://docs.unifygtm.com/developers/mcp/getting-started
+gaps:
+  - id: no-product-scopes
+    detail: >-
+      There is no way for a caller - human or agent - to request less than the full
+      authority of the authenticating user. Neither the OAuth server nor the API
+      key model offers a read-only or resource-limited grant, so least-privilege
+      delegation to an agent is not expressible today.
+cross_links:
+  authentication: authentication/unify-authentication.yml
+  mcp: mcp/unify-mcp.yml
+  well_known: well-known/unify-well-known.yml

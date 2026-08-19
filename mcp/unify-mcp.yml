@@ -1,23 +1,158 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://github.com/unifygtm/agent-plugins
+source: >-
+  https://docs.unifygtm.com/developers/mcp/getting-started,
+  https://docs.unifygtm.com/developers/mcp/tools,
+  https://github.com/unifygtm/agent-plugins,
+  https://docs.unifygtm.com/.well-known/mcp.json
 status: published
-server:
-  name: unify
-  transport: http
-  url: https://mcp.unifygtm.com/mcp
-  auth: oauth2 (public client, browser login; client configuration published in
-    the official agent-plugins repository)
+maturity: early-access
+maturity_note: >-
+  Unify labels MCP "in early access and under active development. Available tools
+  and behavior may change before general availability." (getting-started page,
+  read 2026-08-13.)
+deployment:
+  mode: remote
+  endpoint: https://mcp.unifygtm.com/mcp
+  auth: oauth
+  verified: probed
+  probe: gated
+  checked: '2026-08-13'
+  note: >-
+    An unauthenticated POST of tools/list to https://mcp.unifygtm.com/mcp returns
+    HTTP 401 with
+    WWW-Authenticate: Bearer resource_metadata="https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp",
+    error="invalid_request". That protected-resource document (RFC 9728, saved at
+    well-known/unify-oauth-protected-resource.json) names
+    https://auth.unifygtm.com/ as the authorization server and header bearer
+    methods. The endpoint is therefore live and remote-callable; the tool schemas
+    require an authenticated Unify workspace to introspect. The official
+    agent-plugins repository is a client-side marketplace plugin that configures
+    this same remote URL plus the packaged skills - it is NOT a local stdio server,
+    so mode stays remote.
+servers:
+  - name: unify-gtm
+    role: product
+    transport: http
+    url: https://mcp.unifygtm.com/mcp
+    auth: oauth2
+    auth_detail: >-
+      Browser login against https://auth.unifygtm.com/ (an Auth0 tenant on Unify's
+      own custom domain; discovery at well-known/unify-oauth-authorization-server.json).
+      Unify also documents an API-key alternative for clients that cannot run the
+      OAuth flow - an x-api-key header on the MCP request, using a key generated
+      under Settings -> Developers. A public OAuth client ID for the Claude
+      Desktop connector is published on the getting-started page; it is not a
+      secret and identifies the client app, not the workspace.
+    tools: 71
+    tools_probed: false
+    scope_note: >-
+      Every tool call is scoped to the Unify user and tenant that authenticated the
+      connection; a tool can only read or act on data that user can already see.
+    usage_note: >-
+      Runs the same Agent as Unify Chat and consumes the same workspace
+      credits/funding. Starting an Agent run requires available credits and is
+      subject to per-user rate limiting; both surface as a tool error.
+  - name: unify-docs
+    role: documentation
+    transport: http
+    url: https://docs.unifygtm.com/mcp
+    auth: none
+    tools: 3
+    tools_probed: true
+    probe:
+      method: tools/list
+      http_status: 200
+      content_type: text/event-stream
+      checked: '2026-08-13'
+      file: unify-docs-mcp-tools.json
+    note: >-
+      A second, anonymous MCP server on the documentation host (Mintlify), which
+      answers tools/list without authentication. Its three tools serve the
+      documentation corpus, not the Unify product API. The provider's own
+      /.well-known/mcp.json advertises this server at
+      https://unify-19.main-kill-isr.mintlify.me/mcp - a Mintlify internal preview
+      hostname rather than a unifygtm.com address; the docs.unifygtm.com/mcp URL is
+      the one that actually resolves. Recorded as found.
+tools:
+  summary: >-
+    71 tools on the GTM server: 6 Agent-lifecycle, 4 identity/context loaders, and
+    61 that map one-to-one onto public REST operations (the MCP tool names are
+    byte-identical to the OpenAPI operationIds). Full binding in
+    mcp/unify-tool-crosswalk.yml.
+  agent_lifecycle:
+    - name: run_agent
+      description: Start the general-purpose Unify Agent on a natural-language task; returns a runId immediately.
+    - name: poll_agent
+      description: Check a run's status (PENDING / CLARIFICATION_NEEDED / READY / ERROR / NOT_FOUND).
+    - name: answer_question
+      description: Answer every question from a CLARIFICATION_NEEDED run and resume it.
+    - name: read_agent_results
+      description: Read the final answer or error from a terminal run.
+    - name: cancel_agent
+      description: Stop an in-flight Agent run.
+    - name: list_agent_runs
+      description: List the current user's Agent runs, newest first, cursor-paginated.
+  context:
+    - name: get_me
+      description: Return the authenticated user's profile and workspace identity.
+    - name: load_datatable
+      description: Load a DataTable the calling user owns, with columns and a cursor-paginated page of rows.
+    - name: load_mailbox_voice_profile
+      description: Load the writing voice profile for a connected mailbox.
+    - name: load_general_context
+      description: Load a version of the user's general business context (business description, ICP).
+  public_api:
+    count: 61
+    categories:
+      - name: Objects and records
+        tools: 25
+      - name: Sequences and enrollments
+        tools: 22
+      - name: Tasks
+        tools: 10
+      - name: Events
+        tools: 4
+    crosswalk: mcp/unify-tool-crosswalk.yml
+  docs_server:
+    - name: search_unify
+      description: Search the Unify knowledge base for documentation, code examples and API references.
+    - name: query_docs_filesystem_unify
+      description: Read-only shell-like query (rg/grep/find/tree/ls/cat/head) over a virtual filesystem of the docs pages and OpenAPI specs.
+    - name: submit_feedback
+      description: Submit documentation feedback for a given docs path.
 distribution:
   - kind: agent-plugin
     repository: https://github.com/unifygtm/agent-plugins
-    description: Official Unify GTM agent plugins for Claude Code, Codex, and Cursor.
-      Each plugin bundles the hosted MCP server (unify/mcp.json) plus seven packaged
-      agent skills (see skills/_index.yml in this repo).
     license: MIT
-notes: >-
-  The plugin description published by Unify: "Run Unify's GTM agent from Claude
-  Code - build company and people lists, enrich emails and phone numbers, and
-  launch sequences and tasks." Tool inventory is served by the remote MCP server
-  at runtime and requires an authenticated Unify workspace, so tools[] is not
-  enumerated here.
+    clients: [Claude Code, Cursor, Codex]
+    install:
+      claude_code: claude plugin marketplace add unifygtm/agent-plugins --scope user && claude plugin install unify@unify-plugins --scope user
+      codex: codex plugin marketplace add unifygtm/agent-plugins && codex plugin add unify@unify-plugins
+      cursor: curl -fsSL https://raw.githubusercontent.com/unifygtm/agent-plugins/main/scripts/setup.sh | bash -s -- cursor
+    description: >-
+      Official Unify GTM agent plugins. Each plugin bundles the hosted remote MCP
+      server configuration (unify/mcp.json) plus seven packaged agent skills - see
+      skills/_index.yml. This is client configuration, not a stdio MCP server.
+  - kind: connector
+    client: Claude Desktop / claude.ai
+    description: >-
+      Added as a custom connector with the remote MCP server URL
+      https://mcp.unifygtm.com/mcp and the published OAuth client ID; on Team and
+      Enterprise plans a workspace admin adds it once, then each person logs in
+      with their own Unify account.
+  - kind: manual
+    description: >-
+      Any MCP client supporting remote/HTTP servers can point at
+      https://mcp.unifygtm.com/mcp and authenticate with an x-api-key header
+      instead of the OAuth login.
+discovery:
+  oauth_protected_resource: https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp
+  authorization_server: https://auth.unifygtm.com/
+  well_known: well-known/unify-well-known.yml
+  scopes: scopes/unify-scopes.yml
+cross_links:
+  crosswalk: mcp/unify-tool-crosswalk.yml
+  skills: skills/_index.yml
+  agent_card: a2a/unify-a2a.yml
+  authentication: authentication/unify-authentication.yml

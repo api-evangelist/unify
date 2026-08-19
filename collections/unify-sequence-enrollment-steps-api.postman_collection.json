@@ -1,0 +1,2201 @@
+{
+  "item": [
+    {
+      "id": "9f363075-d3ac-4dd1-887e-122a55a443ce",
+      "name": "Sequence Enrollment Steps",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1359aed5-7f1c-4609-ac5b-16ed914b7614",
+          "name": "create sequence enrollment step query job",
+          "request": {
+            "name": "create sequence enrollment step query job",
+            "description": {
+              "content": "Start an asynchronous query job that exports sequence enrollment steps —\nper-person executions of each sequence step, including sent email\nengagement and any reply. Omitting `filter` exports all enrollment\nsteps. Poll the job until it is `FINISHED`, then page through the\nresults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "enrollment-steps",
+                "query-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"enrollment\": {\n      \"id\": \"<string>\"\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"step_number\": \"<integer>\",\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"sequence\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"mailbox\": {\n      \"id\": \"<string>\",\n      \"email_address\": \"<string>\"\n    },\n    \"started_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"is_blocked\": \"<boolean>\",\n    \"is_bounced\": \"<boolean>\",\n    \"is_canceled\": \"<boolean>\",\n    \"is_opted_out\": \"<boolean>\",\n    \"is_paused\": \"<boolean>\",\n    \"is_replied\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0fdd0552-9e8b-4e99-bd10-a73e4778c96a",
+              "name": "Response returned when creating a Bulk API query job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"enrollment\": {\n      \"id\": \"<string>\"\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"step_number\": \"<integer>\",\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"sequence\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"mailbox\": {\n      \"id\": \"<string>\",\n      \"email_address\": \"<string>\"\n    },\n    \"started_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"is_blocked\": \"<boolean>\",\n    \"is_bounced\": \"<boolean>\",\n    \"is_canceled\": \"<boolean>\",\n    \"is_opted_out\": \"<boolean>\",\n    \"is_paused\": \"<boolean>\",\n    \"is_replied\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ecfa1a2-6339-4edf-83ad-405e51d4a3c5",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"enrollment\": {\n      \"id\": \"<string>\"\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"step_number\": \"<integer>\",\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"sequence\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"mailbox\": {\n      \"id\": \"<string>\",\n      \"email_address\": \"<string>\"\n    },\n    \"started_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"is_blocked\": \"<boolean>\",\n    \"is_bounced\": \"<boolean>\",\n    \"is_canceled\": \"<boolean>\",\n    \"is_opted_out\": \"<boolean>\",\n    \"is_paused\": \"<boolean>\",\n    \"is_replied\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cbb2b21-2fbc-41e4-993e-474e3a9b255a",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"enrollment\": {\n      \"id\": \"<string>\"\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"step_number\": \"<integer>\",\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"sequence\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"mailbox\": {\n      \"id\": \"<string>\",\n      \"email_address\": \"<string>\"\n    },\n    \"started_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"is_blocked\": \"<boolean>\",\n    \"is_bounced\": \"<boolean>\",\n    \"is_canceled\": \"<boolean>\",\n    \"is_opted_out\": \"<boolean>\",\n    \"is_paused\": \"<boolean>\",\n    \"is_replied\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69289665-0399-4f43-9e1c-7557da889351",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"enrollment\": {\n      \"id\": \"<string>\"\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"step_number\": \"<integer>\",\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"sequence\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"mailbox\": {\n      \"id\": \"<string>\",\n      \"email_address\": \"<string>\"\n    },\n    \"started_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"is_blocked\": \"<boolean>\",\n    \"is_bounced\": \"<boolean>\",\n    \"is_canceled\": \"<boolean>\",\n    \"is_opted_out\": \"<boolean>\",\n    \"is_paused\": \"<boolean>\",\n    \"is_replied\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2e134b9-fe62-43c2-bb5c-2c803e1ed029",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"enrollment\": {\n      \"id\": \"<string>\"\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"step_number\": \"<integer>\",\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"sequence\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"mailbox\": {\n      \"id\": \"<string>\",\n      \"email_address\": \"<string>\"\n    },\n    \"started_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"is_blocked\": \"<boolean>\",\n    \"is_bounced\": \"<boolean>\",\n    \"is_canceled\": \"<boolean>\",\n    \"is_opted_out\": \"<boolean>\",\n    \"is_paused\": \"<boolean>\",\n    \"is_replied\": \"<boolean>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ae3765c-6ed8-4d1f-b524-91d595fec1ec",
+          "name": "list sequence enrollment step query jobs",
+          "request": {
+            "name": "list sequence enrollment step query jobs",
+            "description": {
+              "content": "List sequence enrollment step query jobs, optionally filtered by status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "enrollment-steps",
+                "query-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by the previous page."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter jobs by status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33c906ed-44c4-47a0-8eb6-ce9cccf95510",
+              "name": "Response returned when listing Bulk API jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobs\": [\n    {\n      \"job_id\": \"string\",\n      \"status\": \"<string>\",\n      \"total_rows\": 21,\n      \"error_code\": \"string\",\n      \"created_at\": \"string\",\n      \"expires_at\": \"string\",\n      \"canceled_at\": \"string\"\n    },\n    {\n      \"job_id\": \"string\",\n      \"status\": \"<string>\",\n      \"total_rows\": 1389,\n      \"error_code\": \"string\",\n      \"created_at\": \"string\",\n      \"expires_at\": \"string\",\n      \"canceled_at\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99958a91-4672-462c-822c-08187aad1454",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b899a6f-8661-40e7-91ab-e604eeec3eba",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88081b8f-2d6a-44e9-aaf0-fafd9447df34",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc673665-7f50-47e4-b6bf-ebe9712774d1",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46305b30-8fde-46dd-8f8d-10dc8b88e7ae",
+          "name": "get sequence enrollment step query job",
+          "request": {
+            "name": "get sequence enrollment step query job",
+            "description": {
+              "content": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "enrollment-steps",
+                "query-jobs",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9ef2c93-ba8c-40c8-a61e-3d50e2fbe06c",
+              "name": "Response returned when fetching a Bulk API job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"<string>\",\n  \"total_rows\": 3609,\n  \"error_code\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"canceled_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08dfc052-0229-4122-8f05-4b9e02425eb7",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8b5c273-e912-466f-80b4-2ac0d64ccbb0",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "789b3335-39c7-4878-8cb3-87ef1ee819ba",
+              "name": "Response returned when a Bulk API job cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7be7034-6094-47d5-b722-b082731977be",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94b0432f-0c0a-4409-91b2-2386bcc0fefd",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00212493-288f-4bd4-8248-12ad413a9408",
+          "name": "cancel sequence enrollment step query job",
+          "request": {
+            "name": "cancel sequence enrollment step query job",
+            "description": {
+              "content": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "enrollment-steps",
+                "query-jobs",
+                ":job_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "793f2ef7-1dfb-4bcb-8399-34e500ff1976",
+              "name": "Response returned when canceling a Bulk API job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"CANCELED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7f2a795-9f53-47c7-8ca2-8936b19dab75",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2c5c4b8-62c9-4b47-bdd5-d1893c375733",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb5c4853-464c-41df-87d3-1c088cb16232",
+              "name": "Response returned when a Bulk API job cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02b753ff-51c9-4656-9f28-c47a3be4b4ff",
+              "name": "Response returned when a Bulk API job is not cancelable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"job_not_cancelable\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cab32f98-9258-43eb-93d0-2bf7a6eedae1",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed31968d-a36b-4dd4-a80e-badbe634e6cd",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82e817a1-81da-4086-a454-33a25cb89197",
+          "name": "get sequence enrollment step query job results",
+          "request": {
+            "name": "get sequence enrollment step query job results",
+            "description": {
+              "content": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "enrollment-steps",
+                "query-jobs",
+                ":job_id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a192ec01-dfa9-4dd0-9a6e-280e39449c84",
+              "name": "Successful response returned when fetching completed Bulk API job results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total result count. Present for NDJSON responses.",
+                  "key": "x-total",
+                  "value": "9204"
+                },
+                {
+                  "disabled": false,
+                  "description": "Result page number. Present for NDJSON responses.",
+                  "key": "x-page",
+                  "value": "9204"
+                },
+                {
+                  "disabled": false,
+                  "description": "Result page size. Present for NDJSON responses.",
+                  "key": "x-page-size",
+                  "value": "9204"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 4450,\n  \"page\": 307,\n  \"page_size\": 3581,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"updated_at\": \"string\",\n      \"type\": \"<string>\",\n      \"status\": \"<string>\",\n      \"is_blocked\": false,\n      \"is_bounced\": true,\n      \"is_canceled\": false,\n      \"is_opted_out\": true,\n      \"is_paused\": false,\n      \"is_replied\": true,\n      \"sequence\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"version\": 480\n      },\n      \"step_number\": 1381,\n      \"started_at\": \"string\",\n      \"ended_at\": \"string\",\n      \"enrollment\": {\n        \"id\": \"string\",\n        \"mailbox\": {\n          \"id\": \"string\",\n          \"email_address\": \"string\",\n          \"forward_to_email_address\": \"string\",\n          \"secondary_forward_to_email_address\": \"string\",\n          \"user\": {},\n          \"secondary_forward_to_user\": {}\n        },\n        \"person\": {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"linkedin_url\": \"string\",\n          \"company\": {}\n        }\n      },\n      \"email_message\": {\n        \"id\": \"string\",\n        \"subject\": \"string\",\n        \"sent_at\": \"string\",\n        \"from_email_address\": \"string\",\n        \"is_bounced\": false,\n        \"is_opted_out\": true,\n        \"clicks\": 8035,\n        \"opens\": 7159\n      },\n      \"reply_email_message\": {\n        \"id\": \"a92ae0ee-4cb6-16ac-43f3-b68b0f5be3ce\",\n        \"subject\": \"string\",\n        \"classifications\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"updated_at\": \"string\",\n      \"type\": \"<string>\",\n      \"status\": \"<string>\",\n      \"is_blocked\": false,\n      \"is_bounced\": true,\n      \"is_canceled\": true,\n      \"is_opted_out\": false,\n      \"is_paused\": true,\n      \"is_replied\": false,\n      \"sequence\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"version\": 29\n      },\n      \"step_number\": 6535,\n      \"started_at\": \"string\",\n      \"ended_at\": \"string\",\n      \"enrollment\": {\n        \"id\": \"string\",\n        \"mailbox\": {\n          \"id\": \"string\",\n          \"email_address\": \"string\",\n          \"forward_to_email_address\": \"string\",\n          \"secondary_forward_to_email_address\": \"string\",\n          \"user\": {},\n          \"secondary_forward_to_user\": {}\n        },\n        \"person\": {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"linkedin_url\": \"string\",\n          \"company\": {}\n        }\n      },\n      \"email_message\": {\n        \"id\": \"string\",\n        \"subject\": \"string\",\n        \"sent_at\": \"string\",\n        \"from_email_address\": \"string\",\n        \"is_bounced\": false,\n        \"is_opted_out\": true,\n        \"clicks\": 137,\n        \"opens\": 8575\n      },\n      \"reply_email_message\": {\n        \"id\": \"4384f24a-5222-aba0-3d81-045cf626e4e7\",\n        \"subject\": \"string\",\n        \"classifications\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"category\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4960719-0b77-4cc2-9390-47dfcfea884d",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6abdc14-9e6d-40d8-855e-340a787c8b3e",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9594c6f6-e50a-4fa6-8b73-3216649e7549",
+              "name": "Response returned when a Bulk API job cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f581d204-a354-465a-a469-f742e2e5b293",
+              "name": "Response returned when Bulk API job results are not ready yet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"results_not_ready\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "548e9ac9-805e-4118-9da9-1490af22d4b6",
+              "name": "Response returned when Bulk API job results have expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gone",
+              "code": 410,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"results_expired\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58058d45-057b-4a22-b351-371a5ef40ab4",
+              "name": "Response returned when a requested Bulk API results page is too large.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"results_page_too_large\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dbe1ddf-285c-4a19-a2bb-a76f57063696",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5c6d26-f01e-437e-a675-d78c4c397c5c",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "enrollment-steps",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unifygtm.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e1e7222-ae82-449d-9fa5-2b8a7bc40249",
+    "name": "Unify Sequences Sequence Enrollment Steps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Unify Support\n Email: support@unifygtm.com",
+      "type": "text/plain"
+    }
+  }
+}

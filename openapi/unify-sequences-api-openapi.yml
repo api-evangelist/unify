@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
-  title: Unify Analytics Events Sequences API
-  summary: Send website and product analytics data into the Unify platform.
+  title: Unify Sequences API
+  summary: Interact with sequences and sequence enrollments within the Unify platform.
   version: '1'
   termsOfService: https://www.unifygtm.com/legal/terms-and-conditions
   contact:
@@ -9,1762 +9,24 @@ info:
     url: https://www.unifygtm.com/support
     email: support@unifygtm.com
 servers:
-- url: https://api.unifyintent.com/analytics/v1
+- url: https://api.unifygtm.com
   variables: {}
 security:
-- BasicAuth: []
+- ApiKeyAuth: []
 tags:
 - name: Sequences
 paths:
-  /enrollment-steps/query-jobs:
-    post:
-      operationId: create_sequence_enrollment_step_query_job
-      parameters: []
-      responses:
-        '201':
-          description: Response returned when creating a Bulk API query job.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateBulkApiJobSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateBulkApiSequenceEnrollmentStepsJobRequest'
-    get:
-      operationId: list_sequence_enrollment_step_query_jobs
-      parameters:
-      - name: cursor
-        in: query
-        required: false
-        schema:
-          type: string
-        explode: false
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 100
-        explode: false
-      - name: status
-        in: query
-        required: false
-        schema:
-          $ref: '#/components/schemas/BulkApiJobStatus'
-        explode: false
-      responses:
-        '200':
-          description: Response returned when listing Bulk API jobs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListBulkApiJobsSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollment-steps/query-jobs/{job_id}:
-    get:
-      operationId: get_sequence_enrollment_step_query_job
-      parameters:
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Response returned when fetching a Bulk API job.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when a Bulk API job cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollment-steps/query-jobs/{job_id}/cancel:
-    post:
-      operationId: cancel_sequence_enrollment_step_query_job
-      parameters:
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Response returned when canceling a Bulk API job.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelBulkApiJobSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when a Bulk API job cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
-        '409':
-          description: Response returned when a Bulk API job is not cancelable.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelBulkApiJobNotCancelableResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollment-steps/query-jobs/{job_id}/results:
-    get:
-      operationId: get_sequence_enrollment_step_query_job_results
-      description: 'Get Bulk API job results. By default this returns JSON. Send
-
-        `Accept: application/x-ndjson` to stream newline-delimited JSON.'
-      parameters:
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-        explode: false
-      - name: page_size
-        in: query
-        required: false
-        description: 'Maximum is 2,000 for JSON responses and 10,000 when `Accept` is
-
-          `application/x-ndjson`.'
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 10000
-        explode: false
-      responses:
-        '200':
-          description: Successful response returned when fetching completed Bulk API job results.
-          headers:
-            x-total:
-              required: false
-              description: Total result count. Present for NDJSON responses.
-              schema:
-                type: integer
-            x-page:
-              required: false
-              description: Result page number. Present for NDJSON responses.
-              schema:
-                type: integer
-            x-page-size:
-              required: false
-              description: Result page size. Present for NDJSON responses.
-              schema:
-                type: integer
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - total
-                - page
-                - page_size
-                - data
-                properties:
-                  total:
-                    type: integer
-                  page:
-                    type: integer
-                  page_size:
-                    type: integer
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/SequenceEnrollmentStep'
-                description: Successful response returned when fetching completed Bulk API job results.
-            application/x-ndjson:
-              schema:
-                type: string
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when a Bulk API job cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
-        '409':
-          description: Response returned when Bulk API job results are not ready yet.
-          content:
-            application/json:
-              schema:
-                anyOf:
-                - $ref: '#/components/schemas/GetBulkApiJobResultsNotReadyResponse'
-                - $ref: '#/components/schemas/GetBulkApiJobResultsFailedResponse'
-                - $ref: '#/components/schemas/GetBulkApiJobResultsCanceledResponse'
-        '410':
-          description: Response returned when Bulk API job results have expired.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobResultsExpiredResponse'
-        '413':
-          description: Response returned when a requested Bulk API results page is too large.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobResultsPayloadTooLargeResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments:
-    post:
-      operationId: create_sequence_enrollment
-      parameters: []
-      responses:
-        '201':
-          description: Response returned when an enrollment is created.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEnrollmentSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when an enrollment cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EnrollmentNotFoundResponse'
-        '409':
-          description: Response returned when the person is already enrolled in an active sequence.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateEnrollmentConflictResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateEnrollmentRequest'
-    get:
-      operationId: list_sequence_enrollments
-      parameters:
-      - name: cursor
-        in: query
-        required: false
-        schema:
-          type: string
-        explode: false
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 100
-        explode: false
-      - name: sequence_id
-        in: query
-        required: false
-        schema:
-          $ref: '#/components/schemas/uuid'
-        explode: false
-      - name: person_id
-        in: query
-        required: false
-        schema:
-          $ref: '#/components/schemas/uuid'
-        explode: false
-      - name: mailbox_id
-        in: query
-        required: false
-        schema:
-          $ref: '#/components/schemas/uuid'
-        explode: false
-      - name: status
-        in: query
-        required: false
-        description: Repeat `status` to filter by multiple enrollment statuses.
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/SequenceEnrollmentStatus'
-      - name: updated_after
-        in: query
-        required: false
-        description: Inclusive lower bound on `updated_at`.
-        schema:
-          $ref: '#/components/schemas/datetime'
-        explode: false
-      - name: updated_before
-        in: query
-        required: false
-        description: Inclusive upper bound on `updated_at`.
-        schema:
-          $ref: '#/components/schemas/datetime'
-        explode: false
-      responses:
-        '200':
-          description: Response returned when listing enrollments.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListEnrollmentsResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/query-jobs:
-    post:
-      operationId: create_sequence_enrollment_query_job
-      parameters: []
-      responses:
-        '201':
-          description: Response returned when creating a Bulk API query job.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateBulkApiJobSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateBulkApiSequenceEnrollmentsJobRequest'
-    get:
-      operationId: list_sequence_enrollment_query_jobs
-      parameters:
-      - name: cursor
-        in: query
-        required: false
-        schema:
-          type: string
-        explode: false
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 100
-        explode: false
-      - name: status
-        in: query
-        required: false
-        schema:
-          $ref: '#/components/schemas/BulkApiJobStatus'
-        explode: false
-      responses:
-        '200':
-          description: Response returned when listing Bulk API jobs.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListBulkApiJobsSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/query-jobs/{job_id}:
-    get:
-      operationId: get_sequence_enrollment_query_job
-      parameters:
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Response returned when fetching a Bulk API job.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when a Bulk API job cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/query-jobs/{job_id}/cancel:
-    post:
-      operationId: cancel_sequence_enrollment_query_job
-      parameters:
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Response returned when canceling a Bulk API job.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelBulkApiJobSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when a Bulk API job cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
-        '409':
-          description: Response returned when a Bulk API job is not cancelable.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelBulkApiJobNotCancelableResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/query-jobs/{job_id}/results:
-    get:
-      operationId: get_sequence_enrollment_query_job_results
-      description: 'Get Bulk API job results. By default this returns JSON. Send
-
-        `Accept: application/x-ndjson` to stream newline-delimited JSON.'
-      parameters:
-      - name: job_id
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-        explode: false
-      - name: page_size
-        in: query
-        required: false
-        description: 'Maximum is 2,000 for JSON responses and 10,000 when `Accept` is
-
-          `application/x-ndjson`.'
-        schema:
-          type: integer
-          minimum: 1
-          maximum: 10000
-        explode: false
-      responses:
-        '200':
-          description: Successful response returned when fetching completed Bulk API job results.
-          headers:
-            x-total:
-              required: false
-              description: Total result count. Present for NDJSON responses.
-              schema:
-                type: integer
-            x-page:
-              required: false
-              description: Result page number. Present for NDJSON responses.
-              schema:
-                type: integer
-            x-page-size:
-              required: false
-              description: Result page size. Present for NDJSON responses.
-              schema:
-                type: integer
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - total
-                - page
-                - page_size
-                - data
-                properties:
-                  total:
-                    type: integer
-                  page:
-                    type: integer
-                  page_size:
-                    type: integer
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/SequenceEnrollment'
-                description: Successful response returned when fetching completed Bulk API job results.
-            application/x-ndjson:
-              schema:
-                type: string
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when a Bulk API job cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
-        '409':
-          description: Response returned when Bulk API job results are not ready yet.
-          content:
-            application/json:
-              schema:
-                anyOf:
-                - $ref: '#/components/schemas/GetBulkApiJobResultsNotReadyResponse'
-                - $ref: '#/components/schemas/GetBulkApiJobResultsFailedResponse'
-                - $ref: '#/components/schemas/GetBulkApiJobResultsCanceledResponse'
-        '410':
-          description: Response returned when Bulk API job results have expired.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobResultsExpiredResponse'
-        '413':
-          description: Response returned when a requested Bulk API results page is too large.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetBulkApiJobResultsPayloadTooLargeResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/{id}:
-    get:
-      operationId: get_sequence_enrollment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/uuid'
-      responses:
-        '200':
-          description: Response returned when fetching an enrollment.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetEnrollmentResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when an enrollment cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EnrollmentNotFoundResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-    delete:
-      operationId: delete_sequence_enrollment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/uuid'
-      responses:
-        '200':
-          description: Response returned when deleting an enrollment.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteEnrollmentSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when an enrollment cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EnrollmentNotFoundResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/{id}/pause:
-    post:
-      operationId: pause_sequence_enrollment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/uuid'
-      responses:
-        '200':
-          description: Response returned when pausing an enrollment.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PauseEnrollmentSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when an enrollment cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EnrollmentNotFoundResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /enrollments/{id}/resume:
-    post:
-      operationId: resume_sequence_enrollment
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/uuid'
-      responses:
-        '200':
-          description: Response returned when resuming an enrollment.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResumeEnrollmentSuccessResponse'
-        '400':
-          description: Response for any operation that results in a bad request error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - bad_request
-                  errors:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/UResponses.BadRequestError'
-                  message:
-                    type: string
-                description: Response for any operation that results in a bad request error.
-        '401':
-          description: Response for any operation that results in an unauthorized error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - unauthorized
-                  message:
-                    type: string
-                description: Response for any operation that results in an unauthorized error.
-        '404':
-          description: Response returned when an enrollment cannot be found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EnrollmentNotFoundResponse'
-        '429':
-          description: Response for any operation that exceeds a rate limit.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - rate_limited
-                  message:
-                    type: string
-                description: Response for any operation that exceeds a rate limit.
-        '500':
-          description: Response for any operation that results in an internal server error.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                - status
-                - message
-                properties:
-                  status:
-                    type: string
-                    enum:
-                    - error
-                  message:
-                    type: string
-                description: Response for any operation that results in an internal server error.
-      tags:
-      - Sequences
-  /sequences:
+  /sequences/v1/sequences:
     get:
       operationId: list_sequences
+      description: 'List sequences — automated series of outreach steps (emails, tasks, and
+
+        timing conditions) that run against enrolled people.'
       parameters:
       - name: cursor
         in: query
         required: false
+        description: Opaque cursor returned by the previous page.
         schema:
           type: string
         explode: false
@@ -1856,9 +118,15 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
-  /sequences/{id}:
+      x-mcp-tool:
+        readOnlyHint: true
+        openWorldHint: false
+  /sequences/v1/sequences/{id}:
     get:
       operationId: retrieve_sequence
+      description: 'Get a single sequence by its ID, including its owner, send schedule, and
+
+        ruleset.'
       parameters:
       - name: id
         in: path
@@ -1951,8 +219,12 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
+      x-mcp-tool:
+        readOnlyHint: true
+        openWorldHint: false
     delete:
       operationId: delete_sequence
+      description: Delete a sequence by its ID.
       parameters:
       - name: id
         in: path
@@ -2045,9 +317,15 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
-  /sequences/{id}/pause:
+      x-mcp-tool:
+        idempotentHint: true
+        openWorldHint: false
+  /sequences/v1/sequences/{id}/pause:
     post:
       operationId: pause_sequence
+      description: 'Pause a sequence, halting progress for all of its enrollments until it
+
+        is resumed.'
       parameters:
       - name: id
         in: path
@@ -2146,9 +424,14 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
-  /sequences/{id}/resume:
+      x-mcp-tool:
+        destructiveHint: false
+        idempotentHint: true
+        openWorldHint: false
+  /sequences/v1/sequences/{id}/resume:
     post:
       operationId: resume_sequence
+      description: Resume a paused sequence so its enrollments continue.
       parameters:
       - name: id
         in: path
@@ -2247,9 +530,17 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
-  /sequences/{id}/steps:
+      x-mcp-tool:
+        destructiveHint: false
+        idempotentHint: true
+  /sequences/v1/sequences/{id}/steps:
     get:
       operationId: list_sequence_steps
+      description: 'List a sequence''s steps. Steps are automatic emails, manual emails, or
+
+        tasks (calls, LinkedIn touches, action items); each step''s dependencies
+
+        describe when it runs relative to its parent step.'
       parameters:
       - name: id
         in: path
@@ -2259,6 +550,7 @@ paths:
       - name: cursor
         in: query
         required: false
+        description: Opaque cursor returned by the previous page.
         schema:
           type: string
         explode: false
@@ -2364,9 +656,15 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
-  /sequences/{id}/steps/{step_id}:
+      x-mcp-tool:
+        readOnlyHint: true
+        openWorldHint: false
+  /sequences/v1/sequences/{id}/steps/{step_id}:
     get:
       operationId: retrieve_sequence_step
+      description: 'Get a single step of a sequence by ID. The response shape is
+
+        discriminated by the step''s `type`.'
       parameters:
       - name: id
         in: path
@@ -2467,33 +765,245 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Sequences
+      x-mcp-tool:
+        readOnlyHint: true
+        openWorldHint: false
 components:
   schemas:
-    BulkApiUuidFilter:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-      description: Filter matching a resource by ID.
-    SequenceStepTimerCondition:
+    AutomaticEmailSequenceStep:
       type: object
       required:
       - type
-      - duration_value
-      - duration_unit
+      - config
       properties:
         type:
           type: string
           enum:
-          - TIMER
-        duration_value:
-          type: integer
+          - AUTOMATIC_EMAIL
+        config:
+          $ref: '#/components/schemas/SequenceEmailStepConfig'
+      allOf:
+      - $ref: '#/components/schemas/SequenceStepBase'
+      description: Representation of an automatic email sequence step.
+    AutomaticEnrollmentTaskAssignment:
+      type: string
+      enum:
+      - ASSIGN_TO_MAILBOX_OWNER
+      - ASSIGN_TO_USER
+      description: Assignment strategy for tasks created from automatic sequence enrollments.
+    DeleteSequenceSuccessResponse:
+      type: object
+      required:
+      - id
+      - is_deleted
+      properties:
+        id:
+          $ref: '#/components/schemas/uuid'
+        is_deleted:
+          type: boolean
+          enum:
+          - true
+      description: Response returned when deleting a sequence.
+    EmailSendDays:
+      type: object
+      required:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      properties:
+        '1':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
           nullable: true
-        duration_unit:
-          $ref: '#/components/schemas/SequenceTimerConditionDurationUnit'
-      description: Timer condition embedded in sequence step responses.
+        '2':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
+          nullable: true
+        '3':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
+          nullable: true
+        '4':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
+          nullable: true
+        '5':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
+          nullable: true
+        '6':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
+          nullable: true
+        '7':
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailSendWindow'
+          nullable: true
+      description: 'Mapping from ISO weekday number (Monday = 1, Sunday = 7) to send windows.
+
+        A null value means sending is disabled for that day.'
+    EmailSendScheduleRules:
+      type: object
+      required:
+      - time_zone
+      - send_days
+      - skip_us_holidays
+      - excluded_dates
+      properties:
+        time_zone:
+          type: string
+        send_days:
+          $ref: '#/components/schemas/EmailSendDays'
+        skip_us_holidays:
+          type: boolean
+        excluded_dates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExcludedEmailSendDate'
+      description: Sequence email send schedule rules.
+    EmailSendWindow:
+      type: object
+      required:
+      - start_time
+      - end_time
+      properties:
+        start_time:
+          $ref: '#/components/schemas/EmailSendWindowTime'
+        end_time:
+          $ref: '#/components/schemas/EmailSendWindowTime'
+      description: Time window during which sequence emails may be sent.
+    EmailSendWindowTime:
+      type: object
+      required:
+      - hour
+      - minute
+      properties:
+        hour:
+          type: integer
+          minimum: 0
+          maximum: 23
+        minute:
+          type: integer
+          minimum: 0
+          maximum: 59
+      description: Local wall-clock time used in a sequence email send window.
+    ExcludedEmailSendDate:
+      type: object
+      required:
+      - date
+      properties:
+        date:
+          $ref: '#/components/schemas/date'
+        should_recur:
+          type: boolean
+      description: Custom date skipped by a sequence email send schedule.
+    ListSequenceStepsResponse:
+      type: object
+      required:
+      - steps
+      - next_cursor
+      properties:
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/SequenceStep'
+        next_cursor:
+          type: string
+          nullable: true
+      description: Response returned when listing sequence steps.
+    ListSequencesResponse:
+      type: object
+      required:
+      - sequences
+      - next_cursor
+      properties:
+        sequences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sequence'
+        next_cursor:
+          type: string
+          nullable: true
+      description: Response returned when listing sequences.
+    ManualEmailSequenceStep:
+      type: object
+      required:
+      - type
+      - config
+      properties:
+        type:
+          type: string
+          enum:
+          - MANUAL_EMAIL
+        config:
+          $ref: '#/components/schemas/SequenceManualEmailStepConfig'
+      allOf:
+      - $ref: '#/components/schemas/SequenceStepBase'
+      description: Representation of a manual email sequence step.
+    ManualEnrollmentTaskAssignment:
+      type: string
+      enum:
+      - ASSIGN_TO_ENROLLER
+      - ASSIGN_TO_MAILBOX_OWNER
+      - ASSIGN_TO_USER
+      description: Assignment strategy for tasks created from manual sequence enrollments.
+    PauseSequenceSuccessResponse:
+      type: object
+      required:
+      - id
+      - is_paused
+      properties:
+        id:
+          $ref: '#/components/schemas/uuid'
+        is_paused:
+          type: boolean
+          enum:
+          - true
+      description: Response returned when pausing a sequence.
+    RelativeTimeUnit:
+      type: string
+      enum:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      description: Time unit for relative task due dates.
+    ResumeSequenceSuccessResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Sequence'
+      description: Response returned when resuming a sequence.
+    RetrieveAutomaticEmailSequenceStepResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AutomaticEmailSequenceStep'
+      description: Response returned when retrieving an automatic email sequence step.
+    RetrieveManualEmailSequenceStepResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ManualEmailSequenceStep'
+      description: Response returned when retrieving a manual email sequence step.
+    RetrieveSequenceResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Sequence'
+      description: Response returned when retrieving a sequence.
+    RetrieveTaskSequenceStepResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/TaskSequenceStep'
+      description: Response returned when retrieving a manual task sequence step.
     Sequence:
       type: object
       required:
@@ -2529,283 +1039,54 @@ components:
           - $ref: '#/components/schemas/SequenceRuleset'
           nullable: true
       description: A sequence.
-    RetrieveManualEmailSequenceStepResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ManualEmailSequenceStep'
-      description: Response returned when retrieving a manual email sequence step.
-    EmailSendWindowTime:
+    SequenceEmailStepConfig:
       type: object
       required:
-      - hour
-      - minute
+      - is_root_message
+      - subject
+      - fallback_subject
+      - body
+      - cc_recipients
+      - bcc_recipients
       properties:
-        hour:
-          type: integer
-          minimum: 0
-          maximum: 23
-        minute:
-          type: integer
-          minimum: 0
-          maximum: 59
-      description: Local wall-clock time used in a sequence email send window.
-    uuid:
-      type: string
-      format: uuid
-      description: String UUID value.
-    SequenceStep:
-      anyOf:
-      - $ref: '#/components/schemas/AutomaticEmailSequenceStep'
-      - $ref: '#/components/schemas/ManualEmailSequenceStep'
-      - $ref: '#/components/schemas/TaskSequenceStep'
-      description: A sequence step in any of its variants.
-    SequenceEnrollmentStepType:
-      type: string
-      enum:
-      - AUTOMATIC_EMAIL
-      - MANUAL_EMAIL
-      - ACTION_ITEM
-      - ZAPIER
-      - PHONE_CALL
-      - MANUAL_LINKEDIN_PROFILE_VIEW
-      - MANUAL_LINKEDIN_CONNECTION
-      - MANUAL_LINKEDIN_MESSAGE
-      description: Type of a sequence enrollment step.
-    SequenceCompany:
-      type: object
-      required:
-      - id
-      - name
-      - domain
-      - linkedin_url
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          nullable: true
-        domain:
-          type: string
-        description:
-          type: string
-          nullable: true
-          description: Present in enrollment results and omitted in step results.
-        linkedin_url:
-          type: string
-          nullable: true
-      description: Company details embedded in sequence Bulk API results.
-    PauseEnrollmentSuccessResponse:
-      type: object
-      required:
-      - id
-      - is_paused
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        is_paused:
+        is_root_message:
           type: boolean
-          enum:
-          - true
-      description: Response returned when pausing an enrollment.
-    BulkApiJob:
-      type: object
-      required:
-      - job_id
-      - status
-      - total_rows
-      - error_code
-      - created_at
-      - expires_at
-      - canceled_at
-      properties:
-        job_id:
-          type: string
-        status:
-          $ref: '#/components/schemas/BulkApiJobStatus'
-        total_rows:
-          type: integer
-          nullable: true
-        error_code:
+        subject:
           type: string
           nullable: true
-        created_at:
-          type: string
-        expires_at:
-          type: string
-        canceled_at:
+        fallback_subject:
           type: string
           nullable: true
-      description: Bulk API job representation.
-    ListEnrollmentsResponse:
-      type: object
-      required:
-      - enrollments
-      - next_cursor
-      properties:
-        enrollments:
+        body:
+          type: string
+        cc_recipients:
           type: array
           items:
-            $ref: '#/components/schemas/Enrollment'
-        next_cursor:
-          type: string
-          nullable: true
-      description: Response returned when listing enrollments.
-    CreateBulkApiSequenceEnrollmentsJobRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CreateBulkApiSequenceEnrollmentsJobFilter'
-      description: Request body for creating a sequence enrollments Bulk API query job.
-    GetBulkApiJobResultsPayloadTooLargeResponse:
-      type: object
-      required:
-      - status
-      - message
-      properties:
-        status:
-          type: string
-          enum:
-          - results_page_too_large
-        message:
-          type: string
-      description: Response returned when a requested Bulk API results page is too large.
-    CreateBulkApiSequenceEnrollmentStepsJobRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CreateBulkApiSequenceEnrollmentStepsJobFilter'
-      description: Request body for creating a sequence enrollment steps Bulk API query job.
-    CreateEnrollmentConflictResponse:
-      type: object
-      required:
-      - active_sequence_id
-      - active_enrollment_id
-      properties:
-        active_sequence_id:
-          $ref: '#/components/schemas/uuid'
-        active_enrollment_id:
-          $ref: '#/components/schemas/uuid'
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
             type: string
-            enum:
-            - conflict
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when the person is already enrolled in an active sequence.
-    RetrieveTaskSequenceStepResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/TaskSequenceStep'
-      description: Response returned when retrieving a manual task sequence step.
-    CreateBulkApiJobSuccessResponse:
-      type: object
-      required:
-      - job_id
-      - status
-      - expires_at
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-        expires_at:
-          type: string
-      description: Response returned when creating a Bulk API query job.
-    EnrollmentSequence:
-      type: object
-      required:
-      - id
-      - name
-      - is_paused
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        name:
-          type: string
-        is_paused:
-          type: boolean
-      description: Sequence details embedded in enrollment responses.
-    BulkApiMailboxEmailAddressFilter:
-      type: object
-      required:
-      - email_address
-      properties:
-        id:
-          type: string
-        email_address:
-          type: string
-      description: Filter matching a mailbox by email address.
-    GetBulkApiJobNotFoundResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - not_found
-          message:
-            type: string
-        description: Response for any operation that results in a not found error.
-      description: Response returned when a Bulk API job cannot be found.
-    EmailSendWindow:
-      type: object
-      required:
-      - start_time
-      - end_time
-      properties:
-        start_time:
-          $ref: '#/components/schemas/EmailSendWindowTime'
-        end_time:
-          $ref: '#/components/schemas/EmailSendWindowTime'
-      description: Time window during which sequence emails may be sent.
-    EmailSendScheduleRules:
-      type: object
-      required:
-      - time_zone
-      - send_days
-      - skip_us_holidays
-      - excluded_dates
-      properties:
-        time_zone:
-          type: string
-        send_days:
-          $ref: '#/components/schemas/EmailSendDays'
-        skip_us_holidays:
-          type: boolean
-        excluded_dates:
+        bcc_recipients:
           type: array
           items:
-            $ref: '#/components/schemas/ExcludedEmailSendDate'
-      description: Sequence email send schedule rules.
-    EnrollmentNotFoundResponse:
+            type: string
+      description: Configuration for automatic email sequence steps.
+    SequenceManualEmailStepConfig:
       type: object
+      required:
+      - task_priority
+      - auto_skip_on_due_date
+      - relative_due_at
+      properties:
+        task_priority:
+          $ref: '#/components/schemas/TaskPriority'
+        auto_skip_on_due_date:
+          type: boolean
+        relative_due_at:
+          type: object
+          allOf:
+          - $ref: '#/components/schemas/SequenceStepRelativeDueAt'
+          nullable: true
       allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - not_found
-          message:
-            type: string
-        description: Response for any operation that results in a not found error.
-      description: Response returned when an enrollment cannot be found.
+      - $ref: '#/components/schemas/SequenceEmailStepConfig'
+      description: Configuration for manual email sequence steps.
     SequenceNotFoundResponse:
       type: object
       allOf:
@@ -2822,159 +1103,13 @@ components:
             type: string
         description: Response for any operation that results in a not found error.
       description: Response returned when a sequence cannot be found.
-    SequenceStepType:
-      type: string
-      enum:
-      - AUTOMATIC_EMAIL
-      - MANUAL_EMAIL
-      - ACTION_ITEM
-      - PHONE_CALL
-      - MANUAL_LINKEDIN_PROFILE_VIEW
-      - MANUAL_LINKEDIN_CONNECTION
-      - MANUAL_LINKEDIN_MESSAGE
-      description: Type of a sequence step.
-    CancelBulkApiJobSuccessResponse:
-      type: object
-      required:
-      - job_id
-      - status
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - CANCELED
-      description: Response returned when canceling a Bulk API job.
-    SequenceStepCondition:
-      anyOf:
-      - $ref: '#/components/schemas/SequenceStepTimerCondition'
-      - $ref: '#/components/schemas/SequenceStepAndCondition'
-      - $ref: '#/components/schemas/SequenceStepOrCondition'
-      description: Condition embedded in sequence step responses.
-    ListSequenceStepsResponse:
-      type: object
-      required:
-      - steps
-      - next_cursor
-      properties:
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/SequenceStep'
-        next_cursor:
-          type: string
-          nullable: true
-      description: Response returned when listing sequence steps.
-    UResponses.BadRequestError:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: string
-        path:
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        object_api_name:
-          type: string
-        attribute_api_name:
-          type: string
-      allOf:
-      - type: object
-        additionalProperties: {}
-      description: Validation error detail returned for bad request responses.
-    CreateBulkApiSequenceEnrollmentsJobFilter:
-      type: object
-      properties:
-        status:
-          anyOf:
-          - type: object
-            required:
-            - in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStatus'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStatus'
-                minItems: 1
-            description: Filter matching values included in a set.
-          - type: object
-            required:
-            - not_in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStatus'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStatus'
-                minItems: 1
-            description: Filter matching values excluded from a set.
-      allOf:
-      - $ref: '#/components/schemas/BulkApiCommonQueryFilter'
-      description: Filters accepted when querying sequence enrollments.
-    GetEnrollmentResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Enrollment'
-      description: Response returned when fetching an enrollment.
-    SequenceTaskScheduleStepConfig:
-      type: object
-      required:
-      - task_priority
-      - auto_skip_on_due_date
-      - relative_due_at
-      properties:
-        task_priority:
-          $ref: '#/components/schemas/TaskPriority'
-        auto_skip_on_due_date:
-          type: boolean
-        relative_due_at:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/SequenceStepRelativeDueAt'
-          nullable: true
-      description: Schedule configuration shared by manual sequence steps that create tasks.
-    CreateEnrollmentSuccessResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Enrollment'
-      description: Response returned when an enrollment is created.
-    SequenceStepAndCondition:
-      type: object
-      required:
-      - type
-      - subconditions
-      properties:
-        type:
-          type: string
-          enum:
-          - AND
-        subconditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/SequenceStepCondition'
-      description: Conjunction condition embedded in sequence step responses.
-    EnrollmentPerson:
+    SequenceOwner:
       type: object
       required:
       - id
       - email
       - first_name
       - last_name
-      - linkedin_url
       properties:
         id:
           $ref: '#/components/schemas/uuid'
@@ -2986,407 +1121,7 @@ components:
         last_name:
           type: string
           nullable: true
-        linkedin_url:
-          type: string
-          nullable: true
-      description: Person details embedded in enrollment responses.
-    GetBulkApiJobResultsCanceledResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_canceled
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job was canceled and has no results.
-    ResumeEnrollmentSuccessResponse:
-      type: object
-      required:
-      - id
-      - is_paused
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        is_paused:
-          type: boolean
-          enum:
-          - false
-      description: Response returned when resuming an enrollment.
-    BulkApiCommonQueryFilter:
-      type: object
-      properties:
-        updated_at:
-          $ref: '#/components/schemas/BulkApiDatetimeRangeFilter'
-        sequence:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        person:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        company:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        mailbox:
-          anyOf:
-          - $ref: '#/components/schemas/BulkApiMailboxIdFilter'
-          - $ref: '#/components/schemas/BulkApiMailboxEmailAddressFilter'
-        started_at:
-          $ref: '#/components/schemas/BulkApiDatetimeRangeFilter'
-        ended_at:
-          $ref: '#/components/schemas/BulkApiDatetimeRangeFilter'
-        id:
-          anyOf:
-          - type: object
-            required:
-            - in
-            properties:
-              in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-            description: Filter matching values included in a set.
-          - type: object
-            required:
-            - not_in
-            properties:
-              in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-            description: Filter matching values excluded from a set.
-        is_blocked:
-          type: boolean
-        is_bounced:
-          type: boolean
-        is_canceled:
-          type: boolean
-        is_opted_out:
-          type: boolean
-        is_paused:
-          type: boolean
-        is_replied:
-          type: boolean
-      description: Filters shared by sequence enrollment and enrollment step Bulk API query jobs.
-    RetrieveSequenceResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Sequence'
-      description: Response returned when retrieving a sequence.
-    GetBulkApiJobResultsNotReadyResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_not_ready
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when Bulk API job results are not ready yet.
-    SequenceStepOrCondition:
-      type: object
-      required:
-      - type
-      - subconditions
-      properties:
-        type:
-          type: string
-          enum:
-          - OR
-        subconditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/SequenceStepCondition'
-      description: Disjunction condition embedded in sequence step responses.
-    ManualEmailSequenceStep:
-      type: object
-      required:
-      - type
-      - config
-      properties:
-        type:
-          type: string
-          enum:
-          - MANUAL_EMAIL
-        config:
-          $ref: '#/components/schemas/SequenceManualEmailStepConfig'
-      allOf:
-      - $ref: '#/components/schemas/SequenceStepBase'
-      description: Representation of a manual email sequence step.
-    SequenceStepDependency:
-      type: object
-      required:
-      - parent_step_id
-      - condition
-      properties:
-        parent_step_id:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/uuid'
-          nullable: true
-        condition:
-          allOf:
-          - $ref: '#/components/schemas/SequenceStepCondition'
-          nullable: true
-      description: Dependency edge embedded in sequence step responses.
-    BulkApiJobStatus:
-      type: string
-      enum:
-      - IN_PROGRESS
-      - FINISHED
-      - FAILED
-      - EXPIRED
-      - CANCELED
-      description: Status of an asynchronous Bulk API job.
-    GetBulkApiJobSuccessResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BulkApiJob'
-      description: Response returned when fetching a Bulk API job.
-    SequenceEnrollmentSummary:
-      type: object
-      required:
-      - id
-      - mailbox
-      - person
-      properties:
-        id:
-          type: string
-        mailbox:
-          $ref: '#/components/schemas/SequenceMailbox'
-        person:
-          $ref: '#/components/schemas/SequencePerson'
-      description: Enrollment details embedded in sequence enrollment step Bulk API results.
-    CancelBulkApiJobNotCancelableResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - job_not_cancelable
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job is not cancelable.
-    TaskPriority:
-      type: string
-      enum:
-      - LOW
-      - MEDIUM
-      - HIGH
-      - URGENT
-      description: Priority assigned to tasks created by manual sequence steps.
-    SequenceUser:
-      type: object
-      required:
-      - id
-      - email
-      - first_name
-      - last_name
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        first_name:
-          type: string
-          nullable: true
-        last_name:
-          type: string
-          nullable: true
-      description: User details embedded in sequence Bulk API results.
-    SequenceEnrollmentStepEmailMessage:
-      type: object
-      required:
-      - id
-      - subject
-      - sent_at
-      - from_email_address
-      - is_bounced
-      - is_opted_out
-      - clicks
-      - opens
-      properties:
-        id:
-          type: string
-        subject:
-          type: string
-          nullable: true
-        sent_at:
-          type: string
-          nullable: true
-        from_email_address:
-          type: string
-          nullable: true
-        is_bounced:
-          type: boolean
-        is_opted_out:
-          type: boolean
-        clicks:
-          type: integer
-          minimum: 0
-        opens:
-          type: integer
-          minimum: 0
-      description: Sent email message details embedded in sequence enrollment step Bulk API results.
-    BulkApiMailboxIdFilter:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-        email_address:
-          type: string
-      description: Filter matching a mailbox by ID.
-    DeleteSequenceSuccessResponse:
-      type: object
-      required:
-      - id
-      - is_deleted
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        is_deleted:
-          type: boolean
-          enum:
-          - true
-      description: Response returned when deleting a sequence.
-    CreateEnrollmentRequest:
-      type: object
-      required:
-      - sequence_id
-      - person_id
-      - mailbox_emails
-      properties:
-        sequence_id:
-          $ref: '#/components/schemas/uuid'
-        person_id:
-          $ref: '#/components/schemas/uuid'
-        mailbox_emails:
-          type: array
-          items:
-            $ref: '#/components/schemas/email'
-          minItems: 1
-          maxItems: 10
-          description: 'Candidate mailbox addresses to send from. One is selected at enrollment
-
-            time. At most 10 addresses are accepted.'
-      description: Request body for enrolling a person in a sequence.
-    BulkApiDatetimeRangeFilter:
-      type: object
-      properties:
-        gt:
-          type: string
-        gte:
-          type: string
-        lt:
-          type: string
-        lte:
-          type: string
-      description: 'Datetime range filter. At least one bound must be provided. `gt` is mutually
-
-        exclusive with `gte`, and `lt` is mutually exclusive with `lte`.'
-    RelativeTimeUnit:
-      type: string
-      enum:
-      - MINUTE
-      - HOUR
-      - DAY
-      - WEEK
-      description: Time unit for relative task due dates.
-    SequenceEnrollment:
-      type: object
-      required:
-      - id
-      - updated_at
-      - status
-      - is_blocked
-      - is_bounced
-      - is_canceled
-      - is_opted_out
-      - is_paused
-      - is_replied
-      - version
-      - started_at
-      - ended_at
-      - sequence
-      - mailbox
-      - person
-      - reply_email_message
-      properties:
-        id:
-          type: string
-        updated_at:
-          type: string
-        status:
-          $ref: '#/components/schemas/SequenceEnrollmentStatus'
-        is_blocked:
-          type: boolean
-        is_bounced:
-          type: boolean
-        is_canceled:
-          type: boolean
-        is_opted_out:
-          type: boolean
-        is_paused:
-          type: boolean
-        is_replied:
-          type: boolean
-        version:
-          type: integer
-          nullable: true
-        started_at:
-          type: string
-          nullable: true
-        ended_at:
-          type: string
-          nullable: true
-        sequence:
-          $ref: '#/components/schemas/SequenceSummary'
-        mailbox:
-          $ref: '#/components/schemas/SequenceMailbox'
-        person:
-          $ref: '#/components/schemas/SequencePerson'
-        reply_email_message:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/ReplyEmailMessage'
-          nullable: true
-      description: Sequence enrollment row returned by the sequence enrollments Bulk API.
-    ManualEnrollmentTaskAssignment:
-      type: string
-      enum:
-      - ASSIGN_TO_ENROLLER
-      - ASSIGN_TO_MAILBOX_OWNER
-      - ASSIGN_TO_USER
-      description: Assignment strategy for tasks created from manual sequence enrollments.
+      description: Owner details embedded in sequence responses.
     SequenceRuleset:
       type: object
       required:
@@ -3441,47 +1176,36 @@ components:
           - $ref: '#/components/schemas/UnitOfTime'
           nullable: true
       description: Sequence ruleset embedded in sequence responses.
-    ReplyEmailClassification:
+    SequenceSendSchedule:
       type: object
       required:
       - id
-      - category
+      - created_at
+      - updated_at
+      - is_default
+      - name
+      - rules
       properties:
         id:
           $ref: '#/components/schemas/uuid'
-        category:
-          $ref: '#/components/schemas/ReplyEmailClassificationCategory'
-      description: Reply email classification details embedded in sequence API results.
-    SequenceOwner:
+        created_at:
+          $ref: '#/components/schemas/datetime'
+        updated_at:
+          $ref: '#/components/schemas/datetime'
+        is_default:
+          type: boolean
+        name:
+          type: string
+        rules:
+          $ref: '#/components/schemas/EmailSendScheduleRules'
+      description: Email send schedule embedded in sequence responses.
+    SequenceStateConflictResponse:
       type: object
       required:
-      - id
-      - email
-      - first_name
-      - last_name
+      - current_is_paused
       properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        email:
-          $ref: '#/components/schemas/email'
-        first_name:
-          type: string
-          nullable: true
-        last_name:
-          type: string
-          nullable: true
-      description: Owner details embedded in sequence responses.
-    SequenceTimerConditionDurationUnit:
-      type: string
-      enum:
-      - seconds
-      - minutes
-      - hours
-      - days
-      - weeks
-      description: Duration unit used by timer conditions.
-    GetBulkApiJobResultsFailedResponse:
-      type: object
+        current_is_paused:
+          type: boolean
       allOf:
       - type: object
         required:
@@ -3491,131 +1215,32 @@ components:
           status:
             type: string
             enum:
-            - results_failed
+            - state_conflict
           message:
             type: string
         description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job failed and has no results.
-    TaskSequenceStep:
+      description: Response returned when a sequence state change conflicts with a concurrent update.
+    SequenceStep:
+      anyOf:
+      - $ref: '#/components/schemas/AutomaticEmailSequenceStep'
+      - $ref: '#/components/schemas/ManualEmailSequenceStep'
+      - $ref: '#/components/schemas/TaskSequenceStep'
+      description: A sequence step in any of its variants.
+    SequenceStepAndCondition:
       type: object
       required:
       - type
-      - config
+      - subconditions
       properties:
         type:
-          anyOf:
-          - type: string
-            enum:
-            - ACTION_ITEM
-          - type: string
-            enum:
-            - PHONE_CALL
-          - type: string
-            enum:
-            - MANUAL_LINKEDIN_CONNECTION
-          - type: string
-            enum:
-            - MANUAL_LINKEDIN_MESSAGE
-          - type: string
-            enum:
-            - MANUAL_LINKEDIN_PROFILE_VIEW
-        config:
-          $ref: '#/components/schemas/SequenceTaskStepConfig'
-      allOf:
-      - $ref: '#/components/schemas/SequenceStepBase'
-      description: Representation of a manual task sequence step.
-    CreateBulkApiSequenceEnrollmentStepsJobFilter:
-      type: object
-      properties:
-        status:
-          anyOf:
-          - type: object
-            required:
-            - in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepStatus'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepStatus'
-                minItems: 1
-            description: Filter matching values included in a set.
-          - type: object
-            required:
-            - not_in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepStatus'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepStatus'
-                minItems: 1
-            description: Filter matching values excluded from a set.
-        enrollment:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        type:
-          anyOf:
-          - type: object
-            required:
-            - in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepType'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepType'
-                minItems: 1
-            description: Filter matching values included in a set.
-          - type: object
-            required:
-            - not_in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepType'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SequenceEnrollmentStepType'
-                minItems: 1
-            description: Filter matching values excluded from a set.
-        step_number:
-          type: integer
-          minimum: 1
-      allOf:
-      - $ref: '#/components/schemas/BulkApiCommonQueryFilter'
-      description: Filters accepted when querying sequence enrollment steps.
-    ReplyEmailMessage:
-      type: object
-      required:
-      - id
-      - subject
-      - classifications
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        subject:
           type: string
-          nullable: true
-        classifications:
+          enum:
+          - AND
+        subconditions:
           type: array
           items:
-            $ref: '#/components/schemas/ReplyEmailClassification'
-      description: Reply email message details embedded in sequence API results.
+            $ref: '#/components/schemas/SequenceStepCondition'
+      description: Conjunction condition embedded in sequence step responses.
     SequenceStepBase:
       type: object
       required:
@@ -3646,390 +1271,28 @@ components:
           items:
             $ref: '#/components/schemas/SequenceStepDependency'
       description: Shared fields for sequence step responses.
-    EnrollmentMailbox:
+    SequenceStepCondition:
+      anyOf:
+      - $ref: '#/components/schemas/SequenceStepTimerCondition'
+      - $ref: '#/components/schemas/SequenceStepAndCondition'
+      - $ref: '#/components/schemas/SequenceStepOrCondition'
+      description: Condition embedded in sequence step responses.
+    SequenceStepDependency:
       type: object
       required:
-      - id
-      - email
-      - display_name
-      - is_paused
-      - is_unauthorized
+      - parent_step_id
+      - condition
       properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        email:
-          $ref: '#/components/schemas/email'
-        display_name:
+        parent_step_id:
           type: string
-          nullable: true
-        is_paused:
-          type: boolean
-        is_unauthorized:
-          type: boolean
-      description: Mailbox details embedded in enrollment responses.
-    SequenceEnrollmentStatus:
-      type: string
-      enum:
-      - DRAFT
-      - IN_PROGRESS
-      - FINISHED
-      description: Status of a sequence enrollment.
-    DeleteEnrollmentSuccessResponse:
-      type: object
-      required:
-      - id
-      - is_canceled
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        is_canceled:
-          type: boolean
-          enum:
-          - true
-      description: Response returned when deleting an enrollment.
-    SequenceSummary:
-      type: object
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          nullable: true
-      description: Minimal sequence details embedded in sequence enrollment Bulk API results.
-    SequenceStateConflictResponse:
-      type: object
-      required:
-      - current_is_paused
-      properties:
-        current_is_paused:
-          type: boolean
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - state_conflict
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a sequence state change conflicts with a concurrent update.
-    GetBulkApiJobResultsExpiredResponse:
-      type: object
-      required:
-      - status
-      - message
-      properties:
-        status:
-          type: string
-          enum:
-          - results_expired
-        message:
-          type: string
-      description: Response returned when Bulk API job results have expired.
-    ResumeSequenceSuccessResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Sequence'
-      description: Response returned when resuming a sequence.
-    SequenceEnrollmentStepStatus:
-      type: string
-      enum:
-      - NOT_STARTED
-      - SCHEDULED
-      - PENDING
-      - FINISHED
-      - CANCELED
-      - ERRORED
-      - UNREACHABLE
-      description: Status of an individual sequence enrollment step.
-    date:
-      type: string
-      format: date
-      description: String value representing an RFC 3339 full date.
-    SequenceEnrollmentStep:
-      type: object
-      required:
-      - id
-      - updated_at
-      - type
-      - status
-      - is_blocked
-      - is_bounced
-      - is_canceled
-      - is_opted_out
-      - is_paused
-      - is_replied
-      - sequence
-      - step_number
-      - started_at
-      - ended_at
-      - enrollment
-      - email_message
-      - reply_email_message
-      properties:
-        id:
-          type: string
-        updated_at:
-          type: string
-        type:
           allOf:
-          - $ref: '#/components/schemas/SequenceEnrollmentStepType'
+          - $ref: '#/components/schemas/uuid'
           nullable: true
-        status:
-          $ref: '#/components/schemas/SequenceEnrollmentStepStatus'
-        is_blocked:
-          type: boolean
-        is_bounced:
-          type: boolean
-        is_canceled:
-          type: boolean
-        is_opted_out:
-          type: boolean
-        is_paused:
-          type: boolean
-        is_replied:
-          type: boolean
-        sequence:
-          type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-              nullable: true
-            version:
-              type: integer
-              nullable: true
-          required:
-          - id
-          - name
-          - version
-        step_number:
-          type: integer
-          nullable: true
-          minimum: 1
-          description: '1-indexed position of this step within the sequence enrollment. Null while
-
-            a step execution exists but has not yet been assigned a position — for
-
-            sequences with branching, the position is only fixed once a step is
-
-            expected to run or has finished.'
-        started_at:
-          type: string
-          nullable: true
-        ended_at:
-          type: string
-          nullable: true
-        enrollment:
-          $ref: '#/components/schemas/SequenceEnrollmentSummary'
-        email_message:
-          type: object
+        condition:
           allOf:
-          - $ref: '#/components/schemas/SequenceEnrollmentStepEmailMessage'
+          - $ref: '#/components/schemas/SequenceStepCondition'
           nullable: true
-        reply_email_message:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/ReplyEmailMessage'
-          nullable: true
-      description: Sequence enrollment step row returned by the sequence enrollment steps Bulk API.
-    SequenceTaskStepConfig:
-      type: object
-      required:
-      - note_content
-      properties:
-        note_content:
-          type: string
-          nullable: true
-      allOf:
-      - $ref: '#/components/schemas/SequenceTaskScheduleStepConfig'
-      description: Configuration for manual task sequence steps.
-    datetime:
-      type: string
-      format: date-time
-      description: String value representing an RFC 3339 datetime.
-    AutomaticEnrollmentTaskAssignment:
-      type: string
-      enum:
-      - ASSIGN_TO_MAILBOX_OWNER
-      - ASSIGN_TO_USER
-      description: Assignment strategy for tasks created from automatic sequence enrollments.
-    SequencePerson:
-      type: object
-      required:
-      - id
-      - email
-      - first_name
-      - last_name
-      - linkedin_url
-      - company
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        first_name:
-          type: string
-          nullable: true
-        last_name:
-          type: string
-          nullable: true
-        linkedin_url:
-          type: string
-          nullable: true
-        company:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/SequenceCompany'
-          nullable: true
-      description: Person details embedded in sequence Bulk API results.
-    ReplyEmailClassificationCategory:
-      type: string
-      enum:
-      - AUTOMATED
-      - NEGATIVE
-      - NEUTRAL
-      - POSITIVE
-      description: Reply classification category.
-    PauseSequenceSuccessResponse:
-      type: object
-      required:
-      - id
-      - is_paused
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        is_paused:
-          type: boolean
-          enum:
-          - true
-      description: Response returned when pausing a sequence.
-    SequenceManualEmailStepConfig:
-      type: object
-      required:
-      - task_priority
-      - auto_skip_on_due_date
-      - relative_due_at
-      properties:
-        task_priority:
-          $ref: '#/components/schemas/TaskPriority'
-        auto_skip_on_due_date:
-          type: boolean
-        relative_due_at:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/SequenceStepRelativeDueAt'
-          nullable: true
-      allOf:
-      - $ref: '#/components/schemas/SequenceEmailStepConfig'
-      description: Configuration for manual email sequence steps.
-    ListSequencesResponse:
-      type: object
-      required:
-      - sequences
-      - next_cursor
-      properties:
-        sequences:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sequence'
-        next_cursor:
-          type: string
-          nullable: true
-      description: Response returned when listing sequences.
-    SequenceMailbox:
-      type: object
-      required:
-      - id
-      - email_address
-      - forward_to_email_address
-      - secondary_forward_to_email_address
-      - user
-      - secondary_forward_to_user
-      properties:
-        id:
-          type: string
-        email_address:
-          type: string
-          nullable: true
-        forward_to_email_address:
-          type: string
-          nullable: true
-        secondary_forward_to_email_address:
-          type: string
-          nullable: true
-        user:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/SequenceUser'
-          nullable: true
-        secondary_forward_to_user:
-          type: object
-          allOf:
-          - $ref: '#/components/schemas/SequenceUser'
-          nullable: true
-      description: Mailbox details embedded in sequence Bulk API results.
-    ListBulkApiJobsSuccessResponse:
-      type: object
-      required:
-      - jobs
-      - next_cursor
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkApiJob'
-        next_cursor:
-          type: string
-          nullable: true
-      description: Response returned when listing Bulk API jobs.
-    UnitOfTime:
-      type: string
-      enum:
-      - MINUTE
-      - HOUR
-      - DAY
-      - WEEK
-      - MONTH
-      - YEAR
-      description: Unit used for sequence reenrollment blocking windows.
-    SequenceEmailStepConfig:
-      type: object
-      required:
-      - is_root_message
-      - subject
-      - fallback_subject
-      - body
-      - cc_recipients
-      - bcc_recipients
-      properties:
-        is_root_message:
-          type: boolean
-        subject:
-          type: string
-          nullable: true
-        fallback_subject:
-          type: string
-          nullable: true
-        body:
-          type: string
-        cc_recipients:
-          type: array
-          items:
-            type: string
-        bcc_recipients:
-          type: array
-          items:
-            type: string
-      description: Configuration for automatic email sequence steps.
+      description: Dependency edge embedded in sequence step responses.
     SequenceStepNotFoundResponse:
       type: object
       allOf:
@@ -4046,6 +1309,21 @@ components:
             type: string
         description: Response for any operation that results in a not found error.
       description: Response returned when a sequence step cannot be found.
+    SequenceStepOrCondition:
+      type: object
+      required:
+      - type
+      - subconditions
+      properties:
+        type:
+          type: string
+          enum:
+          - OR
+        subconditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SequenceStepCondition'
+      description: Disjunction condition embedded in sequence step responses.
     SequenceStepRelativeDueAt:
       type: object
       required:
@@ -4058,191 +1336,156 @@ components:
         unit_of_time:
           $ref: '#/components/schemas/RelativeTimeUnit'
       description: Relative due date for tasks created by manual sequence steps.
-    Enrollment:
+    SequenceStepTimerCondition:
       type: object
       required:
-      - id
-      - created_at
-      - updated_at
-      - sequence
-      - person
-      - mailbox
-      - reply_email_message
-      - status
-      - is_blocked
-      - is_bounced
-      - is_canceled
-      - is_excluded
-      - is_opted_out
-      - is_paused
-      - is_replied
-      - started_at
-      - ended_at
+      - type
+      - duration_value
+      - duration_unit
       properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        created_at:
-          $ref: '#/components/schemas/datetime'
-        updated_at:
-          $ref: '#/components/schemas/datetime'
-        sequence:
-          $ref: '#/components/schemas/EnrollmentSequence'
-        person:
-          $ref: '#/components/schemas/EnrollmentPerson'
-        mailbox:
-          $ref: '#/components/schemas/EnrollmentMailbox'
-        reply_email_message:
+        type:
+          type: string
+          enum:
+          - TIMER
+        duration_value:
+          type: integer
+          nullable: true
+        duration_unit:
+          $ref: '#/components/schemas/SequenceTimerConditionDurationUnit'
+      description: Timer condition embedded in sequence step responses.
+    SequenceStepType:
+      type: string
+      enum:
+      - AUTOMATIC_EMAIL
+      - MANUAL_EMAIL
+      - ACTION_ITEM
+      - PHONE_CALL
+      - MANUAL_LINKEDIN_PROFILE_VIEW
+      - MANUAL_LINKEDIN_CONNECTION
+      - MANUAL_LINKEDIN_MESSAGE
+      description: Type of a sequence step.
+    SequenceTaskScheduleStepConfig:
+      type: object
+      required:
+      - task_priority
+      - auto_skip_on_due_date
+      - relative_due_at
+      properties:
+        task_priority:
+          $ref: '#/components/schemas/TaskPriority'
+        auto_skip_on_due_date:
+          type: boolean
+        relative_due_at:
           type: object
           allOf:
-          - $ref: '#/components/schemas/EnrollmentReplyEmailMessage'
+          - $ref: '#/components/schemas/SequenceStepRelativeDueAt'
           nullable: true
-        status:
-          $ref: '#/components/schemas/SequenceEnrollmentStatus'
-        is_blocked:
-          type: boolean
-        is_bounced:
-          type: boolean
-        is_canceled:
-          type: boolean
-        is_excluded:
-          type: boolean
-        is_opted_out:
-          type: boolean
-        is_paused:
-          type: boolean
-        is_replied:
-          type: boolean
-        started_at:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/datetime'
-          nullable: true
-        ended_at:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/datetime'
-          nullable: true
-      description: A sequence enrollment.
-    ExcludedEmailSendDate:
+      description: Schedule configuration shared by manual sequence steps that create tasks.
+    SequenceTaskStepConfig:
       type: object
       required:
-      - date
+      - note_content
       properties:
-        date:
-          $ref: '#/components/schemas/date'
-        should_recur:
-          type: boolean
-      description: Custom date skipped by a sequence email send schedule.
-    EmailSendDays:
-      type: object
-      required:
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      properties:
-        '1':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
+        note_content:
+          type: string
           nullable: true
-        '2':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
-          nullable: true
-        '3':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
-          nullable: true
-        '4':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
-          nullable: true
-        '5':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
-          nullable: true
-        '6':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
-          nullable: true
-        '7':
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailSendWindow'
-          nullable: true
-      description: 'Mapping from ISO weekday number (Monday = 1, Sunday = 7) to send windows.
-
-        A null value means sending is disabled for that day.'
-    AutomaticEmailSequenceStep:
+      allOf:
+      - $ref: '#/components/schemas/SequenceTaskScheduleStepConfig'
+      description: Configuration for manual task sequence steps.
+    SequenceTimerConditionDurationUnit:
+      type: string
+      enum:
+      - seconds
+      - minutes
+      - hours
+      - days
+      - weeks
+      description: Duration unit used by timer conditions.
+    TaskPriority:
+      type: string
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - URGENT
+      description: Priority assigned to tasks created by manual sequence steps.
+    TaskSequenceStep:
       type: object
       required:
       - type
       - config
       properties:
         type:
-          type: string
-          enum:
-          - AUTOMATIC_EMAIL
+          anyOf:
+          - type: string
+            enum:
+            - ACTION_ITEM
+          - type: string
+            enum:
+            - PHONE_CALL
+          - type: string
+            enum:
+            - MANUAL_LINKEDIN_CONNECTION
+          - type: string
+            enum:
+            - MANUAL_LINKEDIN_MESSAGE
+          - type: string
+            enum:
+            - MANUAL_LINKEDIN_PROFILE_VIEW
         config:
-          $ref: '#/components/schemas/SequenceEmailStepConfig'
+          $ref: '#/components/schemas/SequenceTaskStepConfig'
       allOf:
       - $ref: '#/components/schemas/SequenceStepBase'
-      description: Representation of an automatic email sequence step.
-    SequenceSendSchedule:
+      description: Representation of a manual task sequence step.
+    UResponses.BadRequestError:
       type: object
       required:
-      - id
-      - created_at
-      - updated_at
-      - is_default
-      - name
-      - rules
+      - code
       properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        created_at:
-          $ref: '#/components/schemas/datetime'
-        updated_at:
-          $ref: '#/components/schemas/datetime'
-        is_default:
-          type: boolean
-        name:
+        code:
           type: string
-        rules:
-          $ref: '#/components/schemas/EmailSendScheduleRules'
-      description: Email send schedule embedded in sequence responses.
-    RetrieveAutomaticEmailSequenceStepResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AutomaticEmailSequenceStep'
-      description: Response returned when retrieving an automatic email sequence step.
-    EnrollmentReplyEmailMessage:
-      type: object
-      required:
-      - received_at
-      properties:
-        received_at:
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
           type: string
-          allOf:
-          - $ref: '#/components/schemas/datetime'
-          nullable: true
+        attribute_api_name:
+          type: string
       allOf:
-      - $ref: '#/components/schemas/ReplyEmailMessage'
-      description: Reply email message details embedded in enrollment responses.
+      - type: object
+        additionalProperties: {}
+      description: Validation error detail returned for bad request responses.
+    UnitOfTime:
+      type: string
+      enum:
+      - MINUTE
+      - HOUR
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      description: Unit used for sequence reenrollment blocking windows.
+    date:
+      type: string
+      format: date
+      description: String value representing an RFC 3339 full date.
+    datetime:
+      type: string
+      format: date-time
+      description: String value representing an RFC 3339 datetime.
     email:
       type: string
       format: email
       description: String value representing an email address.
+    uuid:
+      type: string
+      format: uuid
+      description: String UUID value.
   securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: Basic
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

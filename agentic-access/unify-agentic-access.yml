@@ -1,20 +1,87 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: generated
-source: openapi/unify-analytics-openapi.json, openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json
+source: openapi/unify-event-query-jobs-api-openapi.yml, openapi/unify-events-api-openapi.yml,
+  openapi/unify-object-attribute-options-api-openapi.yml, openapi/unify-object-attributes-api-openapi.yml,
+  openapi/unify-object-record-query-jobs-api-openapi.yml, openapi/unify-object-records-api-openapi.yml,
+  openapi/unify-objects-api-openapi.yml, openapi/unify-sequence-enrollment-steps-api-openapi.yml,
+  openapi/unify-sequence-enrollments-api-openapi.yml, openapi/unify-sequences-api-openapi.yml,
+  openapi/unify-tasks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 48
+  operations: 68
   by_action_class:
-    acting: 28
-    connected: 20
+    acting: 38
+    connected: 30
   by_consequence:
+    write: 35
+    read: 30
     physical: 3
-    read: 20
-    write: 25
   human_in_the_loop_required: 0
 operations:
+- path: /data/v1/events/query-jobs
+  method: post
+  operationId: create_event_query_job
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/events/query-jobs
+  method: get
+  operationId: list_event_query_jobs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/events/query-jobs/{job_id}
+  method: get
+  operationId: get_event_query_job
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/events/query-jobs/{job_id}/cancel
+  method: post
+  operationId: cancel_event_query_job
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/events/query-jobs/{job_id}/results
+  method: get
+  operationId: get_event_query_job_results
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /identify
   method: post
   operationId: send_identify_event
@@ -69,143 +136,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects
-  method: get
-  operationId: list_objects
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /objects
-  method: post
-  operationId: create_object
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /objects/{object_name}
-  method: get
-  operationId: get_object
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /objects/{object_name}
-  method: patch
-  operationId: update_object
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /objects/{object_name}
-  method: delete
-  operationId: delete_object
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /objects/{object_name}/attributes
-  method: get
-  operationId: list_object_attributes
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /objects/{object_name}/attributes
-  method: post
-  operationId: create_object_attribute
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /objects/{object_name}/attributes/{attribute_name}
-  method: get
-  operationId: get_object_attribute
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /objects/{object_name}/attributes/{attribute_name}
-  method: patch
-  operationId: update_object_attribute
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /objects/{object_name}/attributes/{attribute_name}
-  method: delete
-  operationId: delete_object_attribute
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /objects/{object_name}/attributes/{attribute_name}/options
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options
   method: get
   operationId: list_object_attribute_options
   x-agentic-access:
@@ -215,7 +146,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /objects/{object_name}/attributes/{attribute_name}/options
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options
   method: post
   operationId: create_object_attribute_option
   x-agentic-access:
@@ -231,7 +162,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
   method: get
   operationId: get_object_attribute_option
   x-agentic-access:
@@ -241,7 +172,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
   method: patch
   operationId: update_object_attribute_option
   x-agentic-access:
@@ -257,7 +188,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
   method: delete
   operationId: delete_object_attribute_option
   x-agentic-access:
@@ -273,9 +204,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/records
+- path: /data/v1/objects/{object_name}/attributes
   method: get
-  operationId: list_object_records
+  operationId: list_object_attributes
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -283,7 +214,127 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /objects/{object_name}/records
+- path: /data/v1/objects/{object_name}/attributes
+  method: post
+  operationId: create_object_attribute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}
+  method: get
+  operationId: get_object_attribute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}
+  method: patch
+  operationId: update_object_attribute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}
+  method: delete
+  operationId: delete_object_attribute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/query-jobs
+  method: post
+  operationId: create_object_record_query_job
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/query-jobs
+  method: get
+  operationId: list_object_record_query_jobs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}/query-jobs/{job_id}
+  method: get
+  operationId: get_object_record_query_job
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}/query-jobs/{job_id}/cancel
+  method: post
+  operationId: cancel_object_record_query_job
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/query-jobs/{job_id}/results
+  method: get
+  operationId: get_object_record_query_job_results
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}/records
   method: post
   operationId: create_object_record
   x-agentic-access:
@@ -299,7 +350,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/records/find-unique
+- path: /data/v1/objects/{object_name}/records/find-unique
   method: post
   operationId: find_unique_object_record
   x-agentic-access:
@@ -315,7 +366,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/records/upsert
+- path: /data/v1/objects/{object_name}/records/upsert
   method: post
   operationId: upsert_object_record
   x-agentic-access:
@@ -331,7 +382,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/records/{record_id}
+- path: /data/v1/objects/{object_name}/records/{record_id}
   method: get
   operationId: get_object_record
   x-agentic-access:
@@ -341,7 +392,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /objects/{object_name}/records/{record_id}
+- path: /data/v1/objects/{object_name}/records/{record_id}
   method: patch
   operationId: update_object_record
   x-agentic-access:
@@ -357,7 +408,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /objects/{object_name}/records/{record_id}
+- path: /data/v1/objects/{object_name}/records/{record_id}
   method: delete
   operationId: delete_object_record
   x-agentic-access:
@@ -373,7 +424,75 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollment-steps/query-jobs
+- path: /data/v1/objects
+  method: get
+  operationId: list_objects
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects
+  method: post
+  operationId: create_object
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}
+  method: get
+  operationId: get_object
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}
+  method: patch
+  operationId: update_object
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}
+  method: delete
+  operationId: delete_object
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /sequences/v1/enrollment-steps/query-jobs
   method: post
   operationId: create_sequence_enrollment_step_query_job
   x-agentic-access:
@@ -389,7 +508,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollment-steps/query-jobs
+- path: /sequences/v1/enrollment-steps/query-jobs
   method: get
   operationId: list_sequence_enrollment_step_query_jobs
   x-agentic-access:
@@ -399,7 +518,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollment-steps/query-jobs/{job_id}
+- path: /sequences/v1/enrollment-steps/query-jobs/{job_id}
   method: get
   operationId: get_sequence_enrollment_step_query_job
   x-agentic-access:
@@ -409,7 +528,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollment-steps/query-jobs/{job_id}/cancel
+- path: /sequences/v1/enrollment-steps/query-jobs/{job_id}/cancel
   method: post
   operationId: cancel_sequence_enrollment_step_query_job
   x-agentic-access:
@@ -425,7 +544,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollment-steps/query-jobs/{job_id}/results
+- path: /sequences/v1/enrollment-steps/query-jobs/{job_id}/results
   method: get
   operationId: get_sequence_enrollment_step_query_job_results
   x-agentic-access:
@@ -435,7 +554,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollments
+- path: /sequences/v1/enrollments
   method: post
   operationId: create_sequence_enrollment
   x-agentic-access:
@@ -451,7 +570,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollments
+- path: /sequences/v1/enrollments
   method: get
   operationId: list_sequence_enrollments
   x-agentic-access:
@@ -461,7 +580,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollments/query-jobs
+- path: /sequences/v1/enrollments/query-jobs
   method: post
   operationId: create_sequence_enrollment_query_job
   x-agentic-access:
@@ -477,7 +596,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollments/query-jobs
+- path: /sequences/v1/enrollments/query-jobs
   method: get
   operationId: list_sequence_enrollment_query_jobs
   x-agentic-access:
@@ -487,7 +606,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollments/query-jobs/{job_id}
+- path: /sequences/v1/enrollments/query-jobs/{job_id}
   method: get
   operationId: get_sequence_enrollment_query_job
   x-agentic-access:
@@ -497,7 +616,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollments/query-jobs/{job_id}/cancel
+- path: /sequences/v1/enrollments/query-jobs/{job_id}/cancel
   method: post
   operationId: cancel_sequence_enrollment_query_job
   x-agentic-access:
@@ -513,7 +632,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollments/query-jobs/{job_id}/results
+- path: /sequences/v1/enrollments/query-jobs/{job_id}/results
   method: get
   operationId: get_sequence_enrollment_query_job_results
   x-agentic-access:
@@ -523,7 +642,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollments/{id}
+- path: /sequences/v1/enrollments/{id}
   method: get
   operationId: get_sequence_enrollment
   x-agentic-access:
@@ -533,7 +652,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /enrollments/{id}
+- path: /sequences/v1/enrollments/{id}
   method: delete
   operationId: delete_sequence_enrollment
   x-agentic-access:
@@ -549,7 +668,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollments/{id}/pause
+- path: /sequences/v1/enrollments/{id}/pause
   method: post
   operationId: pause_sequence_enrollment
   x-agentic-access:
@@ -565,7 +684,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /enrollments/{id}/resume
+- path: /sequences/v1/enrollments/{id}/resume
   method: post
   operationId: resume_sequence_enrollment
   x-agentic-access:
@@ -581,7 +700,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /sequences
+- path: /sequences/v1/sequences
   method: get
   operationId: list_sequences
   x-agentic-access:
@@ -591,7 +710,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /sequences/{id}
+- path: /sequences/v1/sequences/{id}
   method: get
   operationId: retrieve_sequence
   x-agentic-access:
@@ -601,7 +720,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /sequences/{id}
+- path: /sequences/v1/sequences/{id}
   method: delete
   operationId: delete_sequence
   x-agentic-access:
@@ -617,7 +736,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /sequences/{id}/pause
+- path: /sequences/v1/sequences/{id}/pause
   method: post
   operationId: pause_sequence
   x-agentic-access:
@@ -633,7 +752,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /sequences/{id}/resume
+- path: /sequences/v1/sequences/{id}/resume
   method: post
   operationId: resume_sequence
   x-agentic-access:
@@ -649,7 +768,7 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /sequences/{id}/steps
+- path: /sequences/v1/sequences/{id}/steps
   method: get
   operationId: list_sequence_steps
   x-agentic-access:
@@ -659,7 +778,7 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /sequences/{id}/steps/{step_id}
+- path: /sequences/v1/sequences/{id}/steps/{step_id}
   method: get
   operationId: retrieve_sequence_step
   x-agentic-access:
@@ -669,3 +788,149 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /tasks/v1/tasks
+  method: get
+  operationId: list_tasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tasks/v1/tasks
+  method: post
+  operationId: create_task
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tasks/v1/tasks/query-jobs
+  method: post
+  operationId: create_task_query_job
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tasks/v1/tasks/query-jobs
+  method: get
+  operationId: list_task_query_jobs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tasks/v1/tasks/query-jobs/{job_id}
+  method: get
+  operationId: get_task_query_job
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tasks/v1/tasks/query-jobs/{job_id}/cancel
+  method: post
+  operationId: cancel_task_query_job
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tasks/v1/tasks/query-jobs/{job_id}/results
+  method: get
+  operationId: get_task_query_job_results
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tasks/v1/tasks/{id}
+  method: get
+  operationId: retrieve_task
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tasks/v1/tasks/{id}
+  method: patch
+  operationId: update_task
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tasks/v1/tasks/{id}
+  method: delete
+  operationId: delete_task
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tasks/v1/tasks/{id}/complete
+  method: post
+  operationId: complete_task
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

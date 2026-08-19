@@ -1,6 +1,11 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: derived
-source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json,
+source: >-
+  openapi/_original/unify-data-openapi.json,
+  openapi/_original/unify-sequences-openapi.json,
+  openapi/_original/unify-tasks-openapi.json,
+  openapi/_original/unify-analytics-openapi.json
+  (harvested live 2026-08-13),
   https://docs.unifygtm.com/developers/api/data/standard-objects
 docs: https://docs.unifygtm.com/developers/api/data/standard-objects
 entities:
@@ -28,9 +33,25 @@ entities:
     description: A step within a sequence.
   - name: sequence_enrollment
     description: A person's enrollment in a sequence, with pause/resume state.
+  - name: sequence_enrollment_step
+    description: One executed step of a sequence enrollment; exported through the
+      Bulk API rather than read individually.
+  - name: task
+    description: >-
+      A unit of outreach work - an email, phone call, LinkedIn touch, or manual
+      action item - tied to a person and assigned to a user, carrying its own
+      type, status, priority and due date. Added by the Tasks API
+      (api.unifygtm.com/tasks/v1), new since the previous derivation.
+  - name: analytics_event
+    description: >-
+      An identify, page, or track event collected from a website or product by the
+      Intent client and posted to the Analytics API. Not individually addressable;
+      exported in bulk through event query jobs.
   - name: query_job
-    description: Asynchronous Bulk API job for exporting enrollment and
-      enrollment-step datasets.
+    description: >-
+      Asynchronous Bulk API job. Five families now exist - object records, events,
+      sequence enrollments, sequence enrollment steps, and tasks - each with the
+      same create / list / get / cancel / results lifecycle.
 relationships:
   - from: object
     to: attribute
@@ -69,10 +90,57 @@ relationships:
     to: person
     kind: belongs_to
     via: person_id
+  - from: sequence_enrollment
+    to: sequence_enrollment_step
+    kind: has_many
+    via: enrollment-step query-job results (no synchronous list endpoint)
+  - from: task
+    to: person
+    kind: belongs_to
+    via: person_id
+  - from: task
+    to: user
+    kind: belongs_to
+    via: assigned_user_id (nullable)
   - from: query_job
     to: sequence_enrollment
     kind: has_many
     via: enrollment query-job results pages
+  - from: query_job
+    to: sequence_enrollment_step
+    kind: has_many
+    via: enrollment-step query-job results pages
+  - from: query_job
+    to: record
+    kind: has_many
+    via: object-record query-job results pages (/objects/{object_name}/query-jobs)
+  - from: query_job
+    to: task
+    kind: has_many
+    via: task query-job results pages (/tasks/v1/tasks/query-jobs)
+  - from: query_job
+    to: analytics_event
+    kind: has_many
+    via: event query-job results pages (/data/v1/events/query-jobs)
 unique_keys:
   company: domain (normalized, deduplicating)
   person: email
+  task: id (uuid); no natural key
+enums:
+  TaskType: [EMAIL, ACTION_ITEM, PHONE_CALL, LINKEDIN_SEND_MESSAGE, LINKEDIN_SEND_CONNECTION_REQUEST,
+    LINKEDIN_VIEW_PROFILE, REPLY_TO_EMAIL]
+  TaskStatus: [NOT_READY, READY, COMPLETED, SKIPPED, CANCELED]
+  TaskPriority: [LOW, MEDIUM, HIGH, URGENT]
+identifiers:
+  scheme: bare RFC 4122 uuid
+  prefixed: false
+  note: >-
+    Unify uses unprefixed uuids for every entity id (a `uuid` component schema is
+    shared across all four documents). There is no Stripe-style type prefix, so an
+    id carries no information about which entity it addresses - a caller holding a
+    loose id cannot tell a task from an enrollment from a record without knowing
+    where it came from.
+coverage:
+  entities: 14
+  relationships: 17
+  derived_from_operations: 68

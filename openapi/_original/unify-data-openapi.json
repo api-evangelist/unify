@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Unify Data API",
     "summary": "Interact with objects, attributes, and records within the Unify platform.",
@@ -12,6 +12,15 @@
     }
   },
   "tags": [
+    {
+      "name": "Data"
+    },
+    {
+      "name": "Object Record Query Jobs"
+    },
+    {
+      "name": "Event Query Jobs"
+    },
     {
       "name": "Objects"
     },
@@ -26,9 +35,891 @@
     }
   ],
   "paths": {
-    "/objects": {
+    "/data/v1/events/query-jobs": {
+      "post": {
+        "operationId": "create_event_query_job",
+        "description": "Start an asynchronous query job that exports analytics events — website\nand product activity (`page`, `track`, `identify`) with any revealed\ncompany and person embedded in each row. Events are immutable, so filter\non `timestamp` for incremental exports; omitting `filter` exports all\nevents. Poll the job until it is `FINISHED`, then page through the\nresults.",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Response returned when creating a Bulk API query job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Event Query Jobs"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBulkApiEventsJobRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "list_event_query_jobs",
+        "description": "List event query jobs, optionally filtered by status.",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor returned by the previous page.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filter jobs by status.",
+            "schema": {
+              "$ref": "#/components/schemas/BulkApiJobStatus"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when listing Bulk API jobs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBulkApiJobsSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Event Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/events/query-jobs/{job_id}": {
+      "get": {
+        "operationId": "get_event_query_job",
+        "description": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when fetching a Bulk API job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a Bulk API job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Event Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/events/query-jobs/{job_id}/cancel": {
+      "post": {
+        "operationId": "cancel_event_query_job",
+        "description": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when canceling a Bulk API job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a Bulk API job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response returned when a Bulk API job is not cancelable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelBulkApiJobNotCancelableResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Event Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/events/query-jobs/{job_id}/results": {
+      "get": {
+        "operationId": "get_event_query_job_results",
+        "description": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response returned when fetching completed Bulk API job results.",
+            "headers": {
+              "x-total": {
+                "required": false,
+                "description": "Total result count. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-page": {
+                "required": false,
+                "description": "Result page number. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-page-size": {
+                "required": false,
+                "description": "Result page size. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "page",
+                    "page_size",
+                    "data"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UEvent"
+                      }
+                    }
+                  },
+                  "description": "Successful response returned when fetching completed Bulk API job results."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a Bulk API job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response returned when Bulk API job results are not ready yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsNotReadyResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsFailedResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsCanceledResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Response returned when Bulk API job results have expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobResultsExpiredResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Response returned when a requested Bulk API results page is too large.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobResultsPayloadTooLargeResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Event Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/objects": {
       "get": {
         "operationId": "list_objects",
+        "description": "List every object in the workspace. Objects are the containers Unify\nstores records in — standard objects like `company`, `person`, and\n`opportunity`, plus any custom objects.",
         "parameters": [],
         "responses": {
           "200": {
@@ -145,11 +1036,17 @@
           }
         },
         "tags": [
+          "Data",
           "Objects"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "post": {
         "operationId": "create_object",
+        "description": "Create a custom object for storing a new kind of record. The object is\ncreated without attributes; define those with the object attribute\nendpoints.",
         "parameters": [],
         "responses": {
           "201": {
@@ -235,6 +1132,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "409": {
             "description": "Response for any operation that results in a conflict error.",
             "content": {
@@ -289,6 +1212,7 @@
           }
         },
         "tags": [
+          "Data",
           "Objects"
         ],
         "requestBody": {
@@ -300,17 +1224,23 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
-    "/objects/{object_name}": {
+    "/data/v1/objects/{object_name}": {
       "get": {
         "operationId": "get_object",
+        "description": "Get a single object definition by its API name.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -454,16 +1384,23 @@
           }
         },
         "tags": [
+          "Data",
           "Objects"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "patch": {
         "operationId": "update_object",
+        "description": "Update an object's display name or description. The API name is fixed at\ncreation and cannot be changed.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -659,6 +1596,7 @@
           }
         },
         "tags": [
+          "Data",
           "Objects"
         ],
         "requestBody": {
@@ -670,15 +1608,21 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
         "operationId": "delete_object",
+        "description": "Delete an object by its API name.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -844,18 +1788,25 @@
           }
         },
         "tags": [
+          "Data",
           "Objects"
-        ]
+        ],
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/objects/{object_name}/attributes": {
+    "/data/v1/objects/{object_name}/attributes": {
       "get": {
         "operationId": "list_object_attributes",
+        "description": "List the attributes defined on an object. Attributes are the typed\nfields that records of the object hold values for, identified by API\nname.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1002,16 +1953,23 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attributes"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "post": {
         "operationId": "create_object_attribute",
+        "description": "Add an attribute to an object. The attribute's value type is fixed at\ncreation; `SELECT` / `MULTI_SELECT` attributes take a list of options,\nand `REFERENCE` attributes link to records of a related object. Unique\nattributes can be used to match records in find-unique and upsert\nrequests.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1102,6 +2060,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "404": {
             "description": "Response for any operation that results in a not found error.",
             "content": {
@@ -1182,6 +2166,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attributes"
         ],
         "requestBody": {
@@ -1193,17 +2178,23 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
-    "/objects/{object_name}/attributes/{attribute_name}": {
+    "/data/v1/objects/{object_name}/attributes/{attribute_name}": {
       "get": {
         "operationId": "get_object_attribute",
+        "description": "Get a single attribute on an object by its API name.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1212,6 +2203,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -1356,16 +2348,23 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attributes"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "patch": {
         "operationId": "update_object_attribute",
+        "description": "Update an attribute's mutable fields (e.g. `display_name`,\n`description`). The value type and API name are fixed at creation, and a\nreference attribute's cardinality cannot be downgraded from `MANY` to\n`ONE`.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1374,6 +2373,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -1466,6 +2466,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "404": {
             "description": "Response for any operation that results in a not found error.",
             "content": {
@@ -1547,6 +2573,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attributes"
         ],
         "requestBody": {
@@ -1558,15 +2585,21 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
         "operationId": "delete_object_attribute",
+        "description": "Delete an attribute from an object by its API name.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1575,6 +2608,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -1660,6 +2694,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "404": {
             "description": "Response for any operation that results in a not found error.",
             "content": {
@@ -1715,18 +2775,25 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attributes"
-        ]
+        ],
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/objects/{object_name}/attributes/{attribute_name}/options": {
+    "/data/v1/objects/{object_name}/attributes/{attribute_name}/options": {
       "get": {
         "operationId": "list_object_attribute_options",
+        "description": "List the options defined for a `SELECT` or `MULTI_SELECT` attribute.\nOptions are the predefined values the attribute can hold; requests\nagainst other attribute types fail with\n`attribute_options_not_supported`.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1735,6 +2802,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -1883,16 +2951,23 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attribute Options"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "post": {
         "operationId": "create_object_attribute_option",
+        "description": "Add an option to a `SELECT` or `MULTI_SELECT` attribute.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -1901,6 +2976,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -1991,6 +3067,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "404": {
             "description": "Response for any operation that results in a not found error.",
             "content": {
@@ -2072,6 +3174,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attribute Options"
         ],
         "requestBody": {
@@ -2083,17 +3186,23 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
-    "/objects/{object_name}/attributes/{attribute_name}/options/{option_name}": {
+    "/data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}": {
       "get": {
         "operationId": "get_object_attribute_option",
+        "description": "Get a single option on a `SELECT` or `MULTI_SELECT` attribute by its API\nname.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -2102,6 +3211,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -2110,6 +3220,7 @@
             "name": "option_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute option.",
             "schema": {
               "type": "string"
             }
@@ -2255,16 +3366,23 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attribute Options"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "patch": {
         "operationId": "update_object_attribute_option",
+        "description": "Update an option's display name. The option's API name is fixed at\ncreation.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -2273,6 +3391,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -2281,6 +3400,7 @@
             "name": "option_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute option.",
             "schema": {
               "type": "string"
             }
@@ -2370,6 +3490,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "404": {
             "description": "Response for any operation that results in a not found error.",
             "content": {
@@ -2452,6 +3598,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attribute Options"
         ],
         "requestBody": {
@@ -2463,15 +3610,21 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
         "operationId": "delete_object_attribute_option",
+        "description": "Delete an option from a `SELECT` or `MULTI_SELECT` attribute.",
         "parameters": [
           {
             "name": "object_name",
             "in": "path",
             "required": true,
+            "description": "API name of the object.",
             "schema": {
               "type": "string"
             }
@@ -2480,6 +3633,7 @@
             "name": "attribute_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute.",
             "schema": {
               "type": "string"
             }
@@ -2488,6 +3642,7 @@
             "name": "option_name",
             "in": "path",
             "required": true,
+            "description": "API name of the attribute option.",
             "schema": {
               "type": "string"
             }
@@ -2573,6 +3728,32 @@
               }
             }
           },
+          "403": {
+            "description": "Response for any operation that results in a forbidden error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "forbidden"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a forbidden error."
+                }
+              }
+            }
+          },
           "404": {
             "description": "Response for any operation that results in a not found error.",
             "content": {
@@ -2629,13 +3810,19 @@
           }
         },
         "tags": [
+          "Data",
           "Object Attribute Options"
-        ]
+        ],
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     },
-    "/objects/{object_name}/records": {
-      "get": {
-        "operationId": "list_object_records",
+    "/data/v1/objects/{object_name}/query-jobs": {
+      "post": {
+        "operationId": "create_object_record_query_job",
+        "description": "Start an asynchronous query job that exports records of an object. The\nquery must `select` the attributes to return (optionally expanding\nsingle-reference attributes into nested records) and may filter with\n`where` / `metadata` and sort with `sort_by`; pairing an `updated_at`\nsort with a `metadata` filter enables incremental \"changed since\"\nexports. Poll the job until it is `FINISHED`, then page through the\nresults.",
         "parameters": [
           {
             "name": "object_name",
@@ -2644,116 +3831,15 @@
             "schema": {
               "$ref": "#/components/schemas/UObjects.UObjectName"
             }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "Limit the number of records returned. Default is 100.",
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 1000
-            },
-            "explode": false
-          },
-          {
-            "name": "cursor",
-            "in": "query",
-            "required": false,
-            "description": "Cursor from the previous response to resume pagination from.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
           }
         ],
         "responses": {
-          "200": {
-            "description": "Response for a successful list operation with cursor-based pagination.",
+          "201": {
+            "description": "Response returned when creating a Bulk API query job.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "data",
-                    "cursor"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "enum": [
-                        "success"
-                      ]
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "required": [
-                          "object",
-                          "id",
-                          "created_at",
-                          "updated_at",
-                          "attributes"
-                        ],
-                        "properties": {
-                          "object": {
-                            "type": "string",
-                            "description": "The API name of the object this record is an instance of.",
-                            "readOnly": true
-                          },
-                          "id": {
-                            "allOf": [
-                              {
-                                "$ref": "#/components/schemas/UValues.UUuid"
-                              }
-                            ],
-                            "description": "Unique UUID identifier for the record.",
-                            "readOnly": true
-                          },
-                          "created_at": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date and time the record was created.",
-                            "readOnly": true
-                          },
-                          "updated_at": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date and time the record was last updated.",
-                            "readOnly": true
-                          },
-                          "attributes": {
-                            "type": "object",
-                            "unevaluatedProperties": {
-                              "anyOf": [
-                                {
-                                  "$ref": "#/components/schemas/UValues.UValue"
-                                },
-                                {
-                                  "type": "null"
-                                }
-                              ]
-                            },
-                            "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
-                          }
-                        }
-                      }
-                    },
-                    "cursor": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/components/schemas/UValues.UUuid"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
-                    }
-                  },
-                  "description": "Response for a successful list operation with cursor-based pagination."
+                  "$ref": "#/components/schemas/CreateBulkApiJobSuccessResponse"
                 }
               }
             }
@@ -2816,7 +3902,17 @@
             }
           },
           "404": {
-            "description": "Response for any operation that results in a not found error.",
+            "description": "Response returned when the object being queried cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBulkApiObjectRecordsJobObjectNotFoundResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2829,14 +3925,14 @@
                     "status": {
                       "type": "string",
                       "enum": [
-                        "object_not_found"
+                        "rate_limited"
                       ]
                     },
                     "message": {
                       "type": "string"
                     }
                   },
-                  "description": "Response for any operation that results in a not found error."
+                  "description": "Response for any operation that exceeds a rate limit."
                 }
               }
             }
@@ -2869,11 +3965,796 @@
           }
         },
         "tags": [
-          "Object Records"
-        ]
+          "Data",
+          "Object Record Query Jobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBulkApiObjectRecordsJobRequest"
+              }
+            }
+          }
+        }
       },
+      "get": {
+        "operationId": "list_object_record_query_jobs",
+        "description": "List query jobs previously created for an object, optionally filtered by\nstatus.",
+        "parameters": [
+          {
+            "name": "object_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UObjects.UObjectName"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "description": "Opaque cursor returned by the previous page.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "explode": false
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filter jobs by status.",
+            "schema": {
+              "$ref": "#/components/schemas/BulkApiJobStatus"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when listing Bulk API jobs.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBulkApiJobsSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Object Record Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/objects/{object_name}/query-jobs/{job_id}": {
+      "get": {
+        "operationId": "get_object_record_query_job",
+        "description": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation.",
+        "parameters": [
+          {
+            "name": "object_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UObjects.UObjectName"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when fetching a Bulk API job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a Bulk API job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Object Record Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/objects/{object_name}/query-jobs/{job_id}/cancel": {
+      "post": {
+        "operationId": "cancel_object_record_query_job",
+        "description": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
+        "parameters": [
+          {
+            "name": "object_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UObjects.UObjectName"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response returned when canceling a Bulk API job.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelBulkApiJobSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a Bulk API job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response returned when a Bulk API job is not cancelable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelBulkApiJobNotCancelableResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Object Record Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/objects/{object_name}/query-jobs/{job_id}/results": {
+      "get": {
+        "operationId": "get_object_record_query_job_results",
+        "description": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.\n\nEach result row's `created_at` / `updated_at` timestamps have millisecond\nprecision.\n\n`attributes` is sparse: only the selected attributes are present, and a\nselected attribute whose value is null is omitted entirely. A missing key\ntherefore means the value was null, not that it was unselected.",
+        "parameters": [
+          {
+            "name": "object_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/UObjects.UObjectName"
+            }
+          },
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response returned when fetching completed Bulk API job results.",
+            "headers": {
+              "x-total": {
+                "required": false,
+                "description": "Total result count. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-page": {
+                "required": false,
+                "description": "Result page number. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-page-size": {
+                "required": false,
+                "description": "Result page size. Present for NDJSON responses.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "page",
+                    "page_size",
+                    "data"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/BulkApiObjectRecordResult"
+                      }
+                    }
+                  },
+                  "description": "Successful response returned when fetching completed Bulk API job results."
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response for any operation that results in a bad request error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "bad_request"
+                      ]
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UResponses.BadRequestError"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in a bad request error."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Response for any operation that results in an unauthorized error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "unauthorized"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an unauthorized error."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response returned when a Bulk API job cannot be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobNotFoundResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Response returned when Bulk API job results are not ready yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsNotReadyResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsFailedResponse"
+                    },
+                    {
+                      "$ref": "#/components/schemas/GetBulkApiJobResultsCanceledResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Response returned when Bulk API job results have expired.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobResultsExpiredResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Response returned when a requested Bulk API results page is too large.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetBulkApiJobResultsPayloadTooLargeResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Response for any operation that exceeds a rate limit.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "rate_limited"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that exceeds a rate limit."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Response for any operation that results in an internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "error"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for any operation that results in an internal server error."
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Data",
+          "Object Record Query Jobs"
+        ]
+      }
+    },
+    "/data/v1/objects/{object_name}/records": {
       "post": {
         "operationId": "create_object_record",
+        "description": "Create a record of an object. `data` must include every required\nattribute, and a value that duplicates an existing record's unique\nattribute value is rejected with a conflict — use upsert instead when\nthe record may already exist.",
         "parameters": [
           {
             "name": "object_name",
@@ -2949,15 +4830,13 @@
                         },
                         "attributes": {
                           "type": "object",
-                          "unevaluatedProperties": {
-                            "anyOf": [
+                          "additionalProperties": {
+                            "allOf": [
                               {
                                 "$ref": "#/components/schemas/UValues.UValue"
-                              },
-                              {
-                                "type": "null"
                               }
-                            ]
+                            ],
+                            "nullable": true
                           },
                           "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
                         }
@@ -3134,6 +5013,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Records"
         ],
         "requestBody": {
@@ -3145,12 +5025,17 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "destructiveHint": false,
+          "openWorldHint": false
         }
       }
     },
-    "/objects/{object_name}/records/find-unique": {
+    "/data/v1/objects/{object_name}/records/find-unique": {
       "post": {
         "operationId": "find_unique_object_record",
+        "description": "Find a single record by attribute values. `match` must include at least\none unique attribute so that at most one record can match; the response\ncontains the matching record, or `null` data when none exists.",
         "parameters": [
           {
             "name": "object_name",
@@ -3180,63 +5065,55 @@
                       ]
                     },
                     "data": {
-                      "anyOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "object",
-                            "id",
-                            "created_at",
-                            "updated_at",
-                            "attributes"
-                          ],
-                          "properties": {
-                            "object": {
-                              "type": "string",
-                              "description": "The API name of the object this record is an instance of.",
-                              "readOnly": true
-                            },
-                            "id": {
-                              "allOf": [
-                                {
-                                  "$ref": "#/components/schemas/UValues.UUuid"
-                                }
-                              ],
-                              "description": "Unique UUID identifier for the record.",
-                              "readOnly": true
-                            },
-                            "created_at": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "Date and time the record was created.",
-                              "readOnly": true
-                            },
-                            "updated_at": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "Date and time the record was last updated.",
-                              "readOnly": true
-                            },
-                            "attributes": {
-                              "type": "object",
-                              "unevaluatedProperties": {
-                                "anyOf": [
-                                  {
-                                    "$ref": "#/components/schemas/UValues.UValue"
-                                  },
-                                  {
-                                    "type": "null"
-                                  }
-                                ]
-                              },
-                              "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
-                            }
-                          }
+                      "type": "object",
+                      "required": [
+                        "object",
+                        "id",
+                        "created_at",
+                        "updated_at",
+                        "attributes"
+                      ],
+                      "properties": {
+                        "object": {
+                          "type": "string",
+                          "description": "The API name of the object this record is an instance of.",
+                          "readOnly": true
                         },
-                        {
-                          "type": "null"
+                        "id": {
+                          "allOf": [
+                            {
+                              "$ref": "#/components/schemas/UValues.UUuid"
+                            }
+                          ],
+                          "description": "Unique UUID identifier for the record.",
+                          "readOnly": true
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Date and time the record was created.",
+                          "readOnly": true
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Date and time the record was last updated.",
+                          "readOnly": true
+                        },
+                        "attributes": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/UValues.UValue"
+                              }
+                            ],
+                            "nullable": true
+                          },
+                          "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
                         }
-                      ]
+                      },
+                      "nullable": true
                     }
                   },
                   "description": "Response for a successful get operation."
@@ -3355,6 +5232,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Records"
         ],
         "requestBody": {
@@ -3366,12 +5244,17 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
         }
       }
     },
-    "/objects/{object_name}/records/upsert": {
+    "/data/v1/objects/{object_name}/records/upsert": {
       "post": {
         "operationId": "upsert_object_record",
+        "description": "Create or update a record depending on whether one already exists. The\n`match` values (which must include at least one unique attribute) find\nthe existing record, and the `create` / `update` / `*_if_empty` property\ngroups control which attribute values apply in each case. This is the\nrecommended way to write records that may already exist.",
         "parameters": [
           {
             "name": "object_name",
@@ -3447,15 +5330,13 @@
                         },
                         "attributes": {
                           "type": "object",
-                          "unevaluatedProperties": {
-                            "anyOf": [
+                          "additionalProperties": {
+                            "allOf": [
                               {
                                 "$ref": "#/components/schemas/UValues.UValue"
-                              },
-                              {
-                                "type": "null"
                               }
-                            ]
+                            ],
+                            "nullable": true
                           },
                           "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
                         }
@@ -3632,6 +5513,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Records"
         ],
         "requestBody": {
@@ -3643,12 +5525,17 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
         }
       }
     },
-    "/objects/{object_name}/records/{record_id}": {
+    "/data/v1/objects/{object_name}/records/{record_id}": {
       "get": {
         "operationId": "get_object_record",
+        "description": "Get a single record by its ID.",
         "parameters": [
           {
             "name": "object_name",
@@ -3723,15 +5610,13 @@
                         },
                         "attributes": {
                           "type": "object",
-                          "unevaluatedProperties": {
-                            "anyOf": [
+                          "additionalProperties": {
+                            "allOf": [
                               {
                                 "$ref": "#/components/schemas/UValues.UValue"
-                              },
-                              {
-                                "type": "null"
                               }
-                            ]
+                            ],
+                            "nullable": true
                           },
                           "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
                         }
@@ -3855,11 +5740,17 @@
           }
         },
         "tags": [
+          "Data",
           "Object Records"
-        ]
+        ],
+        "x-mcp-tool": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        }
       },
       "patch": {
         "operationId": "update_object_record",
+        "description": "Update a record by its ID. Only the attributes present in `data` are\nchanged; other attribute values are left untouched.",
         "parameters": [
           {
             "name": "object_name",
@@ -3943,15 +5834,13 @@
                         },
                         "attributes": {
                           "type": "object",
-                          "unevaluatedProperties": {
-                            "anyOf": [
+                          "additionalProperties": {
+                            "allOf": [
                               {
                                 "$ref": "#/components/schemas/UValues.UValue"
-                              },
-                              {
-                                "type": "null"
                               }
-                            ]
+                            ],
+                            "nullable": true
                           },
                           "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
                         }
@@ -4129,6 +6018,7 @@
           }
         },
         "tags": [
+          "Data",
           "Object Records"
         ],
         "requestBody": {
@@ -4140,10 +6030,15 @@
               }
             }
           }
+        },
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
         }
       },
       "delete": {
         "operationId": "delete_object_record",
+        "description": "Delete a record by its ID.",
         "parameters": [
           {
             "name": "object_name",
@@ -4323,8 +6218,13 @@
           }
         },
         "tags": [
+          "Data",
           "Object Records"
-        ]
+        ],
+        "x-mcp-tool": {
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
       }
     }
   },
@@ -4335,6 +6235,405 @@
   ],
   "components": {
     "schemas": {
+      "BulkApiDatetimeRangeFilter": {
+        "type": "object",
+        "properties": {
+          "gt": {
+            "type": "string"
+          },
+          "gte": {
+            "type": "string"
+          },
+          "lt": {
+            "type": "string"
+          },
+          "lte": {
+            "type": "string"
+          }
+        },
+        "description": "Datetime range filter. At least one bound must be provided. `gt` is mutually\nexclusive with `gte`, and `lt` is mutually exclusive with `lte`."
+      },
+      "BulkApiEventsQueryFilter": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "$ref": "#/components/schemas/BulkApiDatetimeRangeFilter"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventType"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventType"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values included in a set."
+              },
+              {
+                "type": "object",
+                "required": [
+                  "not_in"
+                ],
+                "properties": {
+                  "in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventType"
+                    },
+                    "minItems": 1
+                  },
+                  "not_in": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EventType"
+                    },
+                    "minItems": 1
+                  }
+                },
+                "description": "Filter matching values excluded from a set."
+              }
+            ]
+          },
+          "session": {
+            "$ref": "#/components/schemas/BulkApiUuidFilter"
+          },
+          "company": {
+            "$ref": "#/components/schemas/BulkApiUuidFilter"
+          },
+          "person": {
+            "$ref": "#/components/schemas/BulkApiUuidFilter"
+          },
+          "domain": {
+            "type": "string"
+          }
+        },
+        "description": "Filters accepted when querying events. Events are immutable, so the natural\ncursor is `timestamp`, which is also the only datetime field filterable here."
+      },
+      "BulkApiJob": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status",
+          "total_rows",
+          "error_code",
+          "created_at",
+          "expires_at",
+          "canceled_at"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/BulkApiJobStatus"
+          },
+          "total_rows": {
+            "type": "integer",
+            "nullable": true
+          },
+          "error_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "string"
+          },
+          "canceled_at": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "description": "Bulk API job representation."
+      },
+      "BulkApiJobStatus": {
+        "type": "string",
+        "enum": [
+          "IN_PROGRESS",
+          "FINISHED",
+          "FAILED",
+          "EXPIRED",
+          "CANCELED"
+        ],
+        "description": "Status of an asynchronous Bulk API job."
+      },
+      "BulkApiObjectRecordResult": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "created_at",
+          "updated_at",
+          "attributes"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "description": "The API name of the object this record is an instance of.",
+            "readOnly": true
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUuid"
+              }
+            ],
+            "description": "Unique UUID identifier for the record.",
+            "readOnly": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the record was created.",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the record was last updated.",
+            "readOnly": true
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/UValues.UValue"
+                    }
+                  ],
+                  "nullable": true
+                },
+                {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/BulkApiObjectRecordResult"
+                    }
+                  ],
+                  "nullable": true
+                }
+              ]
+            },
+            "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
+          }
+        },
+        "description": "A single object record result row from a query job.\n\nMirrors `UObjectRecord`, but widens `attributes` to allow nested records:\na selected scalar attribute is a `UValue`, while a single-reference attribute\nexpanded through a nested `select` resolves to a nested result record with\nthis same shape. The recursion bottoms out at the `select` depth limit (see\n`SearchRecordsSelect`)."
+      },
+      "BulkApiObjectRecordsQuery": {
+        "type": "object",
+        "required": [
+          "select"
+        ],
+        "properties": {
+          "where": {
+            "$ref": "#/components/schemas/SearchRecordsWhere"
+          },
+          "select": {
+            "$ref": "#/components/schemas/SearchRecordsSelect"
+          },
+          "sort_by": {
+            "$ref": "#/components/schemas/SearchRecordsMetadataSortBy"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/SearchRecordsMetadataFilter"
+          }
+        },
+        "description": "Query describing which object records to return and how to shape them."
+      },
+      "BulkApiUuidFilter": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "description": "Filter matching a resource by ID."
+      },
+      "CancelBulkApiJobNotCancelableResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "job_not_cancelable"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when a Bulk API job is not cancelable."
+      },
+      "CancelBulkApiJobSuccessResponse": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CANCELED"
+            ]
+          }
+        },
+        "description": "Response returned when canceling a Bulk API job."
+      },
+      "CreateBulkApiEventsJobRequest": {
+        "type": "object",
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/BulkApiEventsQueryFilter"
+          }
+        },
+        "description": "Request body for creating an events Bulk API query job."
+      },
+      "CreateBulkApiJobSuccessResponse": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "status",
+          "expires_at"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "IN_PROGRESS"
+            ]
+          },
+          "expires_at": {
+            "type": "string"
+          }
+        },
+        "description": "Response returned when creating a Bulk API query job."
+      },
+      "CreateBulkApiObjectRecordsJobObjectNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when the object being queried cannot be found."
+      },
+      "CreateBulkApiObjectRecordsJobRequest": {
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/BulkApiObjectRecordsQuery"
+          }
+        },
+        "description": "Request body for creating an object records Bulk API query job."
+      },
       "CreateRecordRequest": {
         "type": "object",
         "required": [
@@ -4343,13 +6642,22 @@
         "properties": {
           "data": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values for the new record.\n\nAll required attributes on the object must be included."
           }
         },
         "description": "Request body for creating a record."
+      },
+      "EventType": {
+        "type": "string",
+        "enum": [
+          "page",
+          "track",
+          "identify"
+        ],
+        "description": "Canonical, source-agnostic event type."
       },
       "FindUniqueRecordRequest": {
         "type": "object",
@@ -4359,20 +6667,392 @@
         "properties": {
           "match": {
             "type": "object",
-            "unevaluatedProperties": {
-              "anyOf": [
+            "additionalProperties": {
+              "allOf": [
                 {
                   "$ref": "#/components/schemas/UValues.UValue"
-                },
-                {
-                  "type": "null"
                 }
-              ]
+              ],
+              "nullable": true
             },
             "description": "The attribute values to match against to find an existing record.\n\nAt least one unique attribute must be included to ensure that at most one\nrecord is matched. Additional unique or non-unique attributes may also be\nincluded to refine the matching criteria."
           }
         },
         "description": "Request body for finding a unique record by attribute values."
+      },
+      "GetBulkApiJobNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when a Bulk API job cannot be found."
+      },
+      "GetBulkApiJobResultsCanceledResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "results_canceled"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when a Bulk API job was canceled and has no results."
+      },
+      "GetBulkApiJobResultsExpiredResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "results_expired"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Response returned when Bulk API job results have expired."
+      },
+      "GetBulkApiJobResultsFailedResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "results_failed"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when a Bulk API job failed and has no results."
+      },
+      "GetBulkApiJobResultsNotReadyResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "results_not_ready"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a conflict error."
+          }
+        ],
+        "description": "Response returned when Bulk API job results are not ready yet."
+      },
+      "GetBulkApiJobResultsPayloadTooLargeResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "message"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "results_page_too_large"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "description": "Response returned when a requested Bulk API results page is too large."
+      },
+      "GetBulkApiJobSuccessResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BulkApiJob"
+          }
+        ],
+        "description": "Response returned when fetching a Bulk API job."
+      },
+      "ListBulkApiJobsSuccessResponse": {
+        "type": "object",
+        "required": [
+          "jobs",
+          "next_cursor"
+        ],
+        "properties": {
+          "jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkApiJob"
+            }
+          },
+          "next_cursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "description": "Response returned when listing Bulk API jobs."
+      },
+      "SearchRecordsAttributeWhere": {
+        "type": "object",
+        "required": [
+          "equals"
+        ],
+        "properties": {
+          "equals": {
+            "$ref": "#/components/schemas/UValues.UValue"
+          }
+        },
+        "description": "Filter records by attribute value. The `equals` value must match the type of\nthe attribute being filtered."
+      },
+      "SearchRecordsMetadataFilter": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/SearchRecordsTimestampFilter"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/SearchRecordsTimestampFilter"
+          }
+        },
+        "description": "Filter records by base record timestamps (`created_at` / `updated_at`).\n\nDistinct from attribute `where` because these are record metadata rather than\nobject attributes. Combined with a `created_at` / `updated_at` `sort_by`, this\nenables incremental queries that page through every record changed since a\nprior checkpoint."
+      },
+      "SearchRecordsMetadataSortBy": {
+        "type": "object",
+        "required": [
+          "field",
+          "direction"
+        ],
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/SearchRecordsMetadataSortField"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/SearchRecordsSortDirection"
+          }
+        },
+        "description": "Sort records by a base record field. Pairing a `created_at` / `updated_at`\nsort with the matching `metadata` filter enables incremental queries that\npage through every record changed since a prior checkpoint."
+      },
+      "SearchRecordsMetadataSortField": {
+        "type": "string",
+        "enum": [
+          "id",
+          "created_at",
+          "updated_at"
+        ],
+        "description": "Base record field to sort by."
+      },
+      "SearchRecordsNestedSelect": {
+        "type": "object",
+        "required": [
+          "select"
+        ],
+        "properties": {
+          "select": {
+            "$ref": "#/components/schemas/SearchRecordsSelect"
+          }
+        },
+        "description": "Select the attributes of a referenced record reached through a\nsingle-reference attribute."
+      },
+      "SearchRecordsSelect": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "boolean",
+              "enum": [
+                true
+              ]
+            },
+            {
+              "$ref": "#/components/schemas/SearchRecordsNestedSelect"
+            }
+          ]
+        },
+        "description": "Select the attributes to return for each record.\n\nEach key is an attribute API name on the queried object. A value of `true`\nreturns the attribute directly, while `{ \"select\": ... }` expands a\nsingle-reference attribute and selects attributes on the referenced object.\n\nNested selects may be at most three levels deep, counting the root select as\nlevel one (so the root plus at most two levels of nested reference selects).\nRequests exceeding this depth are rejected with a `400`."
+      },
+      "SearchRecordsSortDirection": {
+        "type": "string",
+        "enum": [
+          "ASCENDING",
+          "DESCENDING"
+        ],
+        "description": "Direction in which to sort records."
+      },
+      "SearchRecordsTimestampFilter": {
+        "type": "object",
+        "properties": {
+          "gt": {
+            "$ref": "#/components/schemas/UValues.UDatetime"
+          },
+          "gte": {
+            "$ref": "#/components/schemas/UValues.UDatetime"
+          },
+          "lt": {
+            "$ref": "#/components/schemas/UValues.UDatetime"
+          },
+          "lte": {
+            "$ref": "#/components/schemas/UValues.UDatetime"
+          }
+        },
+        "description": "Bounds on a record metadata timestamp, expressed as ISO-8601 datetimes\ninterpreted as UTC instants. At least one bound is required, and at most one\nlower (`gt` / `gte`) and one upper (`lt` / `lte`) bound may be supplied — so\na single filter can express an open-ended \"changed since\" cutoff or a closed\nwindow."
+      },
+      "SearchRecordsWhere": {
+        "type": "object",
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/SearchRecordsAttributeWhere"
+            },
+            {
+              "$ref": "#/components/schemas/SearchRecordsWhere"
+            }
+          ]
+        },
+        "description": "Filter records by one or more attribute conditions.\n\nEach key is an attribute API name on the queried object. A value of\n`{ \"equals\": ... }` matches the attribute directly, while a nested object of\nfurther conditions filters through a single-reference attribute on the\nreferenced object."
+      },
+      "UEvent": {
+        "type": "object",
+        "required": [
+          "id",
+          "original_event_id",
+          "timestamp",
+          "type",
+          "name",
+          "properties",
+          "anonymous_id",
+          "session_id",
+          "company",
+          "person"
+        ],
+        "properties": {
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUuid"
+              }
+            ],
+            "description": "Unique identifier for the event."
+          },
+          "original_event_id": {
+            "type": "string",
+            "description": "Identifier assigned to the event by the upstream source that produced it\n(e.g. a Segment `messageId`, a PostHog event ID, or a Unify Tag activity\nID)."
+          },
+          "timestamp": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDatetime"
+              }
+            ],
+            "description": "Time the event occurred. Events are immutable, so this is the natural\ncursor for incremental syncs."
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventType"
+              }
+            ],
+            "description": "Canonical event type."
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Human-readable event name, or `null` when unset."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true,
+            "description": "Event properties: custom track-event properties merged with page context\n(`domain`, `path`, `referrer_domain`, `referrer_path`, `query`) and UTM\nparameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`,\n`utm_content`). Keys with no value are omitted, and the whole object is\n`null` when no properties are present."
+          },
+          "anonymous_id": {
+            "type": "string",
+            "description": "Anonymous identifier assigned to the visitor by the upstream source."
+          },
+          "session_id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUuid"
+              }
+            ],
+            "description": "Identifier of the session the event belongs to."
+          },
+          "company": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UObjects.UCompany"
+              }
+            ],
+            "nullable": true,
+            "description": "Revealed company associated with the visitor, or `null` when unresolved."
+          },
+          "person": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UObjects.UPerson"
+              }
+            ],
+            "nullable": true,
+            "description": "Revealed person associated with the visitor, or `null` when unresolved."
+          }
+        },
+        "description": "A flat, denormalized event row returned by an event Bulk API\nquery job.\n\nUnlike object records, events are not wrapped in the `object` / `attributes`\nenvelope. Page, session, and UTM context are folded into `properties`, while\nthe revealed `company` / `person` are embedded directly on the row as full\nobject records (`null` when the visitor has no revealed company / person)."
       },
       "UObjects.UAttribute": {
         "anyOf": [
@@ -4403,14 +7083,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4451,14 +7125,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4499,14 +7167,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4547,14 +7209,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4595,14 +7251,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4643,14 +7293,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4691,14 +7335,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4739,14 +7377,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4787,14 +7419,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4838,14 +7464,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4892,14 +7512,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4940,14 +7554,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -4988,14 +7596,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -5070,14 +7672,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5095,14 +7691,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5120,14 +7710,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5145,14 +7729,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5170,14 +7748,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5195,14 +7767,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5220,14 +7786,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5245,14 +7805,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5270,14 +7824,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5298,14 +7846,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5329,14 +7871,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5354,14 +7890,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5379,14 +7909,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5394,6 +7918,226 @@
           }
         ],
         "description": "Definition of an attribute on a Unify object."
+      },
+      "UObjects.UCompany": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "created_at",
+          "updated_at",
+          "attributes"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "company"
+            ],
+            "description": "The API name of the object this record is an instance of.",
+            "readOnly": true
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUuid"
+              }
+            ],
+            "description": "Unique UUID identifier for the record.",
+            "readOnly": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the record was created.",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the record was last updated.",
+            "readOnly": true
+          },
+          "attributes": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UObjects.UCompanyAttributes"
+              }
+            ],
+            "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
+          }
+        }
+      },
+      "UObjects.UCompanyAttributes": {
+        "type": "object",
+        "required": [
+          "domain"
+        ],
+        "properties": {
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UAddress",
+                "nullable": true
+              }
+            ],
+            "description": "Physical address of the company."
+          },
+          "corporate_phone": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
+              }
+            ],
+            "description": "Corporate phone number of the company."
+          },
+          "description": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Description of the company."
+          },
+          "do_not_contact": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
+              }
+            ],
+            "description": "Whether contacting this company is disallowed."
+          },
+          "domain": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl"
+              }
+            ],
+            "description": "Website domain of the company."
+          },
+          "employee_count": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UInteger",
+                "nullable": true
+              }
+            ],
+            "description": "Estimated employee count of the company."
+          },
+          "founded": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDate",
+                "nullable": true
+              }
+            ],
+            "description": "Date when the company was founded."
+          },
+          "industry": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Industry the company operates in."
+          },
+          "last_activity_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDatetime",
+                "nullable": true
+              }
+            ],
+            "description": "Last time an activity was recorded for this company.",
+            "readOnly": true
+          },
+          "lead_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Source of the company record."
+          },
+          "linkedin_url": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl",
+                "nullable": true
+              }
+            ],
+            "description": "LinkedIn profile of the company.\n\nThis is the full URL of the LinkedIn profile of the company. The value will\nalways be standardized with an HTTPS prefix, \"www\" subdomain, and trailing\nslash."
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Name of the company."
+          },
+          "record_owner": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+              }
+            ],
+            "nullable": true,
+            "description": "The user that owns the company record."
+          },
+          "revenue": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UCurrency",
+                "nullable": true
+              }
+            ],
+            "description": "Estimated revenue of the company."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Status of the company."
+          },
+          "time_zone": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Time zone the company is located in."
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "additionalProperties": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/UValues.UValue"
+                }
+              ],
+              "nullable": true
+            }
+          }
+        ]
       },
       "UObjects.UMultiSelectAttribute": {
         "type": "object",
@@ -5437,14 +8181,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -5488,14 +8226,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5531,20 +8263,15 @@
             "description": "This is the user-facing object name shown within Unify. It is not required\nto be unique within Unify and can be changed at any time."
           },
           "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
+            "nullable": true,
             "description": "This is a description of the object. It is not required but will be shown\nin the UI to help understand the purpose of the object. Typically, this\nshould be a short sentence or two explaining the object."
           }
         }
       },
       "UObjects.UObjectName": {
-        "type": "string"
+        "type": "string",
+        "description": "The API name of an object, e.g. `company`, `person`, `opportunity`, or a\ncustom object's API name."
       },
       "UObjects.UObjectProvider": {
         "type": "string",
@@ -5566,17 +8293,255 @@
             "description": "This is the user-facing object name shown within Unify. It is not required\nto be unique within Unify and can be changed at any time."
           },
           "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
+            "nullable": true,
             "description": "This is a description of the object. It is not required but will be shown\nin the UI to help understand the purpose of the object. Typically, this\nshould be a short sentence or two explaining the object."
           }
         }
+      },
+      "UObjects.UPerson": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "created_at",
+          "updated_at",
+          "attributes"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "person"
+            ],
+            "description": "The API name of the object this record is an instance of.",
+            "readOnly": true
+          },
+          "id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUuid"
+              }
+            ],
+            "description": "Unique UUID identifier for the record.",
+            "readOnly": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the record was created.",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time the record was last updated.",
+            "readOnly": true
+          },
+          "attributes": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UObjects.UPersonAttributes"
+              }
+            ],
+            "description": "Attribute values for the record. Each key is the API name of the attribute\nand each value is the corresponding attribute value for the record."
+          }
+        }
+      },
+      "UObjects.UPersonAttributes": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "address": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UAddress",
+                "nullable": true
+              }
+            ],
+            "description": "Physical address of the person."
+          },
+          "company": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+              }
+            ],
+            "nullable": true,
+            "description": "Company associated with the person."
+          },
+          "corporate_phone": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
+              }
+            ],
+            "description": "Corporate phone number of the person."
+          },
+          "do_not_call": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
+              }
+            ],
+            "description": "Whether calling this person is disallowed."
+          },
+          "do_not_email": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
+              }
+            ],
+            "description": "Whether emailing this person is disallowed."
+          },
+          "email": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UEmail"
+              }
+            ],
+            "description": "Email address of the person."
+          },
+          "email_opt_out": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
+              }
+            ],
+            "description": "Whether the person has opted out of email communications."
+          },
+          "eu_resident": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UBoolean",
+                "nullable": true
+              }
+            ],
+            "description": "Whether this person is a resident of the European Union."
+          },
+          "first_name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "First name of the person."
+          },
+          "last_activity_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UDatetime",
+                "nullable": true
+              }
+            ],
+            "description": "Last time an activity was recorded for this person.",
+            "readOnly": true
+          },
+          "last_name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Last name of the person."
+          },
+          "lead_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Source of the person record."
+          },
+          "linkedin_url": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UUrl",
+                "nullable": true
+              }
+            ],
+            "description": "LinkedIn profile of the person.\n\nThis is the full URL of the LinkedIn profile of the person. The value\nwill always be standardized with an HTTPS prefix, \"www\" subdomain, and\ntrailing slash."
+          },
+          "mobile_phone": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
+              }
+            ],
+            "description": "Mobile phone number of the person."
+          },
+          "record_owner": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceById"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByMatch"
+              },
+              {
+                "$ref": "#/components/schemas/UValues.UReferenceByUpsert"
+              }
+            ],
+            "nullable": true,
+            "description": "The user that owns the person record."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Status of the person."
+          },
+          "title": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UText",
+                "nullable": true
+              }
+            ],
+            "description": "Job title of the person."
+          },
+          "work_phone": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UValues.UPhoneNumber",
+                "nullable": true
+              }
+            ],
+            "description": "Work phone number of the person."
+          }
+        },
+        "allOf": [
+          {
+            "type": "object",
+            "additionalProperties": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/UValues.UValue"
+                }
+              ],
+              "nullable": true
+            }
+          }
+        ]
       },
       "UObjects.UReferenceAttribute": {
         "type": "object",
@@ -5599,14 +8564,13 @@
             "description": "The API name of the object that this attribute references."
           },
           "related_attribute": {
-            "anyOf": [
+            "type": "object",
+            "allOf": [
               {
                 "$ref": "#/components/schemas/UObjects.URelatedReferenceAttribute"
-              },
-              {
-                "type": "null"
               }
             ],
+            "nullable": true,
             "description": "The optional related attribute on the referenced object. When this exists,\nthe relationship between the two objects is bidirectional."
           }
         },
@@ -5638,14 +8602,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -5683,14 +8641,13 @@
             "description": "The API name of the object that this attribute references."
           },
           "related_attribute": {
-            "anyOf": [
+            "type": "object",
+            "allOf": [
               {
                 "$ref": "#/components/schemas/UObjects.URelatedReferenceAttribute"
-              },
-              {
-                "type": "null"
               }
             ],
+            "nullable": true,
             "description": "The optional related attribute on the referenced object. When this exists,\nthe relationship between the two objects is bidirectional."
           }
         },
@@ -5707,14 +8664,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5791,14 +8742,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               },
               "is_required": {
@@ -5842,14 +8787,8 @@
                 "description": "This is the user-facing attribute name that will be shown within Unify. It\nis unique within the object and can be changed at any time."
               },
               "description": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ],
+                "type": "string",
+                "nullable": true,
                 "description": "This is a description of the attribute. It is not required but will be\nshown in the UI to help understand the purpose of the object. Typically,\nthis should be a short sentence or two explaining the attribute."
               }
             },
@@ -5890,7 +8829,7 @@
         "allOf": [
           {
             "type": "object",
-            "unevaluatedProperties": {}
+            "additionalProperties": {}
           }
         ],
         "description": "Validation error detail returned for bad request responses."
@@ -5906,11 +8845,11 @@
             ],
             "description": "Country code in ISO 3166-1 alpha-2 format."
           },
-          "administrativeArea": {
+          "administrative_area": {
             "type": "string",
             "description": "State, province, region, or territory."
           },
-          "subAdministrativeArea": {
+          "sub_administrative_area": {
             "type": "string",
             "description": "County or other secondary governmental division of an administrative area."
           },
@@ -5918,11 +8857,11 @@
             "type": "string",
             "description": "City, town, or village."
           },
-          "dependentLocality": {
+          "dependent_locality": {
             "type": "string",
             "description": "Neighborhood, borough, district, or city sector."
           },
-          "postalCode": {
+          "postal_code": {
             "type": "string",
             "description": "Postal code or ZIP code."
           },
@@ -5934,7 +8873,7 @@
             "type": "string",
             "description": "Street number or building name."
           },
-          "subPremise": {
+          "sub_premise": {
             "type": "string",
             "description": "Apartment, suite, office number, or other secondary unit designator."
           }
@@ -6500,7 +9439,7 @@
         "properties": {
           "match": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to match against to find an existing record.\n\nAt least one unique attribute must be included to ensure that at most one\nrecord is matched. Additional unique or non-unique attributes may also be\nincluded to refine the matching criteria."
           }
         },
@@ -6515,32 +9454,32 @@
         "properties": {
           "match": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to match against to find an existing record.\n\nAt least one unique attribute must be included to ensure that at most one\nrecord is matched. Additional unique or non-unique attributes may also be\nincluded to refine the matching criteria."
           },
           "create": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to use when creating a new record if no match is found."
           },
           "update": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to use when updating an existing record if a match is found."
           },
           "update_if_empty": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to update when a matching record is found and the\nexisting attribute value on the record is `null`."
           },
           "create_or_update": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to apply during both creation and update operations."
           },
           "create_or_update_if_empty": {
             "type": "object",
-            "unevaluatedProperties": {},
+            "additionalProperties": {},
             "description": "The attribute values to apply during both creation and update-if-empty\noperations."
           }
         },
@@ -6629,6 +9568,101 @@
           }
         ]
       },
+      "UnifyApi.Sequences.EnrollmentNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when an enrollment cannot be found."
+      },
+      "UnifyApi.Sequences.SequenceNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when a sequence cannot be found."
+      },
+      "UnifyApi.Sequences.SequenceStepNotFoundResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status",
+              "message"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "not_found"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "description": "Response for any operation that results in a not found error."
+          }
+        ],
+        "description": "Response returned when a sequence step cannot be found."
+      },
+      "UnifyApi.Tasks.DeleteTaskResponse": {
+        "type": "object",
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "success"
+                ]
+              }
+            },
+            "description": "Response for a successful delete operation."
+          }
+        ]
+      },
       "UpdateRecordRequest": {
         "type": "object",
         "required": [
@@ -6637,7 +9671,7 @@
         "properties": {
           "data": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values to update in the record."
@@ -6653,55 +9687,53 @@
         "properties": {
           "match": {
             "type": "object",
-            "unevaluatedProperties": {
-              "anyOf": [
+            "additionalProperties": {
+              "allOf": [
                 {
                   "$ref": "#/components/schemas/UValues.UValue"
-                },
-                {
-                  "type": "null"
                 }
-              ]
+              ],
+              "nullable": true
             },
             "description": "The attribute values to match against to find an existing record.\n\nAt least one unique attribute must be included to ensure that at most one\nrecord is matched. Additional unique or non-unique attributes may also be\nincluded to refine the matching criteria."
           },
           "create": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values to use when creating a new record if no match is found."
           },
           "update": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values to use when updating an existing record if a match is found."
           },
           "update_if_empty": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values to update when a matching record is found and the\nexisting attribute value on the record is `null`."
           },
           "create_or_update": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values to apply during both creation and update operations."
           },
           "create_or_update_if_empty": {
             "type": "object",
-            "unevaluatedProperties": {
+            "additionalProperties": {
               "$ref": "#/components/schemas/UValues.UValue"
             },
             "description": "The attribute values to apply during both creation and update-if-empty\noperations."
           }
         },
-        "description": "Request body for upserting a record.\n\nAt least one of `create`, `create_or_update` or `create_or_update_if_empty`\nmust be provided, and all required attributes on the object must be included\nin at least one of these properties.\n\nWhen the same attribute is specified in multiple properties, the values will\nbe applied in a specific order of precedence. If a record is being created,\nthe following order is used:\n\n1. `create`\n2. `create_or_update`\n3. `create_or_update_if_empty`\n\nIf an existing record is being updated, the following order is used:\n\n1. `update`\n2. `create_or_update`\n3. `update_if_empty`\n4. `create_or_update_if_empty`"
+        "description": "Request body for upserting a record.\n\nAt least one of `create`, `create_or_update` or `create_or_update_if_empty`\nmust be provided, and all required attributes on the object must be included\nin at least one of these properties.\n\n## Precedence\n\nWhen the same attribute is specified in multiple properties, the values will\nbe applied in a specific order of precedence. If a record is being created,\nthe following order is used:\n\n1. `create`\n2. `create_or_update`\n3. `create_or_update_if_empty`\n\nIf an existing record is being updated, the following order is used:\n\n1. `update`\n2. `create_or_update`\n3. `update_if_empty`\n4. `create_or_update_if_empty`"
       },
       "ValidationMode": {
         "type": "string",
@@ -6722,7 +9754,7 @@
   },
   "servers": [
     {
-      "url": "https://api.unifygtm.com/data/v1",
+      "url": "https://api.unifygtm.com",
       "variables": {}
     }
   ]

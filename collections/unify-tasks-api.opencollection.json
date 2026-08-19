@@ -1,0 +1,287 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Tasks API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to `created_at`."
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to descending."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by status."
+              },
+              {
+                "name": "assigned_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by assignee."
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by person."
+              },
+              {
+                "name": "person_email",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by the person's exact email address. Cannot be combined with\n`person_id`. Email matching is case-insensitive."
+              }
+            ]
+          },
+          "docs": "List tasks — units of outreach work (emails, phone calls, LinkedIn\ntouches, and action items) tied to a person and assignable to a user.\nBy default, tasks are ordered by `created_at` descending, with `id`\ndescending for tasks created at the same time. Supply the returned\n`next_cursor` unchanged to retrieve the next page with the same filters\nand sort order. Pages at most 100 tasks per request; to export more\nthan a few hundred tasks, create an asynchronous query job instead."
+        },
+        {
+          "info": {
+            "name": "create_task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a task for a person. The request is discriminated by `type`:\n`EMAIL` tasks carry a draft subject, body, and the mailbox to send from,\nwhile phone call, LinkedIn, and action item tasks carry an optional\nnote."
+        },
+        {
+          "info": {
+            "name": "list_task_query_jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/query-jobs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by status."
+              }
+            ]
+          },
+          "docs": "List task query jobs, optionally filtered by status."
+        },
+        {
+          "info": {
+            "name": "create_task_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/query-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start an asynchronous query job that exports tasks matching the optional\nfilter; omitting `filter` exports all tasks. Poll the job until it is\n`FINISHED`, then page through the results."
+        },
+        {
+          "info": {
+            "name": "get_task_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/query-jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation."
+        },
+        {
+          "info": {
+            "name": "cancel_task_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/query-jobs/:job_id/cancel",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled."
+        },
+        {
+          "info": {
+            "name": "get_task_query_job_results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/query-jobs/:job_id/results",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`."
+              }
+            ]
+          },
+          "docs": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON."
+        },
+        {
+          "info": {
+            "name": "retrieve_task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single task by its ID."
+        },
+        {
+          "info": {
+            "name": "update_task",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a task's assignee, priority, and/or due date. At least one of\n`assigned_user_id`, `priority`, or `due_at` must be provided."
+        },
+        {
+          "info": {
+            "name": "delete_task",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a task by its ID."
+        },
+        {
+          "info": {
+            "name": "complete_task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/tasks/v1/tasks/:id/complete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mark a task as completed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

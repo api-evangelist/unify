@@ -1,0 +1,5114 @@
+{
+  "item": [
+    {
+      "id": "cdef0534-b3be-4226-8573-7722283e5b84",
+      "name": "Tasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9b869bd7-b038-4e3b-aab4-63363ce1abec",
+          "name": "list tasks",
+          "request": {
+            "name": "list tasks",
+            "description": {
+              "content": "List tasks — units of outreach work (emails, phone calls, LinkedIn\ntouches, and action items) tied to a person and assignable to a user.\nBy default, tasks are ordered by `created_at` descending, with `id`\ndescending for tasks created at the same time. Supply the returned\n`next_cursor` unchanged to retrieve the next page with the same filters\nand sort order. Pages at most 100 tasks per request; to export more\nthan a few hundred tasks, create an asynchronous query job instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by the previous page."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Field to sort by. Defaults to `created_at`."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>",
+                  "description": "Sort direction. Defaults to descending."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter tasks by status."
+                },
+                {
+                  "disabled": false,
+                  "key": "assigned_user_id",
+                  "value": "<uuid>",
+                  "description": "Filter tasks by assignee."
+                },
+                {
+                  "disabled": false,
+                  "key": "person_id",
+                  "value": "<uuid>",
+                  "description": "Filter tasks by person."
+                },
+                {
+                  "disabled": false,
+                  "key": "person_email",
+                  "value": "<email>",
+                  "description": "Filter tasks by the person's exact email address. Cannot be combined with\n`person_id`. Email matching is case-insensitive."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb2b0439-61c5-4711-aceb-1f77d9d651f6",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"REPLY_TO_EMAIL\",\n      \"status\": \"<string>\",\n      \"priority\": \"MEDIUM\",\n      \"person_id\": \"<uuid>\",\n      \"assigned_user_id\": \"<uuid>\",\n      \"due_at\": \"1952-09-07T13:31:53.862Z\",\n      \"ended_at\": \"1988-11-05T23:42:54.376Z\",\n      \"created_at\": \"2008-05-01T14:37:23.765Z\",\n      \"updated_at\": \"1948-03-20T12:44:25.235Z\",\n      \"note_content\": \"string\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"EMAIL\",\n      \"status\": \"<string>\",\n      \"priority\": \"MEDIUM\",\n      \"person_id\": \"<uuid>\",\n      \"assigned_user_id\": \"<uuid>\",\n      \"due_at\": \"1988-01-23T02:24:59.007Z\",\n      \"ended_at\": \"2003-08-29T19:37:55.361Z\",\n      \"created_at\": \"2022-12-13T21:08:47.248Z\",\n      \"updated_at\": \"1996-07-23T10:42:19.956Z\",\n      \"note_content\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72cd10b0-7515-461c-9af0-b8980b754412",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47553703-a7c6-4714-a002-bb7eed7857a6",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5aee70c-5771-4e52-98d8-9086ac029c61",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a4c24b9-18d0-49fc-a62c-05149e73e5a1",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c075491-d6da-417b-8adb-db933835db60",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigned_user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "person_email",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d8fc82b-bcaf-474b-9787-a2ba63dac1d8",
+          "name": "create task",
+          "request": {
+            "name": "create task",
+            "description": {
+              "content": "Create a task for a person. The request is discriminated by `type`:\n`EMAIL` tasks carry a draft subject, body, and the mailbox to send from,\nwhile phone call, LinkedIn, and action item tasks carry an optional\nnote.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1a21cda-3f49-4625-a311-0fb585bb96e6",
+              "name": "The request has succeeded and a new resource has been created as a result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"type\": \"EMAIL\",\n    \"status\": \"<string>\",\n    \"priority\": \"<string>\",\n    \"person_id\": \"<uuid>\",\n    \"assigned_user_id\": \"<uuid>\",\n    \"due_at\": \"1949-09-01T17:40:58.945Z\",\n    \"ended_at\": \"1993-10-06T08:03:03.609Z\",\n    \"created_at\": \"1985-07-28T00:17:55.439Z\",\n    \"updated_at\": \"1964-07-26T03:25:50.059Z\",\n    \"note_content\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50e6bf26-9788-49a3-aacc-36d0c43fc0b9",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0561539-7d05-447a-b9ad-49fc23cee49b",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f9e7c73-4798-438a-b9b5-2fba1a9aaa4a",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55a0a28d-e1de-45f7-973e-b39cd96ba4a5",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c59b23ef-e546-4376-8400-87221571b952",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b9a75ff-fe7f-4e61-80e0-eb5ab0c25fb3",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f582e4d-8ab9-4d11-9e77-45746896e724",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"<string>\",\n  \"mailbox_email\": \"<email>\",\n  \"person_id\": \"<uuid>\",\n  \"subject\": \"<string>\",\n  \"type\": \"<string>\",\n  \"cc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"bcc_recipients\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6aa07be4-fcac-4b2a-a371-250945efbc65",
+          "name": "create task query job",
+          "request": {
+            "name": "create task query job",
+            "description": {
+              "content": "Start an asynchronous query job that exports tasks matching the optional\nfilter; omitting `filter` exports all tasks. Poll the job until it is\n`FINISHED`, then page through the results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                "query-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"due_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"priority\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"assigned_user\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "657ea5ad-f4ea-488f-ab6f-33ac27a8279a",
+              "name": "Response returned when creating a Bulk API query job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"due_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"priority\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"assigned_user\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"IN_PROGRESS\",\n  \"expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df4339c9-0b40-417c-86df-558b5e16a8f1",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"due_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"priority\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"assigned_user\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2499ec69-6748-4aac-9050-ee86007a3028",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"due_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"priority\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"assigned_user\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7217389e-4e62-4ff8-bc75-ef68fc6a93b6",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"due_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"priority\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"assigned_user\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "512846a5-7668-44ce-8964-7e793fb3dc80",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"updated_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"created_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"due_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"ended_at\": {\n      \"gt\": \"<string>\",\n      \"gte\": \"<string>\",\n      \"lt\": \"<string>\",\n      \"lte\": \"<string>\"\n    },\n    \"id\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"status\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"type\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"priority\": {\n      \"in\": [\n        \"<string>\"\n      ],\n      \"not_in\": [\n        \"<string>\"\n      ]\n    },\n    \"assigned_user\": {\n      \"id\": \"<string>\"\n    },\n    \"person\": {\n      \"id\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b739a71-4884-4da5-9973-4ea872a916d2",
+          "name": "list task query jobs",
+          "request": {
+            "name": "list task query jobs",
+            "description": {
+              "content": "List task query jobs, optionally filtered by status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                "query-jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by the previous page."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter jobs by status."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3871d70-1045-4e2b-8a57-5af66cb3fe08",
+              "name": "Response returned when listing Bulk API jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobs\": [\n    {\n      \"job_id\": \"string\",\n      \"status\": \"<string>\",\n      \"total_rows\": 8659,\n      \"error_code\": \"string\",\n      \"created_at\": \"string\",\n      \"expires_at\": \"string\",\n      \"canceled_at\": \"string\"\n    },\n    {\n      \"job_id\": \"string\",\n      \"status\": \"<string>\",\n      \"total_rows\": 3752,\n      \"error_code\": \"string\",\n      \"created_at\": \"string\",\n      \"expires_at\": \"string\",\n      \"canceled_at\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88507f9a-00d2-4e53-9067-0570af25b717",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "843f2a5d-5c6d-4c07-9402-a67a9ee4a446",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2615c4bb-4e24-4b29-b46f-f2651576f538",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ca6e2d7-8dda-48b6-b806-60acc1f56e88",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d0bfa73-15ff-4793-a1a0-bb33dce246e4",
+          "name": "get task query job",
+          "request": {
+            "name": "get task query job",
+            "description": {
+              "content": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                "query-jobs",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9c1a86a-8d11-44ca-ae1d-4ed497f74cc7",
+              "name": "Response returned when fetching a Bulk API job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"<string>\",\n  \"total_rows\": 470,\n  \"error_code\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"canceled_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8da0dbd-cfa6-4cf4-8782-230d4e252523",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b8e80f6-a766-414b-bd9a-639eaa6a823d",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "343857a1-31b8-4bed-a0e5-68909ff045bb",
+              "name": "Response returned when a Bulk API job cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d229a85c-242c-451b-9fa0-88c0721ed2eb",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "402ea8eb-1cc6-4264-86f0-01f8cc38304d",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a44df287-3426-4ce7-a336-2b4d624d3c68",
+          "name": "cancel task query job",
+          "request": {
+            "name": "cancel task query job",
+            "description": {
+              "content": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                "query-jobs",
+                ":job_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63132549-2f33-49d8-8e06-9e86e94eb0f3",
+              "name": "Response returned when canceling a Bulk API job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\",\n  \"status\": \"CANCELED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f04fd75-b807-4add-92e4-1c0b0965ef43",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5257d22d-35a7-4f79-84f9-ee2992bad9e0",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6e2f09e-ff7a-4fd0-b1bb-7ec1fcab3f6e",
+              "name": "Response returned when a Bulk API job cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d6eae17-700b-45ac-8a51-afe9a206cce7",
+              "name": "Response returned when a Bulk API job is not cancelable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"job_not_cancelable\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d487e69d-e705-49a9-9fff-9efb26c92c71",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d200bf3a-1d45-4de9-83af-9bfc3a265a15",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "592ec8f1-64ab-422a-9baa-39786f410cb3",
+          "name": "get task query job results",
+          "request": {
+            "name": "get task query job results",
+            "description": {
+              "content": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                "query-jobs",
+                ":job_id",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "575c7b1c-ec3d-474c-9a79-eecd349c110d",
+              "name": "Successful response returned when fetching completed Bulk API job results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Total result count. Present for NDJSON responses.",
+                  "key": "x-total",
+                  "value": "8805"
+                },
+                {
+                  "disabled": false,
+                  "description": "Result page number. Present for NDJSON responses.",
+                  "key": "x-page",
+                  "value": "8805"
+                },
+                {
+                  "disabled": false,
+                  "description": "Result page size. Present for NDJSON responses.",
+                  "key": "x-page-size",
+                  "value": "8805"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2679,\n  \"page\": 766,\n  \"page_size\": 3463,\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"status\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"person_id\": \"<uuid>\",\n      \"assigned_user_id\": \"<uuid>\",\n      \"due_at\": \"2020-06-07T07:31:42.578Z\",\n      \"ended_at\": \"2025-10-19T10:30:15.244Z\",\n      \"created_at\": \"1999-12-03T08:41:23.513Z\",\n      \"updated_at\": \"2019-10-16T01:12:47.242Z\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"status\": \"<string>\",\n      \"priority\": \"<string>\",\n      \"person_id\": \"<uuid>\",\n      \"assigned_user_id\": \"<uuid>\",\n      \"due_at\": \"1977-12-27T07:25:11.897Z\",\n      \"ended_at\": \"1946-09-06T13:46:22.974Z\",\n      \"created_at\": \"2011-08-31T22:50:40.923Z\",\n      \"updated_at\": \"1958-08-18T19:26:35.637Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59381bea-ae55-4ab1-8c88-deb5bd690c25",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e0fb219-6589-412d-893f-d9fdb5ca5f98",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dea381e-2c09-40c2-a056-1bbb9e53ca89",
+              "name": "Response returned when a Bulk API job cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "462a62b0-9184-41d6-85c5-56d716758b72",
+              "name": "Response returned when Bulk API job results are not ready yet.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"results_not_ready\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7040ca7b-27d4-4c20-96e7-0ccf6e922122",
+              "name": "Response returned when Bulk API job results have expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gone",
+              "code": 410,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"results_expired\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "455f4f24-ead3-49ec-b62a-7a04e89c33db",
+              "name": "Response returned when a requested Bulk API results page is too large.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"results_page_too_large\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fdf309d-eb84-4f74-be19-ecf24879b9af",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "197e6028-d2e7-48f7-ad6b-a989ea2d96fc",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    "query-jobs",
+                    ":job_id",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84d807ec-0741-4ea1-8364-d5814bf1f03d",
+          "name": "retrieve task",
+          "request": {
+            "name": "retrieve task",
+            "description": {
+              "content": "Get a single task by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2423ed5-7b47-465f-bedc-8d2aad93619c",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"priority\": \"<string>\",\n    \"person_id\": \"<uuid>\",\n    \"assigned_user_id\": \"<uuid>\",\n    \"due_at\": \"2008-05-28T09:12:00.568Z\",\n    \"ended_at\": \"1946-12-11T10:53:41.688Z\",\n    \"created_at\": \"1980-10-08T21:48:34.396Z\",\n    \"updated_at\": \"1994-06-19T22:18:01.404Z\",\n    \"note_content\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abad3972-6be6-4344-ab50-620e3e5c5ad9",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2fe0f05-d85a-4548-83d0-46fd4919ddb7",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e68fd896-d693-4824-b70e-95ed4949a039",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad2009c8-7350-404c-bc94-2f36b08e4266",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34778657-44ed-4f02-98fd-235aa60857e1",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbf09f97-957b-40f2-b557-11c3392fa5ec",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e02e619-b5bc-470e-ae13-1c635e1d2bc1",
+          "name": "update task",
+          "request": {
+            "name": "update task",
+            "description": {
+              "content": "Update a task's assignee, priority, and/or due date. At least one of\n`assigned_user_id`, `priority`, or `due_at` must be provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assigned_user_id\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4b827dc-cb8d-4bc2-b74e-526cce5dcd21",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"type\": \"<string>\",\n    \"status\": \"<string>\",\n    \"priority\": \"<string>\",\n    \"person_id\": \"<uuid>\",\n    \"assigned_user_id\": \"<uuid>\",\n    \"due_at\": \"1950-06-03T21:51:25.988Z\",\n    \"ended_at\": \"1989-04-04T12:14:49.897Z\",\n    \"created_at\": \"1950-05-05T13:00:28.968Z\",\n    \"updated_at\": \"1984-02-01T09:25:23.517Z\",\n    \"note_content\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60f2524c-2712-40e4-97e6-615b91caf412",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38b13b78-62b5-4030-8845-7bc802529969",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "010181c3-5ee8-4da9-9edf-889a6c537497",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "983bc166-2333-4325-b2e9-0bbc2e9de0dc",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4159a81-e840-4034-a96f-5ad0b6dc7295",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b86c82d8-d2dc-442d-bf5f-8ea264192a93",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2629f1e0-bde7-43ad-acb2-f5b6d793f87c",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigned_user_id\": \"<uuid>\",\n  \"priority\": \"<string>\",\n  \"due_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fde7318-d683-4fc5-b82d-b8a5c97c8768",
+          "name": "delete task",
+          "request": {
+            "name": "delete task",
+            "description": {
+              "content": "Delete a task by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4754e76-7b65-42e3-b9fe-5e43992cc711",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c31929d-603d-4b69-a66c-84a43e406016",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33c54aa0-4591-4096-af9d-7ed0fb6d3109",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44e22bdd-37b6-4281-a66c-e585a3f563ad",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0c30388-a67f-4c7a-a55a-2f287c7bcdc4",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3273f368-249b-41b5-99bc-f6bea8ebeace",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32140ef6-c2d2-470d-a29d-48447673b052",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3065da0f-d3be-467c-8966-e8cba7a536fb",
+          "name": "complete task",
+          "request": {
+            "name": "complete task",
+            "description": {
+              "content": "Mark a task as completed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tasks",
+                "v1",
+                "tasks",
+                ":id",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64cdbb13-80b4-44c6-8d15-27994572badf",
+              "name": "There is no content to send for this request, but the headers may be useful. ",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9451131-736b-4942-ac45-be7b638bf2f1",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ae4baa8-dbeb-4a10-b1f0-979c2ca06c46",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c445e15-c577-4107-82d5-671ec592d16f",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bda69d43-e905-4cc5-89e8-74543d8e2c20",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb4bc41b-a86b-45f7-a26b-621fbd75228f",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "360dd02c-c991-4f20-b17c-35c877dc4028",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8e47637-1e07-4849-b98d-aae2db86ee41",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tasks",
+                    "v1",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unifygtm.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "50371ba5-e027-4645-b4f5-860312edc7d2",
+    "name": "Unify Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Unify Support\n Email: support@unifygtm.com",
+      "type": "text/plain"
+    }
+  }
+}

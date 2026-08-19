@@ -1,51 +1,163 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/unify-data-openapi.json, openapi/unify-sequences-openapi.json,
-  openapi/unify-analytics-openapi.json, https://docs.unifygtm.com/developers/introduction
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.unifygtm.com/developers/introduction,
+  https://docs.unifygtm.com/developers/api/data/overview,
+  https://docs.unifygtm.com/developers/api/sequences/overview,
+  https://docs.unifygtm.com/developers/api/tasks/overview,
+  https://docs.unifygtm.com/developers/api/analytics/overview,
+  https://docs.unifygtm.com/developers/guides/request-data/bulk-api,
+  openapi/_original/*.json (harvested live 2026-08-13)
+surface:
+  apis: 4
+  operations: 68
+  services:
+    - name: Data API
+      base: https://api.unifygtm.com/data/v1
+      operations: 31
+    - name: Sequences API
+      base: https://api.unifygtm.com/sequences/v1
+      operations: 23
+    - name: Tasks API
+      base: https://api.unifygtm.com/tasks/v1
+      operations: 11
+    - name: Analytics API
+      base: https://api.unifyintent.com/analytics/v1
+      operations: 3
 authentication:
   style: api-key header
   header: x-api-key
-  notes: Generate an API key in the app under Settings -> Developers
-    (app.unifygtm.com/dashboard/settings/integrations/api-keys). The Bulk API
-    requires a user-backed API key. The Analytics API uses HTTP Basic
-    authentication instead (public write key), suitable for client-side event
-    collection. See authentication/unify-authentication.yml.
+  case_note: >-
+    The OpenAPI declares the scheme name as `x-api-key`; the Tasks docs write it
+    `X-Api-Key`. HTTP header names are case-insensitive, so both work.
+  provisioning: Settings -> Developers (app.unifygtm.com/dashboard/settings/integrations/api-keys)
+  scope: >-
+    A key carries the full authority of the Unify user it belongs to. There is no
+    scoped, read-only or resource-limited key. The Bulk API requires a user-backed
+    API key.
+  analytics_exception:
+    style: http basic
+    detail: >-
+      The Analytics API authenticates with HTTP Basic using a public write key,
+      suitable for client-side collection from a browser.
+  oauth:
+    applies_to: MCP only
+    detail: >-
+      https://mcp.unifygtm.com/mcp uses OAuth against https://auth.unifygtm.com/;
+      no product-permission scopes are published. See scopes/unify-scopes.yml.
+  entitlement:
+    detail: >-
+      "Open API + webhooks" is listed as a Business-plan feature on the pricing
+      page. The contracts are public and anonymous to read, but a working key is
+      an enterprise-tier entitlement.
+  cross_link: authentication/unify-authentication.yml
 idempotency:
   supported: false
-  notes: No Idempotency-Key header or documented idempotency contract. The Data
-    API offers upsert and find-unique operations keyed on unique attribute
-    values, which give natural-key write semantics but are not a documented
-    idempotency-key mechanism.
+  header: null
+  notes: >-
+    No Idempotency-Key header, no idempotency-key parameter in any of the 68
+    operations, and no idempotency contract in the docs. Retrying a POST is not
+    safe in general. What Unify offers instead is natural-key write semantics on
+    the Data API - upsert_object_record and find_unique_object_record key on
+    unique attribute values (company.domain, person.email) - which makes record
+    writes convergent but is not an idempotency-key mechanism and does not cover
+    sequences, enrollments, tasks or events. The Bulk API guide advises processing
+    results idempotently on the client side ("use stable record IDs so retrying a
+    page" is safe), which places the burden on the caller.
+  agent_impact: >-
+    An agent that times out mid-write on create_sequence_enrollment or create_task
+    cannot safely retry; it must read back to determine whether the first call
+    landed. create_sequence_enrollment at least returns the conflicting
+    active_enrollment_id on 409, which makes that one recoverable.
 pagination:
-  data_api:
-    style: cursor
-    params: [cursor, limit]
-  sequences_api:
-    style: cursor and page
-    params: [cursor, limit, page, page_size]
-    notes: Bulk query-job results are fetched page by page (page, page_size up
-      to 10000 per the Bulk API guide).
+  style: cursor
+  uniform: true
+  detail: >-
+    List endpoints are cursor-paginated across Data, Sequences and Tasks. Each
+    response carries next_cursor; pass it as the `cursor` query parameter for the
+    next page. A null next_cursor means there are no more results.
+  params: [cursor, limit]
+  response_fields: [next_cursor]
+  bulk_api:
+    style: page-based
+    params: [page, page_size]
+    max_page_size: 10000
+    detail: Bulk query-job results are fetched page by page, separately from the cursor lists.
 filtering:
-  sequences_api: [sequence_id, person_id, mailbox_id, status, type,
-    updated_after, updated_before]
+  sequences_api: [sequence_id, person_id, mailbox_id, status, type, updated_after, updated_before]
+  bulk_api:
+    detail: >-
+      Query jobs take structured filter objects - datetime range filters on
+      created_at / updated_at / due_at / ended_at, and set filters (in / not_in)
+      on id - so a job can be scoped rather than exporting everything.
+  sorting:
+    tasks: created_at (the only declared TaskSortField)
 validation:
-  dry_run: validation_mode query parameter on Data API create, upsert, and
-    update record operations.
-error_envelope:
-  shape: Custom JSON error objects (e.g. UResponses.BadRequestError with code
-    and path fields); success responses wrap payloads in a status/data
-    envelope. Not RFC 9457 problem+json. See errors/unify-problem-types.yml.
-rate_limits:
-  signaling: 429 responses documented on Sequences API operations ("Response
-    for any operation that exceeds a rate limit"); no published numeric limits
-    found.
+  dry_run:
+    param: validation_mode
+    applies_to: Data API create, upsert and update record operations
+    detail: Lets a caller validate a write without committing it.
+expansion:
+  supported: false
+  note: No field expansion, sparse fieldsets or `expand` parameter is offered.
+metadata:
+  supported: false
+  note: No free-form metadata bag on any resource; custom fields are modelled as first-class object attributes instead.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation-id response header is documented, and none is
+    declared in any of the four OpenAPI documents. A caller reporting a failure to
+    support has no server-side handle to quote.
 versioning:
-  scheme: uri-path (/v1). See lifecycle/unify-lifecycle.yml.
+  scheme: uri-path
+  current: v1
+  detail: >-
+    Every service carries its version in the path segment after the service name -
+    /data/v1, /sequences/v1, /tasks/v1, /analytics/v1. info.version is "1" in all
+    four documents. No header or date-based versioning.
+  cross_link: lifecycle/unify-lifecycle.yml
+error_envelope:
+  format: custom
+  media_type: application/json
+  shape: "{ status: <enum string>, message: <string> }, extended per-error via allOf"
+  rfc9457: false
+  cross_link: errors/unify-problem-types.yml
+rate_limits:
+  headline: 100,000 requests per 5-minute window on Data, Sequences, Tasks and Analytics
+  bulk: create ~100 jobs/day; status ~10 rps; results ~5 rps
+  signaling:
+    status_code: 429
+    retry_after: true
+    quota_headers: false
+    detail: >-
+      Retry-After is the only documented rate-limit response header. No
+      X-RateLimit-* or RateLimit-* headers, so remaining quota is not observable.
+  cross_link: rate-limits/unify-rate-limits.yml
 async_jobs:
-  pattern: The Bulk API uses asynchronous query jobs (create job -> poll status
-    -> page results -> optional cancel) for large Sequence enrollment and
-    enrollment-step exports.
+  pattern: create job -> poll status -> page results -> optional cancel
+  families: [object records, events, sequence enrollments, sequence enrollment steps, tasks]
+  lifecycle_errors:
+    - 409 results not ready yet
+    - 409 job not cancelable
+    - 410 results expired
+    - 413 results page too large
+  detail: >-
+    The Bulk API is how large datasets leave Unify. Results expire, so a job id is
+    not a durable handle; a 410 means create a new job rather than retry.
+webhooks:
+  outbound: Plays "Webhook" action (see asyncapi/unify-webhooks.yml)
+  entitlement: Business plan
+mcp:
+  detail: >-
+    61 of the 68 REST operations are exposed as MCP tools whose names are identical
+    to the operationIds, so every convention above applies unchanged through the
+    agent surface.
+  cross_link: mcp/unify-tool-crosswalk.yml
 cross_links:
   errors: errors/unify-problem-types.yml
   lifecycle: lifecycle/unify-lifecycle.yml
   authentication: authentication/unify-authentication.yml
+  rate_limits: rate-limits/unify-rate-limits.yml
+  scopes: scopes/unify-scopes.yml
+  data_model: data-model/unify-data-model.yml

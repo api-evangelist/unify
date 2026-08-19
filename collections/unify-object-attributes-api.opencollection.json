@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Data Object Attributes API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Object Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_object_attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              }
+            ]
+          },
+          "docs": "List the attributes defined on an object. Attributes are the typed\nfields that records of the object hold values for, identified by API\nname."
+        },
+        {
+          "info": {
+            "name": "create_object_attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an attribute to an object. The attribute's value type is fixed at\ncreation; `SELECT` / `MULTI_SELECT` attributes take a list of options,\nand `REFERENCE` attributes link to records of a related object. Unique\nattributes can be used to match records in find-unique and upsert\nrequests."
+        },
+        {
+          "info": {
+            "name": "get_object_attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              }
+            ]
+          },
+          "docs": "Get a single attribute on an object by its API name."
+        },
+        {
+          "info": {
+            "name": "update_object_attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an attribute's mutable fields (e.g. `display_name`,\n`description`). The value type and API name are fixed at creation, and a\nreference attribute's cardinality cannot be downgraded from `MANY` to\n`ONE`."
+        },
+        {
+          "info": {
+            "name": "delete_object_attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/attributes/:attribute_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              },
+              {
+                "name": "attribute_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the attribute."
+              }
+            ]
+          },
+          "docs": "Delete an attribute from an object by its API name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

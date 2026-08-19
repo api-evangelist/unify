@@ -1,0 +1,2240 @@
+{
+  "item": [
+    {
+      "id": "07ce8673-b57d-423d-8d6e-0446d128fd98",
+      "name": "Object Attributes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d907147c-8477-419a-9cf0-aace73884d2c",
+          "name": "list object attributes",
+          "request": {
+            "name": "list object attributes",
+            "description": {
+              "content": "List the attributes defined on an object. Attributes are the typed\nfields that records of the object hold values for, identified by API\nname.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) API name of the object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d587c85-2a5d-47b0-8dc5-23f3bbeaf0ba",
+              "name": "Response for a successful list operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": [\n    {\n      \"type\": \"ADDRESS\",\n      \"api_name\": \"string\",\n      \"display_name\": \"string\",\n      \"description\": \"string\",\n      \"is_required\": true,\n      \"is_unique\": false\n    },\n    {\n      \"type\": \"ADDRESS\",\n      \"api_name\": \"string\",\n      \"display_name\": \"string\",\n      \"description\": \"string\",\n      \"is_required\": false,\n      \"is_unique\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c9ae1d1-c823-4b85-9e60-8a65253754d7",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66edb153-e82a-43bd-b80a-4f1e15584a92",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "712d2d16-1597-428b-a2cc-2faa7e79b4a6",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"object_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bc22f39-c6d2-4e9a-8f7a-f29b6e9557e9",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df33e4cc-8ced-4684-b31e-1b8a16010140",
+          "name": "create object attribute",
+          "request": {
+            "name": "create object attribute",
+            "description": {
+              "content": "Add an attribute to an object. The attribute's value type is fixed at\ncreation; `SELECT` / `MULTI_SELECT` attributes take a list of options,\nand `REFERENCE` attributes link to records of a related object. Unique\nattributes can be used to match records in find-unique and upsert\nrequests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) API name of the object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "058c9438-15b8-4a46-ac6c-f66a9a5fa108",
+              "name": "Response for a successful create operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"type\": \"<string>\",\n    \"api_name\": \"<string>\",\n    \"display_name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"is_unique\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97c16c77-9766-4058-8239-c25287012cdc",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"attribute_reference_object_not_found\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8780b74-9cc6-4f0b-a7fa-891526b3a59a",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4f51a96-afa7-44b7-94aa-4cf239740a84",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa13f489-6829-4c2b-a2bc-e7ff25caafab",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"object_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "942a7c0f-1c3e-4303-8027-1e6289a360d3",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"attribute_conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df8bdb3-3e1d-4058-9664-6f2f9e8813e9",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"api_name\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"is_required\": \"<boolean>\",\n  \"is_unique\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75e8f526-327e-49b3-b200-2101a127c0c6",
+          "name": "get object attribute",
+          "request": {
+            "name": "get object attribute",
+            "description": {
+              "content": "Get a single attribute on an object by its API name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "attributes",
+                ":attribute_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) API name of the object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attribute_name",
+                  "description": "(Required) API name of the attribute."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43ab0946-d8be-47af-a715-94b79e7f244d",
+              "name": "Response for a successful get operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"type\": \"<string>\",\n    \"api_name\": \"<string>\",\n    \"display_name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"is_unique\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50cd6e0b-4021-42d2-9abb-62637079575b",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8c0b0ca-d38e-44e8-b3f4-c97263d032e2",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49e9d757-e6ad-4d69-a11d-1dc80bedfcc7",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"attribute_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31c89c24-a056-4545-b01d-57c187c55d00",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3ec4e90-26ea-43e4-86ae-3017ebef604b",
+          "name": "update object attribute",
+          "request": {
+            "name": "update object attribute",
+            "description": {
+              "content": "Update an attribute's mutable fields (e.g. `display_name`,\n`description`). The value type and API name are fixed at creation, and a\nreference attribute's cardinality cannot be downgraded from `MANY` to\n`ONE`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "attributes",
+                ":attribute_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) API name of the object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attribute_name",
+                  "description": "(Required) API name of the attribute."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "900d447d-4fa5-4719-a53f-b0a241851ca9",
+              "name": "Response for a successful update operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"data\": {\n    \"type\": \"<string>\",\n    \"api_name\": \"<string>\",\n    \"display_name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"is_unique\": \"<boolean>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2cf4324-a501-460e-8de1-f39205d577af",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"reference_cardinality_downgrade_not_supported\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0e05a5d-3354-42ea-97fb-292821c10096",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3846536-c0f5-4068-b6e0-f472e91296db",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0ba0894-1417-4501-8c79-492194165e8e",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"attribute_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe110775-900a-408d-b82e-467bc5cfe7a5",
+              "name": "Response for any operation that results in a conflict error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"related_attribute_conflict\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3d46c1c-8834-4fdb-8e46-50a97ed3f5fd",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"display_name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98f2f931-81fc-4449-b10c-f6625f2a8f1b",
+          "name": "delete object attribute",
+          "request": {
+            "name": "delete object attribute",
+            "description": {
+              "content": "Delete an attribute from an object by its API name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v1",
+                "objects",
+                ":object_name",
+                "attributes",
+                ":attribute_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_name",
+                  "description": "(Required) API name of the object."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "attribute_name",
+                  "description": "(Required) API name of the attribute."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c81a2b8c-6803-4dab-9526-b102bd9b87dd",
+              "name": "Response for a successful delete operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5a59fa8-a3a8-497a-94ec-71340421abd7",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a790d6fa-dc39-4a2c-ba75-272b38b07baa",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a6a88c9-31be-4af3-97d3-6e59cf381f56",
+              "name": "Response for any operation that results in a forbidden error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"forbidden\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee128516-b281-4d3b-a4d1-9eaddbeb461d",
+              "name": "Response for any operation that results in a not found error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"attribute_not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e18cf86-4475-4324-b5de-bbb161b12c1d",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v1",
+                    "objects",
+                    ":object_name",
+                    "attributes",
+                    ":attribute_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_name",
+                      "description": "(Required) API name of the object."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "attribute_name",
+                      "description": "(Required) API name of the attribute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unifygtm.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "74188f9a-cb02-4f45-bca4-dea192487386",
+    "name": "Unify Data Object Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Unify Support\n Email: support@unifygtm.com",
+      "type": "text/plain"
+    }
+  }
+}

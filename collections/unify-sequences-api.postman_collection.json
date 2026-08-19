@@ -1,0 +1,2908 @@
+{
+  "item": [
+    {
+      "id": "3e576885-6c52-4555-93a2-83066da07236",
+      "name": "Sequences",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8c30daa-e591-424e-a256-1a16d3e10653",
+          "name": "list sequences",
+          "request": {
+            "name": "list sequences",
+            "description": {
+              "content": "List sequences — automated series of outreach steps (emails, tasks, and\ntiming conditions) that run against enrolled people.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by the previous page."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c4a2c83-37d0-4b04-8429-94dd5615b690",
+              "name": "Response returned when listing sequences.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sequences\": [\n    {\n      \"id\": \"64523029-9f62-1a37-086f-260faaf755a8\",\n      \"created_at\": \"2012-01-12T04:44:50.118Z\",\n      \"updated_at\": \"1959-06-29T05:03:57.355Z\",\n      \"owner\": {\n        \"id\": \"970548c2-73ec-600e-9e50-9b471e31016f\",\n        \"email\": \"J3qg2pCOTaE0S-M@vIrDpminCYiQDdhF.dp\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"name\": \"string\",\n      \"is_paused\": false,\n      \"send_schedule\": {\n        \"id\": \"6fe7a044-df2c-d3b6-7616-d9734979ced3\",\n        \"created_at\": \"1987-01-28T10:40:46.075Z\",\n        \"updated_at\": \"1965-12-04T22:03:42.376Z\",\n        \"is_default\": true,\n        \"name\": \"string\",\n        \"rules\": {\n          \"time_zone\": \"string\",\n          \"send_days\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"skip_us_holidays\": false,\n          \"excluded_dates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"sequence_ruleset\": {\n        \"id\": \"c9b6e885-c7d6-4c55-1362-f2d4cdb90d5e\",\n        \"created_at\": \"1977-02-04T23:52:59.885Z\",\n        \"updated_at\": \"2015-06-04T01:08:44.381Z\",\n        \"name\": \"string\",\n        \"is_default\": false,\n        \"automatic_enrollment_task_assignment\": \"ASSIGN_TO_USER\",\n        \"automatic_enrollment_task_assignment_user_id\": \"f13f4a76-29c4-e5ec-ad74-84753131d852\",\n        \"manual_enrollment_task_assignment\": \"ASSIGN_TO_USER\",\n        \"manual_enrollment_task_assignment_user_id\": \"daaae2af-2e73-95f1-8cc1-9d69b88366fa\",\n        \"opt_out_message\": \"string\",\n        \"allow_same_sequence_reenrollment\": false,\n        \"block_reenrollment_value\": 3335,\n        \"block_reenrollment_units\": \"MONTH\"\n      }\n    },\n    {\n      \"id\": \"49b35381-9aaf-6ccf-24e6-5f8eedac0ffd\",\n      \"created_at\": \"1947-03-29T06:40:07.874Z\",\n      \"updated_at\": \"1971-08-20T01:48:22.917Z\",\n      \"owner\": {\n        \"id\": \"223f2f40-1b82-35ea-88c2-9ea10a07866d\",\n        \"email\": \"kNWp0@PdGeKFMSfMaSuUUyfIJAeRwBbVaCBfyS.il\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"name\": \"string\",\n      \"is_paused\": false,\n      \"send_schedule\": {\n        \"id\": \"fb911c27-aea7-137d-2cc4-2a8297208e5f\",\n        \"created_at\": \"1981-08-26T00:09:35.331Z\",\n        \"updated_at\": \"1960-05-15T00:28:55.369Z\",\n        \"is_default\": true,\n        \"name\": \"string\",\n        \"rules\": {\n          \"time_zone\": \"string\",\n          \"send_days\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"skip_us_holidays\": true,\n          \"excluded_dates\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"sequence_ruleset\": {\n        \"id\": \"fd733c69-6451-ec01-ff17-6005b73be05f\",\n        \"created_at\": \"1977-01-03T20:52:12.294Z\",\n        \"updated_at\": \"2025-08-24T19:18:21.045Z\",\n        \"name\": \"string\",\n        \"is_default\": false,\n        \"automatic_enrollment_task_assignment\": \"ASSIGN_TO_USER\",\n        \"automatic_enrollment_task_assignment_user_id\": \"59cf8232-19d7-409b-f232-ab4b5ce9e4a9\",\n        \"manual_enrollment_task_assignment\": \"ASSIGN_TO_MAILBOX_OWNER\",\n        \"manual_enrollment_task_assignment_user_id\": \"67d3e467-a2f2-8165-8eaf-34c141a52543\",\n        \"opt_out_message\": \"string\",\n        \"allow_same_sequence_reenrollment\": false,\n        \"block_reenrollment_value\": 8275,\n        \"block_reenrollment_units\": \"YEAR\"\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2537d33b-fe55-4c45-b51a-ce86e6d197b3",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f94c883-a681-4107-9741-8f15fd5722d7",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ee7c5e1-c30a-46c0-9683-9d0494786ccc",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f196240b-849b-46bb-a683-a45bf397de09",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1255a797-ed0d-47ba-84e0-6d9f45659a5c",
+          "name": "retrieve sequence",
+          "request": {
+            "name": "retrieve sequence",
+            "description": {
+              "content": "Get a single sequence by its ID, including its owner, send schedule, and\nruleset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "887754a6-eae5-445a-956e-dd6d14770c3c",
+              "name": "Response returned when retrieving a sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"created_at\": \"1949-06-23T22:25:44.369Z\",\n  \"updated_at\": \"1973-03-01T16:36:54.639Z\",\n  \"owner\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"SykpBgV@fkSaqj.gou\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"is_paused\": false,\n  \"send_schedule\": {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"2009-07-16T00:07:51.790Z\",\n    \"updated_at\": \"1989-07-26T17:00:05.219Z\",\n    \"is_default\": true,\n    \"name\": \"string\",\n    \"rules\": {\n      \"time_zone\": \"string\",\n      \"send_days\": {\n        \"1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"4\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"5\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"6\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"7\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"skip_us_holidays\": true,\n      \"excluded_dates\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  \"sequence_ruleset\": {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"1950-02-17T21:50:09.430Z\",\n    \"updated_at\": \"1957-02-21T20:56:23.521Z\",\n    \"name\": \"string\",\n    \"is_default\": false,\n    \"automatic_enrollment_task_assignment\": \"ASSIGN_TO_MAILBOX_OWNER\",\n    \"automatic_enrollment_task_assignment_user_id\": \"<uuid>\",\n    \"manual_enrollment_task_assignment\": \"ASSIGN_TO_MAILBOX_OWNER\",\n    \"manual_enrollment_task_assignment_user_id\": \"<uuid>\",\n    \"opt_out_message\": \"string\",\n    \"allow_same_sequence_reenrollment\": true,\n    \"block_reenrollment_value\": 1873,\n    \"block_reenrollment_units\": \"YEAR\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "406fa422-31ba-4196-b885-ac8e695f55c4",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54027119-551e-4e10-9928-18a983028920",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c4b3de-3d74-4d88-9770-a9919a9ce3a4",
+              "name": "Response returned when a sequence cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0e35e4d-cfbb-4e78-9977-338ee456adb8",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aeb8d39f-597d-4bf1-ae34-b46eb8e2bb29",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e90ad29-60e5-4066-8586-e6e41346a1fd",
+          "name": "delete sequence",
+          "request": {
+            "name": "delete sequence",
+            "description": {
+              "content": "Delete a sequence by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0651036-b24a-4233-b167-66007e689d89",
+              "name": "Response returned when deleting a sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"is_deleted\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "044bec91-3a47-4d3f-ae9d-11061fe6793d",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aacca9d8-b50f-4bb5-aad5-cfc4cd10559a",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92d8d76d-6af3-4a7e-9de9-901777291b9a",
+              "name": "Response returned when a sequence cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ee7e8b5-dcb2-415a-9146-a0a1002ce02b",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad62edff-c16e-45ab-99eb-2c7c6dae285b",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22ce4bdf-d9a0-490d-bebe-0840b5788819",
+          "name": "pause sequence",
+          "request": {
+            "name": "pause sequence",
+            "description": {
+              "content": "Pause a sequence, halting progress for all of its enrollments until it\nis resumed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences",
+                ":id",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "875df29b-9fce-40da-a606-f58ef7250205",
+              "name": "Response returned when pausing a sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"is_paused\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9f06808-0560-4e09-8254-0236c3583d19",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32788c06-69ee-4dd1-9ee9-e41b4febf593",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0b5b58a-b25a-4145-b73f-6a9dff1c774e",
+              "name": "Response returned when a sequence cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71bd9fba-2b5e-4a23-92d9-329ba45c118f",
+              "name": "Response returned when a sequence state change conflicts with a concurrent update.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_is_paused\": true,\n  \"message\": \"string\",\n  \"status\": \"state_conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20ede3ae-c11b-4ca4-bd0d-7778edebcd7a",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b911a62f-3703-4840-958c-c1d6c3f95380",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd7f713b-e107-4444-a6aa-4028631975d5",
+          "name": "resume sequence",
+          "request": {
+            "name": "resume sequence",
+            "description": {
+              "content": "Resume a paused sequence so its enrollments continue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences",
+                ":id",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d778a0f3-77f9-43e0-8419-f4c7e7507bab",
+              "name": "Response returned when resuming a sequence.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"created_at\": \"2013-08-11T08:56:00.606Z\",\n  \"updated_at\": \"1995-04-25T00:33:30.907Z\",\n  \"owner\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"UAitBfTuX-Qf@qDTNddNuiqilStLTLGxJIzzfMoVihRz.dfg\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"name\": \"string\",\n  \"is_paused\": false,\n  \"send_schedule\": {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"1988-11-06T13:00:30.395Z\",\n    \"updated_at\": \"1998-11-16T10:34:01.181Z\",\n    \"is_default\": true,\n    \"name\": \"string\",\n    \"rules\": {\n      \"time_zone\": \"string\",\n      \"send_days\": {\n        \"1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"4\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"5\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"6\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"7\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"skip_us_holidays\": false,\n      \"excluded_dates\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ]\n    }\n  },\n  \"sequence_ruleset\": {\n    \"id\": \"<uuid>\",\n    \"created_at\": \"1988-10-01T22:32:06.417Z\",\n    \"updated_at\": \"1951-03-21T21:14:57.904Z\",\n    \"name\": \"string\",\n    \"is_default\": false,\n    \"automatic_enrollment_task_assignment\": \"ASSIGN_TO_USER\",\n    \"automatic_enrollment_task_assignment_user_id\": \"<uuid>\",\n    \"manual_enrollment_task_assignment\": \"ASSIGN_TO_USER\",\n    \"manual_enrollment_task_assignment_user_id\": \"<uuid>\",\n    \"opt_out_message\": \"string\",\n    \"allow_same_sequence_reenrollment\": false,\n    \"block_reenrollment_value\": 6406,\n    \"block_reenrollment_units\": \"MONTH\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9bf9d4c-53a5-4748-8aa4-9d8fc6e9b00f",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b207051c-71c8-4c1b-9861-b7a39f86a958",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c9bf550-d1c7-4c71-9cbe-b52a8fc0711d",
+              "name": "Response returned when a sequence cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "944e660c-d36f-4986-b053-b8050bc27927",
+              "name": "Response returned when a sequence state change conflicts with a concurrent update.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_is_paused\": true,\n  \"message\": \"string\",\n  \"status\": \"state_conflict\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d8f1e11-d7c6-433e-8b42-17286a02e58b",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f9cb976-1067-4c62-b2c0-d924d2975653",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3c49cb8-9e14-4d17-9119-837996293cb7",
+          "name": "list sequence steps",
+          "request": {
+            "name": "list sequence steps",
+            "description": {
+              "content": "List a sequence's steps. Steps are automatic emails, manual emails, or\ntasks (calls, LinkedIn touches, action items); each step's dependencies\ndescribe when it runs relative to its parent step.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences",
+                ":id",
+                "steps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned by the previous page."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Repeat `type` to filter by multiple sequence step types."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Repeat `type` to filter by multiple sequence step types."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82910d1d-835c-4f43-aaab-56a16429d46f",
+              "name": "Response returned when listing sequence steps.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"steps\": [\n    {\n      \"config\": {\n        \"is_root_message\": true,\n        \"subject\": \"string\",\n        \"fallback_subject\": \"string\",\n        \"body\": \"string\",\n        \"cc_recipients\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"bcc_recipients\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"created_at\": \"1966-03-03T04:04:36.587Z\",\n      \"dependencies\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"id\": \"<uuid>\",\n      \"key\": \"string\",\n      \"sequence_id\": \"<uuid>\",\n      \"type\": \"AUTOMATIC_EMAIL\",\n      \"updated_at\": \"1978-02-05T14:34:40.454Z\",\n      \"version_number\": 2098\n    },\n    {\n      \"config\": {\n        \"is_root_message\": true,\n        \"subject\": \"string\",\n        \"fallback_subject\": \"string\",\n        \"body\": \"string\",\n        \"cc_recipients\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"bcc_recipients\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"created_at\": \"1967-07-23T12:34:19.980Z\",\n      \"dependencies\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"id\": \"<uuid>\",\n      \"key\": \"string\",\n      \"sequence_id\": \"<uuid>\",\n      \"type\": \"AUTOMATIC_EMAIL\",\n      \"updated_at\": \"1994-11-28T20:19:37.076Z\",\n      \"version_number\": 4410\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbd9f29a-e33b-436e-b461-da9df965f0e2",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0111f86c-b6e5-4010-bb08-26799ecc04fc",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4afa61ff-3bcb-48d7-b21b-843968751556",
+              "name": "Response returned when a sequence step cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61508b35-64c6-4885-80c3-ccf460faa29c",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bee8e12a-e32a-4eed-afdb-a1a679f499ca",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d8c9f04-4fcc-44d7-9275-879b1f930838",
+          "name": "retrieve sequence step",
+          "request": {
+            "name": "retrieve sequence step",
+            "description": {
+              "content": "Get a single step of a sequence by ID. The response shape is\ndiscriminated by the step's `type`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sequences",
+                "v1",
+                "sequences",
+                ":id",
+                "steps",
+                ":step_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "step_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d97ff84-2efa-4b6c-ae78-c1660d582e72",
+              "name": "Response returned when retrieving an automatic email sequence step.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps",
+                    ":step_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "step_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"config\": {\n    \"is_root_message\": false,\n    \"subject\": \"string\",\n    \"fallback_subject\": \"string\",\n    \"body\": \"string\",\n    \"cc_recipients\": [\n      \"string\",\n      \"string\"\n    ],\n    \"bcc_recipients\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"created_at\": \"2009-05-20T03:29:31.227Z\",\n  \"dependencies\": [\n    {\n      \"parent_step_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"condition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"parent_step_id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"condition\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"id\": \"<uuid>\",\n  \"key\": \"string\",\n  \"sequence_id\": \"<uuid>\",\n  \"type\": \"AUTOMATIC_EMAIL\",\n  \"updated_at\": \"2009-11-28T05:23:32.314Z\",\n  \"version_number\": 3703\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7387adab-59df-482d-9850-f53c6c19597f",
+              "name": "Response for any operation that results in a bad request error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps",
+                    ":step_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "step_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"bad_request\",\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"object_api_name\": \"string\",\n      \"attribute_api_name\": \"string\"\n    }\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d8b9ec3-b17e-413d-905e-25fceb0a9079",
+              "name": "Response for any operation that results in an unauthorized error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps",
+                    ":step_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "step_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unauthorized\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a28b44d2-7f33-42be-b24d-af09942f723b",
+              "name": "Response returned when a sequence step cannot be found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps",
+                    ":step_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "step_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"not_found\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5caf7ca-bf09-453b-af1a-8148efee6b48",
+              "name": "Response for any operation that exceeds a rate limit.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps",
+                    ":step_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "step_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"rate_limited\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f66f385-5a21-4f7c-ab60-d06a57e91eb1",
+              "name": "Response for any operation that results in an internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sequences",
+                    "v1",
+                    "sequences",
+                    ":id",
+                    "steps",
+                    ":step_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "step_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unifygtm.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4d9ffdf-2323-4563-a906-c3cfec716e1a",
+    "name": "Unify Sequences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Unify Support\n Email: support@unifygtm.com",
+      "type": "text/plain"
+    }
+  }
+}

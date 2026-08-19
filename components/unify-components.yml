@@ -1,0 +1,70 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.unifygtm.com/developers/intent-client/website-tag,
+  https://docs.unifygtm.com/developers/intent-client/js-client,
+  https://docs.unifygtm.com/developers/intent-client/react
+checked: '2026-08-13'
+note: >-
+  Unify ships no embeddable UI components (no web components, element library,
+  hosted checkout-style surfaces or embedded dashboards). What it does ship
+  client-side is a collection tag: a browser script that installs the Unify Intent
+  client and streams page visits and interactions to the Analytics API. It is
+  catalogued here because it is a client-side loader distributed by CDN rather
+  than a server-side SDK - the npm packages that wrap it live in
+  packages/unify-packages.yml.
+families:
+  - name: Unify Intent website tag
+    kind: collection-script
+    description: >-
+      A <script> tag placed in the <head> or <body> of a marketing site. Once
+      installed it collects page visits automatically; manual interaction tracking
+      is optional. The docs warn to initialize the client only once per site.
+    loader:
+      cdn_host: https://tag.unifyintent.com
+      registry: cdn
+      version: null
+      version_note: >-
+        The snippet is generated per workspace and copied from the Unify app
+        (Settings -> Integrations -> Unify Intent Client); the docs publish no
+        pinned version and no public unversioned URL, so a consumer cannot tell
+        which build they are loading. Recorded as null deliberately - checked,
+        nothing to record.
+      data_host: https://api.unifyintent.com
+    content_security_policy:
+      script-src: https://tag.unifyintent.com
+      connect-src: https://api.unifyintent.com
+      note: Both directives must be added for the tag to load and function.
+    install_paths:
+      - name: Direct HTML
+        detail: Paste the generated snippet into <head> or <body>.
+      - name: Google Tag Manager
+        detail: >-
+          Custom HTML tag, All Pages trigger; document.write support must be
+          enabled in the tag settings or the website tag will not work.
+      - name: HubSpot CMS
+        detail: Global install via the site template, or per-page.
+    source_snippet: https://app.unifygtm.com/dashboard/settings/integrations/unify-intent-client
+    docs: https://docs.unifygtm.com/developers/intent-client/website-tag
+  - name: Unify Intent JS client
+    kind: browser-library
+    description: >-
+      The programmatic form of the same client, for tracking user logins,
+      identifying visitors and emitting custom interactions from application code
+      rather than a pasted tag.
+    package: "@unifygtm/intent-client"
+    registry: npm
+    docs: https://docs.unifygtm.com/developers/intent-client/js-client
+  - name: Unify Intent React bindings
+    kind: browser-library
+    description: React provider/hooks wrapper around the Intent JS client.
+    package: "@unifygtm/intent-react"
+    registry: npm
+    docs: https://docs.unifygtm.com/developers/intent-client/react
+not_found:
+  - embeddable UI components / web components
+  - hosted or prebuilt user-facing surfaces
+  - embedded analytics or dashboard components
+cross_links:
+  packages: packages/unify-packages.yml
+  openapi: openapi/unify-events-api-openapi.yml

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: Unify Analytics Events API
   summary: Send website and product analytics data into the Unify platform.
@@ -78,57 +78,114 @@ paths:
               $ref: '#/components/schemas/TrackEvent'
 components:
   schemas:
-    UValues.UInteger:
-      type: integer
-      description: Integer value.
-      title: UInteger
-    TrackEvent:
+    CampaignParams:
+      type: object
+      properties:
+        source:
+          type: string
+          description: Source of the campaign.
+        medium:
+          type: string
+          description: Medium of the campaign.
+        campaign:
+          type: string
+          description: Name of the campaign.
+        term:
+          type: string
+          description: Term of the campaign.
+        content:
+          type: string
+          description: Content of the campaign.
+      description: UTM parameters for tracking marketing campaigns.
+    CreateOrUpdateUCompanyAttributes:
       type: object
       required:
-      - type
-      - visitorId
-      - timestamp
-      - context
-      - name
+      - domain
       properties:
-        type:
-          type: string
-          enum:
-          - track
-          description: The type of analytics event being sent.
-        visitorId:
-          type: string
-          description: Unique identifier for the visitor that triggered this event.
-        sessionId:
-          type: string
-          description: Unique identifier for the session in which this event occurred.
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the event (in UTC).
-        sentAt:
-          type: string
-          format: date-time
-          description: 'Timestamp at which the request is sent (in UTC).
-
-
-            Typically, this value is nearly identical to `timestamp`. However in some
-
-            situations there is latency between when the event occurs and when it is
-
-            sent to Unify.'
-        context:
+        address:
           allOf:
-          - $ref: '#/components/schemas/EventContext'
-          description: Contextual information about the client behind the event.
+          - $ref: '#/components/schemas/UValues.UAddress'
+            nullable: true
+          description: Physical address of the company.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
+          description: Corporate phone number of the company.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Description of the company.
+        do_not_contact:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
+          description: Whether contacting this company is disallowed.
+        domain:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+          description: Website domain of the company.
+        employee_count:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UInteger'
+            nullable: true
+          description: Estimated employee count of the company.
+        founded:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDate'
+            nullable: true
+          description: Date when the company was founded.
+        industry:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Industry the company operates in.
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Source of the company record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+            nullable: true
+          description: 'LinkedIn profile of the company.
+
+
+            This is the full URL of the LinkedIn profile of the company. The value will
+
+            always be standardized with an HTTPS prefix, "www" subdomain, and trailing
+
+            slash.'
         name:
-          type: string
-          description: Name of the event that was tracked.
-        properties:
           allOf:
-          - $ref: '#/components/schemas/TrackProperties'
-          description: Details about the event that was tracked.
-      description: A track event represents a custom action or activity performed by a visitor.
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Name of the company.
+        record_owner:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          nullable: true
+          description: The user that owns the company record.
+        revenue:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCurrency'
+            nullable: true
+          description: Estimated revenue of the company.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Status of the company.
+        time_zone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Time zone the company is located in.
+      description: ''
     CreateOrUpdateUPersonAttributes:
       type: object
       required:
@@ -137,18 +194,29 @@ components:
         address:
           allOf:
           - $ref: '#/components/schemas/UValues.UAddress'
+            nullable: true
           description: Physical address of the person.
+        company:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          nullable: true
+          description: Company associated with the person.
         corporate_phone:
           allOf:
           - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
           description: Corporate phone number of the person.
         do_not_call:
           allOf:
           - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
           description: Whether calling this person is disallowed.
         do_not_email:
           allOf:
           - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
           description: Whether emailing this person is disallowed.
         email:
           allOf:
@@ -157,26 +225,32 @@ components:
         email_opt_out:
           allOf:
           - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
           description: Whether the person has opted out of email communications.
         eu_resident:
           allOf:
           - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
           description: Whether this person is a resident of the European Union.
         first_name:
           allOf:
           - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
           description: First name of the person.
         last_name:
           allOf:
           - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
           description: Last name of the person.
         lead_source:
           allOf:
           - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
           description: Source of the person record.
         linkedin_url:
           allOf:
-          - $ref: '#/components/schemas/UValues.UText'
+          - $ref: '#/components/schemas/UValues.UUrl'
+            nullable: true
           description: 'LinkedIn profile of the person.
 
 
@@ -188,24 +262,75 @@ components:
         mobile_phone:
           allOf:
           - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
           description: Mobile phone number of the person.
         record_owner:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UReference'
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          nullable: true
           description: The user that owns the person record.
         status:
           allOf:
           - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
           description: Status of the person.
         title:
           allOf:
           - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
           description: Job title of the person.
         work_phone:
           allOf:
           - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
           description: Work phone number of the person.
       description: ''
+    EventContext:
+      type: object
+      properties:
+        library:
+          type: object
+          properties:
+            name:
+              type: string
+            version:
+              type: string
+          description: Name and version of the library used to send the event.
+        ip:
+          anyOf:
+          - $ref: '#/components/schemas/ipv4'
+          - $ref: '#/components/schemas/ipv6'
+          description: IP address for the client that triggered the event.
+        locale:
+          type: string
+          description: Locale string for the client that triggered the event.
+        userAgent:
+          type: string
+          description: User agent string for the device.
+        userAgentData:
+          type: object
+          properties:
+            brands:
+              type: array
+              items:
+                type: object
+                properties:
+                  brand:
+                    type: string
+                  version:
+                    type: string
+            mobile:
+              type: boolean
+            platform:
+              type: string
+          description: User agent data for the device.
+        utm:
+          allOf:
+          - $ref: '#/components/schemas/CampaignParams'
+          description: Marketing campaign information.
+      description: Contextual client information attached to an analytics event.
     IdentifyEvent:
       type: object
       required:
@@ -257,83 +382,6 @@ components:
           - $ref: '#/components/schemas/CreateOrUpdateUPersonAttributes'
           description: Information about the person associated with the visitor.
       description: An identify event is used to send information about a visitor.
-    ipv4:
-      type: string
-      format: ipv4
-    UValues.UCountry:
-      type: object
-      required:
-      - code
-      - name
-      properties:
-        code:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UCountryCode'
-          description: Country code.
-        name:
-          type: string
-          description: Country name.
-      description: Composite object representing a country.
-      title: UCountry
-    UValues.UReference:
-      type: object
-      required:
-      - object
-      - id
-      properties:
-        object:
-          type: string
-          description: Object type.
-        id:
-          type: string
-          format: uuid
-          description: Object ID.
-      description: Composite object representing a reference to another object.
-      title: UReference
-    EventContext:
-      type: object
-      properties:
-        library:
-          type: object
-          properties:
-            name:
-              type: string
-            version:
-              type: string
-          description: Name and version of the library used to send the event.
-        ip:
-          anyOf:
-          - $ref: '#/components/schemas/ipv4'
-          - $ref: '#/components/schemas/ipv6'
-          description: IP address for the client that triggered the event.
-        locale:
-          type: string
-          description: Locale string for the client that triggered the event.
-        userAgent:
-          type: string
-          description: User agent string for the device.
-        userAgentData:
-          type: object
-          properties:
-            brands:
-              type: array
-              items:
-                type: object
-                properties:
-                  brand:
-                    type: string
-                  version:
-                    type: string
-            mobile:
-              type: boolean
-            platform:
-              type: string
-          description: User agent data for the device.
-        utm:
-          allOf:
-          - $ref: '#/components/schemas/CampaignParams'
-          description: Marketing campaign information.
-      description: Contextual client information attached to an analytics event.
     PageEvent:
       type: object
       required:
@@ -380,10 +428,157 @@ components:
           - $ref: '#/components/schemas/PageProperties'
           description: Details about the page that was viewed.
       description: A page view event represents a client visiting a page on a website.
+    PageProperties:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path of the page (equivalent to `location.pathname`).
+        query:
+          type: object
+          additionalProperties:
+            type: string
+          description: Query string parameters (equivalent to `location.search`).
+        referrer:
+          type: string
+          description: Referrer page's full URL (equivalent to `document.referrer`).
+        title:
+          type: string
+          description: Page title (equivalent to `document.title`).
+        url:
+          type: string
+          description: URL of the page (equivalent to `location.href`).
+      description: Details about a page included in a page request.
+    TrackEvent:
+      type: object
+      required:
+      - type
+      - visitorId
+      - timestamp
+      - context
+      - name
+      properties:
+        type:
+          type: string
+          enum:
+          - track
+          description: The type of analytics event being sent.
+        visitorId:
+          type: string
+          description: Unique identifier for the visitor that triggered this event.
+        sessionId:
+          type: string
+          description: Unique identifier for the session in which this event occurred.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event (in UTC).
+        sentAt:
+          type: string
+          format: date-time
+          description: 'Timestamp at which the request is sent (in UTC).
+
+
+            Typically, this value is nearly identical to `timestamp`. However in some
+
+            situations there is latency between when the event occurs and when it is
+
+            sent to Unify.'
+        context:
+          allOf:
+          - $ref: '#/components/schemas/EventContext'
+          description: Contextual information about the client behind the event.
+        name:
+          type: string
+          description: Name of the event that was tracked.
+        properties:
+          allOf:
+          - $ref: '#/components/schemas/TrackProperties'
+          description: Details about the event that was tracked.
+      description: A track event represents a custom action or activity performed by a visitor.
+    TrackProperties:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path of the page (equivalent to `location.pathname`).
+        query:
+          type: object
+          additionalProperties:
+            type: string
+          description: Query string parameters (equivalent to `location.search`).
+        referrer:
+          type: string
+          description: Referrer page's full URL (equivalent to `document.referrer`).
+        title:
+          type: string
+          description: Page title (equivalent to `document.title`).
+        url:
+          type: string
+          description: URL of the page (equivalent to `location.href`).
+      additionalProperties: {}
+      description: Details about an event included in a track request.
+    Traits:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          description: Email address of the visitor.
+      description: Traits for the identify request payload.
+    UValues.UAddress:
+      type: object
+      properties:
+        country:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountry'
+          description: Country code in ISO 3166-1 alpha-2 format.
+        administrative_area:
+          type: string
+          description: State, province, region, or territory.
+        sub_administrative_area:
+          type: string
+          description: County or other secondary governmental division of an administrative area.
+        locality:
+          type: string
+          description: City, town, or village.
+        dependent_locality:
+          type: string
+          description: Neighborhood, borough, district, or city sector.
+        postal_code:
+          type: string
+          description: Postal code or ZIP code.
+        thoroughfare:
+          type: string
+          description: Street name with elements such as street type or direction.
+        premise:
+          type: string
+          description: Street number or building name.
+        sub_premise:
+          type: string
+          description: Apartment, suite, office number, or other secondary unit designator.
+      description: Composite object representing a physical address.
+      title: UAddress
     UValues.UBoolean:
       type: boolean
       description: Boolean value.
       title: UBoolean
+    UValues.UCountry:
+      type: object
+      required:
+      - code
+      - name
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountryCode'
+          description: Country code.
+        name:
+          type: string
+          description: Country name.
+      description: Composite object representing a country.
+      title: UCountry
     UValues.UCountryCode:
       type: string
       enum:
@@ -639,156 +834,22 @@ components:
       - ZW
       description: ISO 3166-1 alpha-2 country code.
       title: UCountryCode
-    UValues.UDate:
-      type: string
-      description: String value representing a date.
-      title: UDate
-    CreateOrUpdateUCompanyAttributes:
+    UValues.UCurrency:
       type: object
       required:
-      - domain
+      - code
+      - value
       properties:
-        address:
+        code:
           allOf:
-          - $ref: '#/components/schemas/UValues.UAddress'
-          description: Physical address of the company.
-        corporate_phone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UPhoneNumber'
-          description: Corporate phone number of the company.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Description of the company.
-        do_not_contact:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UBoolean'
-          description: Whether contacting this company is disallowed.
-        domain:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUrl'
-          description: Website domain of the company.
-        employee_count:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UInteger'
-          description: Estimated employee count of the company.
-        founded:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UDate'
-          description: Date when the company was founded.
-        industry:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Industry the company operates in.
-        lead_source:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Source of the company record.
-        linkedin_url:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: 'LinkedIn profile of the company.
-
-
-            This is the full URL of the LinkedIn profile of the company. The value will
-
-            always be standardized with an HTTPS prefix, "www" subdomain, and trailing
-
-            slash.'
-        name:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Name of the company.
-        record_owner:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UReference'
-          description: The user that owns the company record.
-        revenue:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UCurrency'
-          description: Estimated revenue of the company.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Status of the company.
-        time_zone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Time zone the company is located in.
-      description: ''
-    UValues.UEmail:
-      type: string
-      format: email
-      description: String value representing an email address.
-      title: UEmail
-    UValues.UText:
-      type: string
-      description: String value.
-      title: UText
-    Traits:
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          description: Email address of the visitor.
-      description: Traits for the identify request payload.
-    CampaignParams:
-      type: object
-      properties:
-        source:
-          type: string
-          description: Source of the campaign.
-        medium:
-          type: string
-          description: Medium of the campaign.
-        campaign:
-          type: string
-          description: Name of the campaign.
-        term:
-          type: string
-          description: Term of the campaign.
-        content:
-          type: string
-          description: Content of the campaign.
-      description: UTM parameters for tracking marketing campaigns.
-    ipv6:
-      type: string
-      format: ipv6
-    UValues.UAddress:
-      type: object
-      properties:
-        country:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UCountry'
-          description: Country code in ISO 3166-1 alpha-2 format.
-        administrativeArea:
-          type: string
-          description: State, province, region, or territory.
-        subAdministrativeArea:
-          type: string
-          description: County or other secondary governmental division of an administrative area.
-        locality:
-          type: string
-          description: City, town, or village.
-        dependentLocality:
-          type: string
-          description: Neighborhood, borough, district, or city sector.
-        postalCode:
-          type: string
-          description: Postal code or ZIP code.
-        thoroughfare:
-          type: string
-          description: Street name with elements such as street type or direction.
-        premise:
-          type: string
-          description: Street number or building name.
-        subPremise:
-          type: string
-          description: Apartment, suite, office number, or other secondary unit designator.
-      description: Composite object representing a physical address.
-      title: UAddress
+          - $ref: '#/components/schemas/UValues.UCurrencyCode'
+          description: Currency code.
+        value:
+          type: number
+          format: decimal
+          description: Currency value.
+      description: Composite object representing a currency value.
+      title: UCurrency
     UValues.UCurrencyCode:
       type: string
       enum:
@@ -971,73 +1032,158 @@ components:
       - ZMW
       description: ISO 4217 currency code.
       title: UCurrencyCode
-    UValues.UUrl:
+    UValues.UDate:
       type: string
-      description: String value representing a web URL or internet domain.
-      title: UUrl
-    PageProperties:
-      type: object
-      properties:
-        path:
-          type: string
-          description: Path of the page (equivalent to `location.pathname`).
-        query:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: Query string parameters (equivalent to `location.search`).
-        referrer:
-          type: string
-          description: Referrer page's full URL (equivalent to `document.referrer`).
-        title:
-          type: string
-          description: Page title (equivalent to `document.title`).
-        url:
-          type: string
-          description: URL of the page (equivalent to `location.href`).
-      description: Details about a page included in a page request.
+      description: String value representing a date.
+      title: UDate
+    UValues.UEmail:
+      type: string
+      format: email
+      description: String value representing an email address.
+      title: UEmail
+    UValues.UInteger:
+      type: integer
+      description: Integer value.
+      title: UInteger
     UValues.UPhoneNumber:
       type: string
       description: String value representing a phone number.
       title: UPhoneNumber
-    UValues.UCurrency:
+    UValues.UReferenceById:
       type: object
       required:
-      - code
-      - value
+      - id
       properties:
-        code:
+        id:
           allOf:
-          - $ref: '#/components/schemas/UValues.UCurrencyCode'
-          description: Currency code.
-        value:
-          type: number
-          format: decimal
-          description: Currency value.
-      description: Composite object representing a currency value.
-      title: UCurrency
-    TrackProperties:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: An object record ID.
+      description: 'Reference to another object record by ID.
+
+
+        This will find an existing record by its ID, and an error will be returned if
+
+        the record does not exist.'
+      title: UReferenceById
+    UValues.UReferenceByMatch:
       type: object
+      required:
+      - match
       properties:
-        path:
-          type: string
-          description: Path of the page (equivalent to `location.pathname`).
-        query:
+        match:
           type: object
-          unevaluatedProperties:
-            type: string
-          description: Query string parameters (equivalent to `location.search`).
-        referrer:
-          type: string
-          description: Referrer page's full URL (equivalent to `document.referrer`).
-        title:
-          type: string
-          description: Page title (equivalent to `document.title`).
-        url:
-          type: string
-          description: URL of the page (equivalent to `location.href`).
-      unevaluatedProperties: {}
-      description: Details about an event included in a track request.
+          additionalProperties: {}
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+      description: 'Reference to another object record by match criteria.
+
+
+        This will find an existing record using the provided match criteria, and
+
+        `null` will be returned if no match is found.'
+      title: UReferenceByMatch
+    UValues.UReferenceByUpsert:
+      type: object
+      required:
+      - match
+      properties:
+        match:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+        create:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to use when creating a new record if no match is found.
+        update:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to use when updating an existing record if a match is found.
+        update_if_empty:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to update when a matching record is found and the
+
+            existing attribute value on the record is `null`.'
+        create_or_update:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to apply during both creation and update operations.
+        create_or_update_if_empty:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to apply during both creation and update-if-empty
+
+            operations.'
+      description: 'Reference to another object record by performing a nested upsert.
+
+
+        At least one of `create`, `create_or_update` or `create_or_update_if_empty`
+
+        must be provided, and all required attributes on the object must be included
+
+        in at least one of these properties.
+
+
+        ## Precedence
+
+
+        When the same attribute is specified in multiple properties, the values will
+
+        be applied in a specific order of precedence. If a record is being created,
+
+        the following order is used:
+
+
+        1. `create`
+
+        2. `create_or_update`
+
+        3. `create_or_update_if_empty`
+
+
+        If an existing record is being updated, the following order is used:
+
+
+        1. `update`
+
+        2. `create_or_update`
+
+        3. `update_if_empty`
+
+        4. `create_or_update_if_empty`'
+      title: UReferenceByUpsert
+    UValues.UText:
+      type: string
+      description: String value.
+      title: UText
+    UValues.UUrl:
+      type: string
+      description: String value representing a web URL or internet domain.
+      title: UUrl
+    UValues.UUuid:
+      type: string
+      description: String UUIDv4 value.
+      title: UUuid
+    ipv4:
+      type: string
+      format: ipv4
+    ipv6:
+      type: string
+      format: ipv6
   securitySchemes:
     BasicAuth:
       type: http

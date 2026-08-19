@@ -1,19 +1,101 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
+source: live probe of every Unify host on 2026-08-13
+summary: >-
+  Unify does serve a real /.well-known/ discovery surface, but it is split across
+  three hosts and none of it sits on the marketing domain. The documentation host
+  (docs.unifygtm.com) serves an A2A agent card, an agent-skills discovery index and
+  an MCP manifest; the identity host (auth.unifygtm.com, a custom-domain Auth0
+  tenant) serves full RFC 8414 / OIDC discovery; and the GTM MCP host
+  (mcp.unifygtm.com) serves an RFC 9728 protected-resource document under a
+  sub-path. No security.txt (RFC 9116) and no api-catalog (RFC 9727) are served
+  anywhere. The previous round of this probe checked only www/docs/app and
+  concluded the surface was empty; that conclusion is superseded.
 hosts:
-  - host: https://www.unifygtm.com
-    documents:
-      - path: /.well-known/security.txt
-        status: 404
-      - path: /.well-known/openid-configuration
-        status: 404
-      - path: /.well-known/oauth-authorization-server
-        status: 404
-      - path: /.well-known/api-catalog
-        status: 404
-      - path: /.well-known/ai-plugin.json
-        status: 404
   - host: https://docs.unifygtm.com
+    role: documentation (Mintlify)
+    documents:
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: application/json
+        file: ../a2a/unify-agent-card.json
+        spec: A2A 1.0.0
+        note: Saved under a2a/ and graded in a2a/unify-a2a.yml.
+      - path: /.well-known/agent-skills/index.json
+        status: 200
+        content_type: application/json
+        file: unify-agent-skills-index.json
+        spec: agentskills.io discovery 0.2.0
+        note: >-
+          Lists one skill ("unify", type skill-md) with a sha256 digest, served at
+          /.well-known/agent-skills/unify/skill.md. The skill body is captured at
+          skills/unify-docs-agent-skill.md.
+      - path: /.well-known/agent-skills/unify/skill.md
+        status: 200
+        content_type: text/markdown
+        file: ../skills/unify-docs-agent-skill.md
+      - path: /.well-known/mcp.json
+        status: 200
+        content_type: application/json
+        file: unify-mcp.json
+        note: >-
+          Declares an anonymous HTTP MCP server. The url it advertises
+          (https://unify-19.main-kill-isr.mintlify.me/mcp) is a Mintlify internal
+          preview host rather than a unifygtm.com address; the equivalent server
+          answers correctly at https://docs.unifygtm.com/mcp. Recorded verbatim -
+          the mismatch is the provider's, not ours. See mcp/unify-mcp.yml.
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://auth.unifygtm.com
+    role: identity (Auth0 tenant on a Unify custom domain; issuer https://auth.unifygtm.com/)
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: unify-oauth-authorization-server.json
+        spec: RFC 8414
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        file: unify-openid-configuration.json
+        spec: OpenID Connect Discovery 1.0
+      - path: /.well-known/jwks.json
+        status: 200
+        note: Referenced as jwks_uri by both documents above; not mirrored here.
+  - host: https://mcp.unifygtm.com
+    role: hosted GTM MCP server
+    documents:
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 200
+        content_type: application/json
+        file: unify-oauth-protected-resource.json
+        spec: RFC 9728
+        note: >-
+          Discovered from the WWW-Authenticate challenge returned by an
+          unauthenticated POST to https://mcp.unifygtm.com/mcp. The bare
+          /.well-known/oauth-protected-resource path 404s; the document lives under
+          the resource sub-path. Names https://auth.unifygtm.com/ as the
+          authorization server and header bearer methods.
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+  - host: https://www.unifygtm.com
+    role: marketing site
     documents:
       - path: /.well-known/security.txt
         status: 404
@@ -24,12 +106,60 @@ hosts:
       - path: /.well-known/api-catalog
         status: 404
       - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api.unifygtm.com
+    role: Data / Sequences / Tasks API host
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api.unifyintent.com
+    role: Analytics API host
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
         status: 404
   - host: https://app.unifygtm.com
-    note: Returns HTTP 200 with the SPA index.html for every /.well-known/ path
-      (catch-all route) - no real well-known documents are served, so these are
-      recorded as absent.
+    role: application SPA
+    note: >-
+      Returns HTTP 200 with the SPA index.html (text/html, identical 27,883 bytes)
+      for every /.well-known/ path probed. This is a catch-all route, not a served
+      document; every path is recorded as absent.
     documents: []
-notes: No /.well-known/ discovery surface was found on any Unify host as of the
-  probe date. Recorded as valid absence; no WellKnown or SecurityTxt pointer is
-  wired in apis.yml.
+gaps:
+  - path: /.well-known/security.txt
+    status: 404 on every host
+    impact: >-
+      No RFC 9116 security contact is machine-discoverable. Unify does publish a
+      security address (security@unifygtm.com, on the pricing FAQ) and a trust
+      centre, so the contact exists - only the well-known document is missing.
+  - path: /.well-known/api-catalog
+    status: 404 on every host
+    impact: >-
+      The four OpenAPI documents are individually reachable at
+      <api-host>/<service>/v1/openapi.json but are not linked from an RFC 9727
+      catalogue, so an agent must already know the service names to find them.

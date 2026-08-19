@@ -1,0 +1,695 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  https://docs.unifygtm.com/developers/mcp/tools (the provider's published tool
+  reference, listing all 71 Unify MCP tools by name) cross-referenced against the
+  68 operationIds in openapi/, harvested live from
+  https://api.unifygtm.com/{data,sequences,tasks}/v1/openapi.json and
+  https://api.unifyintent.com/analytics/v1/openapi.json on 2026-08-13.
+note: >-
+  Unify's MCP tool names are byte-identical to its OpenAPI operationIds for every
+  one of the 61 public-API tools, so each binding is exact rather than inferred -
+  hence confidence: high throughout. The live tools/list on the GTM server is
+  OAuth-gated (401), so the inputSchema for each tool was not read directly; the
+  provider states in the tool reference that "their input and output schemas are
+  included in the MCP tool definitions", and the backing operation's parameters +
+  requestBody in openapi/ are the authoritative contract for each bound tool.
+surfaces:
+  openapi:
+    files: 11
+    operations: 68
+    dir: openapi/
+    gated: false
+  mcp:
+    - name: unify-gtm
+      url: https://mcp.unifygtm.com/mcp
+      tools: 71
+      gated: true
+      note: >-
+        tools/list returns HTTP 401 with a WWW-Authenticate Bearer challenge
+        naming https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp.
+        Tool names below are taken from the published reference, not from a live
+        introspection.
+    - name: unify-docs
+      url: https://docs.unifygtm.com/mcp
+      tools: 3
+      gated: false
+      note: >-
+        Separate anonymous documentation MCP server (Mintlify). Its three tools
+        (search_unify, query_docs_filesystem_unify, submit_feedback) read
+        documentation only and back no REST operation - see mcp_only[].
+  graphql: null
+coverage:
+  tools_published: 71
+  tools_bound_to_rest: 61
+  mcp_only: 13
+  rest_operations_total: 68
+  rest_operations_with_tool: 61
+  rest_operations_without_tool: 7
+crosswalk:
+  - tool: list_objects
+    category: objects-and-records
+    rest:
+      - list_objects
+    operation: GET /data/v1/objects
+    spec: openapi/unify-objects-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_object
+    category: objects-and-records
+    rest:
+      - get_object
+    operation: GET /data/v1/objects/{object_name}
+    spec: openapi/unify-objects-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_object
+    category: objects-and-records
+    rest:
+      - create_object
+    operation: POST /data/v1/objects
+    spec: openapi/unify-objects-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: update_object
+    category: objects-and-records
+    rest:
+      - update_object
+    operation: PATCH /data/v1/objects/{object_name}
+    spec: openapi/unify-objects-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_object
+    category: objects-and-records
+    rest:
+      - delete_object
+    operation: DELETE /data/v1/objects/{object_name}
+    spec: openapi/unify-objects-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_object_attributes
+    category: objects-and-records
+    rest:
+      - list_object_attributes
+    operation: GET /data/v1/objects/{object_name}/attributes
+    spec: openapi/unify-object-attributes-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_object_attribute
+    category: objects-and-records
+    rest:
+      - get_object_attribute
+    operation: GET /data/v1/objects/{object_name}/attributes/{attribute_name}
+    spec: openapi/unify-object-attributes-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_object_attribute
+    category: objects-and-records
+    rest:
+      - create_object_attribute
+    operation: POST /data/v1/objects/{object_name}/attributes
+    spec: openapi/unify-object-attributes-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: update_object_attribute
+    category: objects-and-records
+    rest:
+      - update_object_attribute
+    operation: PATCH /data/v1/objects/{object_name}/attributes/{attribute_name}
+    spec: openapi/unify-object-attributes-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_object_attribute
+    category: objects-and-records
+    rest:
+      - delete_object_attribute
+    operation: DELETE /data/v1/objects/{object_name}/attributes/{attribute_name}
+    spec: openapi/unify-object-attributes-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_object_attribute_options
+    category: objects-and-records
+    rest:
+      - list_object_attribute_options
+    operation: GET /data/v1/objects/{object_name}/attributes/{attribute_name}/options
+    spec: openapi/unify-object-attribute-options-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_object_attribute_option
+    category: objects-and-records
+    rest:
+      - get_object_attribute_option
+    operation: GET /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+    spec: openapi/unify-object-attribute-options-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_object_attribute_option
+    category: objects-and-records
+    rest:
+      - create_object_attribute_option
+    operation: POST /data/v1/objects/{object_name}/attributes/{attribute_name}/options
+    spec: openapi/unify-object-attribute-options-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: update_object_attribute_option
+    category: objects-and-records
+    rest:
+      - update_object_attribute_option
+    operation: PATCH /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+    spec: openapi/unify-object-attribute-options-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_object_attribute_option
+    category: objects-and-records
+    rest:
+      - delete_object_attribute_option
+    operation: DELETE /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+    spec: openapi/unify-object-attribute-options-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_object_record
+    category: objects-and-records
+    rest:
+      - get_object_record
+    operation: GET /data/v1/objects/{object_name}/records/{record_id}
+    spec: openapi/unify-object-records-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: find_unique_object_record
+    category: objects-and-records
+    rest:
+      - find_unique_object_record
+    operation: POST /data/v1/objects/{object_name}/records/find-unique
+    spec: openapi/unify-object-records-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_object_record
+    category: objects-and-records
+    rest:
+      - create_object_record
+    operation: POST /data/v1/objects/{object_name}/records
+    spec: openapi/unify-object-records-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: update_object_record
+    category: objects-and-records
+    rest:
+      - update_object_record
+    operation: PATCH /data/v1/objects/{object_name}/records/{record_id}
+    spec: openapi/unify-object-records-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: upsert_object_record
+    category: objects-and-records
+    rest:
+      - upsert_object_record
+    operation: POST /data/v1/objects/{object_name}/records/upsert
+    spec: openapi/unify-object-records-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_object_record
+    category: objects-and-records
+    rest:
+      - delete_object_record
+    operation: DELETE /data/v1/objects/{object_name}/records/{record_id}
+    spec: openapi/unify-object-records-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_object_record_query_job
+    category: objects-and-records
+    rest:
+      - create_object_record_query_job
+    operation: POST /data/v1/objects/{object_name}/query-jobs
+    spec: openapi/unify-object-record-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_object_record_query_jobs
+    category: objects-and-records
+    rest:
+      - list_object_record_query_jobs
+    operation: GET /data/v1/objects/{object_name}/query-jobs
+    spec: openapi/unify-object-record-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_object_record_query_job
+    category: objects-and-records
+    rest:
+      - get_object_record_query_job
+    operation: GET /data/v1/objects/{object_name}/query-jobs/{job_id}
+    spec: openapi/unify-object-record-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_object_record_query_job_results
+    category: objects-and-records
+    rest:
+      - get_object_record_query_job_results
+    operation: GET /data/v1/objects/{object_name}/query-jobs/{job_id}/results
+    spec: openapi/unify-object-record-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_sequences
+    category: sequences-and-enrollments
+    rest:
+      - list_sequences
+    operation: GET /sequences/v1/sequences
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: retrieve_sequence
+    category: sequences-and-enrollments
+    rest:
+      - retrieve_sequence
+    operation: GET /sequences/v1/sequences/{id}
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: pause_sequence
+    category: sequences-and-enrollments
+    rest:
+      - pause_sequence
+    operation: POST /sequences/v1/sequences/{id}/pause
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: resume_sequence
+    category: sequences-and-enrollments
+    rest:
+      - resume_sequence
+    operation: POST /sequences/v1/sequences/{id}/resume
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_sequence
+    category: sequences-and-enrollments
+    rest:
+      - delete_sequence
+    operation: DELETE /sequences/v1/sequences/{id}
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_sequence_steps
+    category: sequences-and-enrollments
+    rest:
+      - list_sequence_steps
+    operation: GET /sequences/v1/sequences/{id}/steps
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: retrieve_sequence_step
+    category: sequences-and-enrollments
+    rest:
+      - retrieve_sequence_step
+    operation: GET /sequences/v1/sequences/{id}/steps/{step_id}
+    spec: openapi/unify-sequences-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_sequence_enrollments
+    category: sequences-and-enrollments
+    rest:
+      - list_sequence_enrollments
+    operation: GET /sequences/v1/enrollments
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_sequence_enrollment
+    category: sequences-and-enrollments
+    rest:
+      - get_sequence_enrollment
+    operation: GET /sequences/v1/enrollments/{id}
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_sequence_enrollment
+    category: sequences-and-enrollments
+    rest:
+      - create_sequence_enrollment
+    operation: POST /sequences/v1/enrollments
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: pause_sequence_enrollment
+    category: sequences-and-enrollments
+    rest:
+      - pause_sequence_enrollment
+    operation: POST /sequences/v1/enrollments/{id}/pause
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: resume_sequence_enrollment
+    category: sequences-and-enrollments
+    rest:
+      - resume_sequence_enrollment
+    operation: POST /sequences/v1/enrollments/{id}/resume
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_sequence_enrollment
+    category: sequences-and-enrollments
+    rest:
+      - delete_sequence_enrollment
+    operation: DELETE /sequences/v1/enrollments/{id}
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_sequence_enrollment_query_job
+    category: sequences-and-enrollments
+    rest:
+      - create_sequence_enrollment_query_job
+    operation: POST /sequences/v1/enrollments/query-jobs
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_sequence_enrollment_query_jobs
+    category: sequences-and-enrollments
+    rest:
+      - list_sequence_enrollment_query_jobs
+    operation: GET /sequences/v1/enrollments/query-jobs
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_sequence_enrollment_query_job
+    category: sequences-and-enrollments
+    rest:
+      - get_sequence_enrollment_query_job
+    operation: GET /sequences/v1/enrollments/query-jobs/{job_id}
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_sequence_enrollment_query_job_results
+    category: sequences-and-enrollments
+    rest:
+      - get_sequence_enrollment_query_job_results
+    operation: GET /sequences/v1/enrollments/query-jobs/{job_id}/results
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_sequence_enrollment_step_query_job
+    category: sequences-and-enrollments
+    rest:
+      - create_sequence_enrollment_step_query_job
+    operation: POST /sequences/v1/enrollment-steps/query-jobs
+    spec: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_sequence_enrollment_step_query_jobs
+    category: sequences-and-enrollments
+    rest:
+      - list_sequence_enrollment_step_query_jobs
+    operation: GET /sequences/v1/enrollment-steps/query-jobs
+    spec: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_sequence_enrollment_step_query_job
+    category: sequences-and-enrollments
+    rest:
+      - get_sequence_enrollment_step_query_job
+    operation: GET /sequences/v1/enrollment-steps/query-jobs/{job_id}
+    spec: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_sequence_enrollment_step_query_job_results
+    category: sequences-and-enrollments
+    rest:
+      - get_sequence_enrollment_step_query_job_results
+    operation: GET /sequences/v1/enrollment-steps/query-jobs/{job_id}/results
+    spec: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: cancel_sequence_enrollment_step_query_job
+    category: sequences-and-enrollments
+    rest:
+      - cancel_sequence_enrollment_step_query_job
+    operation: POST /sequences/v1/enrollment-steps/query-jobs/{job_id}/cancel
+    spec: openapi/unify-sequence-enrollment-steps-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_tasks
+    category: tasks
+    rest:
+      - list_tasks
+    operation: GET /tasks/v1/tasks
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: retrieve_task
+    category: tasks
+    rest:
+      - retrieve_task
+    operation: GET /tasks/v1/tasks/{id}
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_task
+    category: tasks
+    rest:
+      - create_task
+    operation: POST /tasks/v1/tasks
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: update_task
+    category: tasks
+    rest:
+      - update_task
+    operation: PATCH /tasks/v1/tasks/{id}
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: complete_task
+    category: tasks
+    rest:
+      - complete_task
+    operation: POST /tasks/v1/tasks/{id}/complete
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: delete_task
+    category: tasks
+    rest:
+      - delete_task
+    operation: DELETE /tasks/v1/tasks/{id}
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_task_query_job
+    category: tasks
+    rest:
+      - create_task_query_job
+    operation: POST /tasks/v1/tasks/query-jobs
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_task_query_jobs
+    category: tasks
+    rest:
+      - list_task_query_jobs
+    operation: GET /tasks/v1/tasks/query-jobs
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_task_query_job
+    category: tasks
+    rest:
+      - get_task_query_job
+    operation: GET /tasks/v1/tasks/query-jobs/{job_id}
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_task_query_job_results
+    category: tasks
+    rest:
+      - get_task_query_job_results
+    operation: GET /tasks/v1/tasks/query-jobs/{job_id}/results
+    spec: openapi/unify-tasks-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: create_event_query_job
+    category: events
+    rest:
+      - create_event_query_job
+    operation: POST /data/v1/events/query-jobs
+    spec: openapi/unify-event-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: list_event_query_jobs
+    category: events
+    rest:
+      - list_event_query_jobs
+    operation: GET /data/v1/events/query-jobs
+    spec: openapi/unify-event-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_event_query_job
+    category: events
+    rest:
+      - get_event_query_job
+    operation: GET /data/v1/events/query-jobs/{job_id}
+    spec: openapi/unify-event-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+  - tool: get_event_query_job_results
+    category: events
+    rest:
+      - get_event_query_job_results
+    operation: GET /data/v1/events/query-jobs/{job_id}/results
+    spec: openapi/unify-event-query-jobs-api-openapi.yml
+    binding: rest
+    confidence: high
+    note: MCP tool name is identical to the OpenAPI operationId.
+mcp_only:
+  - tool: run_agent
+    category: agent-lifecycle
+    reason: >-
+      Starts Unify's general-purpose Agent (the same Agent behind Unify Chat) on a natural-language task. No REST equivalent is published; the Agent surface is MCP-only.
+  - tool: poll_agent
+    category: agent-lifecycle
+    reason: >-
+      Polls a run started by run_agent for PENDING / CLARIFICATION_NEEDED / READY / ERROR / NOT_FOUND. No public REST operation.
+  - tool: answer_question
+    category: agent-lifecycle
+    reason: >-
+      Answers the questions from a CLARIFICATION_NEEDED run and resumes it. No public REST operation.
+  - tool: read_agent_results
+    category: agent-lifecycle
+    reason: >-
+      Reads the final answer or error from a terminal run. No public REST operation.
+  - tool: cancel_agent
+    category: agent-lifecycle
+    reason: >-
+      Stops an in-flight Agent run. No public REST operation.
+  - tool: list_agent_runs
+    category: agent-lifecycle
+    reason: >-
+      Lists the current user's Agent runs, cursor-paginated. No public REST operation.
+  - tool: get_me
+    category: context
+    reason: >-
+      Returns the authenticated user profile and workspace identity. No public REST operation.
+  - tool: load_datatable
+    category: context
+    reason: >-
+      Loads a Unify DataTable the calling user owns, with columns and a cursor-paginated page of rows. DataTables are an Agent-run output type with no public REST surface.
+  - tool: load_mailbox_voice_profile
+    category: context
+    reason: >-
+      Loads the writing voice profile for a connected mailbox. Mailboxes are not exposed by any public REST API.
+  - tool: load_general_context
+    category: context
+    reason: >-
+      Loads a version of the user's general business context (business description, ICP). No public REST operation.
+  - tool: search_unify
+    category: documentation
+    reason: >-
+      Documentation search on the separate anonymous docs MCP server; backs no Unify API operation.
+  - tool: query_docs_filesystem_unify
+    category: documentation
+    reason: >-
+      Read-only virtual-filesystem query over the documentation corpus on the docs MCP server; backs no Unify API operation.
+  - tool: submit_feedback
+    category: documentation
+    reason: >-
+      Submits documentation feedback on the docs MCP server; backs no Unify API operation.
+rest_only:
+  - operation: cancel_event_query_job
+    category: bulk-export
+    http: POST /data/v1/events/query-jobs/{job_id}/cancel
+    spec: openapi/unify-event-query-jobs-api-openapi.yml
+  - operation: cancel_object_record_query_job
+    category: bulk-export
+    http: POST /data/v1/objects/{object_name}/query-jobs/{job_id}/cancel
+    spec: openapi/unify-object-record-query-jobs-api-openapi.yml
+  - operation: cancel_sequence_enrollment_query_job
+    category: bulk-export
+    http: POST /sequences/v1/enrollments/query-jobs/{job_id}/cancel
+    spec: openapi/unify-sequence-enrollments-api-openapi.yml
+  - operation: cancel_task_query_job
+    category: bulk-export
+    http: POST /tasks/v1/tasks/query-jobs/{job_id}/cancel
+    spec: openapi/unify-tasks-api-openapi.yml
+  - operation: send_identify_event
+    category: analytics-ingest
+    http: POST /identify
+    spec: openapi/unify-events-api-openapi.yml
+  - operation: send_page_event
+    category: analytics-ingest
+    http: POST /page
+    spec: openapi/unify-events-api-openapi.yml
+  - operation: send_track_event
+    category: analytics-ingest
+    http: POST /track
+    spec: openapi/unify-events-api-openapi.yml
+rest_only_analysis:
+  - group: bulk-export
+    detail: >-
+      Four of the five query-job families expose create / list / get / results as
+      MCP tools but omit the cancel operation. Only
+      cancel_sequence_enrollment_step_query_job is published as a tool, so an agent
+      can start a long-running export through MCP but cannot stop four of the five
+      kinds without dropping to REST.
+  - group: analytics-ingest
+    detail: >-
+      The three Analytics write operations (identify / page / track) have no MCP
+      tool. They authenticate with HTTP Basic and a public write key intended for
+      browser-side collection, a different auth model from the x-api-key /
+      OAuth-user model every MCP tool runs under, which is a coherent reason for
+      the omission rather than a gap.

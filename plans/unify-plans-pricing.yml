@@ -1,0 +1,195 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.unifygtm.com/pricing
+checked: '2026-08-13'
+currency: USD
+model: per-seat subscription plus a consumable credit balance
+plan_count: 4
+note: >-
+  Unify re-priced between this pass and the previous one. The earlier catalog note
+  (a "Growth" plan from $1,000/month) no longer appears on the pricing page; the
+  published ladder is now Free / Base / Pro / Business. Credits are the unit of
+  consumption for data and actions, and LLM usage is billed out of the same credit
+  balance rather than as a separate AI fee.
+plans:
+  - name: Free
+    price: 0
+    currency: USD
+    billing_period: forever
+    unit: workspace
+    included_quota:
+      credits: limited
+      credit_note: "Pricing page says only \"Limited credits\"; no number is published."
+      seats: 3
+      mailboxes: 1 per seat
+      records_per_search: 100
+    overage: null
+    overage_note: Credit top-ups are not available on Free.
+    limits:
+      llm_models: [GPT 5.4]
+      salesforce: none
+      hubspot: none
+      website_intent: false
+      product_usage_signals: false
+      managed_mailboxes: false
+      reporting: false
+      open_api_and_webhooks: false
+      sso: false
+    includes:
+      - AI outbound
+      - 1.1B+ people and 65M+ companies
+      - 40+ data sources
+      - Multi-channel sequencing
+      - Agentic chat
+      - Prospecting and list building
+      - Browser extension
+    cta: Start with Free
+  - name: Base
+    price: 20
+    currency: USD
+    billing_period: month
+    unit: seat
+    positioning: Built for reps to put on their personal card.
+    included_quota:
+      credits: 800
+      credit_period: month
+      credit_allocation: per seat
+      seats: unlimited
+      mailboxes: 1 per seat
+    overage:
+      mechanism: one-time credit top-up
+      shared_pool: true
+      auto_renew: false
+      rollover_months: 12
+      price_published: false
+    limits:
+      llm_models: [GPT 5.4]
+      salesforce: none
+      hubspot: none
+      website_intent: false
+      product_usage_signals: false
+      managed_mailboxes: false
+      reporting: false
+      open_api_and_webhooks: false
+      sso: false
+    includes:
+      - Everything in Free
+      - AI email copywriting
+      - Ability to add credits
+      - Job change and hiring signals
+      - Phone and email enrichment
+      - Unlimited seats
+    cta: Start with Base
+  - name: Pro
+    price: 60
+    currency: USD
+    billing_period: month
+    unit: seat
+    most_popular: true
+    positioning: For small teams with CRMs and more usage.
+    trial:
+      length_days: 14
+      credit_card_required: false
+      note: "\"Full access. No credit card required.\""
+    included_quota:
+      credits: 2400
+      credit_period: month
+      credit_allocation: per seat
+    overage:
+      mechanism: one-time credit top-up
+      shared_pool: true
+      auto_renew: false
+      rollover_months: 12
+    limits:
+      llm_models: [GPT 5.4]
+      salesforce: read-only
+      hubspot: read-only
+      website_intent: false
+      product_usage_signals: false
+      managed_mailboxes: false
+      open_api_and_webhooks: false
+      sso: false
+    includes:
+      - Everything in Base
+      - HubSpot and Salesforce sync (read-only)
+      - Slack notifications
+    cta: Start 14-day free trial
+  - name: Business
+    price: null
+    price_model: custom
+    currency: USD
+    billing_period: year
+    unit: workspace
+    positioning: Full-access plan for large teams or businesses. Custom pricing, billed annually.
+    included_quota:
+      credits: custom
+      credit_allocation: per workspace
+      credit_period: year
+      seats: unlimited
+      mailboxes: unlimited (managed)
+    overage:
+      mechanism: one-time credit top-up
+      shared_pool: true
+    limits:
+      llm_models: [GPT 5.4, GPT 5.6]
+      salesforce: read-write
+      hubspot: read-write
+      website_intent: true
+      product_usage_signals: true
+      managed_mailboxes: true
+      managed_mailbox_price: 25 USD per mailbox per month
+      open_api_and_webhooks: true
+      sso: add-on
+    includes:
+      - Everything in Pro
+      - Advanced models (GPT 5.6)
+      - Website intent and product signals
+      - Signal-triggered automations
+      - Managed Gmail and Outlook mailboxes
+      - Dialer (beta)
+      - HubSpot and Salesforce sync (read-write)
+      - All integrations
+      - Sequence analytics, rep activity, signal analytics, pipeline attribution
+      - Automated plays and team management
+    cta: Contact Sales
+api_access:
+  gated_to: Business
+  evidence: >-
+    The plan-comparison table lists "Open API + webhooks" as available on Business
+    only (a dash on Free, Base and Pro). The developer APIs documented at
+    docs.unifygtm.com are therefore an enterprise-tier entitlement even though the
+    OpenAPI documents themselves are served publicly and anonymously.
+  impact: >-
+    An agent or integrator can read every Unify contract without an account, but
+    cannot obtain a working API key below the custom-priced Business plan.
+credits:
+  unit: credit
+  definition: >-
+    "Credits are the currency used to purchase different data points and actions in
+    Unify. Most actions require 1-2 credits, but the value varies by provider."
+  published_action_costs:
+    - action: email enrichment
+      average_credits: 1
+      worst_case_credits: 10
+    - action: phone enrichment
+      average_credits: 4
+      worst_case_credits: 20
+    - action: web intent / technographic signals
+      average_credits: 1
+      note: Other signal sources are described as significantly higher; no per-source table is published.
+  top_ups:
+    available_on: [Base, Pro, Business]
+    one_time: true
+    auto_renew: false
+    shared_pool: true
+    rollover_months: 12
+  hard_cap:
+    enforced: true
+    behaviour: >-
+      When seat credits and the account pool are both exhausted, credit-consuming
+      actions pause rather than charge; an in-product prompt offers a top-up or
+      upgrade, and any automation already in flight finishes its current step
+      before stopping.
+  llm_billing: >-
+    AI usage is billed out of the credit balance - the model cost is passed through
+    with no separate AI fee or subscription.

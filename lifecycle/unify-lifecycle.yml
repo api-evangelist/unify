@@ -1,21 +1,57 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://docs.unifygtm.com/developers/introduction, https://www.unifygtm.com/changelog
+source: https://docs.unifygtm.com/developers/introduction, https://www.unifygtm.com/changelog, openapi/_original/*.json
+  (harvested live 2026-08-13)
 versioning:
   scheme: uri-path
   current: v1
-  evidence: All published API base URLs carry /v1 (api.unifygtm.com/data/v1,
-    api.unifygtm.com/sequences/v1, api.unifyintent.com/analytics/v1).
+  evidence: All four published API base URLs carry /v1 (api.unifygtm.com/data/v1, api.unifygtm.com/sequences/v1,
+    api.unifygtm.com/tasks/v1, api.unifyintent.com/analytics/v1) and info.version is "1" in all four OpenAPI
+    documents.
 changelog: https://www.unifygtm.com/changelog
 deprecation:
   policy_url: null
   sunset_header: false
-  notes: No published deprecation policy or RFC 8594 Sunset header support was
-    found in the docs as of the probe date.
+  notes: 'No published deprecation policy and no RFC 8594 Sunset/Deprecation header support. None of the
+    68 operations carries deprecated: true. Re-checked 2026-08-13.'
 sla:
   url: null
   notes: No public SLA page found.
 status_page: null
-status_page_notes: No public status page found (status.unifygtm.com does not
-  resolve); recorded as absent.
+status_page_notes: No public status page. status.unifygtm.com does not resolve (DNS NXDOMAIN, probed 2026-08-13)
+  and no status link appears on the site, docs or trust centre. Recorded as absent - no StatusPage pointer
+  is wired.
 deprecated_operations: []
+spec_publication:
+  pattern: <api-host>/<service>/v1/openapi.json
+  anonymous: true
+  documents:
+  - https://api.unifygtm.com/data/v1/openapi.json
+  - https://api.unifygtm.com/sequences/v1/openapi.json
+  - https://api.unifygtm.com/tasks/v1/openapi.json
+  - https://api.unifyintent.com/analytics/v1/openapi.json
+  note: Each service overview page links its own spec. The specs are served by the API hosts themselves
+    rather than the docs host, and require no authentication - so the contract is always current with
+    the deployed API. There is no /.well-known/api-catalog tying them together, so the service names must
+    be known in advance.
+change_since_last_pass:
+  checked: '2026-08-13'
+  previous: '2026-07-21'
+  findings:
+  - A new Tasks API (https://api.unifygtm.com/tasks/v1, 11 operations) has appeared that did not exist
+    at the previous harvest.
+  - 'The Data API grew from 10 paths to 18: two new Bulk query-job families (Event Query Jobs, Object
+    Record Query Jobs) and full CRUD on objects, attributes and options.'
+  - Total published operations went from 43 to 68.
+  - All four documents now carry info.contact (Unify Support, support@unifygtm.com) and info.termsOfService;
+    the previous harvest of the analytics document did not.
+  - No operation was removed and no path changed shape, so the growth is additive - consistent with the
+    absent deprecation policy never having been needed yet.
+support:
+  email: support@unifygtm.com
+  declared_in: info.contact.email of all four OpenAPI documents
+  contact_url_published: https://www.unifygtm.com/support
+  contact_url_status: 404
+  note: Every OpenAPI document names https://www.unifygtm.com/support as info.contact.url, but that page
+    returns 404 (probed 2026-08-13). The email address is the working channel; the URL in the contract
+    is dead. Worth reporting to the provider.

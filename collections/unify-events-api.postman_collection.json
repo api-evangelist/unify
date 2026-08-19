@@ -1,0 +1,600 @@
+{
+  "item": [
+    {
+      "id": "d37412a6-acd8-49b0-b79e-0da61c5e77b7",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0377248a-6caa-4986-b908-c1c2257da746",
+          "name": "send identify event",
+          "request": {
+            "name": "send identify event",
+            "description": {
+              "content": "Send an \"identify\" event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"traits\": {\n    \"email\": \"<string>\"\n  },\n  \"company\": {\n    \"domain\": \"<string>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"description\": \"<string>\",\n    \"do_not_contact\": \"<boolean>\",\n    \"employee_count\": \"<integer>\",\n    \"founded\": \"<string>\",\n    \"industry\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"revenue\": {\n      \"code\": \"<string>\",\n      \"value\": \"<decimal>\"\n    },\n    \"status\": \"<string>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"person\": {\n    \"email\": \"<email>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"do_not_call\": \"<boolean>\",\n    \"do_not_email\": \"<boolean>\",\n    \"email_opt_out\": \"<boolean>\",\n    \"eu_resident\": \"<boolean>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"mobile_phone\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"status\": \"<string>\",\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d797b75-cec1-4f99-8f40-f8bf1c315fcc",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"traits\": {\n    \"email\": \"<string>\"\n  },\n  \"company\": {\n    \"domain\": \"<string>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"description\": \"<string>\",\n    \"do_not_contact\": \"<boolean>\",\n    \"employee_count\": \"<integer>\",\n    \"founded\": \"<string>\",\n    \"industry\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"revenue\": {\n      \"code\": \"<string>\",\n      \"value\": \"<decimal>\"\n    },\n    \"status\": \"<string>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"person\": {\n    \"email\": \"<email>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"do_not_call\": \"<boolean>\",\n    \"do_not_email\": \"<boolean>\",\n    \"email_opt_out\": \"<boolean>\",\n    \"eu_resident\": \"<boolean>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"mobile_phone\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"status\": \"<string>\",\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b136e72-c4fc-47ad-97d6-aa23e111d792",
+              "name": "The request has been accepted for processing, but processing has not yet completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"traits\": {\n    \"email\": \"<string>\"\n  },\n  \"company\": {\n    \"domain\": \"<string>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"description\": \"<string>\",\n    \"do_not_contact\": \"<boolean>\",\n    \"employee_count\": \"<integer>\",\n    \"founded\": \"<string>\",\n    \"industry\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"revenue\": {\n      \"code\": \"<string>\",\n      \"value\": \"<decimal>\"\n    },\n    \"status\": \"<string>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"person\": {\n    \"email\": \"<email>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"do_not_call\": \"<boolean>\",\n    \"do_not_email\": \"<boolean>\",\n    \"email_opt_out\": \"<boolean>\",\n    \"eu_resident\": \"<boolean>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"mobile_phone\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"status\": \"<string>\",\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f66e3de-f879-4b54-935c-9f6fc428b617",
+              "name": "Access is unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"traits\": {\n    \"email\": \"<string>\"\n  },\n  \"company\": {\n    \"domain\": \"<string>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"description\": \"<string>\",\n    \"do_not_contact\": \"<boolean>\",\n    \"employee_count\": \"<integer>\",\n    \"founded\": \"<string>\",\n    \"industry\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"name\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"revenue\": {\n      \"code\": \"<string>\",\n      \"value\": \"<decimal>\"\n    },\n    \"status\": \"<string>\",\n    \"time_zone\": \"<string>\"\n  },\n  \"person\": {\n    \"email\": \"<email>\",\n    \"address\": {\n      \"country\": {\n        \"code\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"administrative_area\": \"<string>\",\n      \"sub_administrative_area\": \"<string>\",\n      \"locality\": \"<string>\",\n      \"dependent_locality\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"thoroughfare\": \"<string>\",\n      \"premise\": \"<string>\",\n      \"sub_premise\": \"<string>\"\n    },\n    \"company\": {\n      \"id\": \"<string>\"\n    },\n    \"corporate_phone\": \"<string>\",\n    \"do_not_call\": \"<boolean>\",\n    \"do_not_email\": \"<boolean>\",\n    \"email_opt_out\": \"<boolean>\",\n    \"eu_resident\": \"<boolean>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"lead_source\": \"<string>\",\n    \"linkedin_url\": \"<string>\",\n    \"mobile_phone\": \"<string>\",\n    \"record_owner\": {\n      \"id\": \"<string>\"\n    },\n    \"status\": \"<string>\",\n    \"title\": \"<string>\",\n    \"work_phone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0f606d0-028c-46dd-9c6b-a9b14171b6ad",
+          "name": "send page event",
+          "request": {
+            "name": "send page event",
+            "description": {
+              "content": "Send a \"page\" event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "page"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09d52b0e-affa-483d-a439-31d242f4cf1a",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "506931c1-1b71-4d25-bf13-1051071396f1",
+              "name": "The request has been accepted for processing, but processing has not yet completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f64de6f9-c7d2-49d4-896d-7d3442c8e508",
+              "name": "Access is unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "page"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58f4b95a-3d5e-436e-862b-28df3c1b3567",
+          "name": "send track event",
+          "request": {
+            "name": "send track event",
+            "description": {
+              "content": "Send a \"track\" event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "track"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"name\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94acc6f1-7f74-4065-8129-10c5b0d261d8",
+              "name": "The request has succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"name\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\",\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2bde8120-f722-4c92-89cb-33f356cf5bac",
+              "name": "The request has been accepted for processing, but processing has not yet completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"name\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\",\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9ccb4eef-7bd2-4e3c-bbba-6831d799afc5",
+              "name": "Access is unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "track"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"visitorId\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"context\": {\n    \"library\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"ip\": \"<ipv4>\",\n    \"locale\": \"<string>\",\n    \"userAgent\": \"<string>\",\n    \"userAgentData\": {\n      \"brands\": [\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        },\n        {\n          \"brand\": \"<string>\",\n          \"version\": \"<string>\"\n        }\n      ],\n      \"mobile\": \"<boolean>\",\n      \"platform\": \"<string>\"\n    },\n    \"utm\": {\n      \"source\": \"<string>\",\n      \"medium\": \"<string>\",\n      \"campaign\": \"<string>\",\n      \"term\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  },\n  \"name\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"sentAt\": \"<dateTime>\",\n  \"properties\": {\n    \"path\": \"<string>\",\n    \"query\": {\n      \"key_0\": \"<string>\"\n    },\n    \"referrer\": \"<string>\",\n    \"title\": \"<string>\",\n    \"url\": \"<string>\",\n    \"key_0\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unifyintent.com/analytics/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e7ed6601-1474-4340-ad1b-e7bc7d5128c2",
+    "name": "Unify Analytics Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Unify Support\n Email: support@unifygtm.com",
+      "type": "text/plain"
+    }
+  }
+}

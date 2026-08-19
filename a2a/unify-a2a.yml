@@ -1,0 +1,68 @@
+generated: '2026-08-13'
+method: probed
+source: https://docs.unifygtm.com/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: docs.unifygtm.com
+  note: >-
+    Served from Unify's own documentation host (docs.unifygtm.com, a Mintlify-hosted
+    docs site on Unify's domain). The card identifies itself as Unify - name "Unify",
+    provider.organization "Unify", provider.url and documentationUrl both
+    https://docs.unifygtm.com/ - so ownership is unambiguous. The other Unify hosts
+    (www.unifygtm.com, api.unifygtm.com, api.unifyintent.com, mcp.unifygtm.com) all
+    return 404 for both /.well-known/agent-card.json and /.well-known/agent.json;
+    app.unifygtm.com is an SPA catch-all that answers 200 with index.html for every
+    path and was rejected as a false positive.
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_fields:
+    preferred_transport: true
+    default_input_modes: true
+    default_output_modes: true
+  deviations:
+    - id: supportedInterfaces-instead-of-additionalInterfaces
+      detail: >-
+        The card declares its transport list under "supportedInterfaces"; A2A 1.0.0
+        names this field "additionalInterfaces". Passes every hard check, but an
+        A2A 1.0.0 client reading additionalInterfaces will not see the declared
+        interface.
+    - id: skill-tags-empty
+      detail: The single skill declares an empty tags array.
+card:
+  name: Unify
+  description: Official product documentation for Unify
+  url: https://docs.unifygtm.com/
+  version: 1.0.0
+  protocol_version: '0.3'
+  provider_organization: Unify
+  documentation_url: https://docs.unifygtm.com/
+  capabilities:
+    streaming: false
+    pushNotifications: false
+  skills: 1
+  skill_ids:
+    - unify
+  file: unify-agent-card.json
+related:
+  agent_skill: https://docs.unifygtm.com/.well-known/agent-skills/unify/skill.md
+  agent_skills_discovery: https://docs.unifygtm.com/.well-known/agent-skills/index.json
+  mcp_manifest: https://docs.unifygtm.com/.well-known/mcp.json
+  note: >-
+    The card's single skill points at a provider-served Agent Skill markdown file,
+    captured verbatim at skills/unify-docs-agent-skill.md. The same host also serves
+    an agent-skills discovery index (schemas.agentskills.io/discovery/0.2.0) and an
+    MCP manifest - see well-known/unify-well-known.yml and mcp/unify-mcp.yml.
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://docs.unifygtm.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  content_length: 1042

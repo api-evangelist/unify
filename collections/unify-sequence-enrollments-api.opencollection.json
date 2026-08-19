@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Sequences Sequence Enrollments API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sequence Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_sequence_enrollments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sequence_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mailbox_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "enrolled_by_play_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter to enrollments created by this play."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Repeat `status` to filter by multiple enrollment statuses."
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive lower bound on `updated_at`."
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive upper bound on `updated_at`."
+              }
+            ]
+          },
+          "docs": "List sequence enrollments — each tracks one person's progress through a\nsequence along with reply, bounce, opt-out, and pause state. Pages at\nmost 100 enrollments per request; to export more than a few hundred\nenrollments, create an asynchronous query job instead."
+        },
+        {
+          "info": {
+            "name": "create_sequence_enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enroll a person in a sequence. `mailbox_emails` lists candidate sending\nmailboxes, one of which is selected at enrollment time. If the person is\nalready actively enrolled in a sequence, the request fails with a `409`\nidentifying the active enrollment."
+        },
+        {
+          "info": {
+            "name": "list_sequence_enrollment_query_jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/query-jobs",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by status."
+              }
+            ]
+          },
+          "docs": "List sequence enrollment query jobs, optionally filtered by status."
+        },
+        {
+          "info": {
+            "name": "create_sequence_enrollment_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/query-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start an asynchronous query job that exports sequence enrollments\nmatching the optional filter; omitting `filter` exports all enrollments.\nPoll the job until it is `FINISHED`, then page through the results."
+        },
+        {
+          "info": {
+            "name": "get_sequence_enrollment_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/query-jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation."
+        },
+        {
+          "info": {
+            "name": "cancel_sequence_enrollment_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/query-jobs/:job_id/cancel",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled."
+        },
+        {
+          "info": {
+            "name": "get_sequence_enrollment_query_job_results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/query-jobs/:job_id/results",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`."
+              }
+            ]
+          },
+          "docs": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON."
+        },
+        {
+          "info": {
+            "name": "get_sequence_enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single enrollment by its ID."
+        },
+        {
+          "info": {
+            "name": "delete_sequence_enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel an enrollment, stopping any remaining steps for the person."
+        },
+        {
+          "info": {
+            "name": "pause_sequence_enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/:id/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Pause an enrollment, halting the person's progress through the sequence\nuntil it is resumed."
+        },
+        {
+          "info": {
+            "name": "resume_sequence_enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/sequences/v1/enrollments/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resume a paused enrollment so the person continues through the sequence."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

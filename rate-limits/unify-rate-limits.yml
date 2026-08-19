@@ -1,0 +1,135 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://docs.unifygtm.com/developers/api/data/overview,
+  https://docs.unifygtm.com/developers/api/sequences/overview,
+  https://docs.unifygtm.com/developers/api/tasks/overview,
+  https://docs.unifygtm.com/developers/api/analytics/overview,
+  https://docs.unifygtm.com/developers/guides/request-data/bulk-api
+checked: '2026-08-13'
+limit_count: 7
+summary: >-
+  Every synchronous Unify API publishes the same headline limit - 100,000 requests
+  per five-minute window - and each service page warns that daily limits may be
+  introduced later. The Bulk API (query jobs) is limited separately and far more
+  tightly, by operation type. Retry-After is documented as the honoured backoff
+  signal on 429; no X-RateLimit-*/RateLimit-* response headers are documented
+  anywhere in the developer docs.
+limits:
+  - scope: per-api-key
+    api: Data API
+    window: 5 minutes
+    limit: 100000
+    unit: requests
+    burst: null
+    docs: https://docs.unifygtm.com/developers/api/data/overview
+    quote: >-
+      The Data API is rate-limited to 100,000 requests per five minute window. We
+      may introduce daily limits in the future to prevent extraordinary usage.
+  - scope: per-api-key
+    api: Sequences API
+    window: 5 minutes
+    limit: 100000
+    unit: requests
+    burst: null
+    docs: https://docs.unifygtm.com/developers/api/sequences/overview
+    quote: >-
+      The Sequences API is rate-limited to 100,000 requests per five minute window.
+      We may introduce daily limits in the future to prevent extraordinary usage.
+  - scope: per-api-key
+    api: Tasks API
+    window: 5 minutes
+    limit: 100000
+    unit: requests
+    burst: null
+    docs: https://docs.unifygtm.com/developers/api/tasks/overview
+    quote: >-
+      The Tasks API is rate-limited to 100,000 requests per five minute window. We
+      may introduce daily limits in the future to prevent extraordinary usage.
+  - scope: per-write-key
+    api: Analytics API
+    window: 5 minutes
+    limit: 100000
+    unit: requests
+    burst: null
+    negotiable: true
+    docs: https://docs.unifygtm.com/developers/api/analytics/overview
+    quote: >-
+      The Analytics API is rate-limited by default to 100,000 requests per five
+      minute window. We are able to provide higher limits upon request if needed.
+  - scope: per-account
+    api: Bulk API (query jobs)
+    operation: create query jobs
+    window: 1 day
+    limit: 100
+    approximate: true
+    unit: jobs
+    docs: https://docs.unifygtm.com/developers/guides/request-data/bulk-api
+    note: >-
+      Applies to create_object_record_query_job, create_event_query_job,
+      create_sequence_enrollment_query_job,
+      create_sequence_enrollment_step_query_job and create_task_query_job. The docs
+      advise creating jobs only when a new snapshot is needed, using filters or
+      checkpoints to keep each job focused.
+  - scope: per-account
+    api: Bulk API (query jobs)
+    operation: query / list job status
+    window: 1 second
+    limit: 10
+    approximate: true
+    unit: requests
+    docs: https://docs.unifygtm.com/developers/guides/request-data/bulk-api
+  - scope: per-account
+    api: Bulk API (query jobs)
+    operation: list / stream job results
+    window: 1 second
+    limit: 5
+    approximate: true
+    unit: requests
+    docs: https://docs.unifygtm.com/developers/guides/request-data/bulk-api
+exhaustion:
+  status_code: 429
+  status_text: Too Many Requests
+  documented_in_openapi: true
+  openapi_evidence: >-
+    429 responses are declared on 44 of the 68 operations across the Data,
+    Sequences and Tasks specs (every Sequences and Tasks operation, and every
+    query-job operation on the Data API). The Analytics API declares only 200/202/401
+    and does not declare a 429 response.
+  guidance: >-
+    "429 Too Many Requests, wait before retrying, honor the Retry-After header to
+    avoid additional rate limiting."
+response_headers:
+  - name: Retry-After
+    documented: true
+    standard: RFC 9110
+    on: 429
+    source: https://docs.unifygtm.com/developers/guides/request-data/bulk-api
+    note: The only rate-limit response header Unify documents.
+  - name: X-RateLimit-Limit
+    documented: false
+  - name: X-RateLimit-Remaining
+    documented: false
+  - name: X-RateLimit-Reset
+    documented: false
+  - name: RateLimit
+    documented: false
+    standard: draft-ietf-httpapi-ratelimit-headers
+gaps:
+  - id: no-quota-headers
+    detail: >-
+      Because no X-RateLimit-*/RateLimit-* headers are documented, a client cannot
+      read its remaining quota before exhausting it - it can only react to a 429.
+      For an agent driving the Bulk API against a ~5 requests/second results limit,
+      that is the difference between pacing and retrying.
+  - id: 429-undeclared-on-analytics
+    detail: >-
+      The Analytics OpenAPI declares no 429 response even though the docs publish a
+      100,000/5-minute limit for that API, so a generated client will not model
+      throttling on the highest-volume ingest path.
+agent_credit_limits:
+  note: >-
+    Separate from HTTP rate limiting, MCP Agent runs are subject to per-user rate
+    limiting and require available workspace chat credits; both surface as a tool
+    error rather than a silent failure. See plans/unify-plans-pricing.yml.
+  source: https://docs.unifygtm.com/developers/mcp/tools

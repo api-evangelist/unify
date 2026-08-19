@@ -1,23 +1,46 @@
-# generated: 2026-07-21
+# generated: 2026-08-13
 # method: generated
 overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Unify Analytics API
-  version: 1.0.0
-extends: openapi/unify-analytics-openapi.json
+  version: 1.1.0
+extends: openapi/_original/unify-analytics-openapi.json
 actions:
 - target: $.info
   update:
     x-apievangelist:
       provider: unify
-      harvested: '2026-07-21'
-      source: https://docs.unifygtm.com/developers/api/analytics/openapi.json
+      harvested: '2026-08-13'
+      source: https://api.unifyintent.com/analytics/v1/openapi.json
       humanURL: https://docs.unifygtm.com/developers/api/analytics/overview
-    contact:
-      name: Unify
-      url: https://www.unifygtm.com
+      operations: 3
+      artifacts:
+        authentication: authentication/unify-authentication.yml
+        conventions: conventions/unify-conventions.yml
+        errors: errors/unify-problem-types.yml
+        rate_limits: rate-limits/unify-rate-limits.yml
+        data_model: data-model/unify-data-model.yml
+        tool_crosswalk: mcp/unify-tool-crosswalk.yml
 - target: $
   update:
     externalDocs:
       description: Unify developer documentation
       url: https://docs.unifygtm.com/developers/api/analytics/overview
+- target: $.info
+  update:
+    x-apievangelist-rate-limit:
+      window: 5 minutes
+      limit: 100000
+      unit: requests
+      negotiable: true
+      declared_429_in_spec: false
+      note: The docs publish this limit but the spec declares no 429 response.
+      source: https://docs.unifygtm.com/developers/api/analytics/overview
+- target: $.info
+  update:
+    x-apievangelist-agent-notes:
+      idempotency: none - no Idempotency-Key header or parameter; retries are not safe on writes
+      pagination: cursor + limit, next_cursor in the response
+      error_envelope: '{status, message} application/json - not RFC 9457'
+      request_id_header: null
+      mcp_tools: MCP tool names are identical to operationIds; see mcp/unify-tool-crosswalk.yml

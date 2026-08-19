@@ -1,0 +1,1992 @@
+openapi: 3.0.0
+info:
+  title: Unify Data Event Query Jobs API
+  summary: Interact with objects, attributes, and records within the Unify platform.
+  version: '1'
+  termsOfService: https://www.unifygtm.com/legal/terms-and-conditions
+  contact:
+    name: Unify Support
+    url: https://www.unifygtm.com/support
+    email: support@unifygtm.com
+servers:
+- url: https://api.unifygtm.com
+  variables: {}
+security:
+- ApiKeyAuth: []
+tags:
+- name: Event Query Jobs
+paths:
+  /data/v1/events/query-jobs:
+    post:
+      operationId: create_event_query_job
+      description: 'Start an asynchronous query job that exports analytics events — website
+
+        and product activity (`page`, `track`, `identify`) with any revealed
+
+        company and person embedded in each row. Events are immutable, so filter
+
+        on `timestamp` for incremental exports; omitting `filter` exports all
+
+        events. Poll the job until it is `FINISHED`, then page through the
+
+        results.'
+      parameters: []
+      responses:
+        '201':
+          description: Response returned when creating a Bulk API query job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBulkApiJobSuccessResponse'
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '429':
+          description: Response for any operation that exceeds a rate limit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - rate_limited
+                  message:
+                    type: string
+                description: Response for any operation that exceeds a rate limit.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Event Query Jobs
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBulkApiEventsJobRequest'
+    get:
+      operationId: list_event_query_jobs
+      description: List event query jobs, optionally filtered by status.
+      parameters:
+      - name: cursor
+        in: query
+        required: false
+        description: Opaque cursor returned by the previous page.
+        schema:
+          type: string
+        explode: false
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        explode: false
+      - name: status
+        in: query
+        required: false
+        description: Filter jobs by status.
+        schema:
+          $ref: '#/components/schemas/BulkApiJobStatus'
+        explode: false
+      responses:
+        '200':
+          description: Response returned when listing Bulk API jobs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBulkApiJobsSuccessResponse'
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '429':
+          description: Response for any operation that exceeds a rate limit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - rate_limited
+                  message:
+                    type: string
+                description: Response for any operation that exceeds a rate limit.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Event Query Jobs
+  /data/v1/events/query-jobs/{job_id}:
+    get:
+      operationId: get_event_query_job
+      description: 'Get a query job''s status. Poll until the status is terminal; results are
+
+        available once the job is `FINISHED`. Jobs expire 24 hours after
+
+        creation.'
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response returned when fetching a Bulk API job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkApiJobSuccessResponse'
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response returned when a Bulk API job cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
+        '429':
+          description: Response for any operation that exceeds a rate limit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - rate_limited
+                  message:
+                    type: string
+                description: Response for any operation that exceeds a rate limit.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Event Query Jobs
+  /data/v1/events/query-jobs/{job_id}/cancel:
+    post:
+      operationId: cancel_event_query_job
+      description: Cancel a query job. Only `IN_PROGRESS` jobs can be canceled.
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response returned when canceling a Bulk API job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelBulkApiJobSuccessResponse'
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response returned when a Bulk API job cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
+        '409':
+          description: Response returned when a Bulk API job is not cancelable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelBulkApiJobNotCancelableResponse'
+        '429':
+          description: Response for any operation that exceeds a rate limit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - rate_limited
+                  message:
+                    type: string
+                description: Response for any operation that exceeds a rate limit.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Event Query Jobs
+  /data/v1/events/query-jobs/{job_id}/results:
+    get:
+      operationId: get_event_query_job_results
+      description: 'Get Bulk API job results. By default this returns JSON. Send
+
+        `Accept: application/x-ndjson` to stream newline-delimited JSON.'
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+        explode: false
+      - name: page_size
+        in: query
+        required: false
+        description: 'Maximum is 2,000 for JSON responses and 10,000 when `Accept` is
+
+          `application/x-ndjson`.'
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+        explode: false
+      responses:
+        '200':
+          description: Successful response returned when fetching completed Bulk API job results.
+          headers:
+            x-total:
+              required: false
+              description: Total result count. Present for NDJSON responses.
+              schema:
+                type: integer
+            x-page:
+              required: false
+              description: Result page number. Present for NDJSON responses.
+              schema:
+                type: integer
+            x-page-size:
+              required: false
+              description: Result page size. Present for NDJSON responses.
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - total
+                - page
+                - page_size
+                - data
+                properties:
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UEvent'
+                description: Successful response returned when fetching completed Bulk API job results.
+            application/x-ndjson:
+              schema:
+                type: string
+        '400':
+          description: Response for any operation that results in a bad request error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - bad_request
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UResponses.BadRequestError'
+                  message:
+                    type: string
+                description: Response for any operation that results in a bad request error.
+        '401':
+          description: Response for any operation that results in an unauthorized error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - unauthorized
+                  message:
+                    type: string
+                description: Response for any operation that results in an unauthorized error.
+        '404':
+          description: Response returned when a Bulk API job cannot be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkApiJobNotFoundResponse'
+        '409':
+          description: Response returned when Bulk API job results are not ready yet.
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/GetBulkApiJobResultsNotReadyResponse'
+                - $ref: '#/components/schemas/GetBulkApiJobResultsFailedResponse'
+                - $ref: '#/components/schemas/GetBulkApiJobResultsCanceledResponse'
+        '410':
+          description: Response returned when Bulk API job results have expired.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkApiJobResultsExpiredResponse'
+        '413':
+          description: Response returned when a requested Bulk API results page is too large.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkApiJobResultsPayloadTooLargeResponse'
+        '429':
+          description: Response for any operation that exceeds a rate limit.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - rate_limited
+                  message:
+                    type: string
+                description: Response for any operation that exceeds a rate limit.
+        '500':
+          description: Response for any operation that results in an internal server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                - message
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - error
+                  message:
+                    type: string
+                description: Response for any operation that results in an internal server error.
+      tags:
+      - Event Query Jobs
+components:
+  schemas:
+    BulkApiDatetimeRangeFilter:
+      type: object
+      properties:
+        gt:
+          type: string
+        gte:
+          type: string
+        lt:
+          type: string
+        lte:
+          type: string
+      description: 'Datetime range filter. At least one bound must be provided. `gt` is mutually
+
+        exclusive with `gte`, and `lt` is mutually exclusive with `lte`.'
+    BulkApiEventsQueryFilter:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/BulkApiDatetimeRangeFilter'
+        id:
+          anyOf:
+          - type: object
+            required:
+            - in
+            properties:
+              in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+            description: Filter matching values included in a set.
+          - type: object
+            required:
+            - not_in
+            properties:
+              in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+            description: Filter matching values excluded from a set.
+        type:
+          anyOf:
+          - type: object
+            required:
+            - in
+            properties:
+              in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+            description: Filter matching values included in a set.
+          - type: object
+            required:
+            - not_in
+            properties:
+              in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+            description: Filter matching values excluded from a set.
+        session:
+          $ref: '#/components/schemas/BulkApiUuidFilter'
+        company:
+          $ref: '#/components/schemas/BulkApiUuidFilter'
+        person:
+          $ref: '#/components/schemas/BulkApiUuidFilter'
+        domain:
+          type: string
+      description: 'Filters accepted when querying events. Events are immutable, so the natural
+
+        cursor is `timestamp`, which is also the only datetime field filterable here.'
+    BulkApiJob:
+      type: object
+      required:
+      - job_id
+      - status
+      - total_rows
+      - error_code
+      - created_at
+      - expires_at
+      - canceled_at
+      properties:
+        job_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/BulkApiJobStatus'
+        total_rows:
+          type: integer
+          nullable: true
+        error_code:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        canceled_at:
+          type: string
+          nullable: true
+      description: Bulk API job representation.
+    BulkApiJobStatus:
+      type: string
+      enum:
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+      - EXPIRED
+      - CANCELED
+      description: Status of an asynchronous Bulk API job.
+    BulkApiUuidFilter:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+      description: Filter matching a resource by ID.
+    CancelBulkApiJobNotCancelableResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - job_not_cancelable
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job is not cancelable.
+    CancelBulkApiJobSuccessResponse:
+      type: object
+      required:
+      - job_id
+      - status
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - CANCELED
+      description: Response returned when canceling a Bulk API job.
+    CreateBulkApiEventsJobRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/BulkApiEventsQueryFilter'
+      description: Request body for creating an events Bulk API query job.
+    CreateBulkApiJobSuccessResponse:
+      type: object
+      required:
+      - job_id
+      - status
+      - expires_at
+      properties:
+        job_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+        expires_at:
+          type: string
+      description: Response returned when creating a Bulk API query job.
+    EventType:
+      type: string
+      enum:
+      - page
+      - track
+      - identify
+      description: Canonical, source-agnostic event type.
+    GetBulkApiJobNotFoundResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - not_found
+          message:
+            type: string
+        description: Response for any operation that results in a not found error.
+      description: Response returned when a Bulk API job cannot be found.
+    GetBulkApiJobResultsCanceledResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_canceled
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job was canceled and has no results.
+    GetBulkApiJobResultsExpiredResponse:
+      type: object
+      required:
+      - status
+      - message
+      properties:
+        status:
+          type: string
+          enum:
+          - results_expired
+        message:
+          type: string
+      description: Response returned when Bulk API job results have expired.
+    GetBulkApiJobResultsFailedResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_failed
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job failed and has no results.
+    GetBulkApiJobResultsNotReadyResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_not_ready
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when Bulk API job results are not ready yet.
+    GetBulkApiJobResultsPayloadTooLargeResponse:
+      type: object
+      required:
+      - status
+      - message
+      properties:
+        status:
+          type: string
+          enum:
+          - results_page_too_large
+        message:
+          type: string
+      description: Response returned when a requested Bulk API results page is too large.
+    GetBulkApiJobSuccessResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BulkApiJob'
+      description: Response returned when fetching a Bulk API job.
+    ListBulkApiJobsSuccessResponse:
+      type: object
+      required:
+      - jobs
+      - next_cursor
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkApiJob'
+        next_cursor:
+          type: string
+          nullable: true
+      description: Response returned when listing Bulk API jobs.
+    UEvent:
+      type: object
+      required:
+      - id
+      - original_event_id
+      - timestamp
+      - type
+      - name
+      - properties
+      - anonymous_id
+      - session_id
+      - company
+      - person
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Unique identifier for the event.
+        original_event_id:
+          type: string
+          description: 'Identifier assigned to the event by the upstream source that produced it
+
+            (e.g. a Segment `messageId`, a PostHog event ID, or a Unify Tag activity
+
+            ID).'
+        timestamp:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDatetime'
+          description: 'Time the event occurred. Events are immutable, so this is the natural
+
+            cursor for incremental syncs.'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: Canonical event type.
+        name:
+          type: string
+          nullable: true
+          description: Human-readable event name, or `null` when unset.
+        properties:
+          type: object
+          additionalProperties: {}
+          nullable: true
+          description: 'Event properties: custom track-event properties merged with page context
+
+            (`domain`, `path`, `referrer_domain`, `referrer_path`, `query`) and UTM
+
+            parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`,
+
+            `utm_content`). Keys with no value are omitted, and the whole object is
+
+            `null` when no properties are present.'
+        anonymous_id:
+          type: string
+          description: Anonymous identifier assigned to the visitor by the upstream source.
+        session_id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Identifier of the session the event belongs to.
+        company:
+          type: object
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UCompany'
+          nullable: true
+          description: Revealed company associated with the visitor, or `null` when unresolved.
+        person:
+          type: object
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UPerson'
+          nullable: true
+          description: Revealed person associated with the visitor, or `null` when unresolved.
+      description: 'A flat, denormalized event row returned by an event Bulk API
+
+        query job.
+
+
+        Unlike object records, events are not wrapped in the `object` / `attributes`
+
+        envelope. Page, session, and UTM context are folded into `properties`, while
+
+        the revealed `company` / `person` are embedded directly on the row as full
+
+        object records (`null` when the visitor has no revealed company / person).'
+    UObjects.UCompany:
+      type: object
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - attributes
+      properties:
+        object:
+          type: string
+          enum:
+          - company
+          description: The API name of the object this record is an instance of.
+          readOnly: true
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Unique UUID identifier for the record.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time the record was created.
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time the record was last updated.
+          readOnly: true
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UCompanyAttributes'
+          description: 'Attribute values for the record. Each key is the API name of the attribute
+
+            and each value is the corresponding attribute value for the record.'
+    UObjects.UCompanyAttributes:
+      type: object
+      required:
+      - domain
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UAddress'
+            nullable: true
+          description: Physical address of the company.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
+          description: Corporate phone number of the company.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Description of the company.
+        do_not_contact:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
+          description: Whether contacting this company is disallowed.
+        domain:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+          description: Website domain of the company.
+        employee_count:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UInteger'
+            nullable: true
+          description: Estimated employee count of the company.
+        founded:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDate'
+            nullable: true
+          description: Date when the company was founded.
+        industry:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Industry the company operates in.
+        last_activity_at:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDatetime'
+            nullable: true
+          description: Last time an activity was recorded for this company.
+          readOnly: true
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Source of the company record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+            nullable: true
+          description: 'LinkedIn profile of the company.
+
+
+            This is the full URL of the LinkedIn profile of the company. The value will
+
+            always be standardized with an HTTPS prefix, "www" subdomain, and trailing
+
+            slash.'
+        name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Name of the company.
+        record_owner:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          nullable: true
+          description: The user that owns the company record.
+        revenue:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCurrency'
+            nullable: true
+          description: Estimated revenue of the company.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Status of the company.
+        time_zone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Time zone the company is located in.
+      allOf:
+      - type: object
+        additionalProperties:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UValue'
+          nullable: true
+    UObjects.UPerson:
+      type: object
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - attributes
+      properties:
+        object:
+          type: string
+          enum:
+          - person
+          description: The API name of the object this record is an instance of.
+          readOnly: true
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Unique UUID identifier for the record.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time the record was created.
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time the record was last updated.
+          readOnly: true
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UPersonAttributes'
+          description: 'Attribute values for the record. Each key is the API name of the attribute
+
+            and each value is the corresponding attribute value for the record.'
+    UObjects.UPersonAttributes:
+      type: object
+      required:
+      - email
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UAddress'
+            nullable: true
+          description: Physical address of the person.
+        company:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          nullable: true
+          description: Company associated with the person.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
+          description: Corporate phone number of the person.
+        do_not_call:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
+          description: Whether calling this person is disallowed.
+        do_not_email:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
+          description: Whether emailing this person is disallowed.
+        email:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UEmail'
+          description: Email address of the person.
+        email_opt_out:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
+          description: Whether the person has opted out of email communications.
+        eu_resident:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+            nullable: true
+          description: Whether this person is a resident of the European Union.
+        first_name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: First name of the person.
+        last_activity_at:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDatetime'
+            nullable: true
+          description: Last time an activity was recorded for this person.
+          readOnly: true
+        last_name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Last name of the person.
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Source of the person record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+            nullable: true
+          description: 'LinkedIn profile of the person.
+
+
+            This is the full URL of the LinkedIn profile of the person. The value
+
+            will always be standardized with an HTTPS prefix, "www" subdomain, and
+
+            trailing slash.'
+        mobile_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
+          description: Mobile phone number of the person.
+        record_owner:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          nullable: true
+          description: The user that owns the person record.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Status of the person.
+        title:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+            nullable: true
+          description: Job title of the person.
+        work_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+            nullable: true
+          description: Work phone number of the person.
+      allOf:
+      - type: object
+        additionalProperties:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UValue'
+          nullable: true
+    UResponses.BadRequestError:
+      type: object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
+          type: string
+        attribute_api_name:
+          type: string
+      allOf:
+      - type: object
+        additionalProperties: {}
+      description: Validation error detail returned for bad request responses.
+    UValues.UAddress:
+      type: object
+      properties:
+        country:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountry'
+          description: Country code in ISO 3166-1 alpha-2 format.
+        administrative_area:
+          type: string
+          description: State, province, region, or territory.
+        sub_administrative_area:
+          type: string
+          description: County or other secondary governmental division of an administrative area.
+        locality:
+          type: string
+          description: City, town, or village.
+        dependent_locality:
+          type: string
+          description: Neighborhood, borough, district, or city sector.
+        postal_code:
+          type: string
+          description: Postal code or ZIP code.
+        thoroughfare:
+          type: string
+          description: Street name with elements such as street type or direction.
+        premise:
+          type: string
+          description: Street number or building name.
+        sub_premise:
+          type: string
+          description: Apartment, suite, office number, or other secondary unit designator.
+      description: Composite object representing a physical address.
+      title: UAddress
+    UValues.UBoolean:
+      type: boolean
+      description: Boolean value.
+      title: UBoolean
+    UValues.UCountry:
+      type: object
+      required:
+      - code
+      - name
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountryCode'
+          description: Country code.
+        name:
+          type: string
+          description: Country name.
+      description: Composite object representing a country.
+      title: UCountry
+    UValues.UCountryCode:
+      type: string
+      enum:
+      - AD
+      - AE
+      - AF
+      - AG
+      - AI
+      - AL
+      - AM
+      - AO
+      - AQ
+      - AR
+      - AS
+      - AT
+      - AU
+      - AW
+      - AX
+      - AZ
+      - BA
+      - BB
+      - BD
+      - BE
+      - BF
+      - BG
+      - BH
+      - BI
+      - BJ
+      - BL
+      - BM
+      - BN
+      - BO
+      - BQ
+      - BR
+      - BS
+      - BT
+      - BV
+      - BW
+      - BY
+      - BZ
+      - CA
+      - CC
+      - CD
+      - CF
+      - CG
+      - CH
+      - CI
+      - CK
+      - CL
+      - CM
+      - CN
+      - CO
+      - CR
+      - CU
+      - CV
+      - CW
+      - CX
+      - CY
+      - CZ
+      - DE
+      - DJ
+      - DK
+      - DM
+      - DO
+      - DZ
+      - EC
+      - EE
+      - EG
+      - EH
+      - ER
+      - ES
+      - ET
+      - FI
+      - FJ
+      - FK
+      - FM
+      - FO
+      - FR
+      - GA
+      - GB
+      - GD
+      - GE
+      - GF
+      - GG
+      - GH
+      - GI
+      - GL
+      - GM
+      - GN
+      - GP
+      - GQ
+      - GR
+      - GS
+      - GT
+      - GU
+      - GW
+      - GY
+      - HK
+      - HM
+      - HN
+      - HR
+      - HT
+      - HU
+      - ID
+      - IE
+      - IL
+      - IM
+      - IN
+      - IO
+      - IQ
+      - IR
+      - IS
+      - IT
+      - JE
+      - JM
+      - JO
+      - JP
+      - KE
+      - KG
+      - KH
+      - KI
+      - KM
+      - KN
+      - KP
+      - KR
+      - KW
+      - KY
+      - KZ
+      - LA
+      - LB
+      - LC
+      - LI
+      - LK
+      - LR
+      - LS
+      - LT
+      - LU
+      - LV
+      - LY
+      - MA
+      - MC
+      - MD
+      - ME
+      - MF
+      - MG
+      - MH
+      - MK
+      - ML
+      - MM
+      - MN
+      - MO
+      - MP
+      - MQ
+      - MR
+      - MS
+      - MT
+      - MU
+      - MV
+      - MW
+      - MX
+      - MY
+      - MZ
+      - NA
+      - NC
+      - NE
+      - NF
+      - NG
+      - NI
+      - NL
+      - 'NO'
+      - NP
+      - NR
+      - NU
+      - NZ
+      - OM
+      - PA
+      - PE
+      - PF
+      - PG
+      - PH
+      - PK
+      - PL
+      - PM
+      - PN
+      - PR
+      - PS
+      - PT
+      - PW
+      - PY
+      - QA
+      - RE
+      - RO
+      - RS
+      - RU
+      - RW
+      - SA
+      - SB
+      - SC
+      - SD
+      - SE
+      - SG
+      - SH
+      - SI
+      - SJ
+      - SK
+      - SL
+      - SM
+      - SN
+      - SO
+      - SR
+      - SS
+      - ST
+      - SV
+      - SX
+      - SY
+      - SZ
+      - TC
+      - TD
+      - TF
+      - TG
+      - TH
+      - TJ
+      - TK
+      - TL
+      - TM
+      - TN
+      - TO
+      - TR
+      - TT
+      - TV
+      - TW
+      - TZ
+      - UA
+      - UG
+      - UM
+      - US
+      - UY
+      - UZ
+      - VA
+      - VC
+      - VE
+      - VG
+      - VI
+      - VN
+      - VU
+      - WF
+      - WS
+      - XK
+      - YE
+      - YT
+      - ZA
+      - ZM
+      - ZW
+      description: ISO 3166-1 alpha-2 country code.
+      title: UCountryCode
+    UValues.UCurrency:
+      type: object
+      required:
+      - code
+      - value
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCurrencyCode'
+          description: Currency code.
+        value:
+          type: number
+          format: decimal
+          description: Currency value.
+      description: Composite object representing a currency value.
+      title: UCurrency
+    UValues.UCurrencyCode:
+      type: string
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LVL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - USS
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XTS
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      description: ISO 4217 currency code.
+      title: UCurrencyCode
+    UValues.UDate:
+      type: string
+      description: String value representing a date.
+      title: UDate
+    UValues.UDatetime:
+      type: string
+      description: String value representing a datetime.
+      title: UDatetime
+    UValues.UDecimal:
+      type: number
+      description: Decimal value.
+      title: UDecimal
+    UValues.UEmail:
+      type: string
+      format: email
+      description: String value representing an email address.
+      title: UEmail
+    UValues.UInteger:
+      type: integer
+      description: Integer value.
+      title: UInteger
+    UValues.UMultiSelect:
+      type: array
+      items:
+        type: string
+      description: String array that contains strings from a specific set of allowed values.
+      title: UMultiSelect
+    UValues.UPhoneNumber:
+      type: string
+      description: String value representing a phone number.
+      title: UPhoneNumber
+    UValues.UReferenceById:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: An object record ID.
+      description: 'Reference to another object record by ID.
+
+
+        This will find an existing record by its ID, and an error will be returned if
+
+        the record does not exist.'
+      title: UReferenceById
+    UValues.UReferenceByMatch:
+      type: object
+      required:
+      - match
+      properties:
+        match:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+      description: 'Reference to another object record by match criteria.
+
+
+        This will find an existing record using the provided match criteria, and
+
+        `null` will be returned if no match is found.'
+      title: UReferenceByMatch
+    UValues.UReferenceByUpsert:
+      type: object
+      required:
+      - match
+      properties:
+        match:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+        create:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to use when creating a new record if no match is found.
+        update:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to use when updating an existing record if a match is found.
+        update_if_empty:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to update when a matching record is found and the
+
+            existing attribute value on the record is `null`.'
+        create_or_update:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to apply during both creation and update operations.
+        create_or_update_if_empty:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to apply during both creation and update-if-empty
+
+            operations.'
+      description: 'Reference to another object record by performing a nested upsert.
+
+
+        At least one of `create`, `create_or_update` or `create_or_update_if_empty`
+
+        must be provided, and all required attributes on the object must be included
+
+        in at least one of these properties.
+
+
+        ## Precedence
+
+
+        When the same attribute is specified in multiple properties, the values will
+
+        be applied in a specific order of precedence. If a record is being created,
+
+        the following order is used:
+
+
+        1. `create`
+
+        2. `create_or_update`
+
+        3. `create_or_update_if_empty`
+
+
+        If an existing record is being updated, the following order is used:
+
+
+        1. `update`
+
+        2. `create_or_update`
+
+        3. `update_if_empty`
+
+        4. `create_or_update_if_empty`'
+      title: UReferenceByUpsert
+    UValues.USelect:
+      type: string
+      description: String value that matches one of a specific set of allowed values.
+      title: USelect
+    UValues.UText:
+      type: string
+      description: String value.
+      title: UText
+    UValues.UUrl:
+      type: string
+      description: String value representing a web URL or internet domain.
+      title: UUrl
+    UValues.UUuid:
+      type: string
+      description: String UUIDv4 value.
+      title: UUuid
+    UValues.UValue:
+      anyOf:
+      - $ref: '#/components/schemas/UValues.UAddress'
+      - $ref: '#/components/schemas/UValues.UBoolean'
+      - $ref: '#/components/schemas/UValues.UCountry'
+      - $ref: '#/components/schemas/UValues.UCurrency'
+      - $ref: '#/components/schemas/UValues.UDate'
+      - $ref: '#/components/schemas/UValues.UDatetime'
+      - $ref: '#/components/schemas/UValues.UDecimal'
+      - $ref: '#/components/schemas/UValues.UEmail'
+      - $ref: '#/components/schemas/UValues.UInteger'
+      - $ref: '#/components/schemas/UValues.UMultiSelect'
+      - $ref: '#/components/schemas/UValues.UPhoneNumber'
+      - anyOf:
+        - $ref: '#/components/schemas/UValues.UReferenceById'
+        - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+        - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+      - $ref: '#/components/schemas/UValues.USelect'
+      - $ref: '#/components/schemas/UValues.UText'
+      - $ref: '#/components/schemas/UValues.UUrl'
+      - $ref: '#/components/schemas/UValues.UUuid'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key

@@ -1,20 +1,28 @@
 # Unify
 
-> Unify is a B2B outbound platform that combines 25+ intent signals with AI agents and automated multi-channel sequences to help companies identify, qualify, and engage buyers automatically. Founded in 2023, backed by $52M+ from OpenAI Startup Fund, Thrive Capital, Battery Ventures, and Emergence Capital. Used by Perplexity, Cursor, Together AI, Justworks, and hundreds of fast-growing companies.
+> Unify is outbound AI for sellers, AI agents and reps working side by side to find the buyers already in market and reach them with the right message.
+
+## Key Facts
+
+- Founded: 2023
+- Founders: Austin Hughes (Co-Founder & CEO), Connor Heggie (Co-Founder & CTO)
+- Funding: $52M+ from OpenAI Startup Fund, Thrive Capital, Battery Ventures, and Emergence Capital
+- HQ: San Francisco Bay Area
+- Customers: Perplexity, Together AI, Justworks, Decagon, Juicebox, and hundreds of other fast-growing companies
 
 ## Product
 
-- [Product Tour](https://www.unifygtm.com/product-tour): Interactive walkthrough of the Unify platform
-- [Signals](https://www.unifygtm.com/signals): 25+ B2B intent signals including website visits, product usage, champion tracking, hiring activity, and AI-powered Infinity Signals
-- [AI Agents](https://www.unifygtm.com/ai): AI-powered lead research, qualification, and message personalization agents
-- [Plays](https://www.unifygtm.com/plays): Workflow builder for automated prospecting, enrichment, and sequence enrollment
-- [Engagement](https://www.unifygtm.com/product/sales-engagment): Multi-channel outbound execution with managed mailboxes and deliverability
-- [B2B Contact Data](https://www.unifygtm.com/product/buyer-data): Aggregated contact data from multiple providers (Clearbit, 6sense, Demandbase, Snitcher)
-- [Analytics](https://www.unifygtm.com/analytics): Pipeline attribution and outbound performance reporting
+- [Agents](https://www.unifygtm.com/product/agents): AI-powered lead research, qualification, and message personalization agents
+- [Signals & Intent](https://www.unifygtm.com/products/signals): 25+ B2B intent signals including website visits, product usage, champion tracking, hiring activity, and AI-powered Infinity Signals
+- [Plays](https://www.unifygtm.com/product/plays): Workflow builder for automated signal-triggering, prospecting, enrichment, and sequence enrollment
+- [Sequencing](https://www.unifygtm.com/product/sequencing): Multi-channel outbound sequence execution across email, calling, and other channels
+- [Deliverability](https://www.unifygtm.com/product/deliverability): Managed mailbox infrastructure and deliverability monitoring for outbound sending
+- [B2B Contact Data](https://www.unifygtm.com/product/b2b-company-contact-data): Access more than 1.1B+ contacts, 65M+ companies, and more than 40+ signal and intent data sources. Includes providers like Prospeo, ContactOut, Wiza, Forager, and Findymail.
+- [Analytics](https://www.unifygtm.com/product/analytics): Pipeline attribution and outbound performance reporting
 
 ## Pricing
 
-- [Pricing](https://www.unifygtm.com/pricing): Growth plan starts at $1,000/month (monthly) or $1,740/month (annual). Pro and Enterprise plans with custom pricing. Credit-based system for data and actions.
+- [Pricing](https://www.unifygtm.com/pricing): Free plan at $0. Base at $20/seat/month, Pro at $60/seat/month (most popular, 14-day free trial), and Business with custom annual pricing. Credit-based system for data and actions.
 
 ## Customer Results
 
@@ -24,24 +32,29 @@
 - [Perplexity](https://www.unifygtm.com/customers/perplexity): $1.7M pipeline growth in 3 months with zero BDRs
 - [Campfire](https://www.unifygtm.com/customers/campfire): Doubled qualified outbound pipeline in 5 months
 - [Anrok](https://www.unifygtm.com/customers/anrok): $300K pipeline in 3 months
-- [Hypercomply](https://www.unifygtm.com/customers/hypercomply): Eliminated 100 hours of manual work per month
+- [Juicebox](https://www.unifygtm.com/customers/juicebox): Turns PLG sign-ups into $3M in enterprise pipeline
+- [Pylon](https://www.unifygtm.com/customers/pylon): Achieves 4.2X ROI with orchestrated automated outbound
+- [Navattic](https://www.unifygtm.com/customers/navattic): Generates $100K+ in direct pipeline within the first 10 days
+- [Candoriq](https://www.unifygtm.com/customers/candoriq): How a founding SDR went from stack sprawl to a single outbound engine
+- [HyperComply](https://www.unifygtm.com/customers/hypercomply): Books a meeting with the CISO of a F100 company within 30 minutes of onboarding
+
+## Featured Blog Posts
+
+- [Announcing Unify's Next Chapter](https://www.unifygtm.com/blog/announcing-unifys-next-chapter): Company positioning and product direction update
+- [Unify Raises $40M Series B to Transform Growth into a Science](https://www.unifygtm.com/blog/series-b): Series B funding announcement
+- [Our New Business Reps are on track to make 1.6x industry standard](https://www.unifygtm.com/blog/our-new-business-reps-are-on-track-to-make-1-6x-industry-standard-heres-why-its-well-worth-it): Compensation philosophy for new business reps
+- [You Can Vibe Code Anything. Here's What You Actually Should.](https://www.unifygtm.com/blog/what-you-should-vibe-code): Where AI assisted building pays off
 
 ## Solutions
 
-- [Sales](https://www.unifygtm.com/solutions/sales): Outbound for sales teams
-- [Growth](https://www.unifygtm.com/solutions/growth): Signal-based growth engine
-- [Marketing](https://www.unifygtm.com/solutions/marketing): Demand gen and pipeline marketing
+- [BDRs](https://www.unifygtm.com/solutions/bdr): The new way to prospect
+- [Account Executives](https://www.unifygtm.com/solutions/account-executives): Outbound pipegen and account research
+- [Sales Leaders](https://www.unifygtm.com/solutions/sales-leaders): Outbound agents for all of your reps
 - [RevOps](https://www.unifygtm.com/solutions/revops): GTM operations and workflow automation
+- [Marketing](https://www.unifygtm.com/solutions/marketing): Demand gen and pipeline marketing
+- [Sales-Led](https://www.unifygtm.com/solutions/sales-led-growth): Scale outbound with AI agents
 - [Product-Led Growth](https://www.unifygtm.com/solutions/product-led-growth): Convert PLG signups to enterprise pipeline
-- [Sales-Led Growth](https://www.unifygtm.com/solutions/sales-led-growth): Scale outbound with AI agents
-
-## Comparisons
-
-- [Unify vs Apollo](https://www.unifygtm.com/comparison/unify-vs-apollo)
-- [Unify vs Outreach](https://www.unifygtm.com/comparison/unify-vs-outreach)
-- [Unify vs SalesLoft](https://www.unifygtm.com/comparison/unify-vs-salesloft)
-- [Unify vs Clay](https://www.unifygtm.com/comparison/unify-vs-clay)
-- [Unify vs Instantly](https://www.unifygtm.com/comparison/unify-vs-instantly)
+- [Expansions](https://www.unifygtm.com/solutions/expansions): Turn intent into expansions
 
 ## Company
 
@@ -53,17 +66,24 @@
 ## Documentation
 
 - [Docs](https://docs.unifygtm.com): Product documentation and setup guides
+- [Optimizing your email outreach](https://docs.unifygtm.com/best-practices/deliverability.md): Best practices for writing email copy and optimizing deliverability
+- [Booking meetings with Plays](https://docs.unifygtm.com/best-practices/plays.md): Best practices for using Unify Plays to book meetings from intent signals
+- [Writing AI prompts](https://docs.unifygtm.com/best-practices/prompting.md): Best practices for writing prompts for AI in Unify
 - [University](https://www.unifygtm.com/university): 100+ training courses and play templates
 - [Trust Center](https://trust.unifygtm.com): Security, compliance, and SOC 2 Type II certification
-
-## Optional
-
-- [Content Library](https://www.unifygtm.com/resources): Guides, playbooks, and GTM resources
-- [Events](https://www.unifygtm.com/events): Webinars and live events
-- [Partner Program](https://www.unifygtm.com/become-a-partner): Agency and technology partnerships
 
 ## Explore / Content Hub
 
 - [Explore](https://www.unifygtm.com/explore): B2B go-to-market research, comparisons, and buying guides
 
-Sitemap: https://www.unifygtm.com/sitemap.xml
+## Contact
+
+- Sales: https://www.unifygtm.com/get-started
+- Phone: +1-415-894-5886
+
+## Optional
+
+- [Content Library](https://www.unifygtm.com/resources): Guides, playbooks, and outbound resources
+- [Events](https://www.unifygtm.com/events): Webinars and live events
+- [Partner Program](https://www.unifygtm.com/become-a-partner): Agency and technology partnerships
+- [Sitemap](https://www.unifygtm.com/sitemap.xml): Full site index

@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Data Objects API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_objects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects"
+          },
+          "docs": "List every object in the workspace. Objects are the containers Unify\nstores records in — standard objects like `company`, `person`, and\n`opportunity`, plus any custom objects."
+        },
+        {
+          "info": {
+            "name": "create_object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a custom object for storing a new kind of record. The object is\ncreated without attributes; define those with the object attribute\nendpoints."
+        },
+        {
+          "info": {
+            "name": "get_object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              }
+            ]
+          },
+          "docs": "Get a single object definition by its API name."
+        },
+        {
+          "info": {
+            "name": "update_object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an object's display name or description. The API name is fixed at\ncreation and cannot be changed."
+        },
+        {
+          "info": {
+            "name": "delete_object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path",
+                "description": "API name of the object."
+              }
+            ]
+          },
+          "docs": "Delete an object by its API name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

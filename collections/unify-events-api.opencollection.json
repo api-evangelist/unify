@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Analytics Events API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "send_identify_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifyintent.com/analytics/v1/identify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send an \"identify\" event."
+        },
+        {
+          "info": {
+            "name": "send_page_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifyintent.com/analytics/v1/page",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a \"page\" event."
+        },
+        {
+          "info": {
+            "name": "send_track_event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifyintent.com/analytics/v1/track",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a \"track\" event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

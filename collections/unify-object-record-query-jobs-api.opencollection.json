@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unify Data Object Record Query Jobs API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Object Record Query Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "list_object_record_query_jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/query-jobs",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned by the previous page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter jobs by status."
+              }
+            ]
+          },
+          "docs": "List query jobs previously created for an object, optionally filtered by\nstatus."
+        },
+        {
+          "info": {
+            "name": "create_object_record_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/query-jobs",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start an asynchronous query job that exports records of an object. The\nquery must `select` the attributes to return (optionally expanding\nsingle-reference attributes into nested records) and may filter with\n`where` / `metadata` and sort with `sort_by`; pairing an `updated_at`\nsort with a `metadata` filter enables incremental \"changed since\"\nexports. Poll the job until it is `FINISHED`, then page through the\nresults."
+        },
+        {
+          "info": {
+            "name": "get_object_record_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/query-jobs/:job_id",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a query job's status. Poll until the status is terminal; results are\navailable once the job is `FINISHED`. Jobs expire 24 hours after\ncreation."
+        },
+        {
+          "info": {
+            "name": "cancel_object_record_query_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/query-jobs/:job_id/cancel",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a query job. Only `IN_PROGRESS` jobs can be canceled."
+        },
+        {
+          "info": {
+            "name": "get_object_record_query_job_results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unifygtm.com/data/v1/objects/:object_name/query-jobs/:job_id/results",
+            "params": [
+              {
+                "name": "object_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Maximum is 2,000 for JSON responses and 10,000 when `Accept` is\n`application/x-ndjson`."
+              }
+            ]
+          },
+          "docs": "Get Bulk API job results. By default this returns JSON. Send\n`Accept: application/x-ndjson` to stream newline-delimited JSON.\n\nEach result row's `created_at` / `updated_at` timestamps have millisecond\nprecision.\n\n`attributes` is sparse: only the selected attributes are present, and a\nselected attribute whose value is null is omitted entirely. A missing key\ntherefore means the value was null, not that it was unselected."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

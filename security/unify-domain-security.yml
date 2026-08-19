@@ -1,17 +1,17 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.unifygtm.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 12 12:54:01 2026 GMT
+  cert_expires: Nov 10 19:07:02 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: docs.unifygtm.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Aug 21 11:27:59 2026 GMT
+  cert_expires: Oct 21 09:11:02 2026 GMT
   hsts: true
   hsts_max_age: 63072000
 - host: api.unifygtm.com
@@ -21,7 +21,7 @@ hosts:
   hsts: null
 domains:
 - domain: unifygtm.com
-  dnssec: true
+  dnssec: false
   caa: []
   spf: true
   dmarc: true

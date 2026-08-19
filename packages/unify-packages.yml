@@ -1,32 +1,49 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://docs.unifygtm.com/developers/introduction
+source: >-
+  https://docs.unifygtm.com/developers/sdks/python-library,
+  https://docs.unifygtm.com/developers/sdks/typescript-library,
+  https://docs.unifygtm.com/developers/intent-client/overview,
+  registry.npmjs.org, pypi.org, https://github.com/unifygtm
+checked: '2026-08-13'
+registries_probed: [npm, pypi, rubygems, packagist, crates.io, maven-central, nuget, pkg.go.dev]
+registries_with_packages: [npm, pypi]
 packages:
   - language: python
     registry: pypi
     name: unifygtm-sdk
     version: 0.1.3
+    published: '2026-04-23'
     url: https://pypi.org/project/unifygtm-sdk/
     install: pip install unifygtm-sdk
     repository: https://github.com/unifygtm/sdk-python
+    repo_last_push: '2026-06-18'
     docs: https://docs.unifygtm.com/developers/sdks/python-library
+    description: Official Python SDK for the Unify API.
     official: true
   - language: typescript
     registry: npm
     name: "@unifygtm/sdk"
     version: 0.1.3
+    published: '2026-04-23'
+    releases_total: 4
     url: https://www.npmjs.com/package/@unifygtm/sdk
     install: npm install @unifygtm/sdk
     repository: https://github.com/unifygtm/sdk-typescript
+    repo_last_push: '2026-06-17'
     docs: https://docs.unifygtm.com/developers/sdks/typescript-library
+    description: Official TypeScript SDK for the Unify API.
     official: true
   - language: javascript
     registry: npm
     name: "@unifygtm/intent-client"
     version: 1.9.5
+    published: '2025-12-20'
+    releases_total: 49
     url: https://www.npmjs.com/package/@unifygtm/intent-client
     install: npm install @unifygtm/intent-client
     repository: https://github.com/unifygtm/intent-js-client
+    repo_last_push: '2026-06-14'
     docs: https://docs.unifygtm.com/developers/intent-client/js-client
     description: Browser client for sending website and product intent events into Unify.
     official: true
@@ -34,14 +51,64 @@ packages:
     registry: npm
     name: "@unifygtm/intent-react"
     version: 1.9.5
+    published: '2025-12-20'
+    releases_total: 26
     url: https://www.npmjs.com/package/@unifygtm/intent-react
     install: npm install @unifygtm/intent-react
     repository: https://github.com/unifygtm/intent-react
+    repo_last_push: '2026-01-05'
     docs: https://docs.unifygtm.com/developers/intent-client/react
     description: React bindings for the Unify Intent JS client.
     official: true
+currency:
+  checked: '2026-08-13'
+  finding: >-
+    Both first-party SDKs are still on 0.1.3, published 2026-04-23. The APIs they
+    wrap have moved since: the Tasks API (11 operations) and the query-job/bulk
+    export families on Data, Sequences and Tasks are all present in the live
+    OpenAPI documents harvested 2026-08-13, and the Tasks API shipped after the
+    "Unify API" changelog entry of 2026-05-21 - after the last SDK release. The
+    source repositories were pushed in mid-June 2026 but nothing has been
+    published to npm or PyPI since April, so an SDK consumer is roughly one API
+    generation behind and must drop to raw HTTP for Tasks and for parts of Bulk.
+  intent_client_note: >-
+    The Intent clients (1.9.5, 2025-12-20) are older still, but they wrap the
+    3-operation Analytics API, which has not changed in the same window - staleness
+    there is much less consequential.
+distribution_without_registry:
+  - name: Unify Intent website tag
+    registry: cdn
+    host: https://tag.unifyintent.com
+    version: null
+    note: >-
+      Per-workspace snippet copied from the Unify app; no pinned URL and no CDN
+      metadata endpoint, so no version can be read. See
+      components/unify-components.yml.
 examples:
   - name: bulk-api-connector-examples
     url: https://github.com/unifygtm/bulk-api-connector-examples
     description: Directory of example Connector implementations using the Unify Bulk API.
+    language: python
+    repo_last_push: '2026-07-23'
     official: true
+  - name: agent-plugins
+    url: https://github.com/unifygtm/agent-plugins
+    description: >-
+      Official Unify GTM agent plugins for Claude Code, Cursor and Codex - remote
+      MCP configuration plus seven packaged agent skills. MIT. Not a published
+      registry package; installed through each client's plugin marketplace.
+    repo_last_push: '2026-08-10'
+    official: true
+  - name: unify-hackathon-demo
+    url: https://github.com/unifygtm/unify-hackathon-demo
+    description: Agents SDK workshop demo (Berkeley Hackathon 2025).
+    official: true
+not_found:
+  cli: >-
+    No first-party CLI is published in the GitHub organization, on npm/PyPI, or in
+    the docs. The install instructions that look like CLI commands
+    (claude plugin install, codex plugin add) are the AI clients' own CLIs
+    installing Unify's MCP plugin, not a Unify binary.
+  other_registries: >-
+    No first-party packages found on RubyGems, Packagist, crates.io, Maven Central,
+    NuGet or pkg.go.dev.
