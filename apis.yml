@@ -40,6 +40,22 @@ tags:
 - Data Enrichment
 - Sequences
 - Analytics
+- Task
+- Bulk API
+- MCP
+- Agent Skills
+- Webhook
+tags_raw:
+- Sales
+- Marketing
+- Go-To-Market
+- Outbound
+- Intent Data
+- AI Agents
+- B2B
+- Data Enrichment
+- Sequences
+- Analytics
 - Tasks
 - Bulk API
 - MCP
@@ -53,6 +69,8 @@ apis:
   humanURL: https://docs.unifygtm.com/developers/api/analytics/overview
   baseURL: https://api.unifyintent.com/analytics/v1
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -283,6 +301,8 @@ apis:
   humanURL: https://docs.unifygtm.com/developers/api/tasks/overview
   baseURL: https://api.unifygtm.com/tasks/v1
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
