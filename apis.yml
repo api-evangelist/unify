@@ -8,6 +8,18 @@ description: Unify is a B2B outbound and go-to-market platform that pairs AI age
   Tasks and Analytics, official Python and TypeScript SDKs, browser intent clients, a hosted OAuth-protected
   MCP server exposing 71 tools, provider-published agent skills, and an A2A agent card.
 url: https://raw.githubusercontent.com/api-evangelist/unify/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
