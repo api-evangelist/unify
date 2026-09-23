@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: Unify Tasks API
   summary: List and manage tasks within the Unify platform.
@@ -192,6 +192,8 @@ paths:
       x-mcp-tool:
         readOnlyHint: true
         openWorldHint: false
+      summary: List tasks
+      x-summary-source: derived
     post:
       operationId: create_task
       description: 'Create a task for a person. The request is discriminated by `type`:
@@ -342,6 +344,8 @@ paths:
       x-mcp-tool:
         destructiveHint: false
         openWorldHint: false
+      summary: Create task
+      x-summary-source: derived
   /tasks/v1/tasks/query-jobs:
     post:
       operationId: create_task_query_job
@@ -437,6 +441,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateBulkApiTasksJobRequest'
+      summary: Create task query job
+      x-summary-source: derived
     get:
       operationId: list_task_query_jobs
       description: List task query jobs, optionally filtered by status.
@@ -543,6 +549,8 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Tasks
+      summary: List task query jobs
+      x-summary-source: derived
   /tasks/v1/tasks/query-jobs/{job_id}:
     get:
       operationId: get_task_query_job
@@ -643,6 +651,8 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Tasks
+      summary: Get task query job
+      x-summary-source: derived
   /tasks/v1/tasks/query-jobs/{job_id}/cancel:
     post:
       operationId: cancel_task_query_job
@@ -745,6 +755,8 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Tasks
+      summary: Cancel task query job
+      x-summary-source: derived
   /tasks/v1/tasks/query-jobs/{job_id}/results:
     get:
       operationId: get_task_query_job_results
@@ -918,6 +930,8 @@ paths:
                 description: Response for any operation that results in an internal server error.
       tags:
       - Tasks
+      summary: Get task query job results
+      x-summary-source: derived
   /tasks/v1/tasks/{id}:
     get:
       operationId: retrieve_task
@@ -1045,6 +1059,8 @@ paths:
       x-mcp-tool:
         readOnlyHint: true
         openWorldHint: false
+      summary: Retrieve task
+      x-summary-source: derived
     patch:
       operationId: update_task
       description: 'Update a task''s assignee, priority, and/or due date. At least one of
@@ -1196,6 +1212,8 @@ paths:
       x-mcp-tool:
         idempotentHint: true
         openWorldHint: false
+      summary: Update task
+      x-summary-source: derived
     delete:
       operationId: delete_task
       description: Delete a task by its ID.
@@ -1322,6 +1340,8 @@ paths:
       x-mcp-tool:
         idempotentHint: true
         openWorldHint: false
+      summary: Delete task
+      x-summary-source: derived
   /tasks/v1/tasks/{id}/complete:
     post:
       operationId: complete_task
@@ -1463,81 +1483,195 @@ paths:
         destructiveHint: false
         idempotentHint: true
         openWorldHint: false
+      summary: Complete task
+      x-summary-source: derived
 components:
   schemas:
-    BaseCreateTaskRequest:
-      type: object
-      required:
-      - person_id
-      properties:
-        person_id:
-          $ref: '#/components/schemas/uuid'
-        priority:
-          $ref: '#/components/schemas/TaskPriority'
-        due_at:
-          type: string
-          format: date-time
-          nullable: true
-    BulkApiDatetimeRangeFilter:
-      type: object
-      properties:
-        gt:
-          type: string
-        gte:
-          type: string
-        lt:
-          type: string
-        lte:
-          type: string
-      description: 'Datetime range filter. At least one bound must be provided. `gt` is mutually
-
-        exclusive with `gte`, and `lt` is mutually exclusive with `lte`.'
-    BulkApiJob:
+    TaskSortField:
+      type: string
+      enum:
+      - created_at
+    TaskPriority:
+      type: string
+      enum:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - URGENT
+    CancelBulkApiJobSuccessResponse:
       type: object
       required:
       - job_id
       - status
-      - total_rows
-      - error_code
-      - created_at
-      - expires_at
-      - canceled_at
       properties:
         job_id:
           type: string
         status:
-          $ref: '#/components/schemas/BulkApiJobStatus'
-        total_rows:
-          type: integer
-          nullable: true
-        error_code:
           type: string
-          nullable: true
-        created_at:
-          type: string
-        expires_at:
-          type: string
-        canceled_at:
-          type: string
-          nullable: true
-      description: Bulk API job representation.
-    BulkApiJobStatus:
-      type: string
-      enum:
-      - IN_PROGRESS
-      - FINISHED
-      - FAILED
-      - EXPIRED
-      - CANCELED
-      description: Status of an asynchronous Bulk API job.
-    BulkApiUuidFilter:
+          enum:
+          - CANCELED
+      description: Response returned when canceling a Bulk API job.
+    ListBulkApiJobsSuccessResponse:
       type: object
       required:
-      - id
+      - jobs
+      - next_cursor
       properties:
-        id:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkApiJob'
+        next_cursor:
+          type:
+          - string
+          - 'null'
+      description: Response returned when listing Bulk API jobs.
+    CreatePhoneCallTaskRequest:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - PHONE_CALL
+          note_content:
+            type:
+            - string
+            - 'null'
+        allOf:
+        - $ref: '#/components/schemas/BaseCreateTaskRequest'
+    TaskQueryJobResult:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - id
+        - type
+        - status
+        - priority
+        - person_id
+        - assigned_user_id
+        - due_at
+        - ended_at
+        - created_at
+        - updated_at
+        properties:
+          id:
+            $ref: '#/components/schemas/uuid'
+          type:
+            $ref: '#/components/schemas/TaskType'
+          status:
+            $ref: '#/components/schemas/TaskStatus'
+          priority:
+            $ref: '#/components/schemas/TaskPriority'
+          person_id:
+            $ref: '#/components/schemas/uuid'
+          assigned_user_id:
+            type:
+            - string
+            - 'null'
+            allOf:
+            - $ref: '#/components/schemas/uuid'
+          due_at:
+            type:
+            - string
+            - 'null'
+            format: date-time
+          ended_at:
+            type:
+            - string
+            - 'null'
+            format: date-time
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+        description: The template for omitting properties.
+      description: A task returned by task Bulk API query jobs.
+    GetBulkApiJobResultsFailedResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_failed
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job failed and has no results.
+    UResponses.BadRequestError:
+      type: object
+      required:
+      - code
+      properties:
+        code:
           type: string
-      description: Filter matching a resource by ID.
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
+          type: string
+        attribute_api_name:
+          type: string
+      allOf:
+      - type: object
+        additionalProperties: {}
+      description: Validation error detail returned for bad request responses.
+    CreateLinkedinSendConnectionRequestTaskRequest:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - LINKEDIN_SEND_CONNECTION_REQUEST
+          note_content:
+            type:
+            - string
+            - 'null'
+        allOf:
+        - $ref: '#/components/schemas/BaseCreateTaskRequest'
+    GetBulkApiJobSuccessResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BulkApiJob'
+      description: Response returned when fetching a Bulk API job.
+    ListTasksResponse:
+      type: object
+      required:
+      - status
+      - data
+      - next_cursor
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page, or null when there are no more tasks.
     CancelBulkApiJobNotCancelableResponse:
       type: object
       allOf:
@@ -1554,19 +1688,291 @@ components:
             type: string
         description: Response for any operation that results in a conflict error.
       description: Response returned when a Bulk API job is not cancelable.
-    CancelBulkApiJobSuccessResponse:
+    RetrieveTaskResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - data
+        properties:
+          status:
+            type: string
+            enum:
+            - success
+          data:
+            $ref: '#/components/schemas/Task'
+        description: Response for a successful get operation.
+    GetBulkApiJobResultsNotReadyResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_not_ready
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when Bulk API job results are not ready yet.
+    CreateLinkedinSendMessageTaskRequest:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - LINKEDIN_SEND_MESSAGE
+          note_content:
+            type:
+            - string
+            - 'null'
+        allOf:
+        - $ref: '#/components/schemas/BaseCreateTaskRequest'
+    BulkApiUuidFilter:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+      description: Filter matching a resource by ID.
+    UpdateTaskResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - data
+        properties:
+          status:
+            type: string
+            enum:
+            - success
+          data:
+            $ref: '#/components/schemas/Task'
+        description: Response for a successful update operation.
+    BulkApiJob:
       type: object
       required:
       - job_id
       - status
+      - total_rows
+      - error_code
+      - created_at
+      - expires_at
+      - canceled_at
       properties:
         job_id:
           type: string
         status:
+          $ref: '#/components/schemas/BulkApiJobStatus'
+        total_rows:
+          type:
+          - integer
+          - 'null'
+        error_code:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        canceled_at:
+          type:
+          - string
+          - 'null'
+      description: Bulk API job representation.
+    DeleteTaskResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        properties:
+          status:
+            type: string
+            enum:
+            - success
+        description: Response for a successful delete operation.
+    CreateTaskRequest:
+      type: object
+      oneOf:
+      - $ref: '#/components/schemas/CreateEmailTaskRequest'
+      - $ref: '#/components/schemas/CreateActionItemTaskRequest'
+      - $ref: '#/components/schemas/CreatePhoneCallTaskRequest'
+      - $ref: '#/components/schemas/CreateLinkedinSendMessageTaskRequest'
+      - $ref: '#/components/schemas/CreateLinkedinSendConnectionRequestTaskRequest'
+      - $ref: '#/components/schemas/CreateLinkedinViewProfileTaskRequest'
+      discriminator:
+        propertyName: type
+        mapping:
+          EMAIL: '#/components/schemas/CreateEmailTaskRequest'
+          ACTION_ITEM: '#/components/schemas/CreateActionItemTaskRequest'
+          PHONE_CALL: '#/components/schemas/CreatePhoneCallTaskRequest'
+          LINKEDIN_SEND_MESSAGE: '#/components/schemas/CreateLinkedinSendMessageTaskRequest'
+          LINKEDIN_SEND_CONNECTION_REQUEST: '#/components/schemas/CreateLinkedinSendConnectionRequestTaskRequest'
+          LINKEDIN_VIEW_PROFILE: '#/components/schemas/CreateLinkedinViewProfileTaskRequest'
+    CreateBulkApiTasksJobRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/CreateBulkApiTasksJobFilter'
+      description: Request body for creating a tasks Bulk API query job.
+    GetBulkApiJobResultsPayloadTooLargeResponse:
+      type: object
+      required:
+      - status
+      - message
+      properties:
+        status:
           type: string
           enum:
-          - CANCELED
-      description: Response returned when canceling a Bulk API job.
+          - results_page_too_large
+        message:
+          type: string
+      description: Response returned when a requested Bulk API results page is too large.
+    GetBulkApiJobNotFoundResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - not_found
+          message:
+            type: string
+        description: Response for any operation that results in a not found error.
+      description: Response returned when a Bulk API job cannot be found.
+    Task:
+      type: object
+      required:
+      - id
+      - type
+      - status
+      - priority
+      - person_id
+      - assigned_user_id
+      - due_at
+      - ended_at
+      - created_at
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/uuid'
+        type:
+          $ref: '#/components/schemas/TaskType'
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        priority:
+          $ref: '#/components/schemas/TaskPriority'
+        person_id:
+          $ref: '#/components/schemas/uuid'
+        assigned_user_id:
+          type:
+          - string
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/uuid'
+        due_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        ended_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        note_content:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CreateLinkedinViewProfileTaskRequest:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - LINKEDIN_VIEW_PROFILE
+          note_content:
+            type:
+            - string
+            - 'null'
+        allOf:
+        - $ref: '#/components/schemas/BaseCreateTaskRequest'
+    GetBulkApiJobResultsCanceledResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_canceled
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job was canceled and has no results.
+    CreateEmailTaskRequest:
+      type: object
+      required:
+      - type
+      - mailbox_email
+      - subject
+      - content
+      properties:
+        type:
+          type: string
+          enum:
+          - EMAIL
+        mailbox_email:
+          allOf:
+          - $ref: '#/components/schemas/email'
+          description: Email address of the mailbox used to send the email when the task is completed.
+        subject:
+          type: string
+          description: Email subject. May be empty while the task is a draft.
+        content:
+          type: string
+          description: Email body. May be empty while the task is a draft.
+        cc_recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/email'
+          description: Additional email recipients. The task's person is the primary recipient.
+        bcc_recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/email'
+          description: Blind-copy email recipients.
+      allOf:
+      - $ref: '#/components/schemas/BaseCreateTaskRequest'
     CreateActionItemTaskRequest:
       type: object
       allOf:
@@ -1579,26 +1985,75 @@ components:
             enum:
             - ACTION_ITEM
           note_content:
-            type: string
-            nullable: true
+            type:
+            - string
+            - 'null'
         allOf:
         - $ref: '#/components/schemas/BaseCreateTaskRequest'
-    CreateBulkApiJobSuccessResponse:
+    BulkApiDatetimeRangeFilter:
+      type: object
+      properties:
+        gt:
+          type: string
+        gte:
+          type: string
+        lt:
+          type: string
+        lte:
+          type: string
+      description: 'Datetime range filter. At least one bound must be provided. `gt` is mutually
+
+        exclusive with `gte`, and `lt` is mutually exclusive with `lte`.'
+    GetBulkApiJobResultsExpiredResponse:
       type: object
       required:
-      - job_id
       - status
-      - expires_at
+      - message
       properties:
-        job_id:
-          type: string
         status:
           type: string
           enum:
-          - IN_PROGRESS
-        expires_at:
+          - results_expired
+        message:
           type: string
-      description: Response returned when creating a Bulk API query job.
+      description: Response returned when Bulk API job results have expired.
+    BaseCreateTaskRequest:
+      type: object
+      required:
+      - person_id
+      properties:
+        person_id:
+          $ref: '#/components/schemas/uuid'
+        priority:
+          $ref: '#/components/schemas/TaskPriority'
+        due_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    SortOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+    CreateTaskResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - data
+        properties:
+          status:
+            type: string
+            enum:
+            - success
+          data:
+            $ref: '#/components/schemas/Task'
+        description: Response for a successful create operation.
+    uuid:
+      type: string
+      format: uuid
     CreateBulkApiTasksJobFilter:
       type: object
       properties:
@@ -1745,415 +2200,74 @@ components:
         company:
           $ref: '#/components/schemas/BulkApiUuidFilter'
       description: Filters accepted when querying tasks.
-    CreateBulkApiTasksJobRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/CreateBulkApiTasksJobFilter'
-      description: Request body for creating a tasks Bulk API query job.
-    CreateEmailTaskRequest:
-      type: object
-      required:
-      - type
-      - mailbox_email
-      - subject
-      - content
-      properties:
-        type:
-          type: string
-          enum:
-          - EMAIL
-        mailbox_email:
-          allOf:
-          - $ref: '#/components/schemas/email'
-          description: Email address of the mailbox used to send the email when the task is completed.
-        subject:
-          type: string
-          description: Email subject. May be empty while the task is a draft.
-        content:
-          type: string
-          description: Email body. May be empty while the task is a draft.
-        cc_recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/email'
-          description: Additional email recipients. The task's person is the primary recipient.
-        bcc_recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/email'
-          description: Blind-copy email recipients.
-      allOf:
-      - $ref: '#/components/schemas/BaseCreateTaskRequest'
-    CreateLinkedinSendConnectionRequestTaskRequest:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - LINKEDIN_SEND_CONNECTION_REQUEST
-          note_content:
-            type: string
-            nullable: true
-        allOf:
-        - $ref: '#/components/schemas/BaseCreateTaskRequest'
-    CreateLinkedinSendMessageTaskRequest:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - LINKEDIN_SEND_MESSAGE
-          note_content:
-            type: string
-            nullable: true
-        allOf:
-        - $ref: '#/components/schemas/BaseCreateTaskRequest'
-    CreateLinkedinViewProfileTaskRequest:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - LINKEDIN_VIEW_PROFILE
-          note_content:
-            type: string
-            nullable: true
-        allOf:
-        - $ref: '#/components/schemas/BaseCreateTaskRequest'
-    CreatePhoneCallTaskRequest:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - type
-        properties:
-          type:
-            type: string
-            enum:
-            - PHONE_CALL
-          note_content:
-            type: string
-            nullable: true
-        allOf:
-        - $ref: '#/components/schemas/BaseCreateTaskRequest'
-    CreateTaskRequest:
-      type: object
-      oneOf:
-      - $ref: '#/components/schemas/CreateEmailTaskRequest'
-      - $ref: '#/components/schemas/CreateActionItemTaskRequest'
-      - $ref: '#/components/schemas/CreatePhoneCallTaskRequest'
-      - $ref: '#/components/schemas/CreateLinkedinSendMessageTaskRequest'
-      - $ref: '#/components/schemas/CreateLinkedinSendConnectionRequestTaskRequest'
-      - $ref: '#/components/schemas/CreateLinkedinViewProfileTaskRequest'
-      discriminator:
-        propertyName: type
-        mapping:
-          EMAIL: '#/components/schemas/CreateEmailTaskRequest'
-          ACTION_ITEM: '#/components/schemas/CreateActionItemTaskRequest'
-          PHONE_CALL: '#/components/schemas/CreatePhoneCallTaskRequest'
-          LINKEDIN_SEND_MESSAGE: '#/components/schemas/CreateLinkedinSendMessageTaskRequest'
-          LINKEDIN_SEND_CONNECTION_REQUEST: '#/components/schemas/CreateLinkedinSendConnectionRequestTaskRequest'
-          LINKEDIN_VIEW_PROFILE: '#/components/schemas/CreateLinkedinViewProfileTaskRequest'
-    CreateTaskResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - data
-        properties:
-          status:
-            type: string
-            enum:
-            - success
-          data:
-            $ref: '#/components/schemas/Task'
-        description: Response for a successful create operation.
-    DeleteTaskResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        properties:
-          status:
-            type: string
-            enum:
-            - success
-        description: Response for a successful delete operation.
-    GetBulkApiJobNotFoundResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - not_found
-          message:
-            type: string
-        description: Response for any operation that results in a not found error.
-      description: Response returned when a Bulk API job cannot be found.
-    GetBulkApiJobResultsCanceledResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_canceled
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job was canceled and has no results.
-    GetBulkApiJobResultsExpiredResponse:
-      type: object
-      required:
-      - status
-      - message
-      properties:
-        status:
-          type: string
-          enum:
-          - results_expired
-        message:
-          type: string
-      description: Response returned when Bulk API job results have expired.
-    GetBulkApiJobResultsFailedResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_failed
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job failed and has no results.
-    GetBulkApiJobResultsNotReadyResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_not_ready
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when Bulk API job results are not ready yet.
-    GetBulkApiJobResultsPayloadTooLargeResponse:
-      type: object
-      required:
-      - status
-      - message
-      properties:
-        status:
-          type: string
-          enum:
-          - results_page_too_large
-        message:
-          type: string
-      description: Response returned when a requested Bulk API results page is too large.
-    GetBulkApiJobSuccessResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BulkApiJob'
-      description: Response returned when fetching a Bulk API job.
-    ListBulkApiJobsSuccessResponse:
-      type: object
-      required:
-      - jobs
-      - next_cursor
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkApiJob'
-        next_cursor:
-          type: string
-          nullable: true
-      description: Response returned when listing Bulk API jobs.
-    ListTasksResponse:
-      type: object
-      required:
-      - status
-      - data
-      - next_cursor
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
-        next_cursor:
-          type: string
-          nullable: true
-          description: Opaque cursor for the next page, or null when there are no more tasks.
-    RetrieveTaskResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - data
-        properties:
-          status:
-            type: string
-            enum:
-            - success
-          data:
-            $ref: '#/components/schemas/Task'
-        description: Response for a successful get operation.
-    SortOrder:
+    email:
+      type: string
+      format: email
+    BulkApiJobStatus:
       type: string
       enum:
-      - asc
-      - desc
-    Task:
-      type: object
-      required:
-      - id
-      - type
-      - status
-      - priority
-      - person_id
-      - assigned_user_id
-      - due_at
-      - ended_at
-      - created_at
-      - updated_at
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        type:
-          $ref: '#/components/schemas/TaskType'
-        status:
-          $ref: '#/components/schemas/TaskStatus'
-        priority:
-          $ref: '#/components/schemas/TaskPriority'
-        person_id:
-          $ref: '#/components/schemas/uuid'
-        assigned_user_id:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/uuid'
-          nullable: true
-        due_at:
-          type: string
-          format: date-time
-          nullable: true
-        ended_at:
-          type: string
-          format: date-time
-          nullable: true
-        note_content:
-          type: string
-          nullable: true
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-    TaskPriority:
-      type: string
-      enum:
-      - LOW
-      - MEDIUM
-      - HIGH
-      - URGENT
-    TaskQueryJobResult:
-      type: object
-      allOf:
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+      - EXPIRED
+      - CANCELED
+      description: Status of an asynchronous Bulk API job.
+    UpdateTaskRequest:
+      anyOf:
       - type: object
-        required:
-        - id
-        - type
-        - status
-        - priority
-        - person_id
-        - assigned_user_id
-        - due_at
-        - ended_at
-        - created_at
-        - updated_at
         properties:
-          id:
-            $ref: '#/components/schemas/uuid'
-          type:
-            $ref: '#/components/schemas/TaskType'
-          status:
-            $ref: '#/components/schemas/TaskStatus'
-          priority:
-            $ref: '#/components/schemas/TaskPriority'
-          person_id:
-            $ref: '#/components/schemas/uuid'
           assigned_user_id:
-            type: string
+            type:
+            - string
+            - 'null'
             allOf:
             - $ref: '#/components/schemas/uuid'
-            nullable: true
+          priority:
+            $ref: '#/components/schemas/TaskPriority'
           due_at:
-            type: string
+            type:
+            - string
+            - 'null'
             format: date-time
-            nullable: true
-          ended_at:
-            type: string
+        required:
+        - assigned_user_id
+      - type: object
+        properties:
+          assigned_user_id:
+            type:
+            - string
+            - 'null'
+            allOf:
+            - $ref: '#/components/schemas/uuid'
+          priority:
+            $ref: '#/components/schemas/TaskPriority'
+          due_at:
+            type:
+            - string
+            - 'null'
             format: date-time
-            nullable: true
-          created_at:
-            type: string
+        required:
+        - priority
+      - type: object
+        properties:
+          assigned_user_id:
+            type:
+            - string
+            - 'null'
+            allOf:
+            - $ref: '#/components/schemas/uuid'
+          priority:
+            $ref: '#/components/schemas/TaskPriority'
+          due_at:
+            type:
+            - string
+            - 'null'
             format: date-time
-          updated_at:
-            type: string
-            format: date-time
-        description: The template for omitting properties.
-      description: A task returned by task Bulk API query jobs.
-    TaskSortField:
-      type: string
-      enum:
-      - created_at
-    TaskStatus:
-      type: string
-      enum:
-      - NOT_READY
-      - READY
-      - COMPLETED
-      - SKIPPED
-      - CANCELED
+        required:
+        - due_at
+      description: 'Request body for updating a task. At least one of `assigned_user_id`,
+
+        `priority`, or `due_at` must be provided.'
     TaskType:
       type: string
       enum:
@@ -2164,98 +2278,30 @@ components:
       - LINKEDIN_SEND_CONNECTION_REQUEST
       - LINKEDIN_VIEW_PROFILE
       - REPLY_TO_EMAIL
-    UResponses.BadRequestError:
+    CreateBulkApiJobSuccessResponse:
       type: object
       required:
-      - code
+      - job_id
+      - status
+      - expires_at
       properties:
-        code:
+        job_id:
           type: string
-        path:
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        object_api_name:
+        status:
           type: string
-        attribute_api_name:
+          enum:
+          - IN_PROGRESS
+        expires_at:
           type: string
-      allOf:
-      - type: object
-        additionalProperties: {}
-      description: Validation error detail returned for bad request responses.
-    UpdateTaskRequest:
-      anyOf:
-      - type: object
-        properties:
-          assigned_user_id:
-            type: string
-            allOf:
-            - $ref: '#/components/schemas/uuid'
-            nullable: true
-          priority:
-            $ref: '#/components/schemas/TaskPriority'
-          due_at:
-            type: string
-            format: date-time
-            nullable: true
-        required:
-        - assigned_user_id
-      - type: object
-        properties:
-          assigned_user_id:
-            type: string
-            allOf:
-            - $ref: '#/components/schemas/uuid'
-            nullable: true
-          priority:
-            $ref: '#/components/schemas/TaskPriority'
-          due_at:
-            type: string
-            format: date-time
-            nullable: true
-        required:
-        - priority
-      - type: object
-        properties:
-          assigned_user_id:
-            type: string
-            allOf:
-            - $ref: '#/components/schemas/uuid'
-            nullable: true
-          priority:
-            $ref: '#/components/schemas/TaskPriority'
-          due_at:
-            type: string
-            format: date-time
-            nullable: true
-        required:
-        - due_at
-      description: 'Request body for updating a task. At least one of `assigned_user_id`,
-
-        `priority`, or `due_at` must be provided.'
-    UpdateTaskResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - data
-        properties:
-          status:
-            type: string
-            enum:
-            - success
-          data:
-            $ref: '#/components/schemas/Task'
-        description: Response for a successful update operation.
-    email:
+      description: Response returned when creating a Bulk API query job.
+    TaskStatus:
       type: string
-      format: email
-    uuid:
-      type: string
-      format: uuid
+      enum:
+      - NOT_READY
+      - READY
+      - COMPLETED
+      - SKIPPED
+      - CANCELED
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

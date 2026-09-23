@@ -1,27 +1,34 @@
 {
   "provider": "unify",
   "sources": [
-    "unify-analytics-openapi.json",
-    "unify-data-openapi.json",
-    "unify-sequences-openapi.json",
-    "unify-tasks-openapi.json"
+    "_original/unify-analytics-openapi.json",
+    "_original/unify-data-openapi.json",
+    "_original/unify-sequences-openapi.json",
+    "_original/unify-tasks-openapi.json"
   ],
   "outputs": [
     "unify-events-api-openapi.yml",
-    "unify-event-query-jobs-api-openapi.yml",
-    "unify-objects-api-openapi.yml",
-    "unify-object-attributes-api-openapi.yml",
-    "unify-object-attribute-options-api-openapi.yml",
-    "unify-object-record-query-jobs-api-openapi.yml",
-    "unify-object-records-api-openapi.yml",
-    "unify-sequence-enrollment-steps-api-openapi.yml",
-    "unify-sequence-enrollments-api-openapi.yml",
+    "unify-data-api-openapi.yml",
     "unify-sequences-api-openapi.yml",
     "unify-tasks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "unify-analytics-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "unify-data-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "unify-data-openapi.json: multi-axis tagging (7 tags, 1 first tags, 2.00x duplication over 31 operations) \u2014 split on first tag, 31 operations narrowed",
+    "unify-sequences-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "unify-sequences-openapi.json: multi-axis tagging (3 tags, 1 first tags, 1.70x duplication over 23 operations) \u2014 split on first tag, 16 operations narrowed",
+    "unify-tasks-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "unify-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unify-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unify-sequences-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "unify-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
