@@ -4216,11 +4216,139 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UValues.UBoolean:
-      type: boolean
-      description: Boolean value.
-      title: UBoolean
-    CreateBulkApiObjectRecordsJobObjectNotFoundResponse:
+    UObjects.UPersonAttributes:
+      type: object
+      required:
+      - email
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UAddress'
+          description: Physical address of the person.
+        company:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          description: Company associated with the person.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Corporate phone number of the person.
+        do_not_call:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether calling this person is disallowed.
+        do_not_email:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether emailing this person is disallowed.
+        email:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UEmail'
+          description: Email address of the person.
+        email_opt_out:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether the person has opted out of email communications.
+        eu_resident:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether this person is a resident of the European Union.
+        first_name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: First name of the person.
+        last_activity_at:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDatetime'
+          description: Last time an activity was recorded for this person.
+          readOnly: true
+        last_name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Last name of the person.
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Source of the person record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+          description: 'LinkedIn profile of the person.
+
+
+            This is the full URL of the LinkedIn profile of the person. The value
+
+            will always be standardized with an HTTPS prefix, "www" subdomain, and
+
+            trailing slash.'
+        mobile_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Mobile phone number of the person.
+        record_owner:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          description: The user that owns the person record.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Status of the person.
+        title:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Job title of the person.
+        work_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Work phone number of the person.
+      allOf:
+      - type: object
+        additionalProperties:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UValue'
+    UValues.UDate:
+      type: string
+      description: String value representing a date.
+      title: UDate
+    UObjects.UAttributeOptionUpdate:
+      type: object
+      required:
+      - display_name
+      properties:
+        display_name:
+          type: string
+          description: 'This is the user-facing attribute option name that will be shown within
+
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+    UValues.UReferenceByMatch:
+      type: object
+      required:
+      - match
+      properties:
+        match:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+      description: 'Reference to another object record by match criteria.
+
+
+        This will find an existing record using the provided match criteria, and
+
+        `null` will be returned if no match is found.'
+      title: UReferenceByMatch
+    GetBulkApiJobResultsCanceledResponse:
       type: object
       allOf:
       - type: object
@@ -4231,11 +4359,408 @@ components:
           status:
             type: string
             enum:
-            - not_found
+            - results_canceled
           message:
             type: string
-        description: Response for any operation that results in a not found error.
-      description: Response returned when the object being queried cannot be found.
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job was canceled and has no results.
+    UObjects.UMultiSelectAttribute:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOption'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - MULTI_SELECT
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            type:
+            - string
+            - 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "multi-select" attribute on a Unify object.
+    UObjects.UMultiSelectAttributeUpdate:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOptionUpdateItem'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            type:
+            - string
+            - 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "multi-select" attribute on a Unify object.
+    BulkApiEventsQueryFilter:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/BulkApiDatetimeRangeFilter'
+        id:
+          anyOf:
+          - type: object
+            required:
+            - in
+            properties:
+              in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+            description: Filter matching values included in a set.
+          - type: object
+            required:
+            - not_in
+            properties:
+              in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  type: string
+                minItems: 1
+            description: Filter matching values excluded from a set.
+        type:
+          anyOf:
+          - type: object
+            required:
+            - in
+            properties:
+              in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+            description: Filter matching values included in a set.
+          - type: object
+            required:
+            - not_in
+            properties:
+              in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+              not_in:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+                minItems: 1
+            description: Filter matching values excluded from a set.
+        session:
+          $ref: '#/components/schemas/BulkApiUuidFilter'
+        company:
+          $ref: '#/components/schemas/BulkApiUuidFilter'
+        person:
+          $ref: '#/components/schemas/BulkApiUuidFilter'
+        domain:
+          type: string
+      description: 'Filters accepted when querying events. Events are immutable, so the natural
+
+        cursor is `timestamp`, which is also the only datetime field filterable here.'
+    SearchRecordsMetadataSortBy:
+      type: object
+      required:
+      - field
+      - direction
+      properties:
+        field:
+          $ref: '#/components/schemas/SearchRecordsMetadataSortField'
+        direction:
+          $ref: '#/components/schemas/SearchRecordsSortDirection'
+      description: 'Sort records by a base record field. Pairing a `created_at` / `updated_at`
+
+        sort with the matching `metadata` filter enables incremental queries that
+
+        page through every record changed since a prior checkpoint.'
+    UObjects.USelectAttribute:
+      type: object
+      required:
+      - options
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/UObjects.UAttributeOption'
+          description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - type
+        - api_name
+        - display_name
+        - description
+        - is_required
+        - is_unique
+        properties:
+          type:
+            type: string
+            enum:
+            - SELECT
+            description: The type of value this attribute can hold.
+          api_name:
+            type: string
+            description: 'This is the unique identifier for the attribute at the API level. It is
+
+              unique within the object and cannot be changed.'
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            type:
+            - string
+            - 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+          is_required:
+            type: boolean
+            description: Whether the attribute is required.
+          is_unique:
+            type: boolean
+            description: Whether the attribute is unique.
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "select" attribute on a Unify object.
+    UValues.UPhoneNumber:
+      type: string
+      description: String value representing a phone number.
+      title: UPhoneNumber
+    UValues.UDecimal:
+      type: number
+      description: Decimal value.
+      title: UDecimal
+    UpdateRecordRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: The attribute values to update in the record.
+      description: Request body for updating a record.
+    UObjects.UObject:
+      type: object
+      required:
+      - provider
+      - api_name
+      - display_name
+      - description
+      properties:
+        provider:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UObjectProvider'
+          description: 'The provider of an object represents who created and manages the object in
+
+            Unify. This is used to differentiate between standard objects provided by
+
+            Unify and custom objects created by a plugin or user.'
+          readOnly: true
+        api_name:
+          type: string
+          description: 'This is the unique identifier for the object at the API level. It is unique
+
+            within Unify and cannot be changed.'
+        display_name:
+          type: string
+          description: 'This is the user-facing object name shown within Unify. It is not required
+
+            to be unique within Unify and can be changed at any time.'
+        description:
+          type:
+          - string
+          - 'null'
+          description: 'This is a description of the object. It is not required but will be shown
+
+            in the UI to help understand the purpose of the object. Typically, this
+
+            should be a short sentence or two explaining the object.'
+    GetBulkApiJobSuccessResponse:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/BulkApiJob'
+      description: Response returned when fetching a Bulk API job.
+    UObjects.URelatedReferenceAttribute:
+      type: object
+      required:
+      - api_name
+      - display_name
+      - cardinality
+      properties:
+        api_name:
+          type: string
+        display_name:
+          type: string
+        cardinality:
+          $ref: '#/components/schemas/UObjects.UReferenceCardinality'
+    SearchRecordsTimestampFilter:
+      type: object
+      properties:
+        gt:
+          $ref: '#/components/schemas/UValues.UDatetime'
+        gte:
+          $ref: '#/components/schemas/UValues.UDatetime'
+        lt:
+          $ref: '#/components/schemas/UValues.UDatetime'
+        lte:
+          $ref: '#/components/schemas/UValues.UDatetime'
+      description: 'Bounds on a record metadata timestamp, expressed as ISO-8601 datetimes
+
+        interpreted as UTC instants. At least one bound is required, and at most one
+
+        lower (`gt` / `gte`) and one upper (`lt` / `lte`) bound may be supplied — so
+
+        a single filter can express an open-ended "changed since" cutoff or a closed
+
+        window.'
+    UValues.UEmail:
+      type: string
+      format: email
+      description: String value representing an email address.
+      title: UEmail
+    BulkApiObjectRecordsQuery:
+      type: object
+      required:
+      - select
+      properties:
+        where:
+          $ref: '#/components/schemas/SearchRecordsWhere'
+        select:
+          $ref: '#/components/schemas/SearchRecordsSelect'
+        sort_by:
+          $ref: '#/components/schemas/SearchRecordsMetadataSortBy'
+        metadata:
+          $ref: '#/components/schemas/SearchRecordsMetadataFilter'
+      description: Query describing which object records to return and how to shape them.
+    BulkApiObjectRecordResult:
+      type: object
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - attributes
+      properties:
+        object:
+          type: string
+          description: The API name of the object this record is an instance of.
+          readOnly: true
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Unique UUID identifier for the record.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time the record was created.
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time the record was last updated.
+          readOnly: true
+        attributes:
+          type: object
+          additionalProperties:
+            anyOf:
+            - allOf:
+              - $ref: '#/components/schemas/UValues.UValue'
+            - type:
+              - object
+              - 'null'
+              allOf:
+              - $ref: '#/components/schemas/BulkApiObjectRecordResult'
+          description: 'Attribute values for the record. Each key is the API name of the attribute
+
+            and each value is the corresponding attribute value for the record.'
+      description: 'A single object record result row from a query job.
+
+
+        Mirrors `UObjectRecord`, but widens `attributes` to allow nested records:
+
+        a selected scalar attribute is a `UValue`, while a single-reference attribute
+
+        expanded through a nested `select` resolves to a nested result record with
+
+        this same shape. The recursion bottoms out at the `select` depth limit (see
+
+        `SearchRecordsSelect`).'
     SearchRecordsMetadataFilter:
       type: object
       properties:
@@ -4253,6 +4778,430 @@ components:
         enables incremental queries that page through every record changed since a
 
         prior checkpoint.'
+    UObjects.UReferenceAttributeUpdate:
+      type: object
+      required:
+      - cardinality
+      - related_object
+      - related_attribute
+      properties:
+        cardinality:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UReferenceCardinality'
+          description: The cardinality of the reference attribute.
+        related_object:
+          type: string
+          description: The API name of the object that this attribute references.
+        related_attribute:
+          type:
+          - object
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/UObjects.URelatedReferenceAttribute'
+          description: 'The optional related attribute on the referenced object. When this exists,
+
+            the relationship between the two objects is bidirectional.'
+      allOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            type:
+            - string
+            - 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "reference" attribute on a Unify object.
+    UObjects.UCompany:
+      type: object
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - attributes
+      properties:
+        object:
+          type: string
+          enum:
+          - company
+          description: The API name of the object this record is an instance of.
+          readOnly: true
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Unique UUID identifier for the record.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time the record was created.
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time the record was last updated.
+          readOnly: true
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UCompanyAttributes'
+          description: 'Attribute values for the record. Each key is the API name of the attribute
+
+            and each value is the corresponding attribute value for the record.'
+    SearchRecordsWhere:
+      type: object
+      additionalProperties:
+        anyOf:
+        - $ref: '#/components/schemas/SearchRecordsAttributeWhere'
+        - $ref: '#/components/schemas/SearchRecordsWhere'
+      description: 'Filter records by one or more attribute conditions.
+
+
+        Each key is an attribute API name on the queried object. A value of
+
+        `{ "equals": ... }` matches the attribute directly, while a nested object of
+
+        further conditions filters through a single-reference attribute on the
+
+        referenced object.'
+    GetBulkApiJobResultsNotReadyResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_not_ready
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when Bulk API job results are not ready yet.
+    UObjects.UObjectUpdate:
+      type: object
+      required:
+      - display_name
+      - description
+      properties:
+        display_name:
+          type: string
+          description: 'This is the user-facing object name shown within Unify. It is not required
+
+            to be unique within Unify and can be changed at any time.'
+        description:
+          type:
+          - string
+          - 'null'
+          description: 'This is a description of the object. It is not required but will be shown
+
+            in the UI to help understand the purpose of the object. Typically, this
+
+            should be a short sentence or two explaining the object.'
+    SearchRecordsNestedSelect:
+      type: object
+      required:
+      - select
+      properties:
+        select:
+          $ref: '#/components/schemas/SearchRecordsSelect'
+      description: 'Select the attributes of a referenced record reached through a
+
+        single-reference attribute.'
+    GetBulkApiJobResultsPayloadTooLargeResponse:
+      type: object
+      required:
+      - status
+      - message
+      properties:
+        status:
+          type: string
+          enum:
+          - results_page_too_large
+        message:
+          type: string
+      description: Response returned when a requested Bulk API results page is too large.
+    UEvent:
+      type: object
+      required:
+      - id
+      - original_event_id
+      - timestamp
+      - type
+      - name
+      - properties
+      - anonymous_id
+      - session_id
+      - company
+      - person
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Unique identifier for the event.
+        original_event_id:
+          type: string
+          description: 'Identifier assigned to the event by the upstream source that produced it
+
+            (e.g. a Segment `messageId`, a PostHog event ID, or a Unify Tag activity
+
+            ID).'
+        timestamp:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDatetime'
+          description: 'Time the event occurred. Events are immutable, so this is the natural
+
+            cursor for incremental syncs.'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/EventType'
+          description: Canonical event type.
+        name:
+          type:
+          - string
+          - 'null'
+          description: Human-readable event name, or `null` when unset.
+        properties:
+          type:
+          - object
+          - 'null'
+          additionalProperties: {}
+          description: 'Event properties: custom track-event properties merged with page context
+
+            (`domain`, `path`, `referrer_domain`, `referrer_path`, `query`) and UTM
+
+            parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`,
+
+            `utm_content`). Keys with no value are omitted, and the whole object is
+
+            `null` when no properties are present.'
+        anonymous_id:
+          type: string
+          description: Anonymous identifier assigned to the visitor by the upstream source.
+        session_id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: Identifier of the session the event belongs to.
+        company:
+          type:
+          - object
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UCompany'
+          description: Revealed company associated with the visitor, or `null` when unresolved.
+        person:
+          type:
+          - object
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UPerson'
+          description: Revealed person associated with the visitor, or `null` when unresolved.
+      description: 'A flat, denormalized event row returned by an event Bulk API
+
+        query job.
+
+
+        Unlike object records, events are not wrapped in the `object` / `attributes`
+
+        envelope. Page, session, and UTM context are folded into `properties`, while
+
+        the revealed `company` / `person` are embedded directly on the row as full
+
+        object records (`null` when the visitor has no revealed company / person).'
+    UValues.UCountry:
+      type: object
+      required:
+      - code
+      - name
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountryCode'
+          description: Country code.
+        name:
+          type: string
+          description: Country name.
+      description: Composite object representing a country.
+      title: UCountry
+    EventType:
+      type: string
+      enum:
+      - page
+      - track
+      - identify
+      description: Canonical, source-agnostic event type.
+    SearchRecordsAttributeWhere:
+      type: object
+      required:
+      - equals
+      properties:
+        equals:
+          $ref: '#/components/schemas/UValues.UValue'
+      description: 'Filter records by attribute value. The `equals` value must match the type of
+
+        the attribute being filtered.'
+    UValues.UText:
+      type: string
+      description: String value.
+      title: UText
+    UValues.UInteger:
+      type: integer
+      description: Integer value.
+      title: UInteger
+    GetBulkApiJobNotFoundResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - not_found
+          message:
+            type: string
+        description: Response for any operation that results in a not found error.
+      description: Response returned when a Bulk API job cannot be found.
+    CancelBulkApiJobNotCancelableResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - job_not_cancelable
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job is not cancelable.
+    CreateBulkApiObjectRecordsJobRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          $ref: '#/components/schemas/BulkApiObjectRecordsQuery'
+      description: Request body for creating an object records Bulk API query job.
+    UObjects.UCompanyAttributes:
+      type: object
+      required:
+      - domain
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UAddress'
+          description: Physical address of the company.
+        corporate_phone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UPhoneNumber'
+          description: Corporate phone number of the company.
+        description:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Description of the company.
+        do_not_contact:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UBoolean'
+          description: Whether contacting this company is disallowed.
+        domain:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+          description: Website domain of the company.
+        employee_count:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UInteger'
+          description: Estimated employee count of the company.
+        founded:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDate'
+          description: Date when the company was founded.
+        industry:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Industry the company operates in.
+        last_activity_at:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UDatetime'
+          description: Last time an activity was recorded for this company.
+          readOnly: true
+        lead_source:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Source of the company record.
+        linkedin_url:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUrl'
+          description: 'LinkedIn profile of the company.
+
+
+            This is the full URL of the LinkedIn profile of the company. The value will
+
+            always be standardized with an HTTPS prefix, "www" subdomain, and trailing
+
+            slash.'
+        name:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Name of the company.
+        record_owner:
+          anyOf:
+          - $ref: '#/components/schemas/UValues.UReferenceById'
+          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+          description: The user that owns the company record.
+        revenue:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCurrency'
+          description: Estimated revenue of the company.
+        status:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Status of the company.
+        time_zone:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UText'
+          description: Time zone the company is located in.
+      allOf:
+      - type: object
+        additionalProperties:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UValue'
+    BulkApiJobStatus:
+      type: string
+      enum:
+      - IN_PROGRESS
+      - FINISHED
+      - FAILED
+      - EXPIRED
+      - CANCELED
+      description: Status of an asynchronous Bulk API job.
+    BulkApiUuidFilter:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+      description: Filter matching a resource by ID.
     UObjects.UAttribute:
       anyOf:
       - type: object
@@ -4779,76 +5728,77 @@ components:
             description: Whether the attribute is unique.
         description: Base properties that define an attribute on a Unify object.
       description: Definition of an attribute on a Unify object.
-    UValues.UInteger:
-      type: integer
-      description: Integer value.
-      title: UInteger
-    GetBulkApiJobSuccessResponse:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/BulkApiJob'
-      description: Response returned when fetching a Bulk API job.
-    BulkApiJob:
+    UValues.UValue:
+      anyOf:
+      - $ref: '#/components/schemas/UValues.UAddress'
+      - $ref: '#/components/schemas/UValues.UBoolean'
+      - $ref: '#/components/schemas/UValues.UCountry'
+      - $ref: '#/components/schemas/UValues.UCurrency'
+      - $ref: '#/components/schemas/UValues.UDate'
+      - $ref: '#/components/schemas/UValues.UDatetime'
+      - $ref: '#/components/schemas/UValues.UDecimal'
+      - $ref: '#/components/schemas/UValues.UEmail'
+      - $ref: '#/components/schemas/UValues.UInteger'
+      - $ref: '#/components/schemas/UValues.UMultiSelect'
+      - $ref: '#/components/schemas/UValues.UPhoneNumber'
+      - anyOf:
+        - $ref: '#/components/schemas/UValues.UReferenceById'
+        - $ref: '#/components/schemas/UValues.UReferenceByMatch'
+        - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
+      - $ref: '#/components/schemas/UValues.USelect'
+      - $ref: '#/components/schemas/UValues.UText'
+      - $ref: '#/components/schemas/UValues.UUrl'
+      - $ref: '#/components/schemas/UValues.UUuid'
+    UValues.UUuid:
+      type: string
+      description: String UUIDv4 value.
+      title: UUuid
+    CancelBulkApiJobSuccessResponse:
       type: object
       required:
       - job_id
       - status
-      - total_rows
-      - error_code
-      - created_at
-      - expires_at
-      - canceled_at
       properties:
         job_id:
           type: string
         status:
-          $ref: '#/components/schemas/BulkApiJobStatus'
-        total_rows:
-          type:
-          - integer
-          - 'null'
-        error_code:
-          type:
-          - string
-          - 'null'
-        created_at:
           type: string
-        expires_at:
-          type: string
-        canceled_at:
-          type:
-          - string
-          - 'null'
-      description: Bulk API job representation.
-    UValues.UReferenceByMatch:
+          enum:
+          - CANCELED
+      description: Response returned when canceling a Bulk API job.
+    GetBulkApiJobResultsExpiredResponse:
       type: object
       required:
-      - match
+      - status
+      - message
       properties:
-        match:
-          type: object
-          additionalProperties: {}
-          description: 'The attribute values to match against to find an existing record.
-
-
-            At least one unique attribute must be included to ensure that at most one
-
-            record is matched. Additional unique or non-unique attributes may also be
-
-            included to refine the matching criteria.'
-      description: 'Reference to another object record by match criteria.
-
-
-        This will find an existing record using the provided match criteria, and
-
-        `null` will be returned if no match is found.'
-      title: UReferenceByMatch
-    SearchRecordsSortDirection:
+        status:
+          type: string
+          enum:
+          - results_expired
+        message:
+          type: string
+      description: Response returned when Bulk API job results have expired.
+    UValues.USelect:
       type: string
-      enum:
-      - ASCENDING
-      - DESCENDING
-      description: Direction in which to sort records.
+      description: String value that matches one of a specific set of allowed values.
+      title: USelect
+    CreateBulkApiObjectRecordsJobObjectNotFoundResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - not_found
+          message:
+            type: string
+        description: Response for any operation that results in a not found error.
+      description: Response returned when the object being queried cannot be found.
     UValues.UCurrency:
       type: object
       required:
@@ -4865,333 +5815,38 @@ components:
           description: Currency value.
       description: Composite object representing a currency value.
       title: UCurrency
-    GetBulkApiJobNotFoundResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - not_found
-          message:
-            type: string
-        description: Response for any operation that results in a not found error.
-      description: Response returned when a Bulk API job cannot be found.
-    UObjects.URelatedReferenceAttribute:
-      type: object
-      required:
-      - api_name
-      - display_name
-      - cardinality
-      properties:
-        api_name:
-          type: string
-        display_name:
-          type: string
-        cardinality:
-          $ref: '#/components/schemas/UObjects.UReferenceCardinality'
-    UObjects.UCompany:
-      type: object
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - attributes
-      properties:
-        object:
-          type: string
-          enum:
-          - company
-          description: The API name of the object this record is an instance of.
-          readOnly: true
-        id:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUuid'
-          description: Unique UUID identifier for the record.
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: Date and time the record was created.
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: Date and time the record was last updated.
-          readOnly: true
-        attributes:
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UCompanyAttributes'
-          description: 'Attribute values for the record. Each key is the API name of the attribute
+    UValues.UUrl:
+      type: string
+      description: String value representing a web URL or internet domain.
+      title: UUrl
+    UObjects.UObjectName:
+      type: string
+      description: 'The API name of an object, e.g. `company`, `person`, `opportunity`, or a
 
-            and each value is the corresponding attribute value for the record.'
-    GetBulkApiJobResultsCanceledResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_canceled
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job was canceled and has no results.
-    UObjects.UReferenceCardinality:
+        custom object''s API name.'
+    UObjects.UObjectProvider:
       type: string
       enum:
-      - ONE
-      - MANY
-    UObjects.UAttributeOptionUpdate:
-      type: object
-      required:
-      - display_name
-      properties:
-        display_name:
-          type: string
-          description: 'This is the user-facing attribute option name that will be shown within
-
-            Unify. It is unique within the object and can be changed at any time.'
-      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
-    UValues.USelect:
-      type: string
-      description: String value that matches one of a specific set of allowed values.
-      title: USelect
-    UEvent:
-      type: object
-      required:
-      - id
-      - original_event_id
-      - timestamp
-      - type
-      - name
-      - properties
-      - anonymous_id
-      - session_id
-      - company
-      - person
-      properties:
-        id:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUuid'
-          description: Unique identifier for the event.
-        original_event_id:
-          type: string
-          description: 'Identifier assigned to the event by the upstream source that produced it
-
-            (e.g. a Segment `messageId`, a PostHog event ID, or a Unify Tag activity
-
-            ID).'
-        timestamp:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UDatetime'
-          description: 'Time the event occurred. Events are immutable, so this is the natural
-
-            cursor for incremental syncs.'
-        type:
-          allOf:
-          - $ref: '#/components/schemas/EventType'
-          description: Canonical event type.
-        name:
-          type:
-          - string
-          - 'null'
-          description: Human-readable event name, or `null` when unset.
-        properties:
-          type:
-          - object
-          - 'null'
-          additionalProperties: {}
-          description: 'Event properties: custom track-event properties merged with page context
-
-            (`domain`, `path`, `referrer_domain`, `referrer_path`, `query`) and UTM
-
-            parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`,
-
-            `utm_content`). Keys with no value are omitted, and the whole object is
-
-            `null` when no properties are present.'
-        anonymous_id:
-          type: string
-          description: Anonymous identifier assigned to the visitor by the upstream source.
-        session_id:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUuid'
-          description: Identifier of the session the event belongs to.
-        company:
-          type:
-          - object
-          - 'null'
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UCompany'
-          description: Revealed company associated with the visitor, or `null` when unresolved.
-        person:
-          type:
-          - object
-          - 'null'
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UPerson'
-          description: Revealed person associated with the visitor, or `null` when unresolved.
-      description: 'A flat, denormalized event row returned by an event Bulk API
-
-        query job.
+      - UNIFY
+      - CUSTOMER
+      description: 'Represents who created and manages an object in Unify.
 
 
-        Unlike object records, events are not wrapped in the `object` / `attributes`
+        In most ways, all objects within the Unify platform behave the same way
 
-        envelope. Page, session, and UTM context are folded into `properties`, while
+        regardless of whether they are defined by Unify or as custom objects by a
 
-        the revealed `company` / `person` are embedded directly on the row as full
+        plugin or user. This includes the ability to define custom attributes and
 
-        object records (`null` when the visitor has no revealed company / person).'
-    BulkApiObjectRecordResult:
-      type: object
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - attributes
-      properties:
-        object:
-          type: string
-          description: The API name of the object this record is an instance of.
-          readOnly: true
-        id:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUuid'
-          description: Unique UUID identifier for the record.
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: Date and time the record was created.
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: Date and time the record was last updated.
-          readOnly: true
-        attributes:
-          type: object
-          additionalProperties:
-            anyOf:
-            - allOf:
-              - $ref: '#/components/schemas/UValues.UValue'
-            - type:
-              - object
-              - 'null'
-              allOf:
-              - $ref: '#/components/schemas/BulkApiObjectRecordResult'
-          description: 'Attribute values for the record. Each key is the API name of the attribute
-
-            and each value is the corresponding attribute value for the record.'
-      description: 'A single object record result row from a query job.
+        access records via API.
 
 
-        Mirrors `UObjectRecord`, but widens `attributes` to allow nested records:
+        However, there are some subtle distinctions that require differentiating
 
-        a selected scalar attribute is a `UValue`, while a single-reference attribute
+        between these classifications of objects. This enumeration is used to
 
-        expanded through a nested `select` resolves to a nested result record with
-
-        this same shape. The recursion bottoms out at the `select` depth limit (see
-
-        `SearchRecordsSelect`).'
-    UObjects.UCompanyAttributes:
-      type: object
-      required:
-      - domain
-      properties:
-        address:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UAddress'
-          description: Physical address of the company.
-        corporate_phone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UPhoneNumber'
-          description: Corporate phone number of the company.
-        description:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Description of the company.
-        do_not_contact:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UBoolean'
-          description: Whether contacting this company is disallowed.
-        domain:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUrl'
-          description: Website domain of the company.
-        employee_count:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UInteger'
-          description: Estimated employee count of the company.
-        founded:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UDate'
-          description: Date when the company was founded.
-        industry:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Industry the company operates in.
-        last_activity_at:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UDatetime'
-          description: Last time an activity was recorded for this company.
-          readOnly: true
-        lead_source:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Source of the company record.
-        linkedin_url:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUrl'
-          description: 'LinkedIn profile of the company.
-
-
-            This is the full URL of the LinkedIn profile of the company. The value will
-
-            always be standardized with an HTTPS prefix, "www" subdomain, and trailing
-
-            slash.'
-        name:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Name of the company.
-        record_owner:
-          anyOf:
-          - $ref: '#/components/schemas/UValues.UReferenceById'
-          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
-          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
-          description: The user that owns the company record.
-        revenue:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UCurrency'
-          description: Estimated revenue of the company.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Status of the company.
-        time_zone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Time zone the company is located in.
-      allOf:
-      - type: object
-        additionalProperties:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UValue'
-    UpsertRecordRequest:
+        represent these distinctions.'
+    FindUniqueRecordRequest:
       type: object
       required:
       - match
@@ -5209,184 +5864,54 @@ components:
             record is matched. Additional unique or non-unique attributes may also be
 
             included to refine the matching criteria.'
-        create:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: The attribute values to use when creating a new record if no match is found.
-        update:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: The attribute values to use when updating an existing record if a match is found.
-        update_if_empty:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: 'The attribute values to update when a matching record is found and the
-
-            existing attribute value on the record is `null`.'
-        create_or_update:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: The attribute values to apply during both creation and update operations.
-        create_or_update_if_empty:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: 'The attribute values to apply during both creation and update-if-empty
-
-            operations.'
-      description: 'Request body for upserting a record.
-
-
-        At least one of `create`, `create_or_update` or `create_or_update_if_empty`
-
-        must be provided, and all required attributes on the object must be included
-
-        in at least one of these properties.
-
-
-        ## Precedence
-
-
-        When the same attribute is specified in multiple properties, the values will
-
-        be applied in a specific order of precedence. If a record is being created,
-
-        the following order is used:
-
-
-        1. `create`
-
-        2. `create_or_update`
-
-        3. `create_or_update_if_empty`
-
-
-        If an existing record is being updated, the following order is used:
-
-
-        1. `update`
-
-        2. `create_or_update`
-
-        3. `update_if_empty`
-
-        4. `create_or_update_if_empty`'
-    UValues.UText:
+      description: Request body for finding a unique record by attribute values.
+    SearchRecordsMetadataSortField:
       type: string
-      description: String value.
-      title: UText
-    UObjects.UAttributeOption:
-      type: object
-      required:
-      - api_name
-      - display_name
-      properties:
-        api_name:
-          type: string
-          description: 'This is the unique identifier for the attribute option at the API level. It
-
-            is unique within the attribute and cannot be changed.'
-        display_name:
-          type: string
-          description: 'This is the user-facing attribute option name that will be shown within
-
-            Unify. It is unique within the object and can be changed at any time.'
-      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
-    UObjects.UReferenceAttribute:
-      type: object
-      required:
-      - cardinality
-      - related_object
-      - related_attribute
-      properties:
-        cardinality:
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UReferenceCardinality'
-          description: The cardinality of the reference attribute.
-        related_object:
-          type: string
-          description: The API name of the object that this attribute references.
-        related_attribute:
-          type:
-          - object
-          - 'null'
-          allOf:
-          - $ref: '#/components/schemas/UObjects.URelatedReferenceAttribute'
-          description: 'The optional related attribute on the referenced object. When this exists,
-
-            the relationship between the two objects is bidirectional.'
-      allOf:
-      - type: object
-        required:
-        - type
-        - api_name
-        - display_name
-        - description
-        - is_required
-        - is_unique
-        properties:
-          type:
-            type: string
-            enum:
-            - REFERENCE
-            description: The type of value this attribute can hold.
-          api_name:
-            type: string
-            description: 'This is the unique identifier for the attribute at the API level. It is
-
-              unique within the object and cannot be changed.'
-          display_name:
-            type: string
-            description: 'This is the user-facing attribute name that will be shown within Unify. It
-
-              is unique within the object and can be changed at any time.'
-          description:
-            type:
-            - string
-            - 'null'
-            description: 'This is a description of the attribute. It is not required but will be
-
-              shown in the UI to help understand the purpose of the object. Typically,
-
-              this should be a short sentence or two explaining the attribute.'
-          is_required:
-            type: boolean
-            description: Whether the attribute is required.
-          is_unique:
-            type: boolean
-            description: Whether the attribute is unique.
-        description: Base properties that define an attribute on a Unify object.
-      description: Definition of a "reference" attribute on a Unify object.
-    SearchRecordsAttributeWhere:
-      type: object
-      required:
-      - equals
-      properties:
-        equals:
-          $ref: '#/components/schemas/UValues.UValue'
-      description: 'Filter records by attribute value. The `equals` value must match the type of
-
-        the attribute being filtered.'
-    UValues.UReferenceById:
-      type: object
-      required:
+      enum:
       - id
+      - created_at
+      - updated_at
+      description: Base record field to sort by.
+    UObjects.UPerson:
+      type: object
+      required:
+      - object
+      - id
+      - created_at
+      - updated_at
+      - attributes
       properties:
+        object:
+          type: string
+          enum:
+          - person
+          description: The API name of the object this record is an instance of.
+          readOnly: true
         id:
           allOf:
           - $ref: '#/components/schemas/UValues.UUuid'
-          description: An object record ID.
-      description: 'Reference to another object record by ID.
+          description: Unique UUID identifier for the record.
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          description: Date and time the record was created.
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: Date and time the record was last updated.
+          readOnly: true
+        attributes:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UPersonAttributes'
+          description: 'Attribute values for the record. Each key is the API name of the attribute
 
-
-        This will find an existing record by its ID, and an error will be returned if
-
-        the record does not exist.'
-      title: UReferenceById
+            and each value is the corresponding attribute value for the record.'
+    UValues.UDatetime:
+      type: string
+      description: String value representing a datetime.
+      title: UDatetime
     UValues.UCurrencyCode:
       type: string
       enum:
@@ -5569,822 +6094,22 @@ components:
       - ZMW
       description: ISO 4217 currency code.
       title: UCurrencyCode
-    GetBulkApiJobResultsExpiredResponse:
-      type: object
-      required:
-      - status
-      - message
-      properties:
-        status:
-          type: string
-          enum:
-          - results_expired
-        message:
-          type: string
-      description: Response returned when Bulk API job results have expired.
-    UValues.UCountry:
-      type: object
-      required:
-      - code
-      - name
-      properties:
-        code:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UCountryCode'
-          description: Country code.
-        name:
-          type: string
-          description: Country name.
-      description: Composite object representing a country.
-      title: UCountry
-    BulkApiJobStatus:
-      type: string
-      enum:
-      - IN_PROGRESS
-      - FINISHED
-      - FAILED
-      - EXPIRED
-      - CANCELED
-      description: Status of an asynchronous Bulk API job.
-    EventType:
-      type: string
-      enum:
-      - page
-      - track
-      - identify
-      description: Canonical, source-agnostic event type.
-    CreateBulkApiJobSuccessResponse:
-      type: object
-      required:
-      - job_id
-      - status
-      - expires_at
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - IN_PROGRESS
-        expires_at:
-          type: string
-      description: Response returned when creating a Bulk API query job.
-    UObjects.UReferenceAttributeUpdate:
-      type: object
-      required:
-      - cardinality
-      - related_object
-      - related_attribute
-      properties:
-        cardinality:
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UReferenceCardinality'
-          description: The cardinality of the reference attribute.
-        related_object:
-          type: string
-          description: The API name of the object that this attribute references.
-        related_attribute:
-          type:
-          - object
-          - 'null'
-          allOf:
-          - $ref: '#/components/schemas/UObjects.URelatedReferenceAttribute'
-          description: 'The optional related attribute on the referenced object. When this exists,
-
-            the relationship between the two objects is bidirectional.'
-      allOf:
-      - type: object
-        required:
-        - display_name
-        - description
-        properties:
-          display_name:
-            type: string
-            description: 'This is the user-facing attribute name that will be shown within Unify. It
-
-              is unique within the object and can be changed at any time.'
-          description:
-            type:
-            - string
-            - 'null'
-            description: 'This is a description of the attribute. It is not required but will be
-
-              shown in the UI to help understand the purpose of the object. Typically,
-
-              this should be a short sentence or two explaining the attribute.'
-        description: Base properties that define an attribute on a Unify object.
-      description: Definition of a "reference" attribute on a Unify object.
-    ValidationMode:
-      type: string
-      enum:
-      - strict
-      - ignore_invalid
-      description: 'Validation mode to use when validating request data.
-
-
-        `strict` validation will fail requests if any attribute fails validation,
-
-        including unrecognized attributes.
-
-
-        `ignore_invalid` validation will strip out unknown attributes and replace
-
-        known, non-required attributes with `undefined` if they fail validation.
-
-        The request will still fail if the request body does not contain the proper
-
-        structure or if any required attributes fail validation.'
-    CancelBulkApiJobSuccessResponse:
-      type: object
-      required:
-      - job_id
-      - status
-      properties:
-        job_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - CANCELED
-      description: Response returned when canceling a Bulk API job.
-    UObjects.UObjectUpdate:
+    UObjects.UAttributeOptionUpdateItem:
       type: object
       required:
       - display_name
-      - description
       properties:
         display_name:
           type: string
-          description: 'This is the user-facing object name shown within Unify. It is not required
+          description: 'This is the user-facing attribute option name that will be shown within
 
-            to be unique within Unify and can be changed at any time.'
-        description:
-          type:
-          - string
-          - 'null'
-          description: 'This is a description of the object. It is not required but will be shown
-
-            in the UI to help understand the purpose of the object. Typically, this
-
-            should be a short sentence or two explaining the object.'
-    UObjects.UPerson:
-      type: object
-      required:
-      - object
-      - id
-      - created_at
-      - updated_at
-      - attributes
-      properties:
-        object:
-          type: string
-          enum:
-          - person
-          description: The API name of the object this record is an instance of.
-          readOnly: true
-        id:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUuid'
-          description: Unique UUID identifier for the record.
-          readOnly: true
-        created_at:
-          type: string
-          format: date-time
-          description: Date and time the record was created.
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          description: Date and time the record was last updated.
-          readOnly: true
-        attributes:
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UPersonAttributes'
-          description: 'Attribute values for the record. Each key is the API name of the attribute
-
-            and each value is the corresponding attribute value for the record.'
-    UValues.UAddress:
-      type: object
-      properties:
-        country:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UCountry'
-          description: Country code in ISO 3166-1 alpha-2 format.
-        administrative_area:
-          type: string
-          description: State, province, region, or territory.
-        sub_administrative_area:
-          type: string
-          description: County or other secondary governmental division of an administrative area.
-        locality:
-          type: string
-          description: City, town, or village.
-        dependent_locality:
-          type: string
-          description: Neighborhood, borough, district, or city sector.
-        postal_code:
-          type: string
-          description: Postal code or ZIP code.
-        thoroughfare:
-          type: string
-          description: Street name with elements such as street type or direction.
-        premise:
-          type: string
-          description: Street number or building name.
-        sub_premise:
-          type: string
-          description: Apartment, suite, office number, or other secondary unit designator.
-      description: Composite object representing a physical address.
-      title: UAddress
-    UObjects.UMultiSelectAttribute:
-      type: object
-      required:
-      - options
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/UObjects.UAttributeOption'
-          description: The list of options for the attribute.
-      allOf:
-      - type: object
-        required:
-        - type
-        - api_name
-        - display_name
-        - description
-        - is_required
-        - is_unique
-        properties:
-          type:
-            type: string
-            enum:
-            - MULTI_SELECT
-            description: The type of value this attribute can hold.
-          api_name:
-            type: string
-            description: 'This is the unique identifier for the attribute at the API level. It is
-
-              unique within the object and cannot be changed.'
-          display_name:
-            type: string
-            description: 'This is the user-facing attribute name that will be shown within Unify. It
-
-              is unique within the object and can be changed at any time.'
-          description:
-            type:
-            - string
-            - 'null'
-            description: 'This is a description of the attribute. It is not required but will be
-
-              shown in the UI to help understand the purpose of the object. Typically,
-
-              this should be a short sentence or two explaining the attribute.'
-          is_required:
-            type: boolean
-            description: Whether the attribute is required.
-          is_unique:
-            type: boolean
-            description: Whether the attribute is unique.
-        description: Base properties that define an attribute on a Unify object.
-      description: Definition of a "multi-select" attribute on a Unify object.
-    GetBulkApiJobResultsNotReadyResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_not_ready
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when Bulk API job results are not ready yet.
-    CreateBulkApiEventsJobRequest:
-      type: object
-      properties:
-        filter:
-          $ref: '#/components/schemas/BulkApiEventsQueryFilter'
-      description: Request body for creating an events Bulk API query job.
-    BulkApiUuidFilter:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-      description: Filter matching a resource by ID.
-    UObjects.UMultiSelectAttributeUpdate:
-      type: object
-      required:
-      - options
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/UObjects.UAttributeOptionUpdateItem'
-          description: The list of options for the attribute.
-      allOf:
-      - type: object
-        required:
-        - display_name
-        - description
-        properties:
-          display_name:
-            type: string
-            description: 'This is the user-facing attribute name that will be shown within Unify. It
-
-              is unique within the object and can be changed at any time.'
-          description:
-            type:
-            - string
-            - 'null'
-            description: 'This is a description of the attribute. It is not required but will be
-
-              shown in the UI to help understand the purpose of the object. Typically,
-
-              this should be a short sentence or two explaining the attribute.'
-        description: Base properties that define an attribute on a Unify object.
-      description: Definition of a "multi-select" attribute on a Unify object.
-    UValues.UReferenceByUpsert:
-      type: object
-      required:
-      - match
-      properties:
-        match:
-          type: object
-          additionalProperties: {}
-          description: 'The attribute values to match against to find an existing record.
-
-
-            At least one unique attribute must be included to ensure that at most one
-
-            record is matched. Additional unique or non-unique attributes may also be
-
-            included to refine the matching criteria.'
-        create:
-          type: object
-          additionalProperties: {}
-          description: The attribute values to use when creating a new record if no match is found.
-        update:
-          type: object
-          additionalProperties: {}
-          description: The attribute values to use when updating an existing record if a match is found.
-        update_if_empty:
-          type: object
-          additionalProperties: {}
-          description: 'The attribute values to update when a matching record is found and the
-
-            existing attribute value on the record is `null`.'
-        create_or_update:
-          type: object
-          additionalProperties: {}
-          description: The attribute values to apply during both creation and update operations.
-        create_or_update_if_empty:
-          type: object
-          additionalProperties: {}
-          description: 'The attribute values to apply during both creation and update-if-empty
-
-            operations.'
-      description: 'Reference to another object record by performing a nested upsert.
-
-
-        At least one of `create`, `create_or_update` or `create_or_update_if_empty`
-
-        must be provided, and all required attributes on the object must be included
-
-        in at least one of these properties.
-
-
-        ## Precedence
-
-
-        When the same attribute is specified in multiple properties, the values will
-
-        be applied in a specific order of precedence. If a record is being created,
-
-        the following order is used:
-
-
-        1. `create`
-
-        2. `create_or_update`
-
-        3. `create_or_update_if_empty`
-
-
-        If an existing record is being updated, the following order is used:
-
-
-        1. `update`
-
-        2. `create_or_update`
-
-        3. `update_if_empty`
-
-        4. `create_or_update_if_empty`'
-      title: UReferenceByUpsert
-    CreateRecordRequest:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: 'The attribute values for the new record.
-
-
-            All required attributes on the object must be included.'
-      description: Request body for creating a record.
-    GetBulkApiJobResultsPayloadTooLargeResponse:
-      type: object
-      required:
-      - status
-      - message
-      properties:
-        status:
-          type: string
-          enum:
-          - results_page_too_large
-        message:
-          type: string
-      description: Response returned when a requested Bulk API results page is too large.
-    UObjects.UObject:
-      type: object
-      required:
-      - provider
-      - api_name
-      - display_name
-      - description
-      properties:
-        provider:
-          allOf:
-          - $ref: '#/components/schemas/UObjects.UObjectProvider'
-          description: 'The provider of an object represents who created and manages the object in
-
-            Unify. This is used to differentiate between standard objects provided by
-
-            Unify and custom objects created by a plugin or user.'
-          readOnly: true
-        api_name:
-          type: string
-          description: 'This is the unique identifier for the object at the API level. It is unique
-
-            within Unify and cannot be changed.'
-        display_name:
-          type: string
-          description: 'This is the user-facing object name shown within Unify. It is not required
-
-            to be unique within Unify and can be changed at any time.'
-        description:
-          type:
-          - string
-          - 'null'
-          description: 'This is a description of the object. It is not required but will be shown
-
-            in the UI to help understand the purpose of the object. Typically, this
-
-            should be a short sentence or two explaining the object.'
-    SearchRecordsWhere:
-      type: object
-      additionalProperties:
-        anyOf:
-        - $ref: '#/components/schemas/SearchRecordsAttributeWhere'
-        - $ref: '#/components/schemas/SearchRecordsWhere'
-      description: 'Filter records by one or more attribute conditions.
-
-
-        Each key is an attribute API name on the queried object. A value of
-
-        `{ "equals": ... }` matches the attribute directly, while a nested object of
-
-        further conditions filters through a single-reference attribute on the
-
-        referenced object.'
-    BulkApiDatetimeRangeFilter:
-      type: object
-      properties:
-        gt:
-          type: string
-        gte:
-          type: string
-        lt:
-          type: string
-        lte:
-          type: string
-      description: 'Datetime range filter. At least one bound must be provided. `gt` is mutually
-
-        exclusive with `gte`, and `lt` is mutually exclusive with `lte`.'
-    UValues.UDecimal:
-      type: number
-      description: Decimal value.
-      title: UDecimal
-    BulkApiObjectRecordsQuery:
-      type: object
-      required:
-      - select
-      properties:
-        where:
-          $ref: '#/components/schemas/SearchRecordsWhere'
-        select:
-          $ref: '#/components/schemas/SearchRecordsSelect'
-        sort_by:
-          $ref: '#/components/schemas/SearchRecordsMetadataSortBy'
-        metadata:
-          $ref: '#/components/schemas/SearchRecordsMetadataFilter'
-      description: Query describing which object records to return and how to shape them.
-    UObjects.UPersonAttributes:
-      type: object
-      required:
-      - email
-      properties:
-        address:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UAddress'
-          description: Physical address of the person.
-        company:
-          anyOf:
-          - $ref: '#/components/schemas/UValues.UReferenceById'
-          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
-          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
-          description: Company associated with the person.
-        corporate_phone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UPhoneNumber'
-          description: Corporate phone number of the person.
-        do_not_call:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UBoolean'
-          description: Whether calling this person is disallowed.
-        do_not_email:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UBoolean'
-          description: Whether emailing this person is disallowed.
-        email:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UEmail'
-          description: Email address of the person.
-        email_opt_out:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UBoolean'
-          description: Whether the person has opted out of email communications.
-        eu_resident:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UBoolean'
-          description: Whether this person is a resident of the European Union.
-        first_name:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: First name of the person.
-        last_activity_at:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UDatetime'
-          description: Last time an activity was recorded for this person.
-          readOnly: true
-        last_name:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Last name of the person.
-        lead_source:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Source of the person record.
-        linkedin_url:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UUrl'
-          description: 'LinkedIn profile of the person.
-
-
-            This is the full URL of the LinkedIn profile of the person. The value
-
-            will always be standardized with an HTTPS prefix, "www" subdomain, and
-
-            trailing slash.'
-        mobile_phone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UPhoneNumber'
-          description: Mobile phone number of the person.
-        record_owner:
-          anyOf:
-          - $ref: '#/components/schemas/UValues.UReferenceById'
-          - $ref: '#/components/schemas/UValues.UReferenceByMatch'
-          - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
-          description: The user that owns the person record.
-        status:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Status of the person.
-        title:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UText'
-          description: Job title of the person.
-        work_phone:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UPhoneNumber'
-          description: Work phone number of the person.
-      allOf:
-      - type: object
-        additionalProperties:
-          allOf:
-          - $ref: '#/components/schemas/UValues.UValue'
-    SearchRecordsNestedSelect:
-      type: object
-      required:
-      - select
-      properties:
-        select:
-          $ref: '#/components/schemas/SearchRecordsSelect'
-      description: 'Select the attributes of a referenced record reached through a
-
-        single-reference attribute.'
-    UValues.UUrl:
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+    UObjects.UReferenceCardinality:
       type: string
-      description: String value representing a web URL or internet domain.
-      title: UUrl
-    UObjects.UObjectName:
-      type: string
-      description: 'The API name of an object, e.g. `company`, `person`, `opportunity`, or a
-
-        custom object''s API name.'
-    UObjects.USelectAttributeUpdate:
-      type: object
-      required:
-      - options
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/UObjects.UAttributeOptionUpdateItem'
-          description: The list of options for the attribute.
-      allOf:
-      - type: object
-        required:
-        - display_name
-        - description
-        properties:
-          display_name:
-            type: string
-            description: 'This is the user-facing attribute name that will be shown within Unify. It
-
-              is unique within the object and can be changed at any time.'
-          description:
-            type:
-            - string
-            - 'null'
-            description: 'This is a description of the attribute. It is not required but will be
-
-              shown in the UI to help understand the purpose of the object. Typically,
-
-              this should be a short sentence or two explaining the attribute.'
-        description: Base properties that define an attribute on a Unify object.
-      description: Definition of a "select" attribute on a Unify object.
-    UValues.UMultiSelect:
-      type: array
-      items:
-        type: string
-      description: String array that contains strings from a specific set of allowed values.
-      title: UMultiSelect
-    UValues.UPhoneNumber:
-      type: string
-      description: String value representing a phone number.
-      title: UPhoneNumber
-    ListBulkApiJobsSuccessResponse:
-      type: object
-      required:
-      - jobs
-      - next_cursor
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/BulkApiJob'
-        next_cursor:
-          type:
-          - string
-          - 'null'
-      description: Response returned when listing Bulk API jobs.
-    SearchRecordsSelect:
-      type: object
-      additionalProperties:
-        anyOf:
-        - type: boolean
-          enum:
-          - true
-        - $ref: '#/components/schemas/SearchRecordsNestedSelect'
-      description: 'Select the attributes to return for each record.
-
-
-        Each key is an attribute API name on the queried object. A value of `true`
-
-        returns the attribute directly, while `{ "select": ... }` expands a
-
-        single-reference attribute and selects attributes on the referenced object.
-
-
-        Nested selects may be at most three levels deep, counting the root select as
-
-        level one (so the root plus at most two levels of nested reference selects).
-
-        Requests exceeding this depth are rejected with a `400`.'
-    GetBulkApiJobResultsFailedResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - results_failed
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job failed and has no results.
-    UValues.UValue:
-      anyOf:
-      - $ref: '#/components/schemas/UValues.UAddress'
-      - $ref: '#/components/schemas/UValues.UBoolean'
-      - $ref: '#/components/schemas/UValues.UCountry'
-      - $ref: '#/components/schemas/UValues.UCurrency'
-      - $ref: '#/components/schemas/UValues.UDate'
-      - $ref: '#/components/schemas/UValues.UDatetime'
-      - $ref: '#/components/schemas/UValues.UDecimal'
-      - $ref: '#/components/schemas/UValues.UEmail'
-      - $ref: '#/components/schemas/UValues.UInteger'
-      - $ref: '#/components/schemas/UValues.UMultiSelect'
-      - $ref: '#/components/schemas/UValues.UPhoneNumber'
-      - anyOf:
-        - $ref: '#/components/schemas/UValues.UReferenceById'
-        - $ref: '#/components/schemas/UValues.UReferenceByMatch'
-        - $ref: '#/components/schemas/UValues.UReferenceByUpsert'
-      - $ref: '#/components/schemas/UValues.USelect'
-      - $ref: '#/components/schemas/UValues.UText'
-      - $ref: '#/components/schemas/UValues.UUrl'
-      - $ref: '#/components/schemas/UValues.UUuid'
-    FindUniqueRecordRequest:
-      type: object
-      required:
-      - match
-      properties:
-        match:
-          type: object
-          additionalProperties:
-            allOf:
-            - $ref: '#/components/schemas/UValues.UValue'
-          description: 'The attribute values to match against to find an existing record.
-
-
-            At least one unique attribute must be included to ensure that at most one
-
-            record is matched. Additional unique or non-unique attributes may also be
-
-            included to refine the matching criteria.'
-      description: Request body for finding a unique record by attribute values.
-    UResponses.BadRequestError:
-      type: object
-      required:
-      - code
-      properties:
-        code:
-          type: string
-        path:
-          type: array
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-        object_api_name:
-          type: string
-        attribute_api_name:
-          type: string
-      allOf:
-      - type: object
-        additionalProperties: {}
-      description: Validation error detail returned for bad request responses.
-    CancelBulkApiJobNotCancelableResponse:
-      type: object
-      allOf:
-      - type: object
-        required:
-        - status
-        - message
-        properties:
-          status:
-            type: string
-            enum:
-            - job_not_cancelable
-          message:
-            type: string
-        description: Response for any operation that results in a conflict error.
-      description: Response returned when a Bulk API job is not cancelable.
+      enum:
+      - ONE
+      - MANY
     UObjects.UAttributeUpdate:
       anyOf:
       - type: object
@@ -6651,111 +6376,67 @@ components:
               this should be a short sentence or two explaining the attribute.'
         description: Base properties that define an attribute on a Unify object.
       description: Definition of an attribute on a Unify object.
-    SearchRecordsMetadataSortBy:
+    UValues.UAddress:
+      type: object
+      properties:
+        country:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UCountry'
+          description: Country code in ISO 3166-1 alpha-2 format.
+        administrative_area:
+          type: string
+          description: State, province, region, or territory.
+        sub_administrative_area:
+          type: string
+          description: County or other secondary governmental division of an administrative area.
+        locality:
+          type: string
+          description: City, town, or village.
+        dependent_locality:
+          type: string
+          description: Neighborhood, borough, district, or city sector.
+        postal_code:
+          type: string
+          description: Postal code or ZIP code.
+        thoroughfare:
+          type: string
+          description: Street name with elements such as street type or direction.
+        premise:
+          type: string
+          description: Street number or building name.
+        sub_premise:
+          type: string
+          description: Apartment, suite, office number, or other secondary unit designator.
+      description: Composite object representing a physical address.
+      title: UAddress
+    UValues.UMultiSelect:
+      type: array
+      items:
+        type: string
+      description: String array that contains strings from a specific set of allowed values.
+      title: UMultiSelect
+    UResponses.BadRequestError:
       type: object
       required:
-      - field
-      - direction
+      - code
       properties:
-        field:
-          $ref: '#/components/schemas/SearchRecordsMetadataSortField'
-        direction:
-          $ref: '#/components/schemas/SearchRecordsSortDirection'
-      description: 'Sort records by a base record field. Pairing a `created_at` / `updated_at`
-
-        sort with the matching `metadata` filter enables incremental queries that
-
-        page through every record changed since a prior checkpoint.'
-    UValues.UEmail:
-      type: string
-      format: email
-      description: String value representing an email address.
-      title: UEmail
-    BulkApiEventsQueryFilter:
-      type: object
-      properties:
-        timestamp:
-          $ref: '#/components/schemas/BulkApiDatetimeRangeFilter'
-        id:
-          anyOf:
-          - type: object
-            required:
-            - in
-            properties:
-              in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-            description: Filter matching values included in a set.
-          - type: object
-            required:
-            - not_in
-            properties:
-              in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  type: string
-                minItems: 1
-            description: Filter matching values excluded from a set.
-        type:
-          anyOf:
-          - type: object
-            required:
-            - in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventType'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventType'
-                minItems: 1
-            description: Filter matching values included in a set.
-          - type: object
-            required:
-            - not_in
-            properties:
-              in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventType'
-                minItems: 1
-              not_in:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventType'
-                minItems: 1
-            description: Filter matching values excluded from a set.
-        session:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        company:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        person:
-          $ref: '#/components/schemas/BulkApiUuidFilter'
-        domain:
+        code:
           type: string
-      description: 'Filters accepted when querying events. Events are immutable, so the natural
-
-        cursor is `timestamp`, which is also the only datetime field filterable here.'
-    UValues.UUuid:
-      type: string
-      description: String UUIDv4 value.
-      title: UUuid
-    UObjects.USelectAttribute:
+        path:
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        object_api_name:
+          type: string
+        attribute_api_name:
+          type: string
+      allOf:
+      - type: object
+        additionalProperties: {}
+      description: Validation error detail returned for bad request responses.
+    UObjects.USelectAttributeUpdate:
       type: object
       required:
       - options
@@ -6763,8 +6444,240 @@ components:
         options:
           type: array
           items:
-            $ref: '#/components/schemas/UObjects.UAttributeOption'
+            $ref: '#/components/schemas/UObjects.UAttributeOptionUpdateItem'
           description: The list of options for the attribute.
+      allOf:
+      - type: object
+        required:
+        - display_name
+        - description
+        properties:
+          display_name:
+            type: string
+            description: 'This is the user-facing attribute name that will be shown within Unify. It
+
+              is unique within the object and can be changed at any time.'
+          description:
+            type:
+            - string
+            - 'null'
+            description: 'This is a description of the attribute. It is not required but will be
+
+              shown in the UI to help understand the purpose of the object. Typically,
+
+              this should be a short sentence or two explaining the attribute.'
+        description: Base properties that define an attribute on a Unify object.
+      description: Definition of a "select" attribute on a Unify object.
+    CreateBulkApiEventsJobRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/BulkApiEventsQueryFilter'
+      description: Request body for creating an events Bulk API query job.
+    ListBulkApiJobsSuccessResponse:
+      type: object
+      required:
+      - jobs
+      - next_cursor
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkApiJob'
+        next_cursor:
+          type:
+          - string
+          - 'null'
+      description: Response returned when listing Bulk API jobs.
+    UValues.UReferenceByUpsert:
+      type: object
+      required:
+      - match
+      properties:
+        match:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+        create:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to use when creating a new record if no match is found.
+        update:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to use when updating an existing record if a match is found.
+        update_if_empty:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to update when a matching record is found and the
+
+            existing attribute value on the record is `null`.'
+        create_or_update:
+          type: object
+          additionalProperties: {}
+          description: The attribute values to apply during both creation and update operations.
+        create_or_update_if_empty:
+          type: object
+          additionalProperties: {}
+          description: 'The attribute values to apply during both creation and update-if-empty
+
+            operations.'
+      description: 'Reference to another object record by performing a nested upsert.
+
+
+        At least one of `create`, `create_or_update` or `create_or_update_if_empty`
+
+        must be provided, and all required attributes on the object must be included
+
+        in at least one of these properties.
+
+
+        ## Precedence
+
+
+        When the same attribute is specified in multiple properties, the values will
+
+        be applied in a specific order of precedence. If a record is being created,
+
+        the following order is used:
+
+
+        1. `create`
+
+        2. `create_or_update`
+
+        3. `create_or_update_if_empty`
+
+
+        If an existing record is being updated, the following order is used:
+
+
+        1. `update`
+
+        2. `create_or_update`
+
+        3. `update_if_empty`
+
+        4. `create_or_update_if_empty`'
+      title: UReferenceByUpsert
+    BulkApiJob:
+      type: object
+      required:
+      - job_id
+      - status
+      - total_rows
+      - error_code
+      - created_at
+      - expires_at
+      - canceled_at
+      properties:
+        job_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/BulkApiJobStatus'
+        total_rows:
+          type:
+          - integer
+          - 'null'
+        error_code:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+        expires_at:
+          type: string
+        canceled_at:
+          type:
+          - string
+          - 'null'
+      description: Bulk API job representation.
+    UObjects.UAttributeOption:
+      type: object
+      required:
+      - api_name
+      - display_name
+      properties:
+        api_name:
+          type: string
+          description: 'This is the unique identifier for the attribute option at the API level. It
+
+            is unique within the attribute and cannot be changed.'
+        display_name:
+          type: string
+          description: 'This is the user-facing attribute option name that will be shown within
+
+            Unify. It is unique within the object and can be changed at any time.'
+      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
+    UValues.UReferenceById:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          allOf:
+          - $ref: '#/components/schemas/UValues.UUuid'
+          description: An object record ID.
+      description: 'Reference to another object record by ID.
+
+
+        This will find an existing record by its ID, and an error will be returned if
+
+        the record does not exist.'
+      title: UReferenceById
+    SearchRecordsSelect:
+      type: object
+      additionalProperties:
+        anyOf:
+        - type: boolean
+          enum:
+          - true
+        - $ref: '#/components/schemas/SearchRecordsNestedSelect'
+      description: 'Select the attributes to return for each record.
+
+
+        Each key is an attribute API name on the queried object. A value of `true`
+
+        returns the attribute directly, while `{ "select": ... }` expands a
+
+        single-reference attribute and selects attributes on the referenced object.
+
+
+        Nested selects may be at most three levels deep, counting the root select as
+
+        level one (so the root plus at most two levels of nested reference selects).
+
+        Requests exceeding this depth are rejected with a `400`.'
+    UObjects.UReferenceAttribute:
+      type: object
+      required:
+      - cardinality
+      - related_object
+      - related_attribute
+      properties:
+        cardinality:
+          allOf:
+          - $ref: '#/components/schemas/UObjects.UReferenceCardinality'
+          description: The cardinality of the reference attribute.
+        related_object:
+          type: string
+          description: The API name of the object that this attribute references.
+        related_attribute:
+          type:
+          - object
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/UObjects.URelatedReferenceAttribute'
+          description: 'The optional related attribute on the referenced object. When this exists,
+
+            the relationship between the two objects is bidirectional.'
       allOf:
       - type: object
         required:
@@ -6778,7 +6691,7 @@ components:
           type:
             type: string
             enum:
-            - SELECT
+            - REFERENCE
             description: The type of value this attribute can hold.
           api_name:
             type: string
@@ -6806,7 +6719,147 @@ components:
             type: boolean
             description: Whether the attribute is unique.
         description: Base properties that define an attribute on a Unify object.
-      description: Definition of a "select" attribute on a Unify object.
+      description: Definition of a "reference" attribute on a Unify object.
+    GetBulkApiJobResultsFailedResponse:
+      type: object
+      allOf:
+      - type: object
+        required:
+        - status
+        - message
+        properties:
+          status:
+            type: string
+            enum:
+            - results_failed
+          message:
+            type: string
+        description: Response for any operation that results in a conflict error.
+      description: Response returned when a Bulk API job failed and has no results.
+    CreateRecordRequest:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: 'The attribute values for the new record.
+
+
+            All required attributes on the object must be included.'
+      description: Request body for creating a record.
+    SearchRecordsSortDirection:
+      type: string
+      enum:
+      - ASCENDING
+      - DESCENDING
+      description: Direction in which to sort records.
+    ValidationMode:
+      type: string
+      enum:
+      - strict
+      - ignore_invalid
+      description: 'Validation mode to use when validating request data.
+
+
+        `strict` validation will fail requests if any attribute fails validation,
+
+        including unrecognized attributes.
+
+
+        `ignore_invalid` validation will strip out unknown attributes and replace
+
+        known, non-required attributes with `undefined` if they fail validation.
+
+        The request will still fail if the request body does not contain the proper
+
+        structure or if any required attributes fail validation.'
+    UpsertRecordRequest:
+      type: object
+      required:
+      - match
+      properties:
+        match:
+          type: object
+          additionalProperties:
+            allOf:
+            - $ref: '#/components/schemas/UValues.UValue'
+          description: 'The attribute values to match against to find an existing record.
+
+
+            At least one unique attribute must be included to ensure that at most one
+
+            record is matched. Additional unique or non-unique attributes may also be
+
+            included to refine the matching criteria.'
+        create:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: The attribute values to use when creating a new record if no match is found.
+        update:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: The attribute values to use when updating an existing record if a match is found.
+        update_if_empty:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: 'The attribute values to update when a matching record is found and the
+
+            existing attribute value on the record is `null`.'
+        create_or_update:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: The attribute values to apply during both creation and update operations.
+        create_or_update_if_empty:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UValues.UValue'
+          description: 'The attribute values to apply during both creation and update-if-empty
+
+            operations.'
+      description: 'Request body for upserting a record.
+
+
+        At least one of `create`, `create_or_update` or `create_or_update_if_empty`
+
+        must be provided, and all required attributes on the object must be included
+
+        in at least one of these properties.
+
+
+        ## Precedence
+
+
+        When the same attribute is specified in multiple properties, the values will
+
+        be applied in a specific order of precedence. If a record is being created,
+
+        the following order is used:
+
+
+        1. `create`
+
+        2. `create_or_update`
+
+        3. `create_or_update_if_empty`
+
+
+        If an existing record is being updated, the following order is used:
+
+
+        1. `update`
+
+        2. `create_or_update`
+
+        3. `update_if_empty`
+
+        4. `create_or_update_if_empty`'
     UValues.UCountryCode:
       type: string
       enum:
@@ -7062,93 +7115,40 @@ components:
       - ZW
       description: ISO 3166-1 alpha-2 country code.
       title: UCountryCode
-    UObjects.UAttributeOptionUpdateItem:
-      type: object
-      required:
-      - display_name
-      properties:
-        display_name:
-          type: string
-          description: 'This is the user-facing attribute option name that will be shown within
-
-            Unify. It is unique within the object and can be changed at any time.'
-      description: Definition of an option for a `SELECT` or `MULTI_SELECT` attribute.
-    UObjects.UObjectProvider:
-      type: string
-      enum:
-      - UNIFY
-      - CUSTOMER
-      description: 'Represents who created and manages an object in Unify.
-
-
-        In most ways, all objects within the Unify platform behave the same way
-
-        regardless of whether they are defined by Unify or as custom objects by a
-
-        plugin or user. This includes the ability to define custom attributes and
-
-        access records via API.
-
-
-        However, there are some subtle distinctions that require differentiating
-
-        between these classifications of objects. This enumeration is used to
-
-        represent these distinctions.'
-    SearchRecordsTimestampFilter:
+    BulkApiDatetimeRangeFilter:
       type: object
       properties:
         gt:
-          $ref: '#/components/schemas/UValues.UDatetime'
+          type: string
         gte:
-          $ref: '#/components/schemas/UValues.UDatetime'
+          type: string
         lt:
-          $ref: '#/components/schemas/UValues.UDatetime'
+          type: string
         lte:
-          $ref: '#/components/schemas/UValues.UDatetime'
-      description: 'Bounds on a record metadata timestamp, expressed as ISO-8601 datetimes
+          type: string
+      description: 'Datetime range filter. At least one bound must be provided. `gt` is mutually
 
-        interpreted as UTC instants. At least one bound is required, and at most one
-
-        lower (`gt` / `gte`) and one upper (`lt` / `lte`) bound may be supplied — so
-
-        a single filter can express an open-ended "changed since" cutoff or a closed
-
-        window.'
-    SearchRecordsMetadataSortField:
-      type: string
-      enum:
-      - id
-      - created_at
-      - updated_at
-      description: Base record field to sort by.
-    UValues.UDatetime:
-      type: string
-      description: String value representing a datetime.
-      title: UDatetime
-    UpdateRecordRequest:
+        exclusive with `gte`, and `lt` is mutually exclusive with `lte`.'
+    UValues.UBoolean:
+      type: boolean
+      description: Boolean value.
+      title: UBoolean
+    CreateBulkApiJobSuccessResponse:
       type: object
       required:
-      - data
+      - job_id
+      - status
+      - expires_at
       properties:
-        data:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/UValues.UValue'
-          description: The attribute values to update in the record.
-      description: Request body for updating a record.
-    UValues.UDate:
-      type: string
-      description: String value representing a date.
-      title: UDate
-    CreateBulkApiObjectRecordsJobRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          $ref: '#/components/schemas/BulkApiObjectRecordsQuery'
-      description: Request body for creating an object records Bulk API query job.
+        job_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - IN_PROGRESS
+        expires_at:
+          type: string
+      description: Response returned when creating a Bulk API query job.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

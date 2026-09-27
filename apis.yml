@@ -57,6 +57,7 @@ tags:
 - MCP
 - Agent Skills
 - Webhook
+- A2A
 tags_raw:
 - Sales
 - Marketing
@@ -73,6 +74,7 @@ tags_raw:
 - MCP
 - Agent Skills
 - Webhooks
+- A2A
 apis:
 - aid: unify:unify-events-api
   name: Unify Analytics Events API
@@ -282,3 +284,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 13
   pass: local-v1
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://docs.unifygtm.com/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3"
+  control: 404
