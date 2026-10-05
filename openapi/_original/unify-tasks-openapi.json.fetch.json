@@ -1,0 +1,12 @@
+{
+ "url": "https://api.unifygtm.com/tasks/v1/openapi.json",
+ "requested_url": "https://api.unifygtm.com/tasks/v1/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 111074,
+ "sha256": "0e11d848a2a2fef19d932a7c4130c005d8f55791c38460580b59b75fab6fd651",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
