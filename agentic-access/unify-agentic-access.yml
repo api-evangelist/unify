@@ -1,10 +1,6 @@
-generated: '2026-08-13'
+generated: '2026-09-23'
 method: generated
-source: openapi/unify-event-query-jobs-api-openapi.yml, openapi/unify-events-api-openapi.yml,
-  openapi/unify-object-attribute-options-api-openapi.yml, openapi/unify-object-attributes-api-openapi.yml,
-  openapi/unify-object-record-query-jobs-api-openapi.yml, openapi/unify-object-records-api-openapi.yml,
-  openapi/unify-objects-api-openapi.yml, openapi/unify-sequence-enrollment-steps-api-openapi.yml,
-  openapi/unify-sequence-enrollments-api-openapi.yml, openapi/unify-sequences-api-openapi.yml,
+source: openapi/unify-data-api-openapi.yml, openapi/unify-events-api-openapi.yml, openapi/unify-sequences-api-openapi.yml,
   openapi/unify-tasks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
@@ -12,11 +8,11 @@ description: Recommended x-agentic-access execution contracts, classified heuris
 summary:
   operations: 68
   by_action_class:
-    acting: 38
-    connected: 30
+    acting: 37
+    connected: 31
   by_consequence:
-    write: 35
-    read: 30
+    write: 34
+    read: 31
     physical: 3
   human_in_the_loop_required: 0
 operations:
@@ -82,63 +78,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /identify
-  method: post
-  operationId: send_identify_event
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /page
-  method: post
-  operationId: send_page_event
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /track
-  method: post
-  operationId: send_track_event
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options
+- path: /data/v1/objects
   method: get
-  operationId: list_object_attribute_options
+  operationId: list_objects
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -146,9 +88,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options
+- path: /data/v1/objects
   method: post
-  operationId: create_object_attribute_option
+  operationId: create_object
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -162,9 +104,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+- path: /data/v1/objects/{object_name}
   method: get
-  operationId: get_object_attribute_option
+  operationId: get_object
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -172,9 +114,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+- path: /data/v1/objects/{object_name}
   method: patch
-  operationId: update_object_attribute_option
+  operationId: update_object
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -188,9 +130,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+- path: /data/v1/objects/{object_name}
   method: delete
-  operationId: delete_object_attribute_option
+  operationId: delete_object
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -259,6 +201,74 @@ operations:
 - path: /data/v1/objects/{object_name}/attributes/{attribute_name}
   method: delete
   operationId: delete_object_attribute
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options
+  method: get
+  operationId: list_object_attribute_options
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options
+  method: post
+  operationId: create_object_attribute_option
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+  method: get
+  operationId: get_object_attribute_option
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+  method: patch
+  operationId: update_object_attribute_option
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /data/v1/objects/{object_name}/attributes/{attribute_name}/options/{option_name}
+  method: delete
+  operationId: delete_object_attribute_option
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -354,18 +364,12 @@ operations:
   method: post
   operationId: find_unique_object_record
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /data/v1/objects/{object_name}/records/upsert
   method: post
   operationId: upsert_object_record
@@ -424,68 +428,54 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /data/v1/objects
-  method: get
-  operationId: list_objects
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /data/v1/objects
+- path: /identify
   method: post
-  operationId: create_object
+  operationId: send_identify_event
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /data/v1/objects/{object_name}
-  method: get
-  operationId: get_object
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /data/v1/objects/{object_name}
-  method: patch
-  operationId: update_object
+- path: /page
+  method: post
+  operationId: send_page_event
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /data/v1/objects/{object_name}
-  method: delete
-  operationId: delete_object
+- path: /track
+  method: post
+  operationId: send_track_event
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:

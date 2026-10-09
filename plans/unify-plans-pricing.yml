@@ -193,3 +193,41 @@ credits:
   llm_billing: >-
     AI usage is billed out of the credit balance - the model cost is passed through
     with no separate AI fee or subscription.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - seat
+  units:
+  - object
+  - seat
+  plans:
+  - name: Free
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - object
+    periods: []
+  - name: Base
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods: []
+  - name: Pro
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods: []
+  - name: Business
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - object
+    periods: []

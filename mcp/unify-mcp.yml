@@ -131,3 +131,16 @@ cross_links:
   skills: skills/_index.yml
   agent_card: a2a/unify-a2a.yml
   authentication: authentication/unify-authentication.yml
+rfc9728:
+  endpoint: https://mcp.unifygtm.com/mcp
+  metadata_url: https://mcp.unifygtm.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.unifygtm.com/mcp
+    authorization_servers:
+    - https://auth.unifygtm.com/
+    bearer_methods_supported:
+    - header
